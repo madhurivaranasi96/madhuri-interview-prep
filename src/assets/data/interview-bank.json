@@ -1,6 +1,6 @@
 {
-  "version": 19,
-  "sourceNote": "Expanded to 377 categorized original interview questions. C# coverage now explicitly includes OOP, encapsulation, abstraction, polymorphism, inheritance, composition, interfaces, abstract classes, delegates, Action/Func/Predicate, events, lambdas, closures, generics, collections, exceptions, strings, iterators, records, pattern matching, reflection, attributes, memory/GC, equality, Span, nullable references, access modifiers, constructors and other core language features. Themes are synthesized from multiple current public interview-prep sources; questions are paraphrased original study material. Main questions use only Simple, Medium and Complex difficulty. Scenario-based interviews remain separate.",
+  "version": 20,
+  "sourceNote": "Expanded to cover Angular, AngularJS, JavaScript and TypeScript subtopics comprehensively across fundamentals, architecture, templates, directives, DI, lifecycle, routing, forms, RxJS, signals, change detection, SSR/hydration, performance, testing-oriented concepts, legacy AngularJS scopes/digest/directives/services/routing, JavaScript runtime/language features, and TypeScript type-system features. Questions are categorized only as Simple, Medium and Complex.",
   "questions": [
     {
       "id": "master-001",
@@ -9582,6 +9582,1521 @@
       ],
       "memoryCue": "Tuple = small local grouping; record/class = named concept.",
       "codeExample": "(decimal amount, string currency) result = (100m, \"INR\");"
+    },
+    {
+      "id": "q384",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a standalone component in Angular?",
+      "shortAnswer": "A standalone component declares its own imports and does not need to belong to an NgModule.",
+      "detailedAnswer": "A standalone component declares its own imports and does not need to belong to an NgModule.",
+      "example": "In a modern feature, a screen can import CommonModule functionality and child components directly in its component metadata.",
+      "seniorPerspective": "In a modern feature, a screen can import CommonModule functionality and child components directly in its component metadata.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Standalone = component owns its imports.",
+      "codeExample": "@Component({standalone:true,imports:[UserCardComponent],template:'<app-user-card />'})\\nexport class UsersComponent {}"
+    },
+    {
+      "id": "q385",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What are the four main Angular data-binding types?",
+      "shortAnswer": "Interpolation and property binding move data to the view; event binding moves user events to the class; two-way binding combines property and event binding.",
+      "detailedAnswer": "Interpolation and property binding move data to the view; event binding moves user events to the class; two-way binding combines property and event binding.",
+      "example": "A banking form can display an account name, bind an input value, react to a click, and synchronize editable state.",
+      "seniorPerspective": "A banking form can display an account name, bind an input value, react to a click, and synchronize editable state.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Data in, events out, two-way combines both.",
+      "codeExample": "<h2>{{account.name}}</h2>\\n<input [value]=\"account.name\" (input)=\"onName($event)\">\\n<button (click)=\"save()\">Save</button>"
+    },
+    {
+      "id": "q386",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is the difference between a component and a directive?",
+      "shortAnswer": "A component is a directive with a template; a directive adds behavior to an existing host element or controls structure.",
+      "detailedAnswer": "A component is a directive with a template; a directive adds behavior to an existing host element or controls structure.",
+      "example": "A tooltip attribute directive changes host behavior while a payment component owns a complete screen.",
+      "seniorPerspective": "A tooltip attribute directive changes host behavior while a payment component owns a complete screen.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Component owns a view; directive adds behavior.",
+      "codeExample": "@Directive({selector:'[appHighlight]'})\\nexport class HighlightDirective {\\n  constructor(el:ElementRef){ el.nativeElement.style.outline='1px solid'; }\\n}"
+    },
+    {
+      "id": "q387",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a pipe in Angular?",
+      "shortAnswer": "A pipe transforms a value for display in a template.",
+      "detailedAnswer": "A pipe transforms a value for display in a template.",
+      "example": "A transaction amount can be formatted without changing the underlying numeric value.",
+      "seniorPerspective": "A transaction amount can be formatted without changing the underlying numeric value.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Pipe = display transformation.",
+      "codeExample": "@Pipe({name:'amount',standalone:true})\\nexport class AmountPipe implements PipeTransform {\\n  transform(v:number){ return `₹${v.toFixed(2)}`; }\\n}"
+    },
+    {
+      "id": "q388",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What are Angular lifecycle hooks?",
+      "shortAnswer": "Lifecycle hooks let a component react to creation, input changes, content/view initialization and destruction.",
+      "detailedAnswer": "Lifecycle hooks let a component react to creation, input changes, content/view initialization and destruction.",
+      "example": "Use ngOnInit for initial loading and ngOnDestroy for cleanup such as subscriptions or timers.",
+      "seniorPerspective": "Use ngOnInit for initial loading and ngOnDestroy for cleanup such as subscriptions or timers.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Init work in init; cleanup in destroy.",
+      "codeExample": "export class AccountComponent implements OnInit,OnDestroy {\\n  ngOnInit(){ this.load(); }\\n  ngOnDestroy(){ this.stopTimer(); }\\n}"
+    },
+    {
+      "id": "q389",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is Angular dependency injection?",
+      "shortAnswer": "DI lets Angular create and supply dependencies through providers instead of classes constructing them directly.",
+      "detailedAnswer": "DI lets Angular create and supply dependencies through providers instead of classes constructing them directly.",
+      "example": "A transaction component injects an API service, while tests can provide a fake implementation.",
+      "seniorPerspective": "A transaction component injects an API service, while tests can provide a fake implementation.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Inject dependencies; don't construct them.",
+      "codeExample": "constructor(private api:TransactionApi) {}\\nload(){ this.api.getTransactions().subscribe(); }"
+    },
+    {
+      "id": "q390",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the Angular injector hierarchy?",
+      "shortAnswer": "Angular resolves a token through injector scopes, so provider placement affects instance lifetime and sharing.",
+      "detailedAnswer": "Angular resolves a token through injector scopes, so provider placement affects instance lifetime and sharing.",
+      "example": "Providing a service at root shares one application instance, while a component provider can create a separate instance for that subtree.",
+      "seniorPerspective": "Providing a service at root shares one application instance, while a component provider can create a separate instance for that subtree.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Provider location controls instance scope.",
+      "codeExample": "@Component({providers:[DraftStateService]})\\nexport class DepositComponent {}"
+    },
+    {
+      "id": "q391",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is OnPush change detection?",
+      "shortAnswer": "OnPush limits component checking to specific notifications such as input reference changes, events, and reactive updates.",
+      "detailedAnswer": "OnPush limits component checking to specific notifications such as input reference changes, events, and reactive updates.",
+      "example": "For a large transaction table, immutable inputs and OnPush can reduce unnecessary view work.",
+      "seniorPerspective": "For a large transaction table, immutable inputs and OnPush can reduce unnecessary view work.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "OnPush = check when notified.",
+      "codeExample": "@Component({changeDetection:ChangeDetectionStrategy.OnPush,template:'{{account.name}}'})\\nexport class AccountComponent {}"
+    },
+    {
+      "id": "q392",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are Angular signals?",
+      "shortAnswer": "Signals are reactive state primitives that track reads and notify dependent consumers when their value changes.",
+      "detailedAnswer": "Signals are reactive state primitives that track reads and notify dependent consumers when their value changes.",
+      "example": "A selected ATM transaction can be held as a signal and derived values can use computed().",
+      "seniorPerspective": "A selected ATM transaction can be held as a signal and derived values can use computed().",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Signal = tracked state.",
+      "codeExample": "selected=signal('cash');\\nlabel=computed(()=>this.selected()==='cash'?'Cash Withdrawal':'Other');"
+    },
+    {
+      "id": "q393",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between signal, computed and effect?",
+      "shortAnswer": "signal stores writable state, computed derives memoized state, and effect runs side effects when dependencies change.",
+      "detailedAnswer": "signal stores writable state, computed derives memoized state, and effect runs side effects when dependencies change.",
+      "example": "A selected account is state, its display label is derived state, and audit logging is a side effect.",
+      "seniorPerspective": "A selected account is state, its display label is derived state, and audit logging is a side effect.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "State, derive, side effect.",
+      "codeExample": "account=signal('1001');\\nlabel=computed(()=>`Account ${account()}`);\\neffect(()=>console.log(label()));"
+    },
+    {
+      "id": "q394",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How does Angular routing work?",
+      "shortAnswer": "Routes map URLs to components or lazy route trees and the router manages navigation and activation.",
+      "detailedAnswer": "Routes map URLs to components or lazy route trees and the router manages navigation and activation.",
+      "example": "A banking application can lazy-load /transactions so its code is not needed on the login page.",
+      "seniorPerspective": "A banking application can lazy-load /transactions so its code is not needed on the login page.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "URL -> route -> component.",
+      "codeExample": "const routes:Routes=[{path:'transactions',loadComponent:()=>import('./transactions').then(m=>m.TransactionsComponent)}];"
+    },
+    {
+      "id": "q395",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is route lazy loading?",
+      "shortAnswer": "Lazy loading downloads a feature only when its route is needed.",
+      "detailedAnswer": "Lazy loading downloads a feature only when its route is needed.",
+      "example": "Large ATM administration features can be split so the initial bundle stays smaller.",
+      "seniorPerspective": "Large ATM administration features can be split so the initial bundle stays smaller.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Load feature when needed.",
+      "codeExample": "{path:'admin',loadChildren:()=>import('./admin/routes').then(m=>m.ADMIN_ROUTES)}"
+    },
+    {
+      "id": "q396",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are route guards?",
+      "shortAnswer": "Guards allow, redirect or block navigation based on application state or policy.",
+      "detailedAnswer": "Guards allow, redirect or block navigation based on application state or policy.",
+      "example": "A route can require an authenticated session before opening a production-support dashboard.",
+      "seniorPerspective": "A route can require an authenticated session before opening a production-support dashboard.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Guard navigation, not backend security.",
+      "codeExample": "export const authGuard:CanActivateFn=()=>inject(AuthService).isLoggedIn()?true:inject(Router).parseUrl('/login');"
+    },
+    {
+      "id": "q397",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between template-driven and reactive forms?",
+      "shortAnswer": "Template-driven forms derive much of their behavior from directives in the template; reactive forms model controls explicitly in TypeScript.",
+      "detailedAnswer": "Template-driven forms derive much of their behavior from directives in the template; reactive forms model controls explicitly in TypeScript.",
+      "example": "A small login form may be template-driven, while a dynamic ATM configuration form benefits from typed FormGroup structure.",
+      "seniorPerspective": "A small login form may be template-driven, while a dynamic ATM configuration form benefits from typed FormGroup structure.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Reactive = form model in code.",
+      "codeExample": "form=new FormGroup({\\n  pin:new FormControl('',{nonNullable:true})\\n});"
+    },
+    {
+      "id": "q398",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are Angular interceptors used for?",
+      "shortAnswer": "Interceptors can add cross-cutting HTTP behavior such as authorization headers, logging, retries or error handling.",
+      "detailedAnswer": "Interceptors can add cross-cutting HTTP behavior such as authorization headers, logging, retries or error handling.",
+      "example": "A support portal can attach a correlation ID to every API request.",
+      "seniorPerspective": "A support portal can attach a correlation ID to every API request.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Interceptor = cross-cutting HTTP behavior.",
+      "codeExample": "export const authInterceptor:HttpInterceptorFn=(req,next)=>{\\n const r=req.clone({setHeaders:{Authorization:'Bearer '+token}});\\n return next(r);\\n};"
+    },
+    {
+      "id": "q399",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is content projection with ng-content?",
+      "shortAnswer": "Content projection lets a component render content supplied by its consumer inside the component template.",
+      "detailedAnswer": "Content projection lets a component render content supplied by its consumer inside the component template.",
+      "example": "A reusable panel can own the border and header while callers provide transaction-specific content.",
+      "seniorPerspective": "A reusable panel can own the border and header while callers provide transaction-specific content.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Parent supplies content; child supplies structure.",
+      "codeExample": "@Component({template:'<section><header><ng-content select=\"[title]\"/></header><ng-content/></section>'})\\nexport class Panel {}"
+    },
+    {
+      "id": "q400",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is ViewChild used for?",
+      "shortAnswer": "ViewChild gives access to a child component, directive or DOM element from the component view.",
+      "detailedAnswer": "ViewChild gives access to a child component, directive or DOM element from the component view.",
+      "example": "A screen can focus a PIN input after a validation error.",
+      "seniorPerspective": "A screen can focus a PIN input after a validation error.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "ViewChild = access something in the view.",
+      "codeExample": "@ViewChild('pinInput') pinInput!:ElementRef<HTMLInputElement>;\\nfocus(){this.pinInput.nativeElement.focus();}"
+    },
+    {
+      "id": "q401",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How does Angular change detection work conceptually?",
+      "shortAnswer": "Angular evaluates bindings for views that are eligible for checking, updates changed values and renders the resulting DOM changes.",
+      "detailedAnswer": "Angular evaluates bindings for views that are eligible for checking, updates changed values and renders the resulting DOM changes.",
+      "example": "When a transaction signal changes, only consumers that depend on that state need to become relevant to rendering.",
+      "seniorPerspective": "When a transaction signal changes, only consumers that depend on that state need to become relevant to rendering.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "State notification -> eligible view -> binding update.",
+      "codeExample": "@Component({changeDetection:ChangeDetectionStrategy.OnPush,template:'{{total()}}'})\\nexport class Summary { total=signal(0); }"
+    },
+    {
+      "id": "q402",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do RxJS switchMap, mergeMap, concatMap and exhaustMap differ?",
+      "shortAnswer": "switchMap cancels the previous inner stream, mergeMap runs concurrently, concatMap queues sequentially, and exhaustMap ignores new work while one is active.",
+      "detailedAnswer": "switchMap cancels the previous inner stream, mergeMap runs concurrently, concatMap queues sequentially, and exhaustMap ignores new work while one is active.",
+      "example": "For a type-ahead search use switchMap; for independent uploads use mergeMap; for ordered writes use concatMap; for login submission use exhaustMap.",
+      "seniorPerspective": "For a type-ahead search use switchMap; for independent uploads use mergeMap; for ordered writes use concatMap; for login submission use exhaustMap.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Switch, merge, queue, ignore.",
+      "codeExample": "search$.pipe(switchMap(term=>api.search(term)));"
+    },
+    {
+      "id": "q403",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is the difference between Subject, BehaviorSubject and ReplaySubject?",
+      "shortAnswer": "Subject emits only to current subscribers; BehaviorSubject stores the latest value; ReplaySubject replays a configured history.",
+      "detailedAnswer": "Subject emits only to current subscribers; BehaviorSubject stores the latest value; ReplaySubject replays a configured history.",
+      "example": "Shared application state often needs the latest value, while an event stream usually needs plain Subject semantics.",
+      "seniorPerspective": "Shared application state often needs the latest value, while an event stream usually needs plain Subject semantics.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Current value = Behavior; history = Replay.",
+      "codeExample": "const state$=new BehaviorSubject<string>('idle');\\nstate$.next('ready');"
+    },
+    {
+      "id": "q404",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How can an Angular application avoid RxJS subscription leaks?",
+      "shortAnswer": "Use lifecycle-aware cleanup such as async pipe, takeUntilDestroyed or explicit subscription disposal.",
+      "detailedAnswer": "Use lifecycle-aware cleanup such as async pipe, takeUntilDestroyed or explicit subscription disposal.",
+      "example": "A component subscribing to live ATM status should automatically stop listening when the component is destroyed.",
+      "seniorPerspective": "A component subscribing to live ATM status should automatically stop listening when the component is destroyed.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Subscription lifetime must match component lifetime.",
+      "codeExample": "status$=api.status().pipe(takeUntilDestroyed());"
+    },
+    {
+      "id": "q405",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is Angular SSR and hydration?",
+      "shortAnswer": "SSR renders HTML on the server; hydration attaches Angular behavior to existing server-rendered DOM on the client.",
+      "detailedAnswer": "SSR renders HTML on the server; hydration attaches Angular behavior to existing server-rendered DOM on the client.",
+      "example": "A public support page can arrive with meaningful HTML before JavaScript finishes loading, then become interactive after hydration.",
+      "seniorPerspective": "A public support page can arrive with meaningful HTML before JavaScript finishes loading, then become interactive after hydration.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "SSR renders; hydration activates.",
+      "codeExample": "bootstrapApplication(AppComponent,{providers:[provideClientHydration()]});"
+    },
+    {
+      "id": "q406",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is @defer used for?",
+      "shortAnswer": "@defer delays loading and rendering of non-critical template content based on triggers.",
+      "detailedAnswer": "@defer delays loading and rendering of non-critical template content based on triggers.",
+      "example": "A dashboard can defer a large analytics chart until it becomes visible.",
+      "seniorPerspective": "A dashboard can defer a large analytics chart until it becomes visible.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Defer non-critical work.",
+      "codeExample": "@defer (on viewport) { <app-analytics-chart/> }"
+    },
+    {
+      "id": "q407",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How would you optimize a large Angular list?",
+      "shortAnswer": "Use stable identity tracking, efficient state updates, pagination or virtualization, and measured change-detection boundaries.",
+      "detailedAnswer": "Use stable identity tracking, efficient state updates, pagination or virtualization, and measured change-detection boundaries.",
+      "example": "An ATM transaction history should not recreate thousands of DOM nodes when one row changes.",
+      "seniorPerspective": "An ATM transaction history should not recreate thousands of DOM nodes when one row changes.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "Angular"
+      ],
+      "memoryCue": "Stable identity + bounded rendering.",
+      "codeExample": "@for(tx of transactions; track tx.id){ <app-row [tx]=\"tx\"/> }"
+    },
+    {
+      "id": "q408",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is the difference between var, let and const?",
+      "shortAnswer": "var is function-scoped; let and const are block-scoped. const prevents reassignment of the binding.",
+      "detailedAnswer": "var is function-scoped; let and const are block-scoped. const prevents reassignment of the binding.",
+      "example": "Use const for references that do not change and let when reassignment is required.",
+      "seniorPerspective": "Use const for references that do not change and let when reassignment is required.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Prefer const; use let for reassignment.",
+      "codeExample": "const accountId='1001';\\nlet attempts=0;\\nif(true){ let attempts=1; }"
+    },
+    {
+      "id": "q409",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is hoisting?",
+      "shortAnswer": "JavaScript processes declarations before executing code, but initialization behavior differs between var, let, const and function declarations.",
+      "detailedAnswer": "JavaScript processes declarations before executing code, but initialization behavior differs between var, let, const and function declarations.",
+      "example": "A var declaration exists as undefined before assignment, while accessing a let before initialization throws.",
+      "seniorPerspective": "A var declaration exists as undefined before assignment, while accessing a let before initialization throws.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Declaration hoisted; initialization timing matters.",
+      "codeExample": "console.log(value); // undefined\\nvar value=10;"
+    },
+    {
+      "id": "q410",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is the difference between == and ===?",
+      "shortAnswer": "== allows coercion while === compares without implicit type conversion.",
+      "detailedAnswer": "== allows coercion while === compares without implicit type conversion.",
+      "example": "For IDs from an API, strict equality avoids surprising string-number comparisons.",
+      "seniorPerspective": "For IDs from an API, strict equality avoids surprising string-number comparisons.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "=== avoids coercion.",
+      "codeExample": "'1001' == 1001;  // true\\n'1001' === 1001; // false"
+    },
+    {
+      "id": "q411",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is destructuring?",
+      "shortAnswer": "Destructuring extracts values from arrays or properties from objects into variables.",
+      "detailedAnswer": "Destructuring extracts values from arrays or properties from objects into variables.",
+      "example": "A response object can be unpacked without repeatedly accessing response.account.",
+      "seniorPerspective": "A response object can be unpacked without repeatedly accessing response.account.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Destructure data at the boundary.",
+      "codeExample": "const {id,name}=account;\\nconst [first,second]=transactions;"
+    },
+    {
+      "id": "q412",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What are spread and rest operators?",
+      "shortAnswer": "Spread expands iterable or object values; rest collects remaining values.",
+      "detailedAnswer": "Spread expands iterable or object values; rest collects remaining values.",
+      "example": "Spread can create an updated state object, while rest can capture extra function arguments.",
+      "seniorPerspective": "Spread can create an updated state object, while rest can capture extra function arguments.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Spread expands; rest collects.",
+      "codeExample": "const updated={...account,status:'Active'};\\nfunction log(id,...tags){}"
+    },
+    {
+      "id": "q413",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is optional chaining?",
+      "shortAnswer": "Optional chaining safely stops property or method access when an intermediate value is null or undefined.",
+      "detailedAnswer": "Optional chaining safely stops property or method access when an intermediate value is null or undefined.",
+      "example": "API data may omit an optional customer profile.",
+      "seniorPerspective": "API data may omit an optional customer profile.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "?. stops safely on nullish values.",
+      "codeExample": "const city=response.customer?.address?.city;"
+    },
+    {
+      "id": "q414",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is nullish coalescing?",
+      "shortAnswer": "?? uses a fallback only for null or undefined, unlike || which also treats values such as 0 and '' as false.",
+      "detailedAnswer": "?? uses a fallback only for null or undefined, unlike || which also treats values such as 0 and '' as false.",
+      "example": "A transaction limit of zero is a valid value and should not be replaced by a default.",
+      "seniorPerspective": "A transaction limit of zero is a valid value and should not be replaced by a default.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "?? means null or undefined.",
+      "codeExample": "const limit=apiLimit ?? 1000;"
+    },
+    {
+      "id": "q415",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a closure?",
+      "shortAnswer": "A closure is a function that retains access to variables from its lexical scope after the outer function returns.",
+      "detailedAnswer": "A closure is a function that retains access to variables from its lexical scope after the outer function returns.",
+      "example": "A request factory can retain a correlation ID without exposing the variable globally.",
+      "seniorPerspective": "A request factory can retain a correlation ID without exposing the variable globally.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Function + remembered lexical scope.",
+      "codeExample": "function makeLogger(id){ return ()=>console.log(id); }\\nconst log=makeLogger('REQ-1');\\nlog();"
+    },
+    {
+      "id": "q416",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How does this behave in JavaScript?",
+      "shortAnswer": "this is determined by the call form for regular functions; arrow functions capture lexical this.",
+      "detailedAnswer": "this is determined by the call form for regular functions; arrow functions capture lexical this.",
+      "example": "A class method passed directly as a callback can lose its receiver unless bound or wrapped.",
+      "seniorPerspective": "A class method passed directly as a callback can lose its receiver unless bound or wrapped.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Regular this = call site; arrow = lexical.",
+      "codeExample": "class Api{ id='A'; log(){console.log(this.id);} }\\nconst api=new Api();\\nsetTimeout(()=>api.log(),0);"
+    },
+    {
+      "id": "q417",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the prototype chain?",
+      "shortAnswer": "Objects can delegate property lookup to their prototype chain.",
+      "detailedAnswer": "Objects can delegate property lookup to their prototype chain.",
+      "example": "A method defined on a prototype can be shared across instances instead of copied into each object.",
+      "seniorPerspective": "A method defined on a prototype can be shared across instances instead of copied into each object.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Lookup walks the prototype chain.",
+      "codeExample": "function User(name){this.name=name;}\\nUser.prototype.getName=function(){return this.name;};"
+    },
+    {
+      "id": "q418",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How does the JavaScript event loop work?",
+      "shortAnswer": "Synchronous code runs on the call stack; asynchronous callbacks are queued and processed when the stack is clear, with microtasks processed before the next task.",
+      "detailedAnswer": "Synchronous code runs on the call stack; asynchronous callbacks are queued and processed when the stack is clear, with microtasks processed before the next task.",
+      "example": "A resolved Promise callback runs before a later timer callback.",
+      "seniorPerspective": "A resolved Promise callback runs before a later timer callback.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Stack -> microtasks -> task.",
+      "codeExample": "console.log('A');\\nsetTimeout(()=>console.log('T'));\\nPromise.resolve().then(()=>console.log('M'));\\nconsole.log('B');"
+    },
+    {
+      "id": "q419",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between Promise.all, allSettled, race and any?",
+      "shortAnswer": "all requires every promise, allSettled reports every result, race settles on the first settlement, and any settles on the first fulfillment.",
+      "detailedAnswer": "all requires every promise, allSettled reports every result, race settles on the first settlement, and any settles on the first fulfillment.",
+      "example": "For independent API reads use all; for a best-of-multiple endpoint use any.",
+      "seniorPerspective": "For independent API reads use all; for a best-of-multiple endpoint use any.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "All, settled, race, any = different completion rules.",
+      "codeExample": "const results=await Promise.all([getUser(),getAccounts()]);"
+    },
+    {
+      "id": "q420",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is event delegation?",
+      "shortAnswer": "Event delegation attaches one handler to a common ancestor and uses event.target to handle descendants.",
+      "detailedAnswer": "Event delegation attaches one handler to a common ancestor and uses event.target to handle descendants.",
+      "example": "A transaction table can use one click handler instead of one listener per row.",
+      "seniorPerspective": "A transaction table can use one click handler instead of one listener per row.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "One parent handles many children.",
+      "codeExample": "table.addEventListener('click',e=>{\\n const row=(e.target as HTMLElement).closest('[data-id]');\\n if(row) open(row.dataset.id!);\\n});"
+    },
+    {
+      "id": "q421",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is debouncing vs throttling?",
+      "shortAnswer": "Debouncing waits for a quiet period; throttling limits execution to at most a chosen interval.",
+      "detailedAnswer": "Debouncing waits for a quiet period; throttling limits execution to at most a chosen interval.",
+      "example": "Use debounce for search input and throttle for frequent scroll or resize events.",
+      "seniorPerspective": "Use debounce for search input and throttle for frequent scroll or resize events.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Debounce waits; throttle limits frequency.",
+      "codeExample": "const search=debounce(loadResults,300);\\ninput.addEventListener('input',search);"
+    },
+    {
+      "id": "q422",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are ES modules?",
+      "shortAnswer": "ES modules use import/export for explicit file-level dependencies and static module structure.",
+      "detailedAnswer": "ES modules use import/export for explicit file-level dependencies and static module structure.",
+      "example": "A transaction service can export one API class and import it into a component.",
+      "seniorPerspective": "A transaction service can export one API class and import it into a component.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Modules make dependencies explicit.",
+      "codeExample": "export class TransactionApi {}\\nimport {TransactionApi} from './transaction-api';"
+    },
+    {
+      "id": "q423",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a TypeScript interface?",
+      "shortAnswer": "An interface describes the shape of values for static checking and does not exist as a runtime object.",
+      "detailedAnswer": "An interface describes the shape of values for static checking and does not exist as a runtime object.",
+      "example": "An API response contract can be typed without adding runtime overhead.",
+      "seniorPerspective": "An API response contract can be typed without adding runtime overhead.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Interface = compile-time shape.",
+      "codeExample": "interface Account { id:string; balance:number; }\\nconst a:Account={id:'1001',balance:500};"
+    },
+    {
+      "id": "q424",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are union and intersection types?",
+      "shortAnswer": "A union allows one of several types; an intersection combines multiple object contracts.",
+      "detailedAnswer": "A union allows one of several types; an intersection combines multiple object contracts.",
+      "example": "A transaction status may be a finite string union, while an enriched account can combine two interfaces.",
+      "seniorPerspective": "A transaction status may be a finite string union, while an enriched account can combine two interfaces.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Union = either; intersection = both.",
+      "codeExample": "type Status='Pending'|'Approved';\\ntype AuditedAccount=Account & {updatedBy:string};"
+    },
+    {
+      "id": "q425",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are TypeScript generics?",
+      "shortAnswer": "Generics let code preserve relationships between input and output types without falling back to any.",
+      "detailedAnswer": "Generics let code preserve relationships between input and output types without falling back to any.",
+      "example": "A reusable API wrapper can return the exact response type supplied by its caller.",
+      "seniorPerspective": "A reusable API wrapper can return the exact response type supplied by its caller.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Generic = reusable type parameter.",
+      "codeExample": "function first<T>(items:T[]):T|undefined{return items[0];}"
+    },
+    {
+      "id": "q426",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are type guards?",
+      "shortAnswer": "Type guards narrow a union to a more specific type using runtime checks.",
+      "detailedAnswer": "Type guards narrow a union to a more specific type using runtime checks.",
+      "example": "An API result may be either an error object or a successful payload.",
+      "seniorPerspective": "An API result may be either an error object or a successful payload.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Runtime check enables static narrowing.",
+      "codeExample": "function isError(x:Result):x is ErrorResult{return 'message' in x;}"
+    },
+    {
+      "id": "q427",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are TypeScript utility types?",
+      "shortAnswer": "Utility types transform existing types, such as Partial, Pick, Omit, Record and Readonly.",
+      "detailedAnswer": "Utility types transform existing types, such as Partial, Pick, Omit, Record and Readonly.",
+      "example": "An update request can reuse an Account type while making fields optional.",
+      "seniorPerspective": "An update request can reuse an Account type while making fields optional.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Utilities transform types.",
+      "codeExample": "type AccountUpdate=Partial<Pick<Account,'name'|'email'>>;"
+    },
+    {
+      "id": "q428",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is the difference between microtasks and macrotasks?",
+      "shortAnswer": "Promise callbacks and queueMicrotask use the microtask queue; timers and many browser events are tasks. Microtasks drain before the next task.",
+      "detailedAnswer": "Promise callbacks and queueMicrotask use the microtask queue; timers and many browser events are tasks. Microtasks drain before the next task.",
+      "example": "A long microtask chain can delay rendering and timers even though no synchronous loop is running.",
+      "seniorPerspective": "A long microtask chain can delay rendering and timers even though no synchronous loop is running.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Microtasks drain before the next task.",
+      "codeExample": "queueMicrotask(()=>console.log('micro'));\\nsetTimeout(()=>console.log('task'),0);"
+    },
+    {
+      "id": "q429",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do async and await work?",
+      "shortAnswer": "async functions return promises; await pauses that function until the awaited promise settles while allowing the event loop to continue.",
+      "detailedAnswer": "async functions return promises; await pauses that function until the awaited promise settles while allowing the event loop to continue.",
+      "example": "A service can sequentially call authentication and profile APIs without blocking the browser thread.",
+      "seniorPerspective": "A service can sequentially call authentication and profile APIs without blocking the browser thread.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "await pauses the function, not the thread.",
+      "codeExample": "async function load(){\\n const token=await login();\\n return getProfile(token);\\n}"
+    },
+    {
+      "id": "q430",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is structural typing in TypeScript?",
+      "shortAnswer": "TypeScript compares compatible structure rather than nominal class identity.",
+      "detailedAnswer": "TypeScript compares compatible structure rather than nominal class identity.",
+      "example": "A value with the required Account fields can satisfy an Account interface even if it came from another class.",
+      "seniorPerspective": "A value with the required Account fields can satisfy an Account interface even if it came from another class.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Shape compatibility, not declared identity.",
+      "codeExample": "interface A{id:string}\\nconst x={id:'1',extra:true};\\nconst a:A=x;"
+    },
+    {
+      "id": "q431",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is the difference between any, unknown and never?",
+      "shortAnswer": "any disables useful checking, unknown requires narrowing before use, and never represents an impossible value or a function that cannot return normally.",
+      "detailedAnswer": "any disables useful checking, unknown requires narrowing before use, and never represents an impossible value or a function that cannot return normally.",
+      "example": "Use unknown at untrusted boundaries and exhaustiveness checks can use never.",
+      "seniorPerspective": "Use unknown at untrusted boundaries and exhaustiveness checks can use never.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "any escapes checks; unknown requires proof; never is impossible.",
+      "codeExample": "function assertNever(x:never):never{throw new Error(String(x));}"
+    },
+    {
+      "id": "q432",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What are mapped and conditional types?",
+      "shortAnswer": "Mapped types iterate over keys to build new types; conditional types choose a type based on a type relationship.",
+      "detailedAnswer": "Mapped types iterate over keys to build new types; conditional types choose a type based on a type relationship.",
+      "example": "A library can derive readonly or optional versions of domain contracts without duplicating them.",
+      "seniorPerspective": "A library can derive readonly or optional versions of domain contracts without duplicating them.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Mapped transforms keys; conditional chooses by type.",
+      "codeExample": "type Flags<T>={[K in keyof T]?:boolean};\\ntype Id<T>=T extends {id:infer I}?I:never;"
+    },
+    {
+      "id": "q433",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is an expression of type never useful for in TypeScript?",
+      "shortAnswer": "never can enforce exhaustive handling of discriminated unions at compile time.",
+      "detailedAnswer": "never can enforce exhaustive handling of discriminated unions at compile time.",
+      "example": "When a new transaction status is added, an exhaustive switch can force the compiler to reveal unhandled cases.",
+      "seniorPerspective": "When a new transaction status is added, an exhaustive switch can force the compiler to reveal unhandled cases.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "never catches missing cases.",
+      "codeExample": "type S='cash'|'deposit';\\nfunction handle(s:S){switch(s){case 'cash':return;case 'deposit':return;default:return assertNever(s);}}"
+    },
+    {
+      "id": "q434",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you avoid race conditions between asynchronous JavaScript requests?",
+      "shortAnswer": "Track request identity, cancel obsolete work, or accept results only when they still belong to the current state.",
+      "detailedAnswer": "Track request identity, cancel obsolete work, or accept results only when they still belong to the current state.",
+      "example": "A fast second search should not be overwritten by a slower first response.",
+      "seniorPerspective": "A fast second search should not be overwritten by a slower first response.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "memoryCue": "Only the current request may win.",
+      "codeExample": "let requestId=0;\\nasync function search(q){const id=++requestId;const data=await api(q);if(id===requestId)render(data);}"
+    },
+    {
+      "id": "q435",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is AngularJS and how is it different from modern Angular?",
+      "shortAnswer": "AngularJS is the original 1.x JavaScript framework based heavily on scopes, controllers, directives and digest cycles; modern Angular is a TypeScript-based component framework with a different architecture.",
+      "detailedAnswer": "AngularJS is the original 1.x JavaScript framework based heavily on scopes, controllers, directives and digest cycles; modern Angular is a TypeScript-based component framework with a different architecture.",
+      "example": "An enterprise application may still use AngularJS controllers and $scope while a newer module uses modern Angular components.",
+      "seniorPerspective": "An enterprise application may still use AngularJS controllers and $scope while a newer module uses modern Angular components.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "AngularJS = scopes/digest; Angular = components/TypeScript.",
+      "codeExample": "angular.module('app',[]).controller('UserCtrl',function($scope){$scope.name='Madhuri';});"
+    },
+    {
+      "id": "q436",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is an AngularJS module?",
+      "shortAnswer": "A module groups controllers, services, directives, filters and configuration for an AngularJS application.",
+      "detailedAnswer": "A module groups controllers, services, directives, filters and configuration for an AngularJS application.",
+      "example": "A banking feature can register its controllers and services in one feature module.",
+      "seniorPerspective": "A banking feature can register its controllers and services in one feature module.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Module = AngularJS registration container.",
+      "codeExample": "angular.module('atmApp',['ngRoute']);"
+    },
+    {
+      "id": "q437",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a controller in AngularJS?",
+      "shortAnswer": "A controller prepares data and behavior for a view, traditionally through $scope or controllerAs.",
+      "detailedAnswer": "A controller prepares data and behavior for a view, traditionally through $scope or controllerAs.",
+      "example": "A transaction controller can expose transactions to the template.",
+      "seniorPerspective": "A transaction controller can expose transactions to the template.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Controller prepares view state.",
+      "codeExample": "app.controller('TxnCtrl',function(){this.transactions=[];});"
+    },
+    {
+      "id": "q438",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is $scope?",
+      "shortAnswer": "$scope is an AngularJS object that connects controller state with the template and participates in the digest cycle.",
+      "detailedAnswer": "$scope is an AngularJS object that connects controller state with the template and participates in the digest cycle.",
+      "example": "Legacy screens often attach model values and handlers to scope.",
+      "seniorPerspective": "Legacy screens often attach model values and handlers to scope.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Scope connects controller and view.",
+      "codeExample": "app.controller('Ctrl',function($scope){$scope.status='Ready';});"
+    },
+    {
+      "id": "q439",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is two-way binding in AngularJS?",
+      "shortAnswer": "ng-model synchronizes an input with a model value through AngularJS binding and digest processing.",
+      "detailedAnswer": "ng-model synchronizes an input with a model value through AngularJS binding and digest processing.",
+      "example": "A PIN or account field can bind directly to a controller model.",
+      "seniorPerspective": "A PIN or account field can bind directly to a controller model.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "ng-model = view <-> model.",
+      "codeExample": "<input ng-model='vm.accountId'>"
+    },
+    {
+      "id": "q440",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a directive in AngularJS?",
+      "shortAnswer": "A directive adds behavior, structure or reusable DOM behavior to HTML.",
+      "detailedAnswer": "A directive adds behavior, structure or reusable DOM behavior to HTML.",
+      "example": "ng-if and ng-repeat are built-in directives, while a custom directive can add ATM-specific validation behavior.",
+      "seniorPerspective": "ng-if and ng-repeat are built-in directives, while a custom directive can add ATM-specific validation behavior.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Directive extends HTML behavior.",
+      "codeExample": "app.directive('atmStatus',function(){return{restrict:'A',link:function(s,e){e.addClass('status');}};});"
+    },
+    {
+      "id": "q441",
+      "technology": "AngularJS",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is an AngularJS service?",
+      "shortAnswer": "A service is a reusable dependency created and managed by AngularJS DI.",
+      "detailedAnswer": "A service is a reusable dependency created and managed by AngularJS DI.",
+      "example": "A transaction API service can be shared by multiple controllers.",
+      "seniorPerspective": "A transaction API service can be shared by multiple controllers.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Service = reusable injected behavior.",
+      "codeExample": "app.service('TxnService',function($http){this.get=function(){return $http.get('/api/txns');};});"
+    },
+    {
+      "id": "q442",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is dependency injection in AngularJS?",
+      "shortAnswer": "AngularJS resolves registered services and supplies them to controllers, services, directives and other components.",
+      "detailedAnswer": "AngularJS resolves registered services and supplies them to controllers, services, directives and other components.",
+      "example": "Injecting $http avoids manually constructing HTTP infrastructure.",
+      "seniorPerspective": "Injecting $http avoids manually constructing HTTP infrastructure.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Register dependency; framework supplies it.",
+      "codeExample": "app.controller('Ctrl',['$http',function($http){$http.get('/api/accounts');}]);"
+    },
+    {
+      "id": "q443",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the AngularJS digest cycle?",
+      "shortAnswer": "The digest cycle checks watched expressions and propagates model changes through the scope hierarchy until values stabilize.",
+      "detailedAnswer": "The digest cycle checks watched expressions and propagates model changes through the scope hierarchy until values stabilize.",
+      "example": "After an AngularJS model changes, watchers can cause dependent bindings to update.",
+      "seniorPerspective": "After an AngularJS model changes, watchers can cause dependent bindings to update.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Digest = evaluate watchers until stable.",
+      "codeExample": "$scope.$watch('balance',function(n,o){if(n!==o) refresh();});"
+    },
+    {
+      "id": "q444",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is $apply versus $digest?",
+      "shortAnswer": "$apply enters AngularJS's digest processing from external code; $digest processes the current scope hierarchy directly.",
+      "detailedAnswer": "$apply enters AngularJS's digest processing from external code; $digest processes the current scope hierarchy directly.",
+      "example": "Callbacks from non-Angular libraries may need $apply so AngularJS notices the model change.",
+      "seniorPerspective": "Callbacks from non-Angular libraries may need $apply so AngularJS notices the model change.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "$apply starts the AngularJS update; $digest performs checking.",
+      "codeExample": "external.onChange(function(v){$scope.$apply(function(){$scope.value=v;});});"
+    },
+    {
+      "id": "q445",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between $watch, $watchCollection and deep watching?",
+      "shortAnswer": "$watch observes an expression, $watchCollection detects shallow collection changes, and deep equality watches nested values at higher cost.",
+      "detailedAnswer": "$watch observes an expression, $watchCollection detects shallow collection changes, and deep equality watches nested values at higher cost.",
+      "example": "For a transaction array, $watchCollection can detect additions without deep-comparing every nested property.",
+      "seniorPerspective": "For a transaction array, $watchCollection can detect additions without deep-comparing every nested property.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Choose the smallest watch that matches the change.",
+      "codeExample": "$scope.$watchCollection('vm.transactions',function(newList){render(newList);});"
+    },
+    {
+      "id": "q446",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are AngularJS filters?",
+      "shortAnswer": "Filters transform displayed values in templates or can be composed in expressions.",
+      "detailedAnswer": "Filters transform displayed values in templates or can be composed in expressions.",
+      "example": "A transaction amount can use currency formatting without mutating the model.",
+      "seniorPerspective": "A transaction amount can use currency formatting without mutating the model.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Filter = presentation transformation.",
+      "codeExample": "{{vm.amount | currency}}"
+    },
+    {
+      "id": "q447",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is ng-repeat and why is track by useful?",
+      "shortAnswer": "ng-repeat creates repeated DOM from a collection; track by gives AngularJS stable identity so DOM can be reused.",
+      "detailedAnswer": "ng-repeat creates repeated DOM from a collection; track by gives AngularJS stable identity so DOM can be reused.",
+      "example": "Transaction rows should track by transaction ID instead of array index when items can reorder.",
+      "seniorPerspective": "Transaction rows should track by transaction ID instead of array index when items can reorder.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Stable identity reduces DOM churn.",
+      "codeExample": "<li ng-repeat='tx in vm.transactions track by tx.id'>{{tx.id}}</li>"
+    },
+    {
+      "id": "q448",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is ui-router or ngRoute used for?",
+      "shortAnswer": "AngularJS routing maps URLs or states to views and controllers; ui-router adds a richer state hierarchy.",
+      "detailedAnswer": "AngularJS routing maps URLs or states to views and controllers; ui-router adds a richer state hierarchy.",
+      "example": "A legacy application can expose separate states for ATM configuration screens.",
+      "seniorPerspective": "A legacy application can expose separate states for ATM configuration screens.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Route/state selects a view.",
+      "codeExample": "$routeProvider.when('/accounts',{templateUrl:'accounts.html',controller:'AccountsCtrl'});"
+    },
+    {
+      "id": "q449",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are AngularJS promises and $q?",
+      "shortAnswer": "$q provides promise-based asynchronous composition integrated with AngularJS digest behavior.",
+      "detailedAnswer": "$q provides promise-based asynchronous composition integrated with AngularJS digest behavior.",
+      "example": "A service can return a promise and a controller can handle success and failure.",
+      "seniorPerspective": "A service can return a promise and a controller can handle success and failure.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "$q composes async work.",
+      "codeExample": "return $http.get('/api/account').then(function(r){return r.data;});"
+    },
+    {
+      "id": "q450",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is $http in AngularJS?",
+      "shortAnswer": "$http is AngularJS's promise-based HTTP service for browser API calls.",
+      "detailedAnswer": "$http is AngularJS's promise-based HTTP service for browser API calls.",
+      "example": "A legacy NDCe screen can load configuration from a REST endpoint.",
+      "seniorPerspective": "A legacy NDCe screen can load configuration from a REST endpoint.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "$http = AngularJS HTTP client.",
+      "codeExample": "$http.get('/api/config').then(function(r){vm.config=r.data;});"
+    },
+    {
+      "id": "q451",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are interceptors in AngularJS?",
+      "shortAnswer": "$http interceptors can modify requests or responses and implement cross-cutting concerns.",
+      "detailedAnswer": "$http interceptors can modify requests or responses and implement cross-cutting concerns.",
+      "example": "A legacy app can attach an authorization token and normalize API errors centrally.",
+      "seniorPerspective": "A legacy app can attach an authorization token and normalize API errors centrally.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Interceptor = centralized HTTP cross-cutting logic.",
+      "codeExample": "$httpProvider.interceptors.push(function(){return{request:function(c){c.headers['X-Correlation-Id']=id;return c;}};});"
+    },
+    {
+      "id": "q452",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are isolate scopes in AngularJS directives?",
+      "shortAnswer": "An isolate scope prevents accidental inheritance from the parent scope and exposes explicit bindings.",
+      "detailedAnswer": "An isolate scope prevents accidental inheritance from the parent scope and exposes explicit bindings.",
+      "example": "A reusable transaction widget should receive only the account and callbacks it needs.",
+      "seniorPerspective": "A reusable transaction widget should receive only the account and callbacks it needs.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Isolate scope = explicit directive API.",
+      "codeExample": "scope:{account:'<',onSave:'&'}"
+    },
+    {
+      "id": "q453",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between service, factory and provider in AngularJS?",
+      "shortAnswer": "All register injectable services, but they differ in creation/configuration style; provider offers configuration before runtime service creation.",
+      "detailedAnswer": "All register injectable services, but they differ in creation/configuration style; provider offers configuration before runtime service creation.",
+      "example": "A configurable API base URL can be set during module configuration using a provider.",
+      "seniorPerspective": "A configurable API base URL can be set during module configuration using a provider.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Provider is configurable before service creation.",
+      "codeExample": "app.provider('apiConfig',function(){this.base='/api';this.$get=function(){return{base:this.base};};});"
+    },
+    {
+      "id": "q454",
+      "technology": "AngularJS",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What causes an AngularJS digest loop?",
+      "shortAnswer": "A digest loop occurs when watchers keep changing values so AngularJS cannot reach a stable state within its iteration limit.",
+      "detailedAnswer": "A digest loop occurs when watchers keep changing values so AngularJS cannot reach a stable state within its iteration limit.",
+      "example": "A watcher that modifies the same property it watches can repeatedly trigger itself.",
+      "seniorPerspective": "A watcher that modifies the same property it watches can repeatedly trigger itself.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Watchers must converge.",
+      "codeExample": "$scope.$watch('vm.x',function(v){if(v<10) vm.x=v+1;});"
+    },
+    {
+      "id": "q455",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How does AngularJS dependency injection annotation prevent minification issues?",
+      "shortAnswer": "Explicit annotation preserves dependency names after function parameter renaming.",
+      "detailedAnswer": "Explicit annotation preserves dependency names after function parameter renaming.",
+      "example": "Production minification can rename function arguments, so array or $inject annotation keeps injection metadata.",
+      "seniorPerspective": "Production minification can rename function arguments, so array or $inject annotation keeps injection metadata.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Annotate dependencies for minification safety.",
+      "codeExample": "app.controller('Ctrl',['$http','$scope',function($http,$scope){}]);"
+    },
+    {
+      "id": "q456",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How would you diagnose an AngularJS digest performance problem?",
+      "shortAnswer": "Profile watcher count and digest duration, identify expensive expressions and repeated DOM work, then reduce watches or move computation out of templates.",
+      "detailedAnswer": "Profile watcher count and digest duration, identify expensive expressions and repeated DOM work, then reduce watches or move computation out of templates.",
+      "example": "A large ATM configuration screen may have thousands of bindings; expensive functions in templates can run repeatedly.",
+      "seniorPerspective": "A large ATM configuration screen may have thousands of bindings; expensive functions in templates can run repeatedly.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Measure digest cost; remove repeated work.",
+      "codeExample": "// Prefer cached value\\nvm.total=calculate(vm.items);\\n// avoid {{calculate(vm.items)}} in large repeated lists"
+    },
+    {
+      "id": "q457",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is transclusion in AngularJS?",
+      "shortAnswer": "Transclusion lets a directive capture caller-provided content and place it into the directive's template.",
+      "detailedAnswer": "Transclusion lets a directive capture caller-provided content and place it into the directive's template.",
+      "example": "A reusable panel can own its chrome while consumers supply transaction-specific markup.",
+      "seniorPerspective": "A reusable panel can own its chrome while consumers supply transaction-specific markup.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Directive owns shell; caller supplies content.",
+      "codeExample": "app.directive('panel',function(){return{transclude:true,template:'<div class=\"panel\"><ng-transclude></ng-transclude></div>'};});"
+    },
+    {
+      "id": "q458",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is compile versus link in AngularJS directives?",
+      "shortAnswer": "Compile can transform the template before linking; link connects the compiled DOM to scope and attaches behavior.",
+      "detailedAnswer": "Compile can transform the template before linking; link connects the compiled DOM to scope and attaches behavior.",
+      "example": "A custom directive can generate or normalize structure in compile and register event handlers in link.",
+      "seniorPerspective": "A custom directive can generate or normalize structure in compile and register event handlers in link.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Compile prepares; link connects.",
+      "codeExample": "return{compile:function(t){return{pre:function(){},post:function(scope,el){el.on('click',scope.save);}};}};"
+    },
+    {
+      "id": "q459",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is the difference between pre-link and post-link?",
+      "shortAnswer": "Pre-link runs before child linking; post-link runs after child elements are linked and is commonly used for DOM behavior.",
+      "detailedAnswer": "Pre-link runs before child linking; post-link runs after child elements are linked and is commonly used for DOM behavior.",
+      "example": "A directive that needs initialized child DOM usually belongs in post-link.",
+      "seniorPerspective": "A directive that needs initialized child DOM usually belongs in post-link.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Pre before children; post after children.",
+      "codeExample": "link:{pre:function(){},post:function(scope,el){/* child DOM ready */}}"
+    },
+    {
+      "id": "q460",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you avoid memory leaks in AngularJS?",
+      "shortAnswer": "Destroy listeners, cancel timers and unsubscribe from external event sources when the scope is destroyed.",
+      "detailedAnswer": "Destroy listeners, cancel timers and unsubscribe from external event sources when the scope is destroyed.",
+      "example": "A polling service attached to a screen should stop when that screen's scope is destroyed.",
+      "seniorPerspective": "A polling service attached to a screen should stop when that screen's scope is destroyed.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Destroy external resources with the scope.",
+      "codeExample": "var off=$rootScope.$on('status',refresh);\\n$scope.$on('$destroy',function(){off();$interval.cancel(timer);});"
+    },
+    {
+      "id": "q461",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How does AngularJS prototypal scope inheritance cause binding bugs?",
+      "shortAnswer": "Child scopes inherit properties through JavaScript prototypes, so assigning a primitive can shadow the parent value instead of updating it.",
+      "detailedAnswer": "Child scopes inherit properties through JavaScript prototypes, so assigning a primitive can shadow the parent value instead of updating it.",
+      "example": "A nested ng-repeat can change its own status property while the parent controller still holds the original value.",
+      "seniorPerspective": "A nested ng-repeat can change its own status property while the parent controller still holds the original value.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Nested scope assignment can shadow primitives.",
+      "codeExample": "$scope.status='Ready';\\n// child scope\\n$scope.status='Busy'; // shadows parent"
+    },
+    {
+      "id": "q462",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is the controllerAs pattern?",
+      "shortAnswer": "controllerAs exposes controller state through an object instead of attaching many properties directly to $scope, improving clarity and reducing inheritance confusion.",
+      "detailedAnswer": "controllerAs exposes controller state through an object instead of attaching many properties directly to $scope, improving clarity and reducing inheritance confusion.",
+      "example": "Legacy screens can use vm.account and vm.save rather than anonymous scope properties.",
+      "seniorPerspective": "Legacy screens can use vm.account and vm.save rather than anonymous scope properties.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "controllerAs gives explicit view ownership.",
+      "codeExample": "<div ng-controller='Ctrl as vm'>{{vm.account.id}}</div>\\nfunction Ctrl(){this.account={id:'1001'};}"
+    },
+    {
+      "id": "q463",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How would you migrate an AngularJS feature toward modern Angular?",
+      "shortAnswer": "Isolate dependencies, stabilize API contracts, introduce typed models and component boundaries, then migrate feature-by-feature rather than rewriting everything at once.",
+      "detailedAnswer": "Isolate dependencies, stabilize API contracts, introduce typed models and component boundaries, then migrate feature-by-feature rather than rewriting everything at once.",
+      "example": "An NDCe screen can first separate service calls and templates, then move reusable widgets into Angular components.",
+      "seniorPerspective": "An NDCe screen can first separate service calls and templates, then move reusable widgets into Angular components.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Strangle by feature; don't rewrite blindly.",
+      "codeExample": "// Modern Angular boundary\\n@Component({standalone:true,template:'<p>{{status}}</p>'})\\nexport class StatusComponent{status='Ready';}"
+    },
+    {
+      "id": "q464",
+      "technology": "AngularJS",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How would you diagnose a slow AngularJS screen?",
+      "shortAnswer": "Measure digest time, watcher count, DOM size, network latency and expensive expressions before changing architecture.",
+      "detailedAnswer": "Measure digest time, watcher count, DOM size, network latency and expensive expressions before changing architecture.",
+      "example": "A production support screen may be slow because of thousands of bindings rather than the API itself.",
+      "seniorPerspective": "A production support screen may be slow because of thousands of bindings rather than the API itself.",
+      "commonMistakes": "Focus on the actual runtime behavior, not only the API name.",
+      "followUps": [],
+      "tags": [
+        "AngularJS",
+        "Legacy Angular"
+      ],
+      "memoryCue": "Separate network, digest and DOM cost.",
+      "codeExample": "console.time('digest');\\n$scope.$digest();\\nconsole.timeEnd('digest');"
     }
   ]
 }
