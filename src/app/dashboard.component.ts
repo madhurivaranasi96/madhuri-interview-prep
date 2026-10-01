@@ -1,6 +1,48 @@
-import {Component} from '@angular/core'; import {RouterLink} from '@angular/router';
-const TOPICS=[['C# / .NET','csharp','Core language, async, memory, DI, APIs','24 questions'],['Angular','angular','Architecture, RxJS, change detection, performance','22 questions'],['JavaScript','javascript','Language internals, async, closures, event loop','18 questions'],['SQL','sql','Queries, joins, indexes, transactions, tuning','16 questions'],['System Design','system-design','Scalability, reliability, distributed systems','20 questions'],['AI & Agentic AI','ai','LLMs, RAG, agents, evaluation, security','15 questions'],['Production Debugging','production','RCA, diagnostics, incidents, prevention','14 scenarios']];
-@Component({standalone:true,imports:[RouterLink],template:`
-<section class="dashboard"><div class="hero"><div><p class="label">YOUR ROADMAP</p><h2>From fundamentals<br><em>to senior-level thinking.</em></h2><p class="copy">A focused interview system built around concepts, implementation, architecture, and production reasoning.</p></div><div class="readiness"><div class="ring">32<small>%</small></div><span>Readiness</span><small>Start practicing to build your score.</small></div></div>
-<div class="metrics"><div><b>7</b><span>levels</span></div><div><b>129</b><span>questions</span></div><div><b>24</b><span>practical tasks</span></div><div><b>12</b><span>design drills</span></div></div>
-<div class="section-head"><div><p class="label">LEARNING PATH</p><h3>Choose a track</h3></div><span>Progress is saved locally</span></div><div class="grid">@for(t of topics;track t[1]){<a class="card" [routerLink]="['/topic',t[1]]"><div class="icon">{{t[0].slice(0,1)}}</div><div><h4>{{t[0]}}</h4><p>{{t[2]}}</p><small>{{t[3]}}</small></div><strong>→</strong></a>}</div></section>`,styles:[` .dashboard{padding:34px 42px 60px;max-width:1200px}.hero{border:1px solid #202c3d;background:linear-gradient(120deg,#101925,#0b1019);border-radius:16px;padding:35px;display:flex;justify-content:space-between;gap:30px}.label{font-size:10px;letter-spacing:.18em;color:#7dd3fc;margin:0 0 9px}.hero h2{font-size:36px;line-height:1.1;margin:0;letter-spacing:-.04em}.hero em{font-style:normal;color:#8491a4}.copy{max-width:610px;color:#8996a8;line-height:1.65;font-size:13px}.readiness{min-width:145px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#dce6f2;font-size:12px}.ring{width:88px;height:88px;border:5px solid #233246;border-top-color:#7dd3fc;border-right-color:#7dd3fc;border-radius:50%;display:grid;place-items:center;font-size:25px}.ring small{font-size:12px}.readiness>small{color:#68768a;text-align:center;margin-top:6px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 34px}.metrics div{padding:18px;background:#0d131d;border:1px solid #1b2635;border-radius:10px}.metrics b{font-size:23px;display:block}.metrics span{color:#718096;font-size:11px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px}.section-head h3{margin:0;font-size:21px}.section-head>span{font-size:11px;color:#68768a}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.card{position:relative;text-decoration:none;color:inherit;display:flex;gap:15px;padding:20px;background:#0c121b;border:1px solid #1b2635;border-radius:11px;transition:.2s}.card:hover{border-color:#40566f;transform:translateY(-2px)}.icon{width:38px;height:38px;border-radius:9px;background:#142235;color:#7dd3fc;display:grid;place-items:center;font-weight:700}.card h4{margin:0 0 6px;font-size:15px}.card p{margin:0 0 9px;color:#77869b;font-size:12px}.card small{color:#59697e;font-size:10px}.card>strong{position:absolute;right:18px;top:20px;color:#516176}@media(max-width:800px){.dashboard{padding:22px 18px}.hero{padding:24px;flex-direction:column}.hero h2{font-size:29px}.metrics{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}` ]}) export class DashboardComponent{readonly topics=TOPICS;}
+import {Component} from '@angular/core';
+import {RouterLink} from '@angular/router';
+
+const TOPICS=[
+['C# / .NET','csharp','C# language, async, LINQ, concurrency, design and memory.'],
+['ASP.NET Core','dotnet','DI, middleware, Web APIs, security, configuration and performance.'],
+['Angular','angular','Components, signals, RxJS, forms, routing and performance.'],
+['JavaScript / TypeScript','javascript','Language fundamentals, async, closures and TypeScript.'],
+['SQL','sql','Joins, indexes, transactions, isolation, tuning and concurrency.'],
+['System Design','system-design','Scalability, caching, queues, availability and distributed systems.'],
+['Security','security','Authentication, authorization, injection, XSS, CSRF and secrets.'],
+['Performance','performance','Latency, throughput, caching, N+1 and optimization.'],
+['Production Debugging','production','RCA, incidents, database issues, memory, CPU and queues.'],
+['AI & Agentic AI','ai','RAG, embeddings, agents, evaluation and AI security.'],
+['Behavioral','behavioral','Senior-level ownership, incidents, disagreements and leadership.']
+];
+
+@Component({
+standalone:true,imports:[RouterLink],
+template:`
+<section class="home">
+<p class="label">SENIOR SOFTWARE ENGINEER INTERVIEW PREP</p>
+<h1>Study. Answer aloud. Repeat.</h1>
+<p class="intro">A simple question-and-answer study bank for senior software engineering interviews. No dashboards, scores or complicated practice flow — just the material you need to revise.</p>
+<div class="stats"><strong>130+</strong><span>interview questions</span></div>
+<h2>Study by topic</h2>
+<div class="topics">
+@for(t of topics;track t[1]){
+<a [routerLink]="['/topic',t[1]]">
+<span class="topic-number">{{($index+1).toString().padStart(2,'0')}}</span>
+<span><b>{{t[0]}}</b><small>{{t[2]}}</small></span>
+<span class="arrow">→</span>
+</a>
+}
+</div>
+<div class="method">
+<h2>How to use this</h2>
+<p><b>1.</b> Read the question and answer it aloud without looking below.</p>
+<p><b>2.</b> Compare your answer with the notes and identify what you missed.</p>
+<p><b>3.</b> For complex questions, explain trade-offs, failure modes, testing and production impact.</p>
+<p><b>4.</b> Repeat the same topic until you can answer naturally without memorizing sentences.</p>
+</div>
+</section>`,
+styles:[`
+:host{display:block}.home{max-width:1000px;margin:0 auto;padding:70px 34px 100px}.label{margin:0 0 13px;color:#7dd3fc;font-size:11px;letter-spacing:.18em}h1{margin:0;font-size:48px;letter-spacing:-.045em;color:#edf4fb}.intro{max-width:720px;color:#8998a9;font-size:15px;line-height:1.8;margin:18px 0 28px}.stats{display:flex;align-items:baseline;gap:10px;margin:0 0 58px;color:#73869b}.stats strong{font-size:30px;color:#edf4fb}.stats span{font-size:13px}h2{font-size:22px;color:#e9f0f6;margin:0 0 18px}.topics{border-top:1px solid #202b39}.topics a{display:grid;grid-template-columns:42px 1fr 30px;gap:15px;align-items:center;padding:21px 0;border-bottom:1px solid #1b2633;text-decoration:none;color:inherit}.topics a:hover b{color:#7dd3fc}.topic-number{font-size:12px;color:#53677d}.topics b{display:block;font-size:16px;color:#e3ebf2;margin-bottom:5px}.topics small{display:block;color:#718296;font-size:12px;line-height:1.5}.arrow{color:#587089}.method{margin-top:65px;padding-top:30px;border-top:1px solid #202b39}.method p{color:#8b9aaa;font-size:13px;line-height:1.8;margin:8px 0}.method b{color:#dce6ef}@media(max-width:700px){.home{padding:45px 18px 70px}h1{font-size:36px}.topics a{grid-template-columns:32px 1fr 20px}}
+`]
+})
+export class DashboardComponent{readonly topics=TOPICS;}
