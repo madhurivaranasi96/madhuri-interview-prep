@@ -1,6 +1,6 @@
 {
-  "version": 18,
-  "sourceNote": "Expanded to 336 categorized original interview questions across the full stack: C#/.NET, ASP.NET Core, EF Core, LINQ, async/threading, Angular, JavaScript/TypeScript, SQL, API design, architecture, design patterns, microservices, messaging, system design, networking, cloud/distributed systems, security, performance, testing, DevOps/production, production debugging, AI/agentic AI and behavioral interviews. Themes are synthesized from multiple current public interview-prep sources; questions are paraphrased original study material. Main questions use only Simple, Medium and Complex difficulty. Scenario-based interviews remain separate.",
+  "version": 19,
+  "sourceNote": "Expanded to 377 categorized original interview questions. C# coverage now explicitly includes OOP, encapsulation, abstraction, polymorphism, inheritance, composition, interfaces, abstract classes, delegates, Action/Func/Predicate, events, lambdas, closures, generics, collections, exceptions, strings, iterators, records, pattern matching, reflection, attributes, memory/GC, equality, Span, nullable references, access modifiers, constructors and other core language features. Themes are synthesized from multiple current public interview-prep sources; questions are paraphrased original study material. Main questions use only Simple, Medium and Complex difficulty. Scenario-based interviews remain separate.",
   "questions": [
     {
       "id": "master-001",
@@ -8537,6 +8537,1051 @@
       ],
       "memoryCue": "Open stops; half-open probes.",
       "codeExample": "if(breaker.IsOpen)return Fallback();"
+    },
+    {
+      "id": "csharp-core-001",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What are the four pillars of OOP in C#?",
+      "shortAnswer": "Encapsulation hides state behind controlled members, abstraction exposes only what callers need, inheritance reuses and specialises behaviour, and polymorphism lets the same contract produce different implementations.",
+      "example": "In an ATM application, a Transaction service can depend on an ITransactionProcessor interface while CashWithdrawalProcessor and CashDepositProcessor provide different behaviour.",
+      "detailedAnswer": "OOP is not just definitions: use encapsulation for invariants, abstraction for boundaries, inheritance only for a genuine is-a relationship, and polymorphism to avoid type-specific branching.",
+      "seniorPerspective": "I prefer composition and interfaces when behaviour varies independently; inheritance is useful when the subtype truly satisfies the base contract.",
+      "commonMistakes": "Confusing abstraction with encapsulation; using inheritance only to reuse code; violating substitutability.",
+      "followUps": [
+        "What is composition?",
+        "How does SOLID relate to OOP?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Four pillars = hide, simplify, specialise, substitute.",
+      "codeExample": "public interface ITransaction { void Process(); }"
+    },
+    {
+      "id": "csharp-core-002",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is encapsulation in C#?",
+      "shortAnswer": "Encapsulation means keeping an object's state controlled and exposing operations that preserve its invariants.",
+      "example": "An ATM withdrawal object should not let callers directly set the available balance to an invalid value.",
+      "detailedAnswer": "Good encapsulation makes invalid states harder to create. Private fields, properties with controlled setters, and methods that enforce rules are common techniques.",
+      "seniorPerspective": "I use encapsulation to keep business rules close to the data they protect rather than scattering validation across controllers.",
+      "commonMistakes": "Making every property public with a setter; treating private fields as the only definition of encapsulation.",
+      "followUps": [
+        "How would you make an object immutable?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Encapsulation = protect the state.",
+      "codeExample": "public void Withdraw(decimal amount) { if(amount<=0) throw new ArgumentOutOfRangeException(); Balance -= amount; }"
+    },
+    {
+      "id": "csharp-core-003",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is abstraction in C#?",
+      "shortAnswer": "Abstraction exposes a useful contract while hiding implementation details.",
+      "example": "A payment service can expose ProcessPayment without exposing how the provider API, retries, and logging work.",
+      "detailedAnswer": "Interfaces and abstract classes are common abstraction mechanisms. The important point is the boundary, not simply hiding code.",
+      "seniorPerspective": "A senior design uses abstractions where they reduce coupling and make substitution or testing useful, not for every single class.",
+      "commonMistakes": "Saying abstraction and encapsulation are identical; creating interfaces with no real boundary.",
+      "followUps": [
+        "Interface vs abstract class?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Abstraction = expose what, hide how.",
+      "codeExample": "public interface IPaymentService { Task ProcessPaymentAsync(decimal amount); }"
+    },
+    {
+      "id": "csharp-core-004",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is polymorphism in C#?",
+      "shortAnswer": "Polymorphism allows code to work against a common contract while the concrete implementation determines behaviour.",
+      "example": "An ATM transaction handler can call Process on an ITransaction without knowing whether it is a withdrawal or deposit.",
+      "detailedAnswer": "Runtime polymorphism commonly uses virtual/override or interfaces. Compile-time polymorphism commonly refers to method overloading.",
+      "seniorPerspective": "I use polymorphism to remove large switch statements based on transaction type and make adding a new type safer.",
+      "commonMistakes": "Calling method overloading runtime polymorphism; using inheritance when composition would be clearer.",
+      "followUps": [
+        "virtual vs override?",
+        "interface dispatch?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Polymorphism = one contract, many behaviours.",
+      "codeExample": "ITransaction tx = new CashWithdrawal(); tx.Process();"
+    },
+    {
+      "id": "csharp-core-005",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between method overloading and method overriding?",
+      "shortAnswer": "Overloading uses the same method name with different parameter signatures and is resolved at compile time. Overriding replaces virtual base behaviour and is resolved at runtime.",
+      "example": "A service may overload GetTransaction for different parameter sets, while a specialised processor overrides a virtual validation method.",
+      "detailedAnswer": "Overloading is about API convenience within a type. Overriding is about substitutable implementations in an inheritance hierarchy.",
+      "seniorPerspective": "I avoid overload sets that become ambiguous and use override only when the base contract genuinely permits custom behaviour.",
+      "commonMistakes": "Confusing overload resolution with virtual dispatch; changing only the return type does not create an overload.",
+      "followUps": [
+        "What are new and sealed?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Overload = different inputs; override = different implementation.",
+      "codeExample": "class A { public virtual string Get() => \"A\"; } class B : A { public override string Get() => \"B\"; }"
+    },
+    {
+      "id": "csharp-core-006",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between an abstract class and an interface?",
+      "shortAnswer": "An abstract class can share state and implementation with derived classes, while an interface defines a contract that unrelated classes can implement.",
+      "example": "A base ATM processor may share audit logic, while ITransactionHandler can be implemented by different handlers.",
+      "detailedAnswer": "Choose an abstract class when there is meaningful shared implementation and identity. Choose an interface for capability or a replaceable boundary.",
+      "seniorPerspective": "Modern C# interfaces can contain default implementations, so the practical distinction is about ownership, state, inheritance and design intent.",
+      "commonMistakes": "Saying interfaces can never contain implementation; using an abstract base class just to share unrelated utilities.",
+      "followUps": [
+        "Can a class implement multiple interfaces?",
+        "Can it inherit multiple classes?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Abstract class = shared base; interface = capability/contract.",
+      "codeExample": "public interface IAuditable { void Audit(); } public abstract class TransactionBase { public abstract void Process(); }"
+    },
+    {
+      "id": "csharp-core-007",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between virtual, override, new and sealed?",
+      "shortAnswer": "virtual permits overriding, override supplies the derived implementation, new hides a base member, and sealed can prevent further overriding.",
+      "example": "A transaction base class can expose virtual validation that a specialised transaction overrides.",
+      "detailedAnswer": "new does not participate in normal virtual dispatch and can surprise callers when the object is referenced through the base type.",
+      "seniorPerspective": "I treat new method hiding as a deliberate compatibility choice and prefer override when polymorphism is intended.",
+      "commonMistakes": "Assuming new is equivalent to override.",
+      "followUps": [
+        "What happens when a sealed override is used?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "virtual opens; override replaces; new hides; sealed closes.",
+      "codeExample": "class B : A { public sealed override void Process() { } }"
+    },
+    {
+      "id": "csharp-core-008",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a delegate in C#?",
+      "shortAnswer": "A delegate is a type-safe reference to a method. It lets code pass behaviour as a value.",
+      "example": "A transaction service can accept a delegate for a validation rule or callback.",
+      "detailedAnswer": "Delegates power callbacks, events, lambdas and APIs such as List<T>.Find. Func, Action and Predicate are common built-in delegate types.",
+      "seniorPerspective": "I use delegates when behaviour is supplied to an operation rather than when I need an independently managed event stream.",
+      "commonMistakes": "Treating a delegate as a raw function pointer without type safety; using delegates where a domain interface is clearer.",
+      "followUps": [
+        "Delegate vs interface?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Delegate = pass behaviour.",
+      "codeExample": "Func<int,bool> isPositive = x => x > 0;"
+    },
+    {
+      "id": "csharp-core-009",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between Action, Func and Predicate?",
+      "shortAnswer": "Action represents a method returning void, Func represents a method returning a value, and Predicate is a delegate returning bool with one input.",
+      "example": "An ATM validation pipeline can use Predicate<Transaction> for a rule and Func<Transaction,Result> for transformation.",
+      "detailedAnswer": "The generic type parameters describe inputs and, for Func, the final parameter is the return type.",
+      "seniorPerspective": "I choose the built-in delegate that communicates intent rather than declaring a custom delegate unnecessarily.",
+      "commonMistakes": "Mixing up Func's final generic argument as an input; using Predicate for multi-parameter APIs.",
+      "followUps": [
+        "Can Func have multiple parameters?",
+        "What about async delegates?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Action = no result; Func = result; Predicate = bool.",
+      "codeExample": "Func<Transaction,bool> valid = t => t.Amount > 0;"
+    },
+    {
+      "id": "csharp-core-010",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is an event in C# and how is it different from a delegate?",
+      "shortAnswer": "An event is a controlled publish-subscribe mechanism built on delegates. Subscribers can add or remove handlers, but outside code cannot normally raise the event.",
+      "example": "A transaction processor can raise TransactionCompleted when an ATM transaction finishes.",
+      "detailedAnswer": "The event keyword protects the publisher from external invocation. This makes ownership of raising the notification explicit.",
+      "seniorPerspective": "Events are useful when the publisher owns the lifecycle and consumers react independently.",
+      "commonMistakes": "Treating an event as a general-purpose callback parameter; forgetting to unsubscribe long-lived subscriptions.",
+      "followUps": [
+        "Can events cause memory leaks?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Event = publisher-owned notification.",
+      "codeExample": "public event EventHandler? TransactionCompleted;"
+    },
+    {
+      "id": "csharp-core-011",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are lambda expressions in C#?",
+      "shortAnswer": "A lambda is a concise way to represent a function, commonly converted to a delegate or expression tree.",
+      "example": "Filtering transactions with transactions.Where(t => t.Amount > 1000) is a lambda-based predicate.",
+      "detailedAnswer": "Lambdas can capture variables, which creates closures, and in LINQ providers they may become expression trees rather than executable delegates.",
+      "seniorPerspective": "I watch for captured mutable state and whether a LINQ provider can translate the expression.",
+      "commonMistakes": "Ignoring closure capture; assuming every lambda executes immediately.",
+      "followUps": [
+        "What is a closure?",
+        "What is an expression tree?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Lambda = compact function expression.",
+      "codeExample": "var large = transactions.Where(t => t.Amount > 1000);"
+    },
+    {
+      "id": "csharp-core-012",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is a closure in C#?",
+      "shortAnswer": "A closure occurs when a lambda or local function captures variables from its surrounding scope.",
+      "example": "A retry callback might capture a request identifier for logging.",
+      "detailedAnswer": "Captured variables can outlive the stack frame where they were declared. This matters for loops, asynchronous code and allocations.",
+      "seniorPerspective": "I inspect captured state when debugging surprising values or allocations in callbacks.",
+      "commonMistakes": "Assuming a loop variable is copied independently in every closure; capturing mutable shared state.",
+      "followUps": [
+        "How did loop-variable capture behave in older C# versions?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Closure = function remembers outer state.",
+      "codeExample": "int limit = 100; Func<int,bool> f = x => x < limit;"
+    },
+    {
+      "id": "csharp-core-013",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What are generics in C# and why are they useful?",
+      "shortAnswer": "Generics allow types and methods to work with a type parameter while preserving compile-time type safety and avoiding unnecessary casts.",
+      "example": "A repository can expose Repository<Transaction> instead of accepting object.",
+      "detailedAnswer": "Generics improve reuse without giving up type information. Constraints can restrict T to capabilities the implementation requires.",
+      "seniorPerspective": "I use generics for reusable infrastructure, collections and algorithms while keeping domain types explicit.",
+      "commonMistakes": "Using object everywhere instead of generics; adding overly complex generic abstractions.",
+      "followUps": [
+        "What are generic constraints?",
+        "What is covariance?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Generics = reusable code with type safety.",
+      "codeExample": "class Repository<T> { public T Get(int id) => default!; }"
+    },
+    {
+      "id": "csharp-core-014",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are generic constraints in C#?",
+      "shortAnswer": "Constraints restrict which types can be used as generic arguments and let the compiler guarantee required capabilities.",
+      "example": "A factory can require T : ITransaction so it can safely call transaction methods.",
+      "detailedAnswer": "Common constraints include class, struct, new(), base classes and interfaces.",
+      "seniorPerspective": "Constraints are useful when a generic algorithm genuinely needs a capability; they should not be added just to make a type hierarchy look sophisticated.",
+      "commonMistakes": "Using new() when dependency injection is actually needed; over-constraining reusable code.",
+      "followUps": [
+        "What does where T : class mean?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Constraint = tell T what it must support.",
+      "codeExample": "static T Create<T>() where T : new() => new T();"
+    },
+    {
+      "id": "csharp-core-015",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between List, Dictionary, HashSet and Queue?",
+      "shortAnswer": "List is ordered indexed storage, Dictionary maps keys to values, HashSet stores unique values, and Queue provides FIFO processing.",
+      "example": "ATM pending requests can use a Queue, unique terminal IDs a HashSet, and terminal-to-status lookup a Dictionary.",
+      "detailedAnswer": "Choosing a collection depends on access pattern: lookup, uniqueness, ordering or FIFO processing.",
+      "seniorPerspective": "I start with required operations and complexity rather than choosing List by default.",
+      "commonMistakes": "Using List for repeated key lookups; using Dictionary when duplicate values are the real requirement.",
+      "followUps": [
+        "Stack vs Queue?",
+        "How does Dictionary hashing work?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "List = order; Dictionary = lookup; HashSet = unique; Queue = FIFO.",
+      "codeExample": "var seen = new HashSet<string>(); seen.Add(\"ATM-101\");"
+    },
+    {
+      "id": "csharp-core-016",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between IEnumerable and ICollection and IList?",
+      "shortAnswer": "IEnumerable represents enumeration, ICollection adds collection-level operations such as Count and mutation-related members, and IList adds indexed access.",
+      "example": "A method returning IEnumerable<Transaction> communicates that callers only need to enumerate results.",
+      "detailedAnswer": "Returning the narrowest useful abstraction reduces coupling. IList implies ordering and indexing semantics that may not be needed.",
+      "seniorPerspective": "I choose the interface based on the contract the caller needs, not the concrete collection I happen to use internally.",
+      "commonMistakes": "Assuming IEnumerable always means a database query; assuming IList is always faster.",
+      "followUps": [
+        "How does IQueryable differ?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Expose only what callers need.",
+      "codeExample": "IEnumerable<Transaction> GetTransactions() => transactions;"
+    },
+    {
+      "id": "csharp-core-017",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between const, readonly and static readonly?",
+      "shortAnswer": "const is a compile-time constant, readonly can be assigned during declaration or construction, and static readonly has one runtime value shared by the type.",
+      "example": "A fixed protocol value may be const, while a generated configuration or immutable service-level value may be static readonly.",
+      "detailedAnswer": "const values are embedded into consuming assemblies, so changing a public const can require consumers to recompile.",
+      "seniorPerspective": "I prefer readonly for values determined at runtime or constructed from configuration.",
+      "commonMistakes": "Using const for values that may change across deployments; assuming readonly means compile-time constant.",
+      "followUps": [
+        "Can an instance readonly field be changed in a constructor?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "const = compile time; readonly = construction; static readonly = shared runtime.",
+      "codeExample": "private readonly int timeoutSeconds;"
+    },
+    {
+      "id": "csharp-core-018",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between ref, out and in parameters?",
+      "shortAnswer": "ref requires the caller to initialize the variable, out requires the method to assign it, and in passes a value by readonly reference.",
+      "example": "A parsing method may use out for a parsed result, while ref can update an existing value.",
+      "detailedAnswer": "These keywords affect calling semantics and can avoid copies for some value types, but they should be used only when the API benefits from them.",
+      "seniorPerspective": "For public APIs I prefer clear return types or result objects when multiple outputs are becoming hard to understand.",
+      "commonMistakes": "Thinking out must be initialized by the caller; using ref everywhere for performance without measurement.",
+      "followUps": [
+        "What is the difference between returning a tuple and using out?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "ref = read/write; out = write; in = readonly reference.",
+      "codeExample": "bool TryParse(string s, out int value) => int.TryParse(s, out value);"
+    },
+    {
+      "id": "csharp-core-019",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between string and StringBuilder?",
+      "shortAnswer": "string is immutable, so repeated concatenation can create new strings. StringBuilder is designed for repeated modifications.",
+      "example": "Building a large ATM journal message in a loop is a case where StringBuilder can reduce intermediate allocations.",
+      "detailedAnswer": "For a few concatenations interpolation is usually clearer. StringBuilder is useful for substantial iterative construction.",
+      "seniorPerspective": "I choose based on workload and readability, not because StringBuilder is always faster.",
+      "commonMistakes": "Using StringBuilder for every string; forgetting to measure small operations.",
+      "followUps": [
+        "Why is string immutable?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "string = immutable; StringBuilder = mutable buffer.",
+      "codeExample": "var sb = new StringBuilder(); sb.Append(\"Transaction \"); sb.Append(id);"
+    },
+    {
+      "id": "csharp-core-020",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between throw and throw ex?",
+      "shortAnswer": "throw preserves the original stack trace, while throw ex resets the throw location and loses useful diagnostic context.",
+      "example": "In production RCA, preserving the original stack trace is critical for finding the real failing method.",
+      "detailedAnswer": "Wrap exceptions only when adding meaningful context, and preserve the original exception as the inner exception.",
+      "seniorPerspective": "I avoid catching an exception unless I can handle it, translate it, add context, or perform required cleanup.",
+      "commonMistakes": "Using throw ex; losing the original stack location; catching Exception everywhere.",
+      "followUps": [
+        "When should you use inner exceptions?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "throw = preserve the trail.",
+      "codeExample": "catch(Exception ex) { logger.LogError(ex,\"Failed\"); throw; }"
+    },
+    {
+      "id": "csharp-core-021",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between checked and unchecked in C#?",
+      "shortAnswer": "checked enables overflow checking for integral arithmetic, while unchecked allows overflow to wrap according to the numeric type rules.",
+      "example": "A financial calculation converting amounts or counters should consider overflow behaviour explicitly.",
+      "detailedAnswer": "The right choice depends on whether overflow is an invalid condition that should fail or an expected low-level operation.",
+      "seniorPerspective": "For financial values I prefer decimal and explicit validation rather than relying on overflow behaviour.",
+      "commonMistakes": "Assuming decimal overflow behaves exactly like int overflow; ignoring boundary validation.",
+      "followUps": [
+        "What exception does checked overflow produce for integral arithmetic?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "checked = detect overflow; unchecked = allow it.",
+      "codeExample": "int total = checked(a + b);"
+    },
+    {
+      "id": "csharp-core-022",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What are extension methods in C#?",
+      "shortAnswer": "Extension methods let you add callable methods to an existing type without modifying or inheriting from that type.",
+      "example": "A project can define ToAuditMessage(this Transaction transaction) as a reusable formatting helper.",
+      "detailedAnswer": "They are static methods with a this parameter on the first argument. They improve discoverability but can also hide dependencies if overused.",
+      "seniorPerspective": "I use them for cohesive reusable operations, not to turn every utility into a pseudo-instance API.",
+      "commonMistakes": "Putting business-critical stateful behaviour into extensions; creating ambiguous overloads.",
+      "followUps": [
+        "Can extension methods override instance methods?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Extension = add syntax, not state.",
+      "codeExample": "public static string ToAudit(this Transaction t) => t.Id.ToString();"
+    },
+    {
+      "id": "csharp-core-023",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a sealed class in C#?",
+      "shortAnswer": "A sealed class cannot be inherited. A sealed override prevents further overriding of a virtual member.",
+      "example": "A security-sensitive component might be sealed when inheritance would violate its invariants.",
+      "detailedAnswer": "Sealing communicates that extension through inheritance is not part of the supported design.",
+      "seniorPerspective": "I use it when inheritance would be unsafe or the type's contract should remain closed.",
+      "commonMistakes": "Using sealed everywhere without understanding extensibility requirements.",
+      "followUps": [
+        "Can a sealed class implement interfaces?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "sealed = no subclassing.",
+      "codeExample": "public sealed class TokenValidator { }"
+    },
+    {
+      "id": "csharp-core-024",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is an indexer in C#?",
+      "shortAnswer": "An indexer lets an object expose array-like access syntax for its internal representation.",
+      "example": "A configuration collection can expose settings by key using an indexer.",
+      "detailedAnswer": "Indexers are useful when the object conceptually represents a collection or lookup.",
+      "seniorPerspective": "I keep indexer behaviour predictable and validate missing keys explicitly.",
+      "commonMistakes": "Using indexers to hide expensive operations or network calls.",
+      "followUps": [
+        "Can an indexer be overloaded?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Indexer = object[key] syntax.",
+      "codeExample": "public string this[string key] => values[key];"
+    },
+    {
+      "id": "csharp-core-025",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are iterators and yield return in C#?",
+      "shortAnswer": "An iterator lets a method produce a sequence lazily using yield return. The caller requests items as it enumerates.",
+      "example": "A large transaction stream can be processed without creating a complete list in memory.",
+      "detailedAnswer": "Iterator execution is deferred until enumeration and state is maintained between yields.",
+      "seniorPerspective": "I use iterators when streaming or lazy generation is valuable, but I watch for repeated enumeration and resource lifetime issues.",
+      "commonMistakes": "Assuming the iterator runs when the method is called; returning a sequence over disposed resources.",
+      "followUps": [
+        "yield break vs yield return?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "yield = produce one item at a time.",
+      "codeExample": "IEnumerable<int> Numbers(){ yield return 1; yield return 2; }"
+    },
+    {
+      "id": "csharp-core-026",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are records in C# and when would you use them?",
+      "shortAnswer": "Records are designed for data-centric models with value-based equality and convenient immutable-style syntax.",
+      "example": "An API response or command DTO can be a record when identity is defined by its data.",
+      "detailedAnswer": "Records reduce boilerplate for equality and copying. They do not make every nested object deeply immutable.",
+      "seniorPerspective": "I use records for value-like messages and DTOs, while entities with identity and lifecycle are usually classes.",
+      "commonMistakes": "Assuming records are always immutable; using records for entities without considering identity semantics.",
+      "followUps": [
+        "record vs class?",
+        "with expression?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Record = data/value semantics.",
+      "codeExample": "public record TransactionRequest(string AccountId, decimal Amount);"
+    },
+    {
+      "id": "csharp-core-027",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is pattern matching in C#?",
+      "shortAnswer": "Pattern matching lets code test type, value and shape conditions concisely using is, switch expressions and property patterns.",
+      "example": "An ATM transaction can be handled based on its runtime type and important properties.",
+      "detailedAnswer": "Pattern matching can make branching explicit and exhaustive, especially with switch expressions.",
+      "seniorPerspective": "I prefer it when the branching is genuinely based on shape/type; polymorphism may be better when behaviour belongs to the type itself.",
+      "commonMistakes": "Creating huge switch expressions that become a substitute for polymorphism.",
+      "followUps": [
+        "What are property, relational and list patterns?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Pattern matching = branch on shape/value.",
+      "codeExample": "var message = amount switch { > 10000 => \"Review\", _ => \"Normal\" };"
+    },
+    {
+      "id": "csharp-core-028",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is covariance and contravariance in C#?",
+      "shortAnswer": "Covariance allows a more derived generic type to be used where a base type is expected for output positions; contravariance works in the opposite direction for input positions.",
+      "example": "IEnumerable<Derived> can be assigned to IEnumerable<Base> because IEnumerable<out T> is covariant.",
+      "detailedAnswer": "Variance applies to interfaces and delegates with compatible in/out positions and is useful for API flexibility.",
+      "seniorPerspective": "I check whether a generic parameter is consumed or produced before reasoning about variance.",
+      "commonMistakes": "Assuming List<T> is covariant; forgetting that mutable collections cannot safely expose covariance.",
+      "followUps": [
+        "What do in and out mean on generic interfaces?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "out produces; in consumes.",
+      "codeExample": "IEnumerable<string> names = new List<string>(); IEnumerable<object> values = names;"
+    },
+    {
+      "id": "csharp-core-029",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between IDisposable and a finalizer?",
+      "shortAnswer": "IDisposable provides deterministic cleanup initiated by code, while a finalizer is a GC-driven fallback for unmanaged resources.",
+      "example": "A database connection or file handle should be disposed deterministically rather than waiting for GC.",
+      "detailedAnswer": "The using statement or declaration ensures Dispose is called even when exceptions occur. Finalizers are expensive and uncommon in application code.",
+      "seniorPerspective": "I use SafeHandle or existing disposable abstractions instead of writing finalizers unless directly managing unmanaged resources.",
+      "commonMistakes": "Assuming GC immediately releases file handles; writing finalizers for every class.",
+      "followUps": [
+        "What does using translate to?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Dispose = deterministic cleanup; GC = memory management.",
+      "codeExample": "using var connection = new SqlConnection(connectionString);"
+    },
+    {
+      "id": "csharp-core-030",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How does garbage collection work in .NET?",
+      "shortAnswer": "The GC automatically reclaims managed objects that are no longer reachable. It uses generations to optimise collection based on object lifetime.",
+      "example": "A high-throughput API may create many short-lived request objects, which are usually collected in younger generations.",
+      "detailedAnswer": "GC manages managed memory, not arbitrary external resources. Gen 0/1/2 and the Large Object Heap are important when diagnosing allocation pressure.",
+      "seniorPerspective": "For production issues I measure allocations and GC pauses rather than assuming GC is the cause.",
+      "commonMistakes": "Saying GC collects objects simply because a variable went out of scope; confusing unmanaged resources with managed memory.",
+      "followUps": [
+        "What is LOH?",
+        "What is a memory leak in a GC language?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "GC = reclaim unreachable managed objects.",
+      "codeExample": "GC.GetTotalMemory(false);"
+    },
+    {
+      "id": "csharp-core-031",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is a memory leak in a garbage-collected application?",
+      "shortAnswer": "A memory leak occurs when objects remain reachable even though the application no longer needs them, so GC cannot reclaim them.",
+      "example": "A long-lived singleton subscribing to events from many short-lived objects can accidentally keep those objects alive.",
+      "detailedAnswer": "Common causes include static collections, event subscriptions, caches without eviction and closures retaining large graphs.",
+      "seniorPerspective": "I investigate memory leaks with heap snapshots, allocation profiling and object-reference paths rather than calling GC.Collect as a fix.",
+      "commonMistakes": "Thinking GC eliminates all leaks; forcing GC instead of finding the retaining reference.",
+      "followUps": [
+        "How can events keep objects alive?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Leak = still reachable but no longer needed.",
+      "codeExample": "static readonly List<object> cache = new();"
+    },
+    {
+      "id": "csharp-core-032",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is reflection in C# and when should you use it?",
+      "shortAnswer": "Reflection inspects metadata and types at runtime and can dynamically create or invoke members.",
+      "example": "A plugin framework can discover classes implementing IPlugin at startup.",
+      "detailedAnswer": "Reflection is powerful but can add complexity and runtime cost. Source generators or explicit registration may be better when the set of types is known.",
+      "seniorPerspective": "I use reflection at boundaries such as plugin discovery or framework infrastructure and keep hot paths strongly typed.",
+      "commonMistakes": "Using reflection for normal business logic; ignoring trimming/AOT implications.",
+      "followUps": [
+        "What is an attribute?",
+        "How do DI containers use reflection?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Reflection = inspect types at runtime.",
+      "codeExample": "var type = typeof(Transaction); var props = type.GetProperties();"
+    },
+    {
+      "id": "csharp-core-033",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are attributes in C#?",
+      "shortAnswer": "Attributes attach metadata to types, members or parameters that frameworks and reflection can inspect.",
+      "example": "An API action can use an attribute to declare authorization or validation metadata.",
+      "detailedAnswer": "Attributes are declarative metadata; the framework decides what that metadata means.",
+      "seniorPerspective": "I use attributes for cross-cutting metadata and framework integration, while keeping core business rules explicit.",
+      "commonMistakes": "Putting complex business logic inside attributes.",
+      "followUps": [
+        "How do you create a custom attribute?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Attribute = metadata attached to code.",
+      "codeExample": "[AttributeUsage(AttributeTargets.Class)] class AuditedAttribute : Attribute { }"
+    },
+    {
+      "id": "csharp-core-034",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between dynamic and var in C#?",
+      "shortAnswer": "var is statically typed at compile time; dynamic defers member binding to runtime.",
+      "example": "var is appropriate for ordinary strongly typed local variables, while dynamic may be used for interoperability with COM or genuinely dynamic data.",
+      "detailedAnswer": "dynamic can move errors from compile time to runtime and can affect tooling and performance.",
+      "seniorPerspective": "I avoid dynamic in domain code unless the runtime type really is dynamic.",
+      "commonMistakes": "Thinking var means dynamic; using dynamic just to avoid a type declaration.",
+      "followUps": [
+        "Can var be assigned null?",
+        "What happens with a dynamic missing member?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "var = compile-time type; dynamic = runtime binding.",
+      "codeExample": "var amount = 100m; dynamic value = GetDynamicValue();"
+    },
+    {
+      "id": "csharp-core-035",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between a constructor and a static constructor?",
+      "shortAnswer": "An instance constructor initializes each object, while a static constructor initializes type-level state once before the type is first used.",
+      "example": "A transaction object can validate its instance dependencies in its constructor, while a static configuration cache may use a static constructor.",
+      "detailedAnswer": "Static constructors cannot be called directly and have no parameters.",
+      "seniorPerspective": "I prefer normal static initialization or dependency injection when possible because static state can complicate testing.",
+      "commonMistakes": "Doing heavy I/O in static constructors; assuming they run at application startup regardless of type usage.",
+      "followUps": [
+        "Can a static constructor be inherited?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Instance constructor = object; static constructor = type.",
+      "codeExample": "static Transaction() { /* type initialization */ }"
+    },
+    {
+      "id": "csharp-core-036",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is dependency injection and why does it support OOP design?",
+      "shortAnswer": "Dependency injection supplies a class's collaborators from outside instead of making the class construct them itself.",
+      "example": "A TransactionService can receive IAuditLogger and IPaymentGateway through its constructor.",
+      "detailedAnswer": "DI supports dependency inversion and makes substitution and testing easier.",
+      "seniorPerspective": "I keep constructors explicit and avoid service-locator patterns that hide dependencies.",
+      "commonMistakes": "Injecting every primitive value through a service; creating interfaces without a real substitution need.",
+      "followUps": [
+        "Transient vs scoped vs singleton?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "DI = dependencies supplied from outside.",
+      "codeExample": "public TransactionService(IAuditLogger logger) { _logger = logger; }"
+    },
+    {
+      "id": "csharp-core-037",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is operator overloading in C#?",
+      "shortAnswer": "Operator overloading lets a user-defined type define meaningful behaviour for operators such as +, -, == or >.",
+      "example": "A Money value object can define addition while preserving currency rules.",
+      "detailedAnswer": "Overloaded operators should be intuitive and consistent with equality and domain semantics.",
+      "seniorPerspective": "I use them for value objects where the operator meaning is obvious, not to make domain operations cryptic.",
+      "commonMistakes": "Overloading operators with surprising side effects; ignoring null and equality semantics.",
+      "followUps": [
+        "Which operators must be paired?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Operator overload = natural syntax for value types.",
+      "codeExample": "public static Money operator +(Money a, Money b) => new(a.Amount + b.Amount);"
+    },
+    {
+      "id": "csharp-core-038",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "How do Equals, == and GetHashCode relate in C#?",
+      "shortAnswer": "Equals defines logical equality, == may be overloaded, and GetHashCode must return the same hash for equal objects.",
+      "example": "A transaction value object should compare based on its identity fields and behave consistently in dictionaries and hash sets.",
+      "detailedAnswer": "If equality semantics change, GetHashCode must remain consistent with them.",
+      "seniorPerspective": "I explicitly define equality for value objects and test dictionary/set behaviour.",
+      "commonMistakes": "Overriding Equals without GetHashCode; assuming == always means value equality.",
+      "followUps": [
+        "How do records implement equality?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Equal objects must have equal hashes.",
+      "codeExample": "public override bool Equals(object? obj) => obj is Money m && Amount == m.Amount;"
+    },
+    {
+      "id": "csharp-core-039",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What are expression trees in C#?",
+      "shortAnswer": "An expression tree represents code as a data structure that can be inspected or translated rather than immediately executed.",
+      "example": "Entity Framework can translate expression-based LINQ queries into SQL.",
+      "detailedAnswer": "Expression<Func<T,bool>> and Func<T,bool> have different meanings: one is data describing an expression, the other is executable code.",
+      "seniorPerspective": "I use expression trees when a provider or framework needs to inspect a query, not for ordinary in-memory filtering.",
+      "commonMistakes": "Assuming every lambda is an expression tree; using methods that a database provider cannot translate.",
+      "followUps": [
+        "Expression<TDelegate> vs Delegate?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Expression tree = code as data.",
+      "codeExample": "Expression<Func<Transaction,bool>> high = t => t.Amount > 1000;"
+    },
+    {
+      "id": "csharp-core-040",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is Span<T> and when would you use it?",
+      "shortAnswer": "Span<T> provides a type-safe view over contiguous memory without requiring a new array allocation. It is useful for performance-sensitive synchronous code.",
+      "example": "Parsing protocol messages or ATM host data can use spans to inspect slices of a buffer without allocating substrings.",
+      "detailedAnswer": "Span is a ref struct and cannot be used across await boundaries or stored on the heap.",
+      "seniorPerspective": "I use Span only after profiling identifies allocation or parsing overhead; ordinary business code should remain simpler.",
+      "commonMistakes": "Using Span everywhere; trying to capture it in async code.",
+      "followUps": [
+        "Span vs Memory<T>?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Span = fast synchronous memory view.",
+      "codeExample": "ReadOnlySpan<char> slice = input.AsSpan(0, 5);"
+    },
+    {
+      "id": "csharp-core-041",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between a field and a property in C#?",
+      "shortAnswer": "A field stores state directly; a property provides controlled access through get/set accessors and can add validation or computed behaviour.",
+      "example": "A Transaction can keep a private field while exposing a read-only Balance property.",
+      "detailedAnswer": "Properties are part of the public API and can evolve without exposing storage details.",
+      "seniorPerspective": "I generally expose properties for object state and keep fields private unless direct storage is appropriate.",
+      "commonMistakes": "Making all fields public; assuming auto-properties have no backing storage.",
+      "followUps": [
+        "Can a property be get-only?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Field = storage; property = controlled access.",
+      "codeExample": "public decimal Balance { get; private set; }"
+    },
+    {
+      "id": "csharp-core-042",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What are access modifiers in C#?",
+      "shortAnswer": "public, private, protected, internal and combinations control who can access a type or member.",
+      "example": "A domain object's validation method can be private while its public Process method is the supported operation.",
+      "detailedAnswer": "Access modifiers are a design tool for controlling coupling and preserving invariants.",
+      "seniorPerspective": "I start with the narrowest visibility and widen it only when a real consumer requires it.",
+      "commonMistakes": "Making everything public for convenience; using internal as a substitute for architecture.",
+      "followUps": [
+        "protected internal vs private protected?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Visibility should be as narrow as practical.",
+      "codeExample": "private decimal balance; public decimal Balance => balance;"
+    },
+    {
+      "id": "csharp-core-043",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between composition and inheritance?",
+      "shortAnswer": "Inheritance models an is-a relationship; composition builds an object from collaborators representing has-a relationships.",
+      "example": "A TransactionService composed with an IValidator and IAuditLogger is often more flexible than inheriting from a large base service.",
+      "detailedAnswer": "Composition reduces hierarchy coupling and lets behaviours vary independently.",
+      "seniorPerspective": "I prefer composition when reuse is the goal and inheritance when substitutability and shared invariants are genuinely present.",
+      "commonMistakes": "Using inheritance only to reuse helper methods.",
+      "followUps": [
+        "When is inheritance appropriate?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Inheritance = is-a; composition = has-a.",
+      "codeExample": "class TransactionService { private readonly IValidator _validator; }"
+    },
+    {
+      "id": "csharp-core-044",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are partial classes in C#?",
+      "shortAnswer": "A partial class lets one type be split across multiple source files, which is useful for generated code and human-maintained extensions.",
+      "example": "A generated client can be partial so custom behaviour lives in a separate file and is not overwritten.",
+      "detailedAnswer": "Partial does not create separate types; all parts compile into one type.",
+      "seniorPerspective": "I mainly use partial types at generated-code boundaries.",
+      "commonMistakes": "Splitting normal business classes into many files without a strong reason.",
+      "followUps": [
+        "Can partial methods be used?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Partial = one type, multiple files.",
+      "codeExample": "public partial class Transaction { }"
+    },
+    {
+      "id": "csharp-core-045",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are nullable reference types in C#?",
+      "shortAnswer": "Nullable reference types use compiler analysis to distinguish values that may be null from those expected not to be null.",
+      "example": "An API method can return Transaction? when a transaction may not exist.",
+      "detailedAnswer": "Nullable annotations improve correctness at compile time but do not add runtime null checks automatically.",
+      "seniorPerspective": "I enable nullable analysis and treat warnings as design feedback, especially at API and data boundaries.",
+      "commonMistakes": "Using ! everywhere to silence warnings; assuming nullable annotations prevent runtime nulls.",
+      "followUps": [
+        "string vs string?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Nullable annotations = communicate nullability to the compiler.",
+      "codeExample": "Transaction? Find(string id) => null;"
+    },
+    {
+      "id": "csharp-core-046",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the params keyword in C#?",
+      "shortAnswer": "params allows callers to pass a variable number of arguments that are collected as an array.",
+      "example": "A logging helper can accept params object[] values for a variable number of context values.",
+      "detailedAnswer": "It improves calling syntax but creates an array for the arguments.",
+      "seniorPerspective": "I use params for genuinely variadic APIs and avoid it when a collection communicates intent better.",
+      "commonMistakes": "Using params for large data sets; forgetting overload ambiguity.",
+      "followUps": [
+        "Can params be combined with other parameters?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "params = variable argument list.",
+      "codeExample": "void Log(params string[] messages) { }"
+    },
+    {
+      "id": "csharp-core-047",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between a tuple and a custom class or record?",
+      "shortAnswer": "Tuples are convenient for small local groups of values, while records or classes communicate named domain concepts and can carry behaviour or validation.",
+      "example": "Returning (amount, currency) can be fine internally, while Money is clearer as a domain value object.",
+      "detailedAnswer": "For public APIs and domain models I prefer named types when the data has business meaning.",
+      "seniorPerspective": "I use tuples for short-lived local composition, not as a substitute for domain models.",
+      "commonMistakes": "Returning large tuples from public APIs with unclear Item1/Item2 semantics.",
+      "followUps": [
+        "ValueTuple vs Tuple?"
+      ],
+      "tags": [
+        "C#",
+        "Core",
+        "Interview"
+      ],
+      "memoryCue": "Tuple = small local grouping; record/class = named concept.",
+      "codeExample": "(decimal amount, string currency) result = (100m, \"INR\");"
     }
   ]
 }
