@@ -1,0 +1,822 @@
+{
+  "version": 2,
+  "questions": [
+    {
+      "id": "q-1",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Value type vs reference type",
+      "shortAnswer": "Value types carry data directly; reference variables point to objects.",
+      "detailedAnswer": "Value types carry data directly; reference variables point to objects.",
+      "example": "Copying a struct copies its value; copying a class variable copies the reference.",
+      "seniorPerspective": "When would a struct be a good choice?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "When would a struct be a good choice?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-2",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "String vs StringBuilder",
+      "shortAnswer": "String is immutable; StringBuilder is useful for repeated mutation.",
+      "detailedAnswer": "String is immutable; StringBuilder is useful for repeated mutation.",
+      "example": "Build a large text payload in a loop with StringBuilder.",
+      "seniorPerspective": "When is normal concatenation preferable?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "When is normal concatenation preferable?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-3",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "IEnumerable vs IQueryable",
+      "shortAnswer": "IEnumerable operates over objects; IQueryable can translate expressions to a provider such as SQL.",
+      "detailedAnswer": "IEnumerable operates over objects; IQueryable can translate expressions to a provider such as SQL.",
+      "example": "Filter IQueryable before materializing it.",
+      "seniorPerspective": "What does premature ToList change?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What does premature ToList change?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-4",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "async/await",
+      "shortAnswer": "It composes asynchronous work without blocking the caller while I/O is pending.",
+      "detailedAnswer": "It composes asynchronous work without blocking the caller while I/O is pending.",
+      "example": "await an HTTP call rather than blocking on Result.",
+      "seniorPerspective": "Why avoid async void?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why avoid async void?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-5",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Diagnose high CPU",
+      "shortAnswer": "Correlate CPU with endpoints and deployments, then profile hot paths and validate a measured fix.",
+      "detailedAnswer": "Correlate CPU with endpoints and deployments, then profile hot paths and validate a measured fix.",
+      "example": "Repeated large LINQ materialization can become a CPU hotspot.",
+      "seniorPerspective": "How do you distinguish CPU pressure from starvation?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you distinguish CPU pressure from starvation?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-6",
+      "technology": ".NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is middleware",
+      "shortAnswer": "Middleware is a pipeline component that can inspect or modify requests and responses.",
+      "detailedAnswer": "Middleware is a pipeline component that can inspect or modify requests and responses.",
+      "example": "Correlation middleware adds a request ID before downstream processing.",
+      "seniorPerspective": "Why does ordering matter?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why does ordering matter?"
+      ],
+      "tags": [
+        ".NET",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-7",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Global exception handling",
+      "shortAnswer": "Handle errors at a boundary, map known failures, log context and avoid leaking internals.",
+      "detailedAnswer": "Handle errors at a boundary, map known failures, log context and avoid leaking internals.",
+      "example": "Map a domain conflict to 409 and unexpected failures to a safe 500.",
+      "seniorPerspective": "What should never be returned?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What should never be returned?"
+      ],
+      "tags": [
+        ".NET",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-8",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Secure a Web API",
+      "shortAnswer": "Use authentication, policy authorization, validation, TLS, safe secrets and secure logging.",
+      "detailedAnswer": "Use authentication, policy authorization, validation, TLS, safe secrets and secure logging.",
+      "example": "Validate JWT claims before policy checks.",
+      "seniorPerspective": "Where should authorization happen?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Where should authorization happen?"
+      ],
+      "tags": [
+        ".NET",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-9",
+      "technology": ".NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "High latency with low CPU",
+      "shortAnswer": "Inspect dependency latency, DB waits, connection pools and thread waits using traces.",
+      "detailedAnswer": "Inspect dependency latency, DB waits, connection pools and thread waits using traces.",
+      "example": "Tracing shows most time waiting on a downstream API.",
+      "seniorPerspective": "Which latency percentile matters?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Which latency percentile matters?"
+      ],
+      "tags": [
+        ".NET",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-10",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is a component",
+      "shortAnswer": "A component owns a focused view and its behavior.",
+      "detailedAnswer": "A component owns a focused view and its behavior.",
+      "example": "A user-list component renders data while a service handles HTTP.",
+      "seniorPerspective": "How do you prevent a huge component?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you prevent a huge component?"
+      ],
+      "tags": [
+        "Angular",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-11",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "OnPush",
+      "shortAnswer": "OnPush narrows change detection and works well with immutable/reactive state.",
+      "detailedAnswer": "OnPush narrows change detection and works well with immutable/reactive state.",
+      "example": "Replace an array reference after updates instead of mutating the same reference.",
+      "seniorPerspective": "What can still trigger checking?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What can still trigger checking?"
+      ],
+      "tags": [
+        "Angular",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-12",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "switchMap vs mergeMap",
+      "shortAnswer": "switchMap keeps the newest inner stream; mergeMap allows concurrent inner streams.",
+      "detailedAnswer": "switchMap keeps the newest inner stream; mergeMap allows concurrent inner streams.",
+      "example": "Use switchMap for typeahead search.",
+      "seniorPerspective": "When is mergeMap better?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "When is mergeMap better?"
+      ],
+      "tags": [
+        "Angular",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-13",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Slow Angular page",
+      "shortAnswer": "Measure rendering, network, bundle and change-detection costs before optimizing.",
+      "detailedAnswer": "Measure rendering, network, bundle and change-detection costs before optimizing.",
+      "example": "Virtualize a huge table after profiling shows DOM work is dominant.",
+      "seniorPerspective": "How do you prevent regression?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you prevent regression?"
+      ],
+      "tags": [
+        "Angular",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-14",
+      "technology": "JavaScript",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "var let const",
+      "shortAnswer": "var is function-scoped; let and const are block-scoped; const prevents rebinding.",
+      "detailedAnswer": "var is function-scoped; let and const are block-scoped; const prevents rebinding.",
+      "example": "A const object can mutate internally but cannot be reassigned.",
+      "seniorPerspective": "Why prefer block scope?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why prefer block scope?"
+      ],
+      "tags": [
+        "JavaScript",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-15",
+      "technology": "JavaScript",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Closure",
+      "shortAnswer": "A function retains access to lexical variables after its outer function returns.",
+      "detailedAnswer": "A function retains access to lexical variables after its outer function returns.",
+      "example": "A counter function keeps its private count.",
+      "seniorPerspective": "How can closures retain memory?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How can closures retain memory?"
+      ],
+      "tags": [
+        "JavaScript",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-16",
+      "technology": "JavaScript",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Event loop",
+      "shortAnswer": "Synchronous work runs first; microtasks such as Promise continuations run before later tasks.",
+      "detailedAnswer": "Synchronous work runs first; microtasks such as Promise continuations run before later tasks.",
+      "example": "Promise callbacks commonly run before a timer callback.",
+      "seniorPerspective": "How can microtasks hurt responsiveness?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How can microtasks hurt responsiveness?"
+      ],
+      "tags": [
+        "JavaScript",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-17",
+      "technology": "JavaScript",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Browser memory leak",
+      "shortAnswer": "Compare heap snapshots and retained objects, inspect listeners/timers and verify stabilization.",
+      "detailedAnswer": "Compare heap snapshots and retained objects, inspect listeners/timers and verify stabilization.",
+      "example": "A component adds window listeners without cleanup.",
+      "seniorPerspective": "What retaining path would you inspect?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What retaining path would you inspect?"
+      ],
+      "tags": [
+        "JavaScript",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-18",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "WHERE vs HAVING",
+      "shortAnswer": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
+      "detailedAnswer": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
+      "example": "Filter 2026 orders with WHERE, then customers over a SUM threshold with HAVING.",
+      "seniorPerspective": "Can HAVING work without GROUP BY?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Can HAVING work without GROUP BY?"
+      ],
+      "tags": [
+        "SQL",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-19",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "INNER vs LEFT JOIN",
+      "shortAnswer": "INNER keeps matches; LEFT keeps all left rows and nulls unmatched right values.",
+      "detailedAnswer": "INNER keeps matches; LEFT keeps all left rows and nulls unmatched right values.",
+      "example": "List customers with or without orders using LEFT JOIN.",
+      "seniorPerspective": "How can WHERE undo a LEFT JOIN?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How can WHERE undo a LEFT JOIN?"
+      ],
+      "tags": [
+        "SQL",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-20",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "What is an index",
+      "shortAnswer": "An index can reduce row lookup work for selected access patterns but adds write/storage cost.",
+      "detailedAnswer": "An index can reduce row lookup work for selected access patterns but adds write/storage cost.",
+      "example": "Index CustomerId and CreatedAt for customer history queries.",
+      "seniorPerspective": "Why can too many indexes hurt?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why can too many indexes hurt?"
+      ],
+      "tags": [
+        "SQL",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-21",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Slow query investigation",
+      "shortAnswer": "Capture exact SQL and parameters, inspect plans, estimates, indexes, blocking and statistics.",
+      "detailedAnswer": "Capture exact SQL and parameters, inspect plans, estimates, indexes, blocking and statistics.",
+      "example": "A non-sargable predicate can force a scan.",
+      "seniorPerspective": "Why might an index not help?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why might an index not help?"
+      ],
+      "tags": [
+        "SQL",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-22",
+      "technology": "System Design",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Horizontal scaling",
+      "shortAnswer": "Add more service instances instead of only making one machine larger.",
+      "detailedAnswer": "Add more service instances instead of only making one machine larger.",
+      "example": "Run several stateless API instances behind a load balancer.",
+      "seniorPerspective": "Where should shared state live?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Where should shared state live?"
+      ],
+      "tags": [
+        "System Design",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-23",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Idempotency",
+      "shortAnswer": "Repeating an operation should have the same intended effect as doing it once.",
+      "detailedAnswer": "Repeating an operation should have the same intended effect as doing it once.",
+      "example": "A payment request uses a unique idempotency key.",
+      "seniorPerspective": "Where should the key be stored?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Where should the key be stored?"
+      ],
+      "tags": [
+        "System Design",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-24",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Why use a queue",
+      "shortAnswer": "Queues decouple producers and consumers, absorb bursts and enable asynchronous work.",
+      "detailedAnswer": "Queues decouple producers and consumers, absorb bursts and enable asynchronous work.",
+      "example": "An API queues email work instead of waiting for the provider.",
+      "seniorPerspective": "How do you handle duplicate delivery?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you handle duplicate delivery?"
+      ],
+      "tags": [
+        "System Design",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-25",
+      "technology": "System Design",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Notification service",
+      "shortAnswer": "Persist intent, queue work, scale workers, add retries, idempotency, dead letters and observability.",
+      "detailedAnswer": "Persist intent, queue work, scale workers, add retries, idempotency, dead letters and observability.",
+      "example": "POST stores notification ID and queues delivery.",
+      "seniorPerspective": "What if the provider is down?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What if the provider is down?"
+      ],
+      "tags": [
+        "System Design",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-26",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is an LLM",
+      "shortAnswer": "A model predicts tokens from context learned during training and can generate useful but unsupported text.",
+      "detailedAnswer": "A model predicts tokens from context learned during training and can generate useful but unsupported text.",
+      "example": "Summarize a supplied document.",
+      "seniorPerspective": "Why does context quality matter?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why does context quality matter?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-27",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Embeddings",
+      "shortAnswer": "Embeddings map content to vectors so semantic similarity can be measured.",
+      "detailedAnswer": "Embeddings map content to vectors so semantic similarity can be measured.",
+      "example": "Retrieve document chunks close to a question vector.",
+      "seniorPerspective": "How do chunk size and overlap matter?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do chunk size and overlap matter?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-28",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "RAG",
+      "shortAnswer": "Retrieval-Augmented Generation retrieves external context before generation.",
+      "detailedAnswer": "Retrieval-Augmented Generation retrieves external context before generation.",
+      "example": "Retrieve policy chunks and require answers to use them.",
+      "seniorPerspective": "How do you evaluate retrieval separately?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you evaluate retrieval separately?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-29",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Secure AI agent",
+      "shortAnswer": "Treat model output as untrusted input and enforce least privilege, validation and audit controls.",
+      "detailedAnswer": "Treat model output as untrusted input and enforce least privilege, validation and audit controls.",
+      "example": "A delete request must pass policy checks before execution.",
+      "seniorPerspective": "How do you prevent prompt injection?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you prevent prompt injection?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-30",
+      "technology": "Production Debugging",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "RCA",
+      "shortAnswer": "Root cause analysis identifies the underlying cause rather than only the symptom.",
+      "detailedAnswer": "Root cause analysis identifies the underlying cause rather than only the symptom.",
+      "example": "A timeout may be caused by exhausted DB connections.",
+      "seniorPerspective": "What prevention follows?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What prevention follows?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-31",
+      "technology": "Production Debugging",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Correlation ID",
+      "shortAnswer": "A correlation ID connects logs and traces across service boundaries.",
+      "detailedAnswer": "A correlation ID connects logs and traces across service boundaries.",
+      "example": "The gateway ID appears in downstream logs.",
+      "seniorPerspective": "Should clients choose IDs freely?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Should clients choose IDs freely?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-32",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Slow API investigation",
+      "shortAnswer": "Check percentiles, traffic, CPU, thread pool, DB, dependencies, pools and traces.",
+      "detailedAnswer": "Check percentiles, traffic, CPU, thread pool, DB, dependencies, pools and traces.",
+      "example": "Tracing shows most time in a database query.",
+      "seniorPerspective": "What distinguishes tail latency?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What distinguishes tail latency?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-33",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Production deadlock",
+      "shortAnswer": "Capture deadlock evidence, inspect resource order and transaction scope, then fix conflicting access patterns.",
+      "detailedAnswer": "Capture deadlock evidence, inspect resource order and transaction scope, then fix conflicting access patterns.",
+      "example": "Two transactions update tables in opposite order.",
+      "seniorPerspective": "Why is retry not the full fix?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why is retry not the full fix?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-34",
+      "technology": "Security",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Authentication vs authorization",
+      "shortAnswer": "Authentication establishes identity; authorization decides permissions.",
+      "detailedAnswer": "Authentication establishes identity; authorization decides permissions.",
+      "example": "A valid token authenticates while a policy decides whether approval is allowed.",
+      "seniorPerspective": "Why is UI-only authorization insufficient?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why is UI-only authorization insufficient?"
+      ],
+      "tags": [
+        "Security",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-35",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Protect secrets",
+      "shortAnswer": "Keep secrets out of source control and client bundles; use managed runtime secret storage and rotation.",
+      "detailedAnswer": "Keep secrets out of source control and client bundles; use managed runtime secret storage and rotation.",
+      "example": "Load an API key server-side from a secret provider.",
+      "seniorPerspective": "What if a secret is committed?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What if a secret is committed?"
+      ],
+      "tags": [
+        "Security",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-36",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "SQL injection",
+      "shortAnswer": "Untrusted input changes SQL structure when concatenated into queries.",
+      "detailedAnswer": "Untrusted input changes SQL structure when concatenated into queries.",
+      "example": "Parameterized queries treat input as data.",
+      "seniorPerspective": "Why is escaping fragile?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why is escaping fragile?"
+      ],
+      "tags": [
+        "Security",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-37",
+      "technology": "Security",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Secure file upload",
+      "shortAnswer": "Validate type/size, randomize names, isolate storage, authorize access and scan when appropriate.",
+      "detailedAnswer": "Validate type/size, randomize names, isolate storage, authorize access and scan when appropriate.",
+      "example": "Store uploaded files under generated IDs outside executable paths.",
+      "seniorPerspective": "What is path traversal?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What is path traversal?"
+      ],
+      "tags": [
+        "Security",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-38",
+      "technology": "Performance",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Latency vs throughput",
+      "shortAnswer": "Latency is time per operation; throughput is work completed per unit time.",
+      "detailedAnswer": "Latency is time per operation; throughput is work completed per unit time.",
+      "example": "An API can have high throughput while tail latency is poor.",
+      "seniorPerspective": "Why use percentiles?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "Why use percentiles?"
+      ],
+      "tags": [
+        "Performance",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-39",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "N+1 query",
+      "shortAnswer": "One parent query followed by one query per parent creates excessive round trips.",
+      "detailedAnswer": "One parent query followed by one query per parent creates excessive round trips.",
+      "example": "Load required related data with a suitable join/projection.",
+      "seniorPerspective": "How do you prove N+1?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you prove N+1?"
+      ],
+      "tags": [
+        "Performance",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-40",
+      "technology": "Performance",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Slow endpoint",
+      "shortAnswer": "Break latency into application, DB, network and downstream spans and optimize the dominant measured component.",
+      "detailedAnswer": "Break latency into application, DB, network and downstream spans and optimize the dominant measured component.",
+      "example": "Tracing shows most time in a dependency.",
+      "seniorPerspective": "How do you prevent regressions?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "How do you prevent regressions?"
+      ],
+      "tags": [
+        "Performance",
+        "complex"
+      ]
+    },
+    {
+      "id": "q-41",
+      "technology": "Behavioral",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Difficult technical problem",
+      "shortAnswer": "Use a concise situation, responsibility, actions, reasoning and result.",
+      "detailedAnswer": "Use a concise situation, responsibility, actions, reasoning and result.",
+      "example": "Explain one technical decision you personally made.",
+      "seniorPerspective": "What would you do differently now?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What would you do differently now?"
+      ],
+      "tags": [
+        "Behavioral",
+        "simple"
+      ]
+    },
+    {
+      "id": "q-42",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Code review disagreement",
+      "shortAnswer": "Focus on requirements, evidence and maintainability rather than ownership.",
+      "detailedAnswer": "Focus on requirements, evidence and maintainability rather than ownership.",
+      "example": "Use tests or measurements to resolve ambiguous trade-offs.",
+      "seniorPerspective": "What if the reviewer still disagrees?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What if the reviewer still disagrees?"
+      ],
+      "tags": [
+        "Behavioral",
+        "medium"
+      ]
+    },
+    {
+      "id": "q-43",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "Lead without authority",
+      "shortAnswer": "Build alignment with evidence, a small proposal and measurable outcomes.",
+      "detailedAnswer": "Build alignment with evidence, a small proposal and measurable outcomes.",
+      "example": "Prototype a change and document migration steps.",
+      "seniorPerspective": "What if the team rejects it?",
+      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "followUps": [
+        "What if the team rejects it?"
+      ],
+      "tags": [
+        "Behavioral",
+        "complex"
+      ]
+    }
+  ]
+}
