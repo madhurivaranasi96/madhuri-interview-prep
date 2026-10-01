@@ -15,7 +15,7 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
         <p>These are conventional interview questions. The practical example is part of the answer so you can explain the concept through implementation, trade-offs, failure modes and production validation.</p>
       </header>
 
-      @for(group of groups; track group.name) {<h2 class="difficulty">{{group.name}}</h2>@for(q of group.questions; track q.id; let i = $index) {
+      @for(group of groups; track group.name) {<section class="difficulty"><h2 class="difficulty-title">{{group.name}}</h2>@for(q of group.questions; track q.id; let i = $index) {
         <article class="scenario">
           <div class="scenario-number">{{($index + 1).toString().padStart(2,'0')}}</div>
 
@@ -60,6 +60,7 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
             </section>
           </div>
         </article>
+      }}</section>
       }
     </section>
   `,
