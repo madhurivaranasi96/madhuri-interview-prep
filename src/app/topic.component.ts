@@ -10,12 +10,12 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
       <a routerLink="/" class="back">← Interview Prep</a>
 
       <header class="topic-header">
-        <p class="label">PRACTICAL INTERVIEW PREPARATION</p>
+        <p class="label">MAIN TECHNICAL INTERVIEW BANK</p>
         <h1>{{topic}}</h1>
         <p>Do not memorize definitions. Learn how to explain the concept through a real engineering situation, what you would implement, what can fail, and how you would make the decision in production.</p>
       </header>
 
-      @for(q of filtered; track q.id; let i = $index) {
+      @for(group of groups; track group.name) {<h2 class="difficulty">{{group.name}}</h2>@for(q of group.questions; track q.id; let i = $index) {
         <article class="scenario">
           <div class="scenario-number">{{($index + 1).toString().padStart(2,'0')}}</div>
 
@@ -102,7 +102,7 @@ export class TopicComponent{
   private service=inject(QuestionBankService);
   private route=inject(ActivatedRoute);
   topic='';
-  filtered:InterviewQuestion[]=[];
+  filtered:InterviewQuestion[]=[];groups:any[]=[];
 
   constructor(){
     this.route.paramMap.subscribe(params=>{
@@ -120,7 +120,7 @@ export class TopicComponent{
         behavioral:'Behavioral'
       };
       this.topic=map[params.get('slug')||'csharp']||'C# / .NET';
-      this.service.byTechnology(this.topic).subscribe(q=>this.filtered=q);
+      this.service.byTechnology(this.topic).subscribe(q=>this.filtered=q; const defs=[['01','Simple'],['02','Medium'],['03','Complex'],['04','Senior / Advanced']]; this.groups=defs.map(x=>({number:x[0],name:x[1],questions:q.filter(y=>y.difficulty===x[1])})).filter(x=>x.questions.length);
     });
   }
 }
