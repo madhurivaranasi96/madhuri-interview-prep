@@ -1,0 +1,74 @@
+{
+  "title": "dotnet",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": ".NET",
+      "level": "Simple",
+      "question": "What is middleware?",
+      "answer": "Middleware is a component in the HTTP pipeline that can inspect, modify or short-circuit requests and responses.",
+      "example": "Authentication, logging and exception handling can each be middleware stages.",
+      "followup": "Why does middleware ordering matter?"
+    },
+    {
+      "area": ".NET",
+      "level": "Simple",
+      "question": "What is dependency injection?",
+      "answer": "Dependencies are supplied by a container or composition root rather than constructed inside the consumer.",
+      "example": "A controller receives IOrderService through its constructor.",
+      "followup": "Explain singleton, scoped and transient lifetimes."
+    },
+    {
+      "area": ".NET",
+      "level": "Medium",
+      "question": "How does global exception handling work?",
+      "answer": "Centralize unexpected exception handling, log correlation information and return safe, consistent responses without exposing internals.",
+      "example": "Exception middleware maps domain exceptions to 400/404 and unknown exceptions to a generic 500 response.",
+      "followup": "What should never be logged?"
+    },
+    {
+      "area": ".NET",
+      "level": "Medium",
+      "question": "How do you secure a Web API?",
+      "answer": "Use TLS, authentication, authorization, validation, safe serialization, secret management, rate limits and secure logging.",
+      "example": "JWT authentication identifies the caller; policies decide whether the caller can perform an operation.",
+      "followup": "How do you prevent confused-deputy style authorization bugs?"
+    },
+    {
+      "area": ".NET",
+      "level": "Medium",
+      "question": "What is model binding and validation?",
+      "answer": "The framework maps request data to action parameters/models, then validation rules determine whether the model is acceptable.",
+      "example": "A POST body is bound to CreateOrderRequest and validated before service logic runs.",
+      "followup": "Where should business validation live?"
+    },
+    {
+      "area": ".NET",
+      "level": "Complex",
+      "question": "An API has high latency but low CPU. What do you inspect?",
+      "answer": "Trace dependency timings, DB calls, connection pools, external APIs, serialization and thread-pool health; latency is often dominated by waiting.",
+      "example": "A trace shows 700ms of a 900ms request is a database call.",
+      "followup": "How do you isolate database latency from application latency?"
+    },
+    {
+      "area": ".NET",
+      "level": "Complex",
+      "question": "How would you design resilient outbound HTTP calls?",
+      "answer": "Use HttpClientFactory, sensible timeouts, bounded retries for transient failures, jitter/backoff, cancellation and circuit breaking where appropriate.",
+      "example": "Retry a transient 503 with exponential backoff, but do not blindly retry a non-idempotent operation.",
+      "followup": "When should an operation not be retried?"
+    },
+    {
+      "area": ".NET",
+      "level": "Complex",
+      "question": "How would you version a public API?",
+      "answer": "Choose a compatible versioning strategy, document contract changes, support a migration window and monitor usage before retiring old versions.",
+      "example": "Keep /v1 behavior stable while introducing a /v2 contract that changes response shape.",
+      "followup": "How do you avoid version proliferation?"
+    }
+  ]
+}
