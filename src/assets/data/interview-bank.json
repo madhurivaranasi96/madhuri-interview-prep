@@ -1,6 +1,6 @@
 {
-  "version": 21,
-  "sourceNote": "Comprehensive interview bank expanded across every technology stack with subtopic-level coverage. Main questions use only Simple, Medium and Complex difficulty. Each question includes a clear answer, real-world example, actual code example and memory cue. Scenario-based interviews remain separate.",
+  "version": 22,
+  "sourceNote": "Comprehensive subtopic-level interview bank across all listed stacks. Main questions use Simple, Medium and Complex difficulty only. Each question includes a clear answer, practical example, actual code example and memory cue. Scenario-based interviews remain separate.",
   "questions": [
     {
       "id": "master-001",
@@ -14809,6 +14809,744 @@
       "tags": "System",
       "memoryCue": "Data model follows access patterns.",
       "codeExample": "// decide from workload, not brand"
+    },
+    {
+      "id": "q697",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a primary key?",
+      "shortAnswer": "A primary key uniquely identifies each row and cannot be null.",
+      "detailedAnswer": "A primary key uniquely identifies each row and cannot be null.",
+      "example": "A transaction table can use TransactionId as its stable identifier.",
+      "seniorPerspective": "A transaction table can use TransactionId as its stable identifier.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Primary key = unique row identity.",
+      "codeExample": "CREATE TABLE Transactions (TransactionId BIGINT PRIMARY KEY);"
+    },
+    {
+      "id": "q698",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a foreign key?",
+      "shortAnswer": "A foreign key enforces a relationship between a child row and a referenced parent key.",
+      "detailedAnswer": "A foreign key enforces a relationship between a child row and a referenced parent key.",
+      "example": "A transaction can reference the account that owns it.",
+      "seniorPerspective": "A transaction can reference the account that owns it.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Foreign key = relationship constraint.",
+      "codeExample": "ALTER TABLE Transactions ADD CONSTRAINT FK_Tx_Account FOREIGN KEY(AccountId) REFERENCES Accounts(Id);"
+    },
+    {
+      "id": "q699",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is an INNER JOIN?",
+      "shortAnswer": "INNER JOIN returns rows with matching keys in both inputs.",
+      "detailedAnswer": "INNER JOIN returns rows with matching keys in both inputs.",
+      "example": "Join transactions with accounts when only valid matching accounts should appear.",
+      "seniorPerspective": "Join transactions with accounts when only valid matching accounts should appear.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "INNER = matching rows.",
+      "codeExample": "SELECT t.Id,a.Name FROM Transactions t INNER JOIN Accounts a ON a.Id=t.AccountId;"
+    },
+    {
+      "id": "q700",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is a LEFT JOIN?",
+      "shortAnswer": "LEFT JOIN keeps every row from the left side and matches data when available on the right.",
+      "detailedAnswer": "LEFT JOIN keeps every row from the left side and matches data when available on the right.",
+      "example": "Return all accounts even when an account has no transactions.",
+      "seniorPerspective": "Return all accounts even when an account has no transactions.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "LEFT keeps the left side.",
+      "codeExample": "SELECT a.Id,t.Id FROM Accounts a LEFT JOIN Transactions t ON t.AccountId=a.Id;"
+    },
+    {
+      "id": "q701",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is normalization?",
+      "shortAnswer": "Normalization structures related data to reduce unnecessary duplication and update anomalies.",
+      "detailedAnswer": "Normalization structures related data to reduce unnecessary duplication and update anomalies.",
+      "example": "Customer identity belongs in one table while transactions reference it.",
+      "seniorPerspective": "Customer identity belongs in one table while transactions reference it.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Normalize to reduce duplication.",
+      "codeExample": "CREATE TABLE Customers(Id INT PRIMARY KEY, Name NVARCHAR(100));"
+    },
+    {
+      "id": "q702",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a clustered versus nonclustered index?",
+      "shortAnswer": "A clustered index determines the table's row storage order in systems that support it; a nonclustered index is a separate searchable structure.",
+      "detailedAnswer": "A clustered index determines the table's row storage order in systems that support it; a nonclustered index is a separate searchable structure.",
+      "example": "A transaction table may cluster by an appropriate key and use a nonclustered index for account history.",
+      "seniorPerspective": "A transaction table may cluster by an appropriate key and use a nonclustered index for account history.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Clustered stores rows; nonclustered points to them.",
+      "codeExample": "CREATE INDEX IX_Tx_AccountTime ON Transactions(AccountId,CreatedAt);"
+    },
+    {
+      "id": "q703",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a covering index?",
+      "shortAnswer": "A covering index contains all columns needed by a query so the engine can avoid extra lookups.",
+      "detailedAnswer": "A covering index contains all columns needed by a query so the engine can avoid extra lookups.",
+      "example": "An account-history query can cover account ID, date and status.",
+      "seniorPerspective": "An account-history query can cover account ID, date and status.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Index can cover the query.",
+      "codeExample": "CREATE INDEX IX_Tx_History ON Transactions(AccountId,CreatedAt) INCLUDE(Status,Amount);"
+    },
+    {
+      "id": "q704",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a transaction and ACID?",
+      "shortAnswer": "A transaction groups work atomically while ACID describes atomicity, consistency, isolation and durability.",
+      "detailedAnswer": "A transaction groups work atomically while ACID describes atomicity, consistency, isolation and durability.",
+      "example": "Updating balance and recording the transaction should commit as one logical operation.",
+      "seniorPerspective": "Updating balance and recording the transaction should commit as one logical operation.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "ACID protects transaction correctness.",
+      "codeExample": "BEGIN TRAN; UPDATE Accounts SET Balance=Balance-100 WHERE Id=1; COMMIT;"
+    },
+    {
+      "id": "q705",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are isolation levels?",
+      "shortAnswer": "Isolation levels define how concurrent transactions observe each other's changes and trade consistency against concurrency.",
+      "detailedAnswer": "Isolation levels define how concurrent transactions observe each other's changes and trade consistency against concurrency.",
+      "example": "A reporting query may tolerate weaker isolation than a balance update.",
+      "seniorPerspective": "A reporting query may tolerate weaker isolation than a balance update.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Isolation controls concurrency visibility.",
+      "codeExample": "SET TRANSACTION ISOLATION LEVEL READ COMMITTED;"
+    },
+    {
+      "id": "q706",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a deadlock in SQL Server?",
+      "shortAnswer": "A deadlock occurs when transactions hold resources the other needs, so the database chooses one as a victim.",
+      "detailedAnswer": "A deadlock occurs when transactions hold resources the other needs, so the database chooses one as a victim.",
+      "example": "Two updates touching account and audit rows in opposite order can deadlock.",
+      "seniorPerspective": "Two updates touching account and audit rows in opposite order can deadlock.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Consistent lock order reduces deadlocks.",
+      "codeExample": "BEGIN TRAN; -- lock resources in consistent order"
+    },
+    {
+      "id": "q707",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are window functions?",
+      "shortAnswer": "Window functions calculate values across related rows without collapsing them into one row per group.",
+      "detailedAnswer": "Window functions calculate values across related rows without collapsing them into one row per group.",
+      "example": "Rank transactions or calculate a running balance per account.",
+      "seniorPerspective": "Rank transactions or calculate a running balance per account.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Window = calculate across rows, keep rows.",
+      "codeExample": "SELECT Id,Amount,SUM(Amount) OVER(PARTITION BY AccountId ORDER BY CreatedAt) RunningTotal FROM Transactions;"
+    },
+    {
+      "id": "q708",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a CTE?",
+      "shortAnswer": "A common table expression names a query expression for readability, reuse within the statement and recursive queries.",
+      "detailedAnswer": "A common table expression names a query expression for readability, reuse within the statement and recursive queries.",
+      "example": "Use a CTE to isolate the latest transaction per account.",
+      "seniorPerspective": "Use a CTE to isolate the latest transaction per account.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "CTE = named query expression.",
+      "codeExample": "WITH Latest AS (SELECT * FROM Transactions) SELECT * FROM Latest;"
+    },
+    {
+      "id": "q709",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is SARGability?",
+      "shortAnswer": "A SARGable predicate lets the database use an index efficiently rather than applying a function to every indexed value.",
+      "detailedAnswer": "A SARGable predicate lets the database use an index efficiently rather than applying a function to every indexed value.",
+      "example": "Filtering CreatedAt with a range is usually more index-friendly than wrapping the column in a function.",
+      "seniorPerspective": "Filtering CreatedAt with a range is usually more index-friendly than wrapping the column in a function.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Write predicates the index can search.",
+      "codeExample": "WHERE CreatedAt >= @from AND CreatedAt < @to"
+    },
+    {
+      "id": "q710",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you read an execution plan?",
+      "shortAnswer": "An execution plan shows how the optimizer accesses data and estimates or measures operator cost.",
+      "detailedAnswer": "An execution plan shows how the optimizer accesses data and estimates or measures operator cost.",
+      "example": "A slow transaction query may reveal a scan, expensive join or missing index.",
+      "seniorPerspective": "A slow transaction query may reveal a scan, expensive join or missing index.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Plan reveals where SQL spends work.",
+      "codeExample": "SET STATISTICS IO, TIME ON; SELECT ...;"
+    },
+    {
+      "id": "q711",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is keyset pagination?",
+      "shortAnswer": "Keyset pagination uses the last seen ordered key instead of OFFSET to continue from a known position efficiently.",
+      "detailedAnswer": "Keyset pagination uses the last seen ordered key instead of OFFSET to continue from a known position efficiently.",
+      "example": "Transaction history can page using CreatedAt plus TransactionId.",
+      "seniorPerspective": "Transaction history can page using CreatedAt plus TransactionId.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Page from the last key.",
+      "codeExample": "SELECT TOP 50 * FROM Transactions WHERE (CreatedAt,Id) < (@date,@id) ORDER BY CreatedAt DESC,Id DESC;"
+    },
+    {
+      "id": "q712",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What are stored procedures and when might you use them?",
+      "shortAnswer": "Stored procedures encapsulate database-side logic and can centralize complex operations, though they also add database-code lifecycle considerations.",
+      "detailedAnswer": "Stored procedures encapsulate database-side logic and can centralize complex operations, though they also add database-code lifecycle considerations.",
+      "example": "A tightly controlled settlement operation may execute as a stored procedure.",
+      "seniorPerspective": "A tightly controlled settlement operation may execute as a stored procedure.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Use DB procedures for deliberate DB-side logic.",
+      "codeExample": "CREATE PROCEDURE dbo.Settle @AccountId INT AS BEGIN ... END;"
+    },
+    {
+      "id": "q713",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "What is partitioning?",
+      "shortAnswer": "Partitioning divides a large table or index into manageable partitions based on a partition key.",
+      "detailedAnswer": "Partitioning divides a large table or index into manageable partitions based on a partition key.",
+      "example": "Large transaction history can be partitioned by transaction date for maintenance and pruning.",
+      "seniorPerspective": "Large transaction history can be partitioned by transaction date for maintenance and pruning.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Partition large data by access/maintenance boundary.",
+      "codeExample": "CREATE PARTITION FUNCTION TxByMonth(date) AS RANGE RIGHT FOR VALUES ('2026-01-01');"
+    },
+    {
+      "id": "q714",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you prevent SQL injection?",
+      "shortAnswer": "Use parameterized queries or ORM parameterization and never concatenate untrusted values into SQL.",
+      "detailedAnswer": "Use parameterized queries or ORM parameterization and never concatenate untrusted values into SQL.",
+      "example": "An account ID should be passed as a parameter.",
+      "seniorPerspective": "An account ID should be passed as a parameter.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "SQL"
+      ],
+      "memoryCue": "Parameters, never concatenation.",
+      "codeExample": "cmd.CommandText=\"SELECT * FROM Accounts WHERE Id=@id\"; cmd.Parameters.AddWithValue(\"@id\",id);"
+    },
+    {
+      "id": "q715",
+      "technology": "Production Debugging",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What is the first step when a production issue is reported?",
+      "shortAnswer": "Confirm impact, scope and symptoms before changing anything.",
+      "detailedAnswer": "Confirm impact, scope and symptoms before changing anything.",
+      "example": "For an ATM transaction failure, establish affected terminals, transaction type, time range and error rate.",
+      "seniorPerspective": "For an ATM transaction failure, establish affected terminals, transaction type, time range and error rate.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "First establish scope.",
+      "codeExample": "// scope: who + what + when + how many"
+    },
+    {
+      "id": "q716",
+      "technology": "Production Debugging",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What logs should a production application have?",
+      "shortAnswer": "Logs should be structured, actionable and correlated with request or transaction identifiers.",
+      "detailedAnswer": "Logs should be structured, actionable and correlated with request or transaction identifiers.",
+      "example": "A transaction failure should include trace ID, transaction ID, endpoint and outcome without secrets.",
+      "seniorPerspective": "A transaction failure should include trace ID, transaction ID, endpoint and outcome without secrets.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Logs need context.",
+      "codeExample": "logger.LogError(ex,\"Transaction failed {TransactionId} {TraceId}\",txId,traceId);"
+    },
+    {
+      "id": "q717",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How do you distinguish application failure from dependency failure?",
+      "shortAnswer": "Compare application errors, dependency health, latency and correlated traces rather than assuming the application is the cause.",
+      "detailedAnswer": "Compare application errors, dependency health, latency and correlated traces rather than assuming the application is the cause.",
+      "example": "If API latency rises with database connection wait time, investigate the database path.",
+      "seniorPerspective": "If API latency rises with database connection wait time, investigate the database path.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Correlate dependencies.",
+      "codeExample": "// API latency + DB wait + DB errors"
+    },
+    {
+      "id": "q718",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a rollback versus a hotfix?",
+      "shortAnswer": "Rollback restores a known-good version; a hotfix changes the current release path to address the issue.",
+      "detailedAnswer": "Rollback restores a known-good version; a hotfix changes the current release path to address the issue.",
+      "example": "If a deployment immediately causes errors, rollback may restore service while a permanent fix is prepared.",
+      "seniorPerspective": "If a deployment immediately causes errors, rollback may restore service while a permanent fix is prepared.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Restore safety before perfecting the fix.",
+      "codeExample": "git revert <commit>"
+    },
+    {
+      "id": "q719",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How do you use correlation IDs?",
+      "shortAnswer": "A correlation ID links logs and traces belonging to one request across components.",
+      "detailedAnswer": "A correlation ID links logs and traces belonging to one request across components.",
+      "example": "A support engineer can search the same ID across gateway, API and downstream logs.",
+      "seniorPerspective": "A support engineer can search the same ID across gateway, API and downstream logs.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "One ID follows one request.",
+      "codeExample": "Response.Headers[\"X-Correlation-Id\"]=traceId;"
+    },
+    {
+      "id": "q720",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is RCA?",
+      "shortAnswer": "Root cause analysis identifies the underlying condition that allowed the failure, not only the visible symptom.",
+      "detailedAnswer": "Root cause analysis identifies the underlying condition that allowed the failure, not only the visible symptom.",
+      "example": "A timeout may be caused by connection pool exhaustion rather than the endpoint code itself.",
+      "seniorPerspective": "A timeout may be caused by connection pool exhaustion rather than the endpoint code itself.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Fix the cause, not only the symptom.",
+      "codeExample": "// symptom -> evidence -> root cause -> corrective action"
+    },
+    {
+      "id": "q721",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you investigate a memory leak in a .NET service?",
+      "shortAnswer": "Compare heap snapshots and allocation/retention patterns, identify objects that remain reachable unexpectedly and trace their owners.",
+      "detailedAnswer": "Compare heap snapshots and allocation/retention patterns, identify objects that remain reachable unexpectedly and trace their owners.",
+      "example": "An unbounded static cache or event subscription can retain objects across requests.",
+      "seniorPerspective": "An unbounded static cache or event subscription can retain objects across requests.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Find what retains memory.",
+      "codeExample": "// heap snapshot -> retained path -> owner -> fix"
+    },
+    {
+      "id": "q722",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you investigate high CPU in production?",
+      "shortAnswer": "Correlate CPU with request rate, profile representative workloads and identify hot code paths or contention.",
+      "detailedAnswer": "Correlate CPU with request rate, profile representative workloads and identify hot code paths or contention.",
+      "example": "A CPU spike during report generation may point to serialization or an inefficient LINQ operation.",
+      "seniorPerspective": "A CPU spike during report generation may point to serialization or an inefficient LINQ operation.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Profile the hotspot.",
+      "codeExample": "// metrics -> profiler -> hot method"
+    },
+    {
+      "id": "q723",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you investigate intermittent failures?",
+      "shortAnswer": "Correlate failures by time, instance, dependency, input and concurrency instead of relying on one successful reproduction.",
+      "detailedAnswer": "Correlate failures by time, instance, dependency, input and concurrency instead of relying on one successful reproduction.",
+      "example": "If only one pod reports errors, compare its configuration, resource limits and logs with healthy pods.",
+      "seniorPerspective": "If only one pod reports errors, compare its configuration, resource limits and logs with healthy pods.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Intermittent means find the common dimension.",
+      "codeExample": "// group failures by instance + dependency + input"
+    },
+    {
+      "id": "q724",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you prevent recurrence after an incident?",
+      "shortAnswer": "Add a targeted code/config fix plus monitoring, tests, alerts or operational controls that address the failure mode.",
+      "detailedAnswer": "Add a targeted code/config fix plus monitoring, tests, alerts or operational controls that address the failure mode.",
+      "example": "After a timeout incident, add bounded timeouts and an alert on dependency latency rather than only documenting the incident.",
+      "seniorPerspective": "After a timeout incident, add bounded timeouts and an alert on dependency latency rather than only documenting the incident.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Production"
+      ],
+      "memoryCue": "Prevention needs an observable control.",
+      "codeExample": "// fix + test + metric + alert"
+    },
+    {
+      "id": "q725",
+      "technology": "Behavioral",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "Tell me about yourself.",
+      "shortAnswer": "Give a concise career summary connecting experience, current strengths and the role's technical needs.",
+      "detailedAnswer": "Give a concise career summary connecting experience, current strengths and the role's technical needs.",
+      "example": "For a senior .NET/Angular role, connect 7+ years of development and production ownership to the technologies in the role.",
+      "seniorPerspective": "For a senior .NET/Angular role, connect 7+ years of development and production ownership to the technologies in the role.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Present -> strengths -> relevance.",
+      "codeExample": "I build enterprise software with C#/.NET and Angular and have owned both development and production problem solving."
+    },
+    {
+      "id": "q726",
+      "technology": "Behavioral",
+      "difficulty": "Simple",
+      "type": "Technical",
+      "question": "What are your strengths as a software engineer?",
+      "shortAnswer": "Choose strengths supported by concrete work examples rather than generic adjectives.",
+      "detailedAnswer": "Choose strengths supported by concrete work examples rather than generic adjectives.",
+      "example": "Discuss debugging, ownership and full-stack understanding with a specific production or feature example.",
+      "seniorPerspective": "Discuss debugging, ownership and full-stack understanding with a specific production or feature example.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Strength needs evidence.",
+      "codeExample": "Strength: RCA -> Example: traced timeout -> Result: restored service."
+    },
+    {
+      "id": "q727",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "Tell me about a difficult technical problem you solved.",
+      "shortAnswer": "Explain context, constraints, investigation, decision, implementation and measurable result.",
+      "detailedAnswer": "Explain context, constraints, investigation, decision, implementation and measurable result.",
+      "example": "Use a production issue or complex feature where logs, code and customer impact all mattered.",
+      "seniorPerspective": "Use a production issue or complex feature where logs, code and customer impact all mattered.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Tell the engineering story.",
+      "codeExample": "Situation -> investigation -> decision -> result."
+    },
+    {
+      "id": "q728",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "Tell me about a production incident you handled.",
+      "shortAnswer": "Describe how you stabilized impact, investigated evidence, communicated and prevented recurrence.",
+      "detailedAnswer": "Describe how you stabilized impact, investigated evidence, communicated and prevented recurrence.",
+      "example": "A customer escalation can be explained through triage, RCA, code/config fix and validation.",
+      "seniorPerspective": "A customer escalation can be explained through triage, RCA, code/config fix and validation.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Incident answers show ownership.",
+      "codeExample": "Impact -> stabilize -> diagnose -> recover -> prevent."
+    },
+    {
+      "id": "q729",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "Tell me about a time you disagreed with a technical decision.",
+      "shortAnswer": "Explain the technical concern, evidence, discussion and how you aligned after the decision.",
+      "detailedAnswer": "Explain the technical concern, evidence, discussion and how you aligned after the decision.",
+      "example": "Compare two implementation approaches using measured risk and maintainability rather than personal preference.",
+      "seniorPerspective": "Compare two implementation approaches using measured risk and maintainability rather than personal preference.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Disagree professionally.",
+      "codeExample": "Concern -> evidence -> discussion -> alignment."
+    },
+    {
+      "id": "q730",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "Tell me about a mistake you made.",
+      "shortAnswer": "Choose a real but recoverable mistake and focus on what changed in your engineering practice.",
+      "detailedAnswer": "Choose a real but recoverable mistake and focus on what changed in your engineering practice.",
+      "example": "For example, an incomplete validation assumption can become a lesson in tests and production checks.",
+      "seniorPerspective": "For example, an incomplete validation assumption can become a lesson in tests and production checks.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Own it and show learning.",
+      "codeExample": "Mistake -> impact -> correction -> prevention."
+    },
+    {
+      "id": "q731",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How do you prioritize competing work?",
+      "shortAnswer": "Prioritize by customer impact, production risk, business urgency, dependencies and effort, while communicating trade-offs.",
+      "detailedAnswer": "Prioritize by customer impact, production risk, business urgency, dependencies and effort, while communicating trade-offs.",
+      "example": "A production defect affecting many customers takes precedence over a low-impact enhancement.",
+      "seniorPerspective": "A production defect affecting many customers takes precedence over a low-impact enhancement.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Prioritize transparently.",
+      "codeExample": "impact + risk + urgency + dependency"
+    },
+    {
+      "id": "q732",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you handle an ambiguous requirement?",
+      "shortAnswer": "Turn ambiguity into explicit assumptions, examples, acceptance criteria and questions before committing to implementation.",
+      "detailedAnswer": "Turn ambiguity into explicit assumptions, examples, acceptance criteria and questions before committing to implementation.",
+      "example": "For an ATM flow change, clarify transaction states, error paths and expected customer behavior.",
+      "seniorPerspective": "For an ATM flow change, clarify transaction states, error paths and expected customer behavior.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Make ambiguity concrete.",
+      "codeExample": "Assumptions -> examples -> acceptance criteria."
+    },
+    {
+      "id": "q733",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you mentor a less experienced developer?",
+      "shortAnswer": "Give context, ask them to reason first, review their approach and gradually increase ownership rather than taking over.",
+      "detailedAnswer": "Give context, ask them to reason first, review their approach and gradually increase ownership rather than taking over.",
+      "example": "Pair on a production RCA and let the developer lead the evidence gathering while you guide the reasoning.",
+      "seniorPerspective": "Pair on a production RCA and let the developer lead the evidence gathering while you guide the reasoning.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Teach reasoning, not just answers.",
+      "codeExample": "Guide -> review -> feedback -> ownership."
+    },
+    {
+      "id": "q734",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you communicate a technical issue to a non-technical stakeholder?",
+      "shortAnswer": "Translate technical cause into impact, current status, risk, action and expected timeline without unnecessary implementation detail.",
+      "detailedAnswer": "Translate technical cause into impact, current status, risk, action and expected timeline without unnecessary implementation detail.",
+      "example": "For a payment outage, explain affected transactions, mitigation and next update time.",
+      "seniorPerspective": "For a payment outage, explain affected transactions, mitigation and next update time.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Lead with impact.",
+      "codeExample": "Impact -> action -> risk -> next update."
+    },
+    {
+      "id": "q735",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you make a technical decision when you lack complete information?",
+      "shortAnswer": "Identify what is known, state assumptions, reduce uncertainty with targeted investigation and choose a reversible path when possible.",
+      "detailedAnswer": "Identify what is known, state assumptions, reduce uncertainty with targeted investigation and choose a reversible path when possible.",
+      "example": "During an incident, use logs and metrics to test hypotheses before making a risky production change.",
+      "seniorPerspective": "During an incident, use logs and metrics to test hypotheses before making a risky production change.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Reduce uncertainty deliberately.",
+      "codeExample": "Known -> unknown -> evidence -> reversible decision."
+    },
+    {
+      "id": "q736",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "Tell me about a time you improved an engineering process.",
+      "shortAnswer": "Describe the original friction, the change, adoption and measurable outcome.",
+      "detailedAnswer": "Describe the original friction, the change, adoption and measurable outcome.",
+      "example": "An automated RCA or deployment check can reduce manual investigation or release risk.",
+      "seniorPerspective": "An automated RCA or deployment check can reduce manual investigation or release risk.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Process improvement needs an outcome.",
+      "codeExample": "Problem -> automation -> adoption -> outcome."
+    },
+    {
+      "id": "q737",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Technical",
+      "question": "How do you handle pressure during a customer escalation?",
+      "shortAnswer": "Stay factual, establish impact, communicate knowns and unknowns, and avoid promising unsupported conclusions.",
+      "detailedAnswer": "Stay factual, establish impact, communicate knowns and unknowns, and avoid promising unsupported conclusions.",
+      "example": "For a production ATM issue, provide a clear investigation update while continuing technical diagnosis.",
+      "seniorPerspective": "For a production ATM issue, provide a clear investigation update while continuing technical diagnosis.",
+      "commonMistakes": "Tie the answer to the actual data, runtime or production behavior.",
+      "followUps": [],
+      "tags": [
+        "Behavioral"
+      ],
+      "memoryCue": "Calm communication is part of engineering.",
+      "codeExample": "Facts -> impact -> action -> update."
     }
   ]
 }
