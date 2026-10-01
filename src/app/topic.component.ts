@@ -60,7 +60,7 @@ export class TopicComponent{
   topic='';selectedDifficulty='All';filtered:InterviewQuestion[]=[];private allQuestions:InterviewQuestion[]=[];
   constructor(){
     this.route.paramMap.subscribe(params=>{
-      const map:any={csharp:'C# / .NET',dotnet:'.NET',angular:'Angular',javascript:'JavaScript / TypeScript',sql:'SQL','system-design':'System Design',ai:'AI & Agentic AI',production:'Production Debugging',security:'Security',performance:'Performance',behavioral:'Behavioral'};
+      const map:any={csharp:'C# / .NET','dotnet-runtime':'.NET', 'aspnet-core':'ASP.NET Core / .NET', 'ef-core':'EF Core',linq:'LINQ / C#','async-threading':'Async / Threading',angular:'Angular',javascript:'JavaScript / TypeScript',sql:'SQL','api-design':'API Design',architecture:'Architecture','design-patterns':'Design Patterns',microservices:'Microservices','data-messaging':'Data / Messaging','system-design':'System Design','networking-web':'Networking / Web','cloud-distributed':'Cloud / Distributed Systems',security:'Security',performance:'Performance',testing:'Testing','devops-production':'DevOps / Production',production:'Production Debugging',ai:'AI & Agentic AI',behavioral:'Behavioral'}
       this.topic=map[params.get('slug')||'csharp']||'C# / .NET';
       this.service.byTechnology(this.topic).subscribe(q=>{this.allQuestions=q.map(x=>x.difficulty==='Senior / Advanced'?{...x,difficulty:'Complex'}:x);this.applyFilter();});
     });
