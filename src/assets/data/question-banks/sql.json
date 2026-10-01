@@ -1,0 +1,74 @@
+{
+  "title": "sql",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": "SQL",
+      "level": "Simple",
+      "question": "WHERE vs HAVING?",
+      "answer": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
+      "example": "Filter orders by year in WHERE, then keep customers whose SUM(total) exceeds a threshold in HAVING.",
+      "followup": "Can HAVING be used without GROUP BY?"
+    },
+    {
+      "area": "SQL",
+      "level": "Simple",
+      "question": "INNER JOIN vs LEFT JOIN?",
+      "answer": "INNER JOIN returns matching rows; LEFT JOIN preserves every left-side row and adds nulls when no match exists.",
+      "example": "Find customers with no orders using LEFT JOIN and WHERE order.id IS NULL.",
+      "followup": "Why can a WHERE condition accidentally turn a LEFT JOIN into an INNER JOIN?"
+    },
+    {
+      "area": "SQL",
+      "level": "Medium",
+      "question": "What is a composite index?",
+      "answer": "An index containing multiple columns can support predicates and ordering that align with its key order.",
+      "example": "Index(CustomerId, CreatedAt) can support recent orders for one customer.",
+      "followup": "Why does column order matter?"
+    },
+    {
+      "area": "SQL",
+      "level": "Medium",
+      "question": "What is a window function?",
+      "answer": "It calculates across related rows without collapsing them into one row per group.",
+      "example": "ROW_NUMBER partitioned by CustomerId can identify each customer's latest order.",
+      "followup": "When would RANK differ from ROW_NUMBER?"
+    },
+    {
+      "area": "SQL",
+      "level": "Medium",
+      "question": "What is transaction isolation?",
+      "answer": "Isolation controls what concurrent transactions can observe, balancing consistency and concurrency.",
+      "example": "Read Committed prevents dirty reads while allowing other concurrency phenomena.",
+      "followup": "What is a deadlock?"
+    },
+    {
+      "area": "SQL",
+      "level": "Complex",
+      "question": "A query became slow after data grew 10x. What do you check?",
+      "answer": "Inspect the execution plan, cardinality estimates, indexes, statistics, scans, joins, blocking and parameter behavior.",
+      "example": "A query that once scanned 10k rows now scans 10m because a predicate cannot use the available index.",
+      "followup": "What is a non-sargable predicate?"
+    },
+    {
+      "area": "SQL",
+      "level": "Complex",
+      "question": "How do you find the latest record per customer?",
+      "answer": "Use ROW_NUMBER or another ranking/window pattern to rank rows per customer and select rank 1.",
+      "example": "ROW_NUMBER() OVER(PARTITION BY CustomerId ORDER BY CreatedAt DESC) = 1.",
+      "followup": "How do ties change the solution?"
+    },
+    {
+      "area": "SQL",
+      "level": "Complex",
+      "question": "How do you troubleshoot blocking?",
+      "answer": "Identify blocked sessions and the blocker, inspect transaction age and SQL, then reduce transaction scope or correct access order/indexing.",
+      "example": "A transaction keeps a lock open while waiting for an external call; moving the external call outside the transaction reduces lock duration.",
+      "followup": "Why is killing the blocker only a mitigation?"
+    }
+  ]
+}
