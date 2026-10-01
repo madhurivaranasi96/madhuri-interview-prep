@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "sourceNote": "Senior full-stack interview master bank for a 7-year developer. Main questions are conventional interview questions, grouped only into Simple, Medium and Complex. Every question has a clear interview answer, a concrete real-world engineering example, deeper reasoning, senior-level considerations, common mistakes and concept-specific follow-ups. Scenario-based questions remain separate.",
   "questions": [
     {
