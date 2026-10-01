@@ -1,0 +1,1 @@
+import {Routes} from '@angular/router'; import {DashboardComponent} from './dashboard.component'; import {TopicComponent} from './topic.component'; export const routes:Routes=[{path:'',component:DashboardComponent},{path:'dashboard',component:DashboardComponent},{path:'topic/:slug',component:TopicComponent},{path:'**',redirectTo:''}];
