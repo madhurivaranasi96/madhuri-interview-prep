@@ -1,0 +1,66 @@
+{
+  "title": "javascript",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": "JavaScript",
+      "level": "Simple",
+      "question": "What is a closure?",
+      "answer": "A function retains access to variables from its lexical scope even after the outer function returns.",
+      "example": "A counter factory returns a function that retains count.",
+      "followup": "How can closures retain unwanted objects?"
+    },
+    {
+      "area": "JavaScript",
+      "level": "Simple",
+      "question": "What is hoisting?",
+      "answer": "Declarations are processed before execution, but initialization semantics differ between var, let, const and function declarations.",
+      "example": "Accessing a var before assignment yields undefined; accessing a let before initialization throws.",
+      "followup": "Why is the temporal dead zone important?"
+    },
+    {
+      "area": "JavaScript",
+      "level": "Medium",
+      "question": "Explain the event loop.",
+      "answer": "Synchronous code runs on the stack; asynchronous work queues callbacks, with microtasks such as Promise continuations processed before the next task.",
+      "example": "Promise.then generally runs before a setTimeout callback scheduled in the same turn.",
+      "followup": "How can too many microtasks hurt responsiveness?"
+    },
+    {
+      "area": "JavaScript",
+      "level": "Medium",
+      "question": "Debounce vs throttle?",
+      "answer": "Debounce waits for a pause; throttle limits execution frequency during continuous activity.",
+      "example": "Debounce search input; throttle scroll telemetry.",
+      "followup": "What latency tradeoff does debounce introduce?"
+    },
+    {
+      "area": "JavaScript",
+      "level": "Medium",
+      "question": "Shallow copy vs deep copy?",
+      "answer": "A shallow copy duplicates the outer structure while nested references remain shared; a deep copy recursively separates nested data.",
+      "example": "Spread creates a shallow object copy; structuredClone can deep-copy supported data.",
+      "followup": "Why can JSON serialization be a poor deep-copy technique?"
+    },
+    {
+      "area": "JavaScript",
+      "level": "Complex",
+      "question": "How would you debug a browser memory leak?",
+      "answer": "Compare heap snapshots, inspect retained paths, listeners, timers and subscriptions, then verify that objects become collectible after navigation.",
+      "example": "A global event listener closes over a component and prevents collection.",
+      "followup": "What evidence proves the fix?"
+    },
+    {
+      "area": "JavaScript",
+      "level": "Complex",
+      "question": "Why can async code appear out of order?",
+      "answer": "Concurrent operations complete independently; awaiting a promise preserves sequencing only where the code explicitly awaits it.",
+      "example": "Promise.all runs independent requests concurrently while preserving result ordering in its returned array.",
+      "followup": "When should requests be serialized instead?"
+    }
+  ]
+}
