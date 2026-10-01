@@ -1,0 +1,66 @@
+{
+  "title": "production",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": "Production",
+      "level": "Simple",
+      "question": "What is RCA?",
+      "answer": "Root cause analysis identifies the underlying cause rather than only documenting the visible symptom.",
+      "example": "A timeout is a symptom; exhausted database connections may be the cause.",
+      "followup": "What prevention action should follow RCA?"
+    },
+    {
+      "area": "Production",
+      "level": "Simple",
+      "question": "What is a correlation ID?",
+      "answer": "An identifier propagated through a request path so logs and traces can be connected across services.",
+      "example": "The same request id appears in API, worker and downstream logs.",
+      "followup": "Where should it be generated and propagated?"
+    },
+    {
+      "area": "Production",
+      "level": "Medium",
+      "question": "An API is slow only sometimes. How do you investigate?",
+      "answer": "Compare slow and normal traces by endpoint, dependency, host, input, time and deployment; use percentiles rather than averages alone.",
+      "example": "Only requests hitting one database shard are slow.",
+      "followup": "What evidence separates an application issue from a dependency issue?"
+    },
+    {
+      "area": "Production",
+      "level": "Medium",
+      "question": "High CPU after deployment—what next?",
+      "answer": "Check the deployment diff, endpoint traffic, CPU profiles, loops, serialization, regex, logging and concurrency behavior; rollback or mitigate if impact is high.",
+      "example": "A new retry loop repeatedly performs expensive serialization.",
+      "followup": "How do you safely validate the hypothesis?"
+    },
+    {
+      "area": "Production",
+      "level": "Medium",
+      "question": "Memory keeps increasing. What do you check?",
+      "answer": "Look at process/managed memory, GC behavior, allocation rates and retained objects; compare snapshots over time.",
+      "example": "An unbounded in-memory cache grows with unique request keys.",
+      "followup": "How do you distinguish cache growth from a leak?"
+    },
+    {
+      "area": "Production",
+      "level": "Complex",
+      "question": "Production deadlock occurs. What is your approach?",
+      "answer": "Capture the deadlock graph, identify resource ordering, reduce transaction scope and make lock ordering consistent; then test under concurrency.",
+      "example": "Two transactions acquire resources in opposite order.",
+      "followup": "Why might retries hide rather than solve the design problem?"
+    },
+    {
+      "area": "Production",
+      "level": "Complex",
+      "question": "A release breaks one customer only. What do you investigate?",
+      "answer": "Compare configuration, feature flags, data shape, permissions, version and environment for that customer while preserving privacy.",
+      "example": "Only one tenant has malformed legacy data triggering a new parser path.",
+      "followup": "How do you reproduce without copying sensitive production data?"
+    }
+  ]
+}
