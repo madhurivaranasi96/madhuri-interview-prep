@@ -12,7 +12,7 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
       <header class="topic-header">
         <p class="label">MAIN TECHNICAL INTERVIEW BANK</p>
         <h1>{{topic}}</h1>
-        <p>Do not memorize definitions. Learn how to explain the concept through a real engineering situation, what you would implement, what can fail, and how you would make the decision in production.</p>
+        <p>These are conventional interview questions. The practical example is part of the answer so you can explain the concept through implementation, trade-offs, failure modes and production validation.</p>
       </header>
 
       @for(group of groups; track group.name) {<h2 class="difficulty">{{group.name}}</h2>@for(q of group.questions; track q.id; let i = $index) {
@@ -110,7 +110,7 @@ export class TopicComponent{
         csharp:'C# / .NET',
         dotnet:'.NET',
         angular:'Angular',
-        javascript:'JavaScript',
+        javascript:'JavaScript / TypeScript',
         sql:'SQL',
         'system-design':'System Design',
         ai:'AI & Agentic AI',
@@ -120,7 +120,7 @@ export class TopicComponent{
         behavioral:'Behavioral'
       };
       this.topic=map[params.get('slug')||'csharp']||'C# / .NET';
-      this.service.byTechnology(this.topic).subscribe(q=>this.filtered=q; const defs=[['01','Simple'],['02','Medium'],['03','Complex'],['04','Senior / Advanced']]; this.groups=defs.map(x=>({number:x[0],name:x[1],questions:q.filter(y=>y.difficulty===x[1])})).filter(x=>x.questions.length);
+      this.service.byTechnology(this.topic).subscribe(q=>{this.filtered=q; const defs=[['01','Simple'],['02','Medium'],['03','Complex'],['04','Senior / Advanced']]; this.groups=defs.map(x=>({number:x[0],name:x[1],questions:q.filter(y=>y.difficulty===x[1])})).filter(x=>x.questions.length);});
     });
   }
 }
