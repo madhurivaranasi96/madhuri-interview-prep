@@ -1,6 +1,6 @@
 {
-  "version": 15,
-  "sourceNote": "Expanded research-backed senior full-stack interview bank. Question themes were synthesized from current public interview-prep sources covering C#, ASP.NET Core, EF Core, Angular, async/concurrency, SQL, system design, security and performance. Questions are paraphrased and written as original study material; scenario-based interviews remain separate.",
+  "version": 16,
+  "sourceNote": "Expanded research-backed senior full-stack interview bank. Themes are synthesized from multiple current public interview-prep sources covering .NET/C#, ASP.NET Core, EF Core, Angular/RxJS, SQL Server, system design, security, performance, testing, architecture and DevOps. Questions are paraphrased original study material; main questions use only Simple, Medium and Complex difficulty. Scenario-based questions remain separate.",
   "questions": [
     {
       "id": "master-001",
@@ -2817,6 +2817,2866 @@
       ],
       "memoryCue": "How do you test for prompt injection?",
       "codeExample": "How do you evaluate no-answer cases?"
+    },
+    {
+      "id": "exp-1",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What are access modifiers in C#?",
+      "shortAnswer": "Access modifiers control visibility of types and members.",
+      "detailedAnswer": "Use the narrowest visibility that preserves the design.",
+      "example": "A service exposes public operations while helpers remain private.",
+      "seniorPerspective": "Visibility is part of the API boundary.",
+      "commonMistakes": "Making everything public.",
+      "followUps": [
+        "What does protected mean?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Visibility = boundary.",
+      "codeExample": "public class Service { private int count; public void Run() {} }"
+    },
+    {
+      "id": "exp-2",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is an enum in C#?",
+      "shortAnswer": "An enum represents a fixed set of named values.",
+      "detailedAnswer": "Use it when choices are finite and meaningful.",
+      "example": "Transaction status can be Pending, Completed or Failed.",
+      "seniorPerspective": "Consider stable serialization values for external contracts.",
+      "commonMistakes": "Using enums for frequently changing business data.",
+      "followUps": [
+        "How are enums serialized?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Enum = named choices.",
+      "codeExample": "enum Status { Pending, Completed, Failed }"
+    },
+    {
+      "id": "exp-3",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is pattern matching in C#?",
+      "shortAnswer": "Pattern matching tests types, properties and conditions while optionally extracting values.",
+      "detailedAnswer": "It can make branching explicit and reduce unsafe casts.",
+      "example": "Handle different transaction result types with a switch expression.",
+      "seniorPerspective": "Use patterns to express domain rules clearly.",
+      "commonMistakes": "Huge nested patterns that hide business logic.",
+      "followUps": [
+        "What is a property pattern?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Pattern = test + extract.",
+      "codeExample": "if (result is Success s) Console.WriteLine(s.Id);"
+    },
+    {
+      "id": "exp-4",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are nullable reference types?",
+      "shortAnswer": "Nullable reference types let the compiler warn about possible null dereferences.",
+      "detailedAnswer": "They improve correctness at compile time but do not validate runtime input.",
+      "example": "Optional nickname is string?, while accountId is required.",
+      "seniorPerspective": "Treat warnings as design feedback rather than suppressing them.",
+      "commonMistakes": "Using ! everywhere.",
+      "followUps": [
+        "Does nullable annotation validate JSON?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Nullable = compiler guidance.",
+      "codeExample": "string? nickname = null;"
+    },
+    {
+      "id": "exp-5",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are init-only properties?",
+      "shortAnswer": "init properties can be assigned during object initialization but not changed afterward.",
+      "detailedAnswer": "They support immutable-style request and configuration models.",
+      "example": "A transaction request can initialize amount once.",
+      "seniorPerspective": "Stable objects are safer across asynchronous code.",
+      "commonMistakes": "Using mutable setters for immutable data.",
+      "followUps": [
+        "init versus readonly?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "init = set during creation.",
+      "codeExample": "public decimal Amount { get; init; }"
+    },
+    {
+      "id": "exp-6",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is string interning?",
+      "shortAnswer": "Interning can reuse identical string instances to reduce repeated string storage.",
+      "detailedAnswer": "It can help with repeated literals but is not a general cache.",
+      "example": "Repeated status literals may share storage.",
+      "seniorPerspective": "Do not intern high-cardinality input without measuring memory impact.",
+      "commonMistakes": "Assuming all strings are interned.",
+      "followUps": [
+        "Can strings be interned explicitly?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Interning = reuse strings.",
+      "codeExample": "var s = string.Intern(\"Completed\");"
+    },
+    {
+      "id": "exp-7",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "When should you use Span<T>?",
+      "shortAnswer": "Span<T> provides an allocation-free view over contiguous memory for synchronous processing.",
+      "detailedAnswer": "It is useful on measured hot paths such as parsing.",
+      "example": "A protocol parser can inspect bytes without copying them.",
+      "seniorPerspective": "Use it after profiling because it increases complexity.",
+      "commonMistakes": "Trying to carry Span across await.",
+      "followUps": [
+        "Can Span cross await?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Span = fast memory view.",
+      "codeExample": "ReadOnlySpan<char> part = text.AsSpan(0, 5);"
+    },
+    {
+      "id": "exp-8",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is ArrayPool<T>?",
+      "shortAnswer": "ArrayPool reuses arrays to reduce temporary allocations and GC pressure.",
+      "detailedAnswer": "It helps high-throughput code with repeated buffers.",
+      "example": "A log parser can rent a byte buffer for each file.",
+      "seniorPerspective": "Always return rented arrays in finally.",
+      "commonMistakes": "Forgetting to return arrays.",
+      "followUps": [
+        "What if processing throws?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Pool = reuse buffers.",
+      "codeExample": "var b=ArrayPool<byte>.Shared.Rent(4096); try{} finally{ArrayPool<byte>.Shared.Return(b);}"
+    },
+    {
+      "id": "exp-9",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is ValueTask?",
+      "shortAnswer": "ValueTask can reduce allocation when an async operation often completes synchronously.",
+      "detailedAnswer": "It is mainly useful in specialized performance-sensitive APIs.",
+      "example": "A cache lookup may often complete immediately.",
+      "seniorPerspective": "Prefer Task unless profiling justifies the added complexity.",
+      "commonMistakes": "Using ValueTask everywhere.",
+      "followUps": [
+        "When is Task better?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "ValueTask = measured optimization.",
+      "codeExample": "ValueTask<int> GetAsync() => new(42);"
+    },
+    {
+      "id": "exp-10",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is an extension method?",
+      "shortAnswer": "An extension method adds callable behavior to a type without changing its source.",
+      "detailedAnswer": "It is useful for cohesive reusable transformations.",
+      "example": "Transactions can expose an IsCompleted extension.",
+      "seniorPerspective": "Keep extensions focused and discoverable.",
+      "commonMistakes": "Large generic utility classes.",
+      "followUps": [
+        "How are extension methods resolved?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Extension = add behavior externally.",
+      "codeExample": "public static bool IsCompleted(this Transaction t)=>t.Status==\"Completed\";"
+    },
+    {
+      "id": "exp-11",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is dependency inversion?",
+      "shortAnswer": "High-level policy should depend on abstractions rather than infrastructure details.",
+      "detailedAnswer": "It reduces coupling and improves testability.",
+      "example": "A withdrawal service depends on IPaymentGateway.",
+      "seniorPerspective": "Define abstractions around business needs.",
+      "commonMistakes": "Interfaces that mirror every class without purpose.",
+      "followUps": [
+        "How does DI help?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Depend on contracts.",
+      "codeExample": "public WithdrawalService(IPaymentGateway gateway){}"
+    },
+    {
+      "id": "exp-12",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "Composition versus inheritance?",
+      "shortAnswer": "Inheritance models substitutable types; composition assembles behavior from collaborators.",
+      "detailedAnswer": "Composition usually reduces coupling.",
+      "example": "A transaction service composes validators and gateways.",
+      "seniorPerspective": "Use inheritance when substitutability is genuine.",
+      "commonMistakes": "Deep inheritance trees for code reuse.",
+      "followUps": [
+        "When is inheritance appropriate?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Compose behavior.",
+      "codeExample": "class Service{private readonly IValidator validator;}"
+    },
+    {
+      "id": "exp-13",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is routing in ASP.NET Core?",
+      "shortAnswer": "Routing maps HTTP requests to endpoints.",
+      "detailedAnswer": "Clear routes make API contracts predictable.",
+      "example": "GET /accounts/42 maps to account retrieval.",
+      "seniorPerspective": "Use resource-oriented routes and stable contracts.",
+      "commonMistakes": "Business logic in route constraints.",
+      "followUps": [
+        "Attribute versus conventional routing?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Route = request to endpoint.",
+      "codeExample": "[HttpGet(\"accounts/{id:int}\")]"
+    },
+    {
+      "id": "exp-14",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is content negotiation?",
+      "shortAnswer": "Content negotiation lets client and server agree on a representation format.",
+      "detailedAnswer": "It commonly uses Accept and Content-Type headers.",
+      "example": "An API can return JSON and optionally another supported format.",
+      "seniorPerspective": "Keep supported formats explicit.",
+      "commonMistakes": "Assuming Accept changes authorization.",
+      "followUps": [
+        "What is Content-Type?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Accept asks; Content-Type describes.",
+      "codeExample": "[Produces(\"application/json\")]"
+    },
+    {
+      "id": "exp-15",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is API versioning?",
+      "shortAnswer": "Versioning lets an API evolve without unexpectedly breaking existing clients.",
+      "detailedAnswer": "Use a clear compatibility and deprecation policy.",
+      "example": "Older ATM clients can remain on v1 while new clients use v2.",
+      "seniorPerspective": "Treat versioning as contract lifecycle management.",
+      "commonMistakes": "Creating versions without a retirement plan.",
+      "followUps": [
+        "URL versus header versioning?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Version = controlled evolution.",
+      "codeExample": "[Route(\"api/v1/accounts\")]"
+    },
+    {
+      "id": "exp-16",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is model validation?",
+      "shortAnswer": "Validation checks whether incoming data satisfies required input rules.",
+      "detailedAnswer": "It protects the domain from invalid requests.",
+      "example": "Withdrawal amount must be positive before processing.",
+      "seniorPerspective": "Separate boundary validation from domain rules.",
+      "commonMistakes": "Relying only on Angular validation.",
+      "followUps": [
+        "Where should validation happen?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Validate at the boundary.",
+      "codeExample": "if(request.Amount<=0)return BadRequest();"
+    },
+    {
+      "id": "exp-17",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is middleware ordering?",
+      "shortAnswer": "Middleware runs in registration order for requests and reverse order for responses.",
+      "detailedAnswer": "Ordering affects authentication, authorization and exception handling.",
+      "example": "Exception handling should wrap downstream processing.",
+      "seniorPerspective": "Treat middleware order as runtime behavior.",
+      "commonMistakes": "Moving middleware randomly.",
+      "followUps": [
+        "Why authentication before authorization?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Order = pipeline behavior.",
+      "codeExample": "app.UseAuthentication(); app.UseAuthorization();"
+    },
+    {
+      "id": "exp-18",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is rate limiting?",
+      "shortAnswer": "Rate limiting controls how much traffic a client or identity can send.",
+      "detailedAnswer": "It protects service capacity and fairness.",
+      "example": "A login endpoint can have a stricter limit than reads.",
+      "seniorPerspective": "Define keys, bursts and distributed behavior.",
+      "commonMistakes": "One limit for every endpoint.",
+      "followUps": [
+        "Fixed window versus token bucket?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Rate limit = protect capacity.",
+      "codeExample": "builder.Services.AddRateLimiter(_=>{});"
+    },
+    {
+      "id": "exp-19",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What are health checks?",
+      "shortAnswer": "Health checks expose whether an application is alive or ready to serve traffic.",
+      "detailedAnswer": "Readiness can include required dependencies.",
+      "example": "A load balancer can stop routing to an instance that is not ready.",
+      "seniorPerspective": "Separate liveness from readiness.",
+      "commonMistakes": "Making liveness depend on every dependency.",
+      "followUps": [
+        "What should readiness check?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Health = know whether to route.",
+      "codeExample": "app.MapHealthChecks(\"/health/ready\");"
+    },
+    {
+      "id": "exp-20",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What are BackgroundService workers?",
+      "shortAnswer": "Hosted services run long-lived work outside HTTP requests.",
+      "detailedAnswer": "They are useful for queues and scheduled work.",
+      "example": "A worker processes transaction notifications from a queue.",
+      "seniorPerspective": "Support cancellation, retries and graceful shutdown.",
+      "commonMistakes": "Infinite loops without cancellation.",
+      "followUps": [
+        "How does shutdown work?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Worker = controlled long-lived work.",
+      "codeExample": "protected override Task ExecuteAsync(CancellationToken ct)=>RunAsync(ct);"
+    },
+    {
+      "id": "exp-21",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is HTTP caching?",
+      "shortAnswer": "HTTP caching allows clients or intermediaries to reuse responses according to cache headers.",
+      "detailedAnswer": "It reduces repeated work when freshness rules allow it.",
+      "example": "Reference data can be cached for a short period.",
+      "seniorPerspective": "Consider authorization and invalidation first.",
+      "commonMistakes": "Caching personalized responses publicly.",
+      "followUps": [
+        "ETag versus max-age?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Cache only reusable data.",
+      "codeExample": "Response.Headers.CacheControl=\"max-age=60\";"
+    },
+    {
+      "id": "exp-22",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is distributed tracing?",
+      "shortAnswer": "Tracing follows a request across services using trace and span identifiers.",
+      "detailedAnswer": "It connects latency and failures across dependencies.",
+      "example": "ATM API -> database -> notification can be one trace.",
+      "seniorPerspective": "Propagate context and correlate logs.",
+      "commonMistakes": "New unrelated IDs at every hop.",
+      "followUps": [
+        "What is a span?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Trace = end-to-end; span = operation.",
+      "codeExample": "using var a=ActivitySource.StartActivity(\"Withdraw\");"
+    },
+    {
+      "id": "exp-23",
+      "technology": "ASP.NET Core / .NET",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is OpenAPI?",
+      "shortAnswer": "OpenAPI is a machine-readable description of an HTTP API contract.",
+      "detailedAnswer": "It supports documentation and client generation.",
+      "example": "Angular clients can consume documented request and response shapes.",
+      "seniorPerspective": "Keep documentation aligned with actual behavior.",
+      "commonMistakes": "Treating generated docs as runtime validation.",
+      "followUps": [
+        "How is OpenAPI used?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "ASP.NET Core / .NET",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "OpenAPI = API contract.",
+      "codeExample": "app.MapOpenApi();"
+    },
+    {
+      "id": "exp-24",
+      "technology": "EF Core",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is DbContext?",
+      "shortAnswer": "DbContext represents a unit of work with querying, tracking and persistence.",
+      "detailedAnswer": "It is normally scoped to a web request.",
+      "example": "An API request loads and updates a transaction through one context.",
+      "seniorPerspective": "Do not share a context across concurrent operations.",
+      "commonMistakes": "Registering DbContext as singleton.",
+      "followUps": [
+        "Why is it scoped?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Context = unit of work.",
+      "codeExample": "builder.Services.AddDbContext<AppDbContext>();"
+    },
+    {
+      "id": "exp-25",
+      "technology": "EF Core",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a navigation property?",
+      "shortAnswer": "A navigation property represents a relationship to another entity or collection.",
+      "detailedAnswer": "It makes related data accessible but loading strategy matters.",
+      "example": "Transaction.Account can represent its account.",
+      "seniorPerspective": "Choose loading explicitly for predictable performance.",
+      "commonMistakes": "Assuming navigation always loads automatically.",
+      "followUps": [
+        "Eager versus explicit loading?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Navigation = relationship.",
+      "codeExample": "public Account Account {get;set;}=null!;"
+    },
+    {
+      "id": "exp-26",
+      "technology": "EF Core",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is eager loading?",
+      "shortAnswer": "Eager loading retrieves related data as part of a query.",
+      "detailedAnswer": "Use it when related data is definitely needed.",
+      "example": "A transaction query can Include its account.",
+      "seniorPerspective": "Projection may be better when only a few fields are needed.",
+      "commonMistakes": "Multiple Includes creating huge result sets.",
+      "followUps": [
+        "Include versus projection?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Eager = load intentionally.",
+      "codeExample": "var x=await db.Transactions.Include(t=>t.Account).ToListAsync();"
+    },
+    {
+      "id": "exp-27",
+      "technology": "EF Core",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is lazy loading and why can it cause N+1?",
+      "shortAnswer": "Lazy loading fetches related data when accessed, which can hide extra queries.",
+      "detailedAnswer": "It can accidentally issue one query per row.",
+      "example": "Looping over transactions and accessing Account can trigger many queries.",
+      "seniorPerspective": "Prefer projection or explicit loading for predictable APIs.",
+      "commonMistakes": "Lazy loading in large loops.",
+      "followUps": [
+        "How do you detect N+1?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Lazy = hidden query risk.",
+      "codeExample": "var names=transactions.Select(t=>t.Account.Name).ToList();"
+    },
+    {
+      "id": "exp-28",
+      "technology": "EF Core",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is projection?",
+      "shortAnswer": "Projection selects only fields required by the application.",
+      "detailedAnswer": "It reduces database IO and materialization.",
+      "example": "A list endpoint can select Id, Amount and Status into a DTO.",
+      "seniorPerspective": "Use projection for read APIs.",
+      "commonMistakes": "Loading complete entities unnecessarily.",
+      "followUps": [
+        "Can projection calculate values?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Projection = only what you need.",
+      "codeExample": "var rows=await db.Transactions.Select(t=>new{t.Id,t.Amount}).ToListAsync();"
+    },
+    {
+      "id": "exp-29",
+      "technology": "EF Core",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is AsSplitQuery?",
+      "shortAnswer": "AsSplitQuery loads related collections using separate queries to avoid some cartesian explosion.",
+      "detailedAnswer": "It can trade join duplication for additional round trips.",
+      "example": "A complex report with several collections may benefit from split queries.",
+      "seniorPerspective": "Compare SQL, row counts and latency before choosing.",
+      "commonMistakes": "Assuming split queries are always faster.",
+      "followUps": [
+        "When does cartesian explosion occur?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Split = separate related loads.",
+      "codeExample": "var x=await db.Orders.Include(o=>o.Items).AsSplitQuery().ToListAsync();"
+    },
+    {
+      "id": "exp-30",
+      "technology": "EF Core",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is ExecuteUpdate?",
+      "shortAnswer": "ExecuteUpdate performs a set-based update directly in the database without loading every entity.",
+      "detailedAnswer": "It is useful for bulk changes.",
+      "example": "Expired sessions can be updated in one database operation.",
+      "seniorPerspective": "Remember tracked objects may become stale.",
+      "commonMistakes": "Expecting the context to auto-refresh tracked entities.",
+      "followUps": [
+        "What is ExecuteDelete?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Set-based = database-side update.",
+      "codeExample": "await db.Sessions.Where(x=>x.Expired).ExecuteUpdateAsync(s=>s.SetProperty(x=>x.Active,false));"
+    },
+    {
+      "id": "exp-31",
+      "technology": "EF Core",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How does EF Core optimistic concurrency work?",
+      "shortAnswer": "A concurrency token detects when another process changed a row before your update.",
+      "detailedAnswer": "The application can retry, merge or return a conflict.",
+      "example": "Two engineers editing ATM configuration cannot silently overwrite each other.",
+      "seniorPerspective": "The conflict policy belongs to the business workflow.",
+      "commonMistakes": "Blindly retrying stale updates.",
+      "followUps": [
+        "What is rowversion?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Version check prevents lost updates.",
+      "codeExample": "[Timestamp] public byte[] Version {get;set;}=[];"
+    },
+    {
+      "id": "exp-32",
+      "technology": "EF Core",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What are global query filters?",
+      "shortAnswer": "Global filters automatically add predicates to entity queries.",
+      "detailedAnswer": "They are useful for soft delete or tenant isolation.",
+      "example": "TenantId can be enforced on every transaction query.",
+      "seniorPerspective": "Audit and test filters carefully because they can hide data.",
+      "commonMistakes": "Bypassing tenant filters accidentally.",
+      "followUps": [
+        "How do you disable a filter?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Filter = automatic constraint.",
+      "codeExample": "modelBuilder.Entity<Transaction>().HasQueryFilter(x=>x.TenantId==tenantId);"
+    },
+    {
+      "id": "exp-33",
+      "technology": "EF Core",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you prevent SQL injection in EF Core?",
+      "shortAnswer": "Use LINQ parameters or parameterized SQL and never concatenate untrusted values into SQL.",
+      "detailedAnswer": "Normal LINQ queries are parameterized by EF Core.",
+      "example": "Terminal search values are supplied as parameters.",
+      "seniorPerspective": "Review raw SQL separately.",
+      "commonMistakes": "Concatenating input into FromSqlRaw.",
+      "followUps": [
+        "What about dynamic SQL identifiers?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "EF Core",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Parameterize values.",
+      "codeExample": "var x=await db.Transactions.FromSqlInterpolated($\"SELECT * FROM Transactions WHERE TerminalId={id}\").ToListAsync();"
+    },
+    {
+      "id": "exp-34",
+      "technology": "LINQ / C#",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "Select versus SelectMany?",
+      "shortAnswer": "Select maps each item; SelectMany flattens nested sequences.",
+      "detailedAnswer": "Use SelectMany when you need one combined sequence.",
+      "example": "Flatten transactions from multiple accounts.",
+      "seniorPerspective": "Choose based on desired output shape.",
+      "commonMistakes": "Manual nested loops for simple flattening.",
+      "followUps": [
+        "What happens with empty child collections?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "LINQ / C#",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Select = map; SelectMany = flatten.",
+      "codeExample": "var all=accounts.SelectMany(a=>a.Transactions);"
+    },
+    {
+      "id": "exp-35",
+      "technology": "LINQ / C#",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "First versus Single?",
+      "shortAnswer": "First expects at least one; Single expects exactly one.",
+      "detailedAnswer": "The method communicates expected cardinality.",
+      "example": "Lookup by unique account ID can use SingleOrDefault.",
+      "seniorPerspective": "Do not use Single when duplicates are valid.",
+      "commonMistakes": "Ignoring duplicate-data failures.",
+      "followUps": [
+        "What happens with multiple matches?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "LINQ / C#",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "First = first; Single = one.",
+      "codeExample": "var a=accounts.SingleOrDefault(x=>x.Id==id);"
+    },
+    {
+      "id": "exp-36",
+      "technology": "LINQ / C#",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "Any versus Count for existence?",
+      "shortAnswer": "Any can stop after finding a match and expresses existence intent.",
+      "detailedAnswer": "Use Any when you only need to know whether something exists.",
+      "example": "Check whether an account has failed transactions.",
+      "seniorPerspective": "Count when you actually need the number.",
+      "commonMistakes": "Count() > 0 for remote queries without need.",
+      "followUps": [
+        "Does Any translate to EXISTS?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "LINQ / C#",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Any = existence.",
+      "codeExample": "bool has=transactions.Any(t=>t.Status==\"Failed\");"
+    },
+    {
+      "id": "exp-37",
+      "technology": "LINQ / C#",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you avoid multiple enumeration?",
+      "shortAnswer": "Materialize an expensive sequence when repeated enumeration would repeat work or produce changing results.",
+      "detailedAnswer": "This matters for database queries and costly calculations.",
+      "example": "A report can load a list once and reuse it.",
+      "seniorPerspective": "Balance stability against memory use.",
+      "commonMistakes": "Calling ToList on huge sequences without need.",
+      "followUps": [
+        "When should you not materialize?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "LINQ / C#",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Enumerate expensive work once.",
+      "codeExample": "var rows=query.ToList(); var count=rows.Count; var first=rows.FirstOrDefault();"
+    },
+    {
+      "id": "exp-38",
+      "technology": "Async / Threading",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a Task?",
+      "shortAnswer": "Task represents an asynchronous operation and optionally its result.",
+      "detailedAnswer": "It enables composition without tying up a thread during I/O.",
+      "example": "An API awaits a database query.",
+      "seniorPerspective": "Distinguish asynchronous I/O from CPU parallelism.",
+      "commonMistakes": "Thinking every Task creates a thread.",
+      "followUps": [
+        "Task versus Thread?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Task = operation, not thread.",
+      "codeExample": "Task<Order> task=service.GetOrderAsync(id);"
+    },
+    {
+      "id": "exp-39",
+      "technology": "Async / Threading",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "Why avoid async void?",
+      "shortAnswer": "Except for event handlers, async void cannot be awaited and has difficult exception behavior.",
+      "detailedAnswer": "Return Task so callers can compose and observe completion.",
+      "example": "Service methods should return Task.",
+      "seniorPerspective": "Keep async flows awaitable.",
+      "commonMistakes": "Using async void in business services.",
+      "followUps": [
+        "How are exceptions observed?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "async Task = composable.",
+      "codeExample": "async Task SaveAsync()=>await repo.SaveAsync();"
+    },
+    {
+      "id": "exp-40",
+      "technology": "Async / Threading",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is sync-over-async?",
+      "shortAnswer": "Blocking asynchronous work with Result or Wait can cause deadlocks or thread starvation.",
+      "detailedAnswer": "Use await through the call chain.",
+      "example": "An API should await database and HTTP calls.",
+      "seniorPerspective": "Avoid blocking worker threads.",
+      "commonMistakes": "Calling .Result inside async code.",
+      "followUps": [
+        "How can it cause starvation?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Await, don't block.",
+      "codeExample": "var result=await service.GetAsync();"
+    },
+    {
+      "id": "exp-41",
+      "technology": "Async / Threading",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is ThreadPool starvation?",
+      "shortAnswer": "Starvation occurs when worker threads are blocked or saturated, delaying other work.",
+      "detailedAnswer": "It can cause high latency with modest CPU usage.",
+      "example": "Blocking database calls under load can exhaust workers.",
+      "seniorPerspective": "Inspect thread counts, queueing and blocking stacks.",
+      "commonMistakes": "Increasing thread limits without removing blocking.",
+      "followUps": [
+        "What metrics indicate starvation?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Blocked workers delay everyone.",
+      "codeExample": "await httpClient.GetAsync(uri);"
+    },
+    {
+      "id": "exp-42",
+      "technology": "Async / Threading",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is Parallel.ForEachAsync?",
+      "shortAnswer": "It performs bounded asynchronous processing over a collection.",
+      "detailedAnswer": "It is useful for independent work where concurrency should be limited.",
+      "example": "Process many independent log files with a fixed degree of parallelism.",
+      "seniorPerspective": "Bound concurrency to protect dependencies.",
+      "commonMistakes": "Launching thousands of tasks at once.",
+      "followUps": [
+        "How choose concurrency?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Parallel async = bounded concurrency.",
+      "codeExample": "await Parallel.ForEachAsync(items,new ParallelOptions{MaxDegreeOfParallelism=8},async(i,ct)=>await ProcessAsync(i,ct));"
+    },
+    {
+      "id": "exp-43",
+      "technology": "Async / Threading",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How does lock work in C#?",
+      "shortAnswer": "lock provides mutual exclusion around a critical section.",
+      "detailedAnswer": "Keep the locked region small and never hold it across I/O.",
+      "example": "Protect a shared in-memory counter.",
+      "seniorPerspective": "Consider concurrent collections for appropriate workloads.",
+      "commonMistakes": "Locking public objects.",
+      "followUps": [
+        "Can you await inside lock?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Lock = exclusive critical section.",
+      "codeExample": "lock(_sync){count++;}"
+    },
+    {
+      "id": "exp-44",
+      "technology": "Async / Threading",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is a race condition?",
+      "shortAnswer": "A race condition occurs when results depend on timing between concurrent operations.",
+      "detailedAnswer": "It often comes from check-then-act logic on shared state.",
+      "example": "Two requests can both see an ATM configuration as available.",
+      "seniorPerspective": "Use atomic operations, transactions or concurrency control.",
+      "commonMistakes": "Assuming one request at a time.",
+      "followUps": [
+        "How do you reproduce races?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Async / Threading",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Race = timing changes outcome.",
+      "codeExample": "if(dict.TryGetValue(id,out var x)){/* state may change here */}"
+    },
+    {
+      "id": "exp-45",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a directive?",
+      "shortAnswer": "A directive adds reusable behavior or presentation to an element.",
+      "detailedAnswer": "Use directives for element-level reusable behavior.",
+      "example": "A focus or validation directive can be shared across forms.",
+      "seniorPerspective": "Keep business workflows out of directives.",
+      "commonMistakes": "Making directives responsible for application workflows.",
+      "followUps": [
+        "Structural versus attribute directive?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Directive = element behavior.",
+      "codeExample": "@Directive({selector:'[appFocus]'}) export class FocusDirective{}"
+    },
+    {
+      "id": "exp-46",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is Angular dependency injection?",
+      "shortAnswer": "Angular DI creates and supplies services to consumers.",
+      "detailedAnswer": "It separates construction from use and improves testing.",
+      "example": "A component injects TransactionService rather than constructing it.",
+      "seniorPerspective": "Choose provider scope intentionally.",
+      "commonMistakes": "Global mutable services for local state.",
+      "followUps": [
+        "What does providedIn root mean?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "DI = framework supplies dependencies.",
+      "codeExample": "private service=inject(TransactionService);"
+    },
+    {
+      "id": "exp-47",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is OnPush change detection?",
+      "shortAnswer": "OnPush reduces unnecessary component checks and works well with immutable inputs and signals.",
+      "detailedAnswer": "It can improve rendering performance.",
+      "example": "A large transaction table can use OnPush with immutable rows.",
+      "seniorPerspective": "Measure and model state predictably.",
+      "commonMistakes": "Mutating inputs and expecting detection.",
+      "followUps": [
+        "How do signals interact with OnPush?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "OnPush = fewer checks.",
+      "codeExample": "changeDetection:ChangeDetectionStrategy.OnPush"
+    },
+    {
+      "id": "exp-48",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the async pipe?",
+      "shortAnswer": "The async pipe subscribes to an Observable or Promise in the template and manages cleanup.",
+      "detailedAnswer": "It reduces manual subscription code.",
+      "example": "A transaction stream can bind directly in the template.",
+      "seniorPerspective": "Use it for presentation streams where imperative side effects are unnecessary.",
+      "commonMistakes": "Manual subscriptions when async pipe is enough.",
+      "followUps": [
+        "How does it unsubscribe?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Async pipe = template subscription management.",
+      "codeExample": "transactions$=service.getTransactions();"
+    },
+    {
+      "id": "exp-49",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do switchMap, mergeMap, concatMap and exhaustMap differ?",
+      "shortAnswer": "switchMap keeps the latest, mergeMap runs concurrently, concatMap queues, and exhaustMap ignores new values while active.",
+      "detailedAnswer": "The operator is a concurrency and cancellation decision.",
+      "example": "Search uses switchMap; ordered writes can use concatMap.",
+      "seniorPerspective": "Choose from business semantics.",
+      "commonMistakes": "Using switchMap for writes that must never cancel.",
+      "followUps": [
+        "Which operator for search?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Operator = concurrency policy.",
+      "codeExample": "search$.pipe(switchMap(x=>api.search(x)))"
+    },
+    {
+      "id": "exp-50",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is shareReplay?",
+      "shortAnswer": "shareReplay shares a source and replays recent values to later subscribers.",
+      "detailedAnswer": "It can prevent duplicate HTTP calls.",
+      "example": "Reference data can be shared across components.",
+      "seniorPerspective": "Define cache lifetime and invalidation.",
+      "commonMistakes": "Using it as an unlimited global cache.",
+      "followUps": [
+        "What does refCount change?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Share + replay.",
+      "codeExample": "data$=http.get('/api/data').pipe(shareReplay({bufferSize:1,refCount:true}));"
+    },
+    {
+      "id": "exp-51",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "Signals versus RxJS Observables?",
+      "shortAnswer": "Signals model reactive state and derived values; Observables model asynchronous streams and events.",
+      "detailedAnswer": "Use each where its semantics fit.",
+      "example": "Selected terminal can be a signal while API streams remain Observables.",
+      "seniorPerspective": "Do not convert everything blindly.",
+      "commonMistakes": "Replacing complex stream orchestration with signals unnecessarily.",
+      "followUps": [
+        "computed versus effect?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Signal = state; Observable = stream.",
+      "codeExample": "selectedId=signal<string|null>(null);"
+    },
+    {
+      "id": "exp-52",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you prevent Angular memory leaks?",
+      "shortAnswer": "Manage subscriptions and long-lived resources with async pipe, signals or lifecycle-aware cleanup.",
+      "detailedAnswer": "Leaks can come from subscriptions, timers, listeners and retained references.",
+      "example": "A live ATM status stream should stop when its component is destroyed.",
+      "seniorPerspective": "Use heap snapshots when diagnosing leaks.",
+      "commonMistakes": "Nested subscriptions and forgotten cleanup.",
+      "followUps": [
+        "What does takeUntilDestroyed do?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Owner cleans up owned resources.",
+      "codeExample": "stream.pipe(takeUntilDestroyed()).subscribe();"
+    },
+    {
+      "id": "exp-53",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you optimize a large Angular list?",
+      "shortAnswer": "Reduce data volume, DOM work and recalculation using tracking, pagination, virtual scrolling and efficient state.",
+      "detailedAnswer": "Optimization should be measured.",
+      "example": "Thousands of transactions should be paged or virtualized rather than all rendered.",
+      "seniorPerspective": "Measure render and interaction latency.",
+      "commonMistakes": "Fetching and rendering the entire dataset.",
+      "followUps": [
+        "When is pagination better?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Large list = less data + less DOM.",
+      "codeExample": "@for(tx of transactions;track tx.id){<app-row [transaction]='tx'/>}"
+    },
+    {
+      "id": "exp-54",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is lexical scope?",
+      "shortAnswer": "Lexical scope means visibility is determined by where code is written.",
+      "detailedAnswer": "It explains closures and variable access.",
+      "example": "A callback can access variables from its defining function.",
+      "seniorPerspective": "Use scope understanding to reason about callbacks.",
+      "commonMistakes": "Confusing lexical scope with call context.",
+      "followUps": [
+        "How does it enable closures?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Scope follows source structure.",
+      "codeExample": "const outer='ATM'; function f(){console.log(outer);}"
+    },
+    {
+      "id": "exp-55",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is Promise.all?",
+      "shortAnswer": "Promise.all runs independent promises concurrently and rejects if one rejects.",
+      "detailedAnswer": "Use it when all results are required.",
+      "example": "Load terminal configuration and permissions concurrently.",
+      "seniorPerspective": "Do not use it when operations depend on one another.",
+      "commonMistakes": "Awaiting independent operations sequentially.",
+      "followUps": [
+        "all versus allSettled?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "All = concurrent, fail-fast.",
+      "codeExample": "const [a,b]=await Promise.all([getA(),getB()]);"
+    },
+    {
+      "id": "exp-56",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is Promise.allSettled?",
+      "shortAnswer": "allSettled waits for every promise and returns each outcome.",
+      "detailedAnswer": "Use it when partial success is meaningful.",
+      "example": "Dashboard widgets can load independently.",
+      "seniorPerspective": "Do not hide failures when all data is required.",
+      "commonMistakes": "Using allSettled when one failure should stop the workflow.",
+      "followUps": [
+        "How do you inspect rejection?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "AllSettled = collect outcomes.",
+      "codeExample": "const results=await Promise.allSettled(tasks);"
+    },
+    {
+      "id": "exp-57",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is debouncing?",
+      "shortAnswer": "Debouncing waits until activity stops before running a function.",
+      "detailedAnswer": "It is useful for search inputs.",
+      "example": "An API search should not fire on every keystroke.",
+      "seniorPerspective": "Choose the delay from UX and backend needs.",
+      "commonMistakes": "Debouncing actions that need immediate response.",
+      "followUps": [
+        "Debounce versus throttle?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Debounce = wait for quiet.",
+      "codeExample": "const search=debounce(term=>api.search(term),300);"
+    },
+    {
+      "id": "exp-58",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is throttling?",
+      "shortAnswer": "Throttling limits how often a function can execute during continuous activity.",
+      "detailedAnswer": "It suits scroll, resize and telemetry events.",
+      "example": "A scroll handler can run once per 100ms.",
+      "seniorPerspective": "Choose throttle when periodic updates are enough.",
+      "commonMistakes": "Using throttle when only the final value matters.",
+      "followUps": [
+        "Debounce versus throttle?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Throttle = maximum rate.",
+      "codeExample": "const onScroll=throttle(updatePosition,100);"
+    },
+    {
+      "id": "exp-59",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is the prototype chain?",
+      "shortAnswer": "Objects can inherit property lookup through their prototypes.",
+      "detailedAnswer": "It explains JavaScript inheritance and class behavior.",
+      "example": "A custom object can inherit shared methods from a prototype.",
+      "seniorPerspective": "Understand prototypes when debugging inheritance.",
+      "commonMistakes": "Treating JavaScript classes as identical to C# classes.",
+      "followUps": [
+        "How does instanceof work?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Prototype = lookup chain.",
+      "codeExample": "const child=Object.create(parent);"
+    },
+    {
+      "id": "exp-60",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is type narrowing in TypeScript?",
+      "shortAnswer": "Narrowing refines a union after runtime checks.",
+      "detailedAnswer": "It reduces unsafe casts.",
+      "example": "A result union can be narrowed by an ok discriminant.",
+      "seniorPerspective": "Prefer evidence-based narrowing to assertions.",
+      "commonMistakes": "Using as to silence errors.",
+      "followUps": [
+        "What is a type guard?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Narrow with evidence.",
+      "codeExample": "if(result.ok)console.log(result.data);"
+    },
+    {
+      "id": "exp-61",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What are generics in TypeScript?",
+      "shortAnswer": "Generics preserve type relationships across reusable code.",
+      "detailedAnswer": "They avoid losing type safety through any.",
+      "example": "An API wrapper can return ApiResponse<T>.",
+      "seniorPerspective": "Use generics to express useful relationships.",
+      "commonMistakes": "Overly complex generic signatures.",
+      "followUps": [
+        "What is a constraint?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Generic = reusable type relationship.",
+      "codeExample": "function identity<T>(x:T):T{return x;}"
+    },
+    {
+      "id": "exp-62",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a primary key?",
+      "shortAnswer": "A primary key uniquely identifies a row.",
+      "detailedAnswer": "It supports identity and relationships.",
+      "example": "TransactionId identifies a transaction.",
+      "seniorPerspective": "Choose stable, appropriate keys.",
+      "commonMistakes": "Using mutable business data as identity.",
+      "followUps": [
+        "Primary versus unique key?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Primary key = row identity.",
+      "codeExample": "CREATE TABLE Transaction(Id bigint PRIMARY KEY);"
+    },
+    {
+      "id": "exp-63",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is a foreign key?",
+      "shortAnswer": "A foreign key enforces a relationship between tables.",
+      "detailedAnswer": "It protects data integrity.",
+      "example": "Transaction.AccountId references Account.Id.",
+      "seniorPerspective": "Use constraints instead of relying only on application checks.",
+      "commonMistakes": "Skipping constraints unnecessarily.",
+      "followUps": [
+        "What happens on delete?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Foreign key = valid relationship.",
+      "codeExample": "FOREIGN KEY(AccountId) REFERENCES Account(Id)"
+    },
+    {
+      "id": "exp-64",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is a composite index?",
+      "shortAnswer": "A composite index contains multiple ordered columns and can support multi-column predicates.",
+      "detailedAnswer": "Column order matters.",
+      "example": "TerminalId plus CreatedAt can support terminal history queries.",
+      "seniorPerspective": "Design from actual predicates and ordering.",
+      "commonMistakes": "Arbitrary column ordering.",
+      "followUps": [
+        "What is the leading-column rule?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Composite = ordered combination.",
+      "codeExample": "CREATE INDEX IX_Tx ON Transactions(TerminalId,CreatedAt);"
+    },
+    {
+      "id": "exp-65",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is a covering index?",
+      "shortAnswer": "A covering index contains all columns needed by a query.",
+      "detailedAnswer": "It can avoid extra lookups but increases storage and write cost.",
+      "example": "An index can include Amount and Status for a terminal search.",
+      "seniorPerspective": "Validate with execution plans.",
+      "commonMistakes": "Including too many columns.",
+      "followUps": [
+        "What are INCLUDE columns?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Covering = index answers query.",
+      "codeExample": "CREATE INDEX IX_Tx ON Transactions(TerminalId) INCLUDE(Amount,Status);"
+    },
+    {
+      "id": "exp-66",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is an execution plan?",
+      "shortAnswer": "An execution plan shows how the database intends to execute a query.",
+      "detailedAnswer": "It helps diagnose scans, joins, lookups and bad estimates.",
+      "example": "Use the actual plan for a slow transaction query.",
+      "seniorPerspective": "Compare plan and runtime evidence.",
+      "commonMistakes": "Optimizing from cost percentages alone.",
+      "followUps": [
+        "What is a table scan?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Plan = database work strategy.",
+      "codeExample": "SET STATISTICS IO ON; SELECT * FROM Transactions WHERE TerminalId=10;"
+    },
+    {
+      "id": "exp-67",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is a SARGable predicate?",
+      "shortAnswer": "A SARGable predicate lets an index be used effectively for filtering.",
+      "detailedAnswer": "Avoid wrapping indexed columns in unnecessary functions.",
+      "example": "Use date ranges rather than converting every row.",
+      "seniorPerspective": "Verify with the actual plan.",
+      "commonMistakes": "Applying functions to indexed columns unnecessarily.",
+      "followUps": [
+        "How can LIKE affect seeks?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "SARGable = index-friendly.",
+      "codeExample": "WHERE CreatedAt>=@from AND CreatedAt<@to"
+    },
+    {
+      "id": "exp-68",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is parameter sniffing?",
+      "shortAnswer": "A cached query plan compiled for one parameter value may perform poorly for another data distribution.",
+      "detailedAnswer": "It is a plan sensitivity problem.",
+      "example": "A common terminal and rare terminal may need different access strategies.",
+      "seniorPerspective": "Confirm with plans and runtime stats before changing options.",
+      "commonMistakes": "Adding RECOMPILE everywhere.",
+      "followUps": [
+        "How does plan cache matter?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Plan fits one value, not another.",
+      "codeExample": "EXEC sp_executesql N'SELECT * FROM Transactions WHERE TerminalId=@id',N'@id int',@id=10;"
+    },
+    {
+      "id": "exp-69",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is table partitioning?",
+      "shortAnswer": "Partitioning splits large tables into logical pieces, often by date.",
+      "detailedAnswer": "It can aid lifecycle management and some query patterns.",
+      "example": "Historical transactions can be partitioned monthly.",
+      "seniorPerspective": "Align partitions with access and retention patterns.",
+      "commonMistakes": "Partitioning without a maintenance plan.",
+      "followUps": [
+        "Partitioning versus sharding?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Partition = split within database.",
+      "codeExample": "CREATE PARTITION FUNCTION ByMonth(date) AS RANGE RIGHT FOR VALUES ('2026-01-01');"
+    },
+    {
+      "id": "exp-70",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is sharding?",
+      "shortAnswer": "Sharding distributes data across database nodes using a shard key.",
+      "detailedAnswer": "It increases scale but complicates routing and cross-shard operations.",
+      "example": "Tenant-based sharding can distribute customers.",
+      "seniorPerspective": "Choose an even, stable shard key.",
+      "commonMistakes": "Hot shards from poor key choice.",
+      "followUps": [
+        "How do you rebalance?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "SQL",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Shard = distribute databases.",
+      "codeExample": "var shard=shardMap.Resolve(tenantId);"
+    },
+    {
+      "id": "exp-71",
+      "technology": "System Design",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "Functional versus non-functional requirements?",
+      "shortAnswer": "Functional requirements describe behavior; non-functional requirements describe qualities such as latency, availability and security.",
+      "detailedAnswer": "Both drive architecture.",
+      "example": "Withdraw money is functional; p99 latency is non-functional.",
+      "seniorPerspective": "Clarify measurable constraints before design.",
+      "commonMistakes": "Designing before requirements.",
+      "followUps": [
+        "Give examples.",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "What vs how well.",
+      "codeExample": "// Functional: withdraw\n// NFR: p99 < 300ms"
+    },
+    {
+      "id": "exp-72",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is CAP theorem?",
+      "shortAnswer": "During a network partition, a distributed system must trade consistency and availability for affected operations.",
+      "detailedAnswer": "CAP is specifically about partitioned distributed systems.",
+      "example": "Account balance may prioritize consistency while reporting can tolerate stale data.",
+      "seniorPerspective": "Explain business consequences rather than slogans.",
+      "commonMistakes": "Saying every system simply chooses two forever.",
+      "followUps": [
+        "What is a partition?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "CAP = partition trade-off.",
+      "codeExample": "// Decide behavior during partition from business requirements."
+    },
+    {
+      "id": "exp-73",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is a circuit breaker?",
+      "shortAnswer": "A circuit breaker stops repeated calls to an unhealthy dependency.",
+      "detailedAnswer": "It prevents cascading failures.",
+      "example": "An SMS provider failure should not block the core transaction API.",
+      "seniorPerspective": "Combine with timeouts and bounded retries.",
+      "commonMistakes": "Infinite retries through a failing dependency.",
+      "followUps": [
+        "What are the circuit states?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Open stops calls; half-open probes.",
+      "codeExample": "if(breaker.IsOpen)return Fallback();"
+    },
+    {
+      "id": "exp-74",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is bulkhead isolation?",
+      "shortAnswer": "Bulkheads isolate resources so one workload cannot consume all capacity.",
+      "detailedAnswer": "Separate pools or queues protect critical traffic.",
+      "example": "Report generation should not exhaust workers needed for transactions.",
+      "seniorPerspective": "Allocate capacity by business criticality.",
+      "commonMistakes": "One unbounded shared queue.",
+      "followUps": [
+        "How does it differ from rate limiting?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Bulkhead = isolate capacity.",
+      "codeExample": "await limiter.WaitAsync(ct);"
+    },
+    {
+      "id": "exp-75",
+      "technology": "System Design",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is a distributed lock?",
+      "shortAnswer": "A distributed lock coordinates exclusive work across multiple nodes.",
+      "detailedAnswer": "It requires leases and failure handling.",
+      "example": "Only one instance should run a scheduled reconciliation task.",
+      "seniorPerspective": "Prefer idempotency or database constraints where possible.",
+      "commonMistakes": "Holding locks during long operations.",
+      "followUps": [
+        "What happens if the holder dies?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Lock = coordination under failure.",
+      "codeExample": "await using var lease=await locks.AcquireAsync(\"job\",ct);"
+    },
+    {
+      "id": "exp-76",
+      "technology": "System Design",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How would you design an audit logging system?",
+      "shortAnswer": "Capture who did what, when, which resource and relevant change information in protected storage.",
+      "detailedAnswer": "Audit logs support accountability and compliance.",
+      "example": "ATM configuration changes produce immutable audit events.",
+      "seniorPerspective": "Separate audit records from noisy debug logs.",
+      "commonMistakes": "Logging secrets or allowing silent edits.",
+      "followUps": [
+        "How do you protect integrity?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Audit = accountable history.",
+      "codeExample": "await audit.WriteAsync(new AuditEvent(userId,\"ConfigChanged\",terminalId));"
+    },
+    {
+      "id": "exp-77",
+      "technology": "System Design",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How would you design a file-processing pipeline?",
+      "shortAnswer": "Store files durably, enqueue work, process asynchronously and track state.",
+      "detailedAnswer": "This separates upload latency from processing time.",
+      "example": "ATM log uploads can be processed by scalable workers.",
+      "seniorPerspective": "Define retries, poison files and retention.",
+      "commonMistakes": "Processing large files inside HTTP requests.",
+      "followUps": [
+        "How do you resume failed work?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "System Design",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Upload -> queue -> worker.",
+      "codeExample": "await queue.PublishAsync(new FileUploaded(fileId));"
+    },
+    {
+      "id": "exp-78",
+      "technology": "Security",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is HTTPS?",
+      "shortAnswer": "HTTPS uses TLS to protect data in transit and authenticate the server.",
+      "detailedAnswer": "It protects credentials and sensitive API traffic.",
+      "example": "ATM administration traffic should use HTTPS.",
+      "seniorPerspective": "Also manage certificates and secure protocols.",
+      "commonMistakes": "Thinking HTTPS provides authorization.",
+      "followUps": [
+        "TLS versus authentication?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Security",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "HTTPS protects transport.",
+      "codeExample": "app.UseHttpsRedirection();"
+    },
+    {
+      "id": "exp-79",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is JWT?",
+      "shortAnswer": "JWT is a signed token carrying claims that a server can validate.",
+      "detailedAnswer": "JWT payloads are not automatically secret.",
+      "example": "An API can validate issuer, audience, signature and expiry.",
+      "seniorPerspective": "Design lifetime and key rotation deliberately.",
+      "commonMistakes": "Trusting decoded claims without validation.",
+      "followUps": [
+        "Signed versus encrypted JWT?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Security",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "JWT = signed claims.",
+      "codeExample": "[Authorize] public IActionResult Get()=>Ok();"
+    },
+    {
+      "id": "exp-80",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is refresh-token rotation?",
+      "shortAnswer": "Rotation issues a new refresh token and invalidates the previous one when used.",
+      "detailedAnswer": "It reduces replay risk.",
+      "example": "A SPA rotates refresh tokens during renewal.",
+      "seniorPerspective": "Track token families where required.",
+      "commonMistakes": "Long-lived reusable refresh tokens.",
+      "followUps": [
+        "What if an old token is reused?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Security",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Rotate + detect replay.",
+      "codeExample": "var next=tokenService.Rotate(current);"
+    },
+    {
+      "id": "exp-81",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is policy-based authorization?",
+      "shortAnswer": "Policies express authorization rules using claims and requirements.",
+      "detailedAnswer": "They can model capabilities more precisely than broad roles.",
+      "example": "CanConfigureTerminal can be a policy.",
+      "seniorPerspective": "Prefer capability-oriented rules where needed.",
+      "commonMistakes": "Creating hundreds of roles.",
+      "followUps": [
+        "Can policies use claims?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Security",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Policy = explicit permission rule.",
+      "codeExample": "[Authorize(Policy=\"CanConfigureTerminal\")]"
+    },
+    {
+      "id": "exp-82",
+      "technology": "Security",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is SSRF?",
+      "shortAnswer": "SSRF occurs when attacker-controlled input makes a server call unintended internal resources.",
+      "detailedAnswer": "Use URL validation, allowlists and network egress controls.",
+      "example": "A URL-fetching service must not access internal metadata endpoints.",
+      "seniorPerspective": "Defense should exist at application and network layers.",
+      "commonMistakes": "Allowing arbitrary URLs from users.",
+      "followUps": [
+        "How do you validate redirects?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Security",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "SSRF = attacker controls server outbound call.",
+      "codeExample": "if(!allowedHosts.Contains(uri.Host))throw new SecurityException();"
+    },
+    {
+      "id": "exp-83",
+      "technology": "Security",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is threat modeling?",
+      "shortAnswer": "Threat modeling identifies assets, attackers, trust boundaries and mitigations.",
+      "detailedAnswer": "It turns security concerns into concrete controls.",
+      "example": "An ATM support portal must protect terminal configuration and privileged actions.",
+      "seniorPerspective": "Prioritize realistic attack paths and impact.",
+      "commonMistakes": "Treating threat modeling as paperwork.",
+      "followUps": [
+        "What is STRIDE?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Security",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Threat model = assets + threats + controls.",
+      "codeExample": "// Asset: terminal config\n// Threat: unauthorized change\n// Control: authorization + audit"
+    },
+    {
+      "id": "exp-84",
+      "technology": "Performance",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is profiling?",
+      "shortAnswer": "Profiling measures where CPU, memory or other resources are spent.",
+      "detailedAnswer": "It replaces guesses with evidence.",
+      "example": "Profile an API to determine whether SQL, serialization or CPU dominates.",
+      "seniorPerspective": "Profile before and after optimization.",
+      "commonMistakes": "Optimizing from code appearance.",
+      "followUps": [
+        "Profiler versus logging?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Performance",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Profile = measure resource hotspots.",
+      "codeExample": "// Capture CPU and allocation profile."
+    },
+    {
+      "id": "exp-85",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is p95 and p99 latency?",
+      "shortAnswer": "p95 and p99 describe tail latency below which 95% or 99% of requests complete.",
+      "detailedAnswer": "They expose slow requests hidden by averages.",
+      "example": "An API may have a good average but bad p99 due to database waits.",
+      "seniorPerspective": "Monitor percentiles with throughput and errors.",
+      "commonMistakes": "Reporting only average latency.",
+      "followUps": [
+        "Why does tail latency matter?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Percentile = tail behavior.",
+      "codeExample": "metrics.Record(\"api_latency_ms\",elapsedMs);"
+    },
+    {
+      "id": "exp-86",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is connection pooling?",
+      "shortAnswer": "Pooling reuses database connections instead of creating physical connections for each operation.",
+      "detailedAnswer": "It reduces setup overhead but pool exhaustion can bottleneck requests.",
+      "example": "ASP.NET Core database calls can reuse SQL connections.",
+      "seniorPerspective": "Open connections only for required database work.",
+      "commonMistakes": "Holding connections during unrelated calls.",
+      "followUps": [
+        "What causes pool exhaustion?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Pool = reuse connections.",
+      "codeExample": "await using var c=new SqlConnection(cs);await c.OpenAsync();"
+    },
+    {
+      "id": "exp-87",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are caching trade-offs?",
+      "shortAnswer": "Caching reduces repeated work but introduces staleness, invalidation and memory concerns.",
+      "detailedAnswer": "It is useful when data can be reused safely.",
+      "example": "Reference terminal configuration can be cached.",
+      "seniorPerspective": "Define freshness before choosing the cache.",
+      "commonMistakes": "Caching without invalidation.",
+      "followUps": [
+        "What is cache-aside?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Cache = speed with consistency cost.",
+      "codeExample": "var v=await cache.GetStringAsync(key);"
+    },
+    {
+      "id": "exp-88",
+      "technology": "Performance",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is a cache stampede?",
+      "shortAnswer": "A cache stampede occurs when many requests miss an expired item and all hit the backend together.",
+      "detailedAnswer": "Use coalescing, jitter or background refresh as appropriate.",
+      "example": "A popular terminal configuration should not trigger hundreds of database calls after expiry.",
+      "seniorPerspective": "Measure miss bursts and backend load.",
+      "commonMistakes": "Synchronized expiration without mitigation.",
+      "followUps": [
+        "What is request coalescing?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Performance",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Many misses -> one load.",
+      "codeExample": "await cache.GetOrCreateAsync(key,()=>LoadOnceAsync(key));"
+    },
+    {
+      "id": "exp-89",
+      "technology": "Performance",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you reduce GC pressure?",
+      "shortAnswer": "Reduce unnecessary allocations, avoid boxing and use bounded or streaming processing where appropriate.",
+      "detailedAnswer": "Lower allocation rate can reduce GC work and tail latency.",
+      "example": "Stream large log files rather than materializing all records.",
+      "seniorPerspective": "Use allocation profiling before optimizing.",
+      "commonMistakes": "Pooling everything without evidence.",
+      "followUps": [
+        "What metrics matter?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Performance",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Fewer allocations = less GC pressure.",
+      "codeExample": "foreach(var line in File.ReadLines(path))Process(line);"
+    },
+    {
+      "id": "exp-90",
+      "technology": "Testing",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is unit testing?",
+      "shortAnswer": "A unit test verifies focused behavior with minimal external dependencies.",
+      "detailedAnswer": "It provides fast feedback on business rules.",
+      "example": "Withdrawal validation can be unit tested without a database.",
+      "seniorPerspective": "Test behavior rather than private implementation.",
+      "commonMistakes": "Testing private methods directly.",
+      "followUps": [
+        "Unit versus integration?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Testing",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Unit = focused behavior.",
+      "codeExample": "Assert.False(validator.IsValid(-1));"
+    },
+    {
+      "id": "exp-91",
+      "technology": "Testing",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is mocking?",
+      "shortAnswer": "A mock controls or observes a dependency in a test.",
+      "detailedAnswer": "It can isolate behavior but excessive mocking creates brittle tests.",
+      "example": "A gateway can be mocked to simulate a payment failure.",
+      "seniorPerspective": "Mock only meaningful interactions.",
+      "commonMistakes": "Verifying every internal call.",
+      "followUps": [
+        "Mock versus stub?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Testing",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Mock = controlled dependency.",
+      "codeExample": "gateway.Setup(x=>x.PayAsync(100)).ReturnsAsync(true);"
+    },
+    {
+      "id": "exp-92",
+      "technology": "Testing",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is integration testing?",
+      "shortAnswer": "Integration tests verify multiple components together, often including HTTP and database behavior.",
+      "detailedAnswer": "They catch wiring and serialization problems.",
+      "example": "An API test can call a real test database.",
+      "seniorPerspective": "Keep critical integration paths focused.",
+      "commonMistakes": "Mocking everything and missing integration defects.",
+      "followUps": [
+        "What should integration tests cover?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Testing",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Integration = components together.",
+      "codeExample": "var response=await client.PostAsJsonAsync(\"/withdraw\",request);"
+    },
+    {
+      "id": "exp-93",
+      "technology": "Testing",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is contract testing?",
+      "shortAnswer": "Contract testing verifies provider and consumer expectations for an API.",
+      "detailedAnswer": "It reduces independently deployed service compatibility failures.",
+      "example": "An Angular client can verify required API fields and statuses.",
+      "seniorPerspective": "Use contracts where deployment independence creates risk.",
+      "commonMistakes": "Treating documentation as proof of compatibility.",
+      "followUps": [
+        "Consumer-driven contracts?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Testing",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Contract = provider/consumer agreement.",
+      "codeExample": "Assert.Equal(HttpStatusCode.OK,response.StatusCode);"
+    },
+    {
+      "id": "exp-94",
+      "technology": "Testing",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is property-based testing?",
+      "shortAnswer": "Property-based tests generate many inputs and verify general invariants.",
+      "detailedAnswer": "They are useful for transformations and domain rules.",
+      "example": "Money operations can test conservation or ordering properties.",
+      "seniorPerspective": "Combine with concrete examples for important cases.",
+      "commonMistakes": "Properties too weak to detect defects.",
+      "followUps": [
+        "Give a property for sorting.",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Testing",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Property = invariant across inputs.",
+      "codeExample": "// Sort(xs) is ordered and contains the same elements."
+    },
+    {
+      "id": "exp-95",
+      "technology": "Testing",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is mutation testing?",
+      "shortAnswer": "Mutation testing changes code deliberately and checks whether tests fail.",
+      "detailedAnswer": "It measures test sensitivity rather than just coverage.",
+      "example": "Invert a validation condition and ensure tests catch it.",
+      "seniorPerspective": "Use selectively on critical logic.",
+      "commonMistakes": "Running it across the entire codebase without purpose.",
+      "followUps": [
+        "What is mutation score?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Testing",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Good tests kill defects.",
+      "codeExample": "// amount > 0 mutated to amount >= 0 should fail tests."
+    },
+    {
+      "id": "exp-96",
+      "technology": "Architecture",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is SOLID?",
+      "shortAnswer": "SOLID is a group of design principles for managing responsibility, coupling and extensibility.",
+      "detailedAnswer": "Use principles to guide change, not as rigid rules.",
+      "example": "Separate transaction processing from reporting responsibilities.",
+      "seniorPerspective": "Apply the principle that addresses the actual design pressure.",
+      "commonMistakes": "Creating abstractions solely to satisfy SOLID.",
+      "followUps": [
+        "Which principle concerns dependencies?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "SOLID = manage change.",
+      "codeExample": "public sealed class TransactionService{}"
+    },
+    {
+      "id": "exp-97",
+      "technology": "Architecture",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is Single Responsibility Principle?",
+      "shortAnswer": "A class should have one cohesive reason to change.",
+      "detailedAnswer": "It is about responsibility, not number of methods.",
+      "example": "Payment processing and report generation can have separate change drivers.",
+      "seniorPerspective": "Split when responsibilities evolve independently.",
+      "commonMistakes": "One class per method.",
+      "followUps": [
+        "What is cohesion?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "One reason to change.",
+      "codeExample": "class PaymentService{} class ReportService{}"
+    },
+    {
+      "id": "exp-98",
+      "technology": "Architecture",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is Open/Closed Principle?",
+      "shortAnswer": "Stable behavior should allow new variants without unnecessary modification.",
+      "detailedAnswer": "Strategy can isolate changing algorithms.",
+      "example": "Different fee calculators can implement IFeeCalculator.",
+      "seniorPerspective": "Use it where variation is expected.",
+      "commonMistakes": "Abstraction for hypothetical variants.",
+      "followUps": [
+        "Give a strategy example.",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Extend through stable contracts.",
+      "codeExample": "IFeeCalculator calculator=calculators[type];"
+    },
+    {
+      "id": "exp-99",
+      "technology": "Architecture",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is Liskov Substitution Principle?",
+      "shortAnswer": "Subtypes must preserve the behavioral contract expected from their base abstraction.",
+      "detailedAnswer": "This protects substitutability.",
+      "example": "A subtype should not unexpectedly reject valid operations promised by the base type.",
+      "seniorPerspective": "Review preconditions, postconditions and invariants.",
+      "commonMistakes": "Inheritance used only for code reuse.",
+      "followUps": [
+        "Can a subtype strengthen preconditions?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Subtype honors the contract.",
+      "codeExample": "IAccount account=new SavingsAccount();account.Deposit(100);"
+    },
+    {
+      "id": "exp-100",
+      "technology": "Architecture",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is Interface Segregation Principle?",
+      "shortAnswer": "Consumers should not depend on methods they do not need.",
+      "detailedAnswer": "Focused interfaces reduce coupling.",
+      "example": "Reporting can depend on ITransactionReader instead of a giant admin interface.",
+      "seniorPerspective": "Shape interfaces around consumers.",
+      "commonMistakes": "Huge interfaces with unrelated methods.",
+      "followUps": [
+        "How does ISP help testing?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Small interface = focused dependency.",
+      "codeExample": "public interface ITransactionReader{Task<Transaction> GetAsync(string id);}"
+    },
+    {
+      "id": "exp-101",
+      "technology": "Architecture",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is Clean Architecture?",
+      "shortAnswer": "Clean Architecture keeps business rules independent of delivery and infrastructure details.",
+      "detailedAnswer": "It can improve testability and replaceability.",
+      "example": "Domain transaction rules should not depend on SQL or controllers.",
+      "seniorPerspective": "Use only as much structure as complexity warrants.",
+      "commonMistakes": "Many projects without real dependency discipline.",
+      "followUps": [
+        "Which direction do dependencies point?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Business core stays stable.",
+      "codeExample": "// API -> Application -> Domain; Infrastructure implements abstractions"
+    },
+    {
+      "id": "exp-102",
+      "technology": "Architecture",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is hexagonal architecture?",
+      "shortAnswer": "Hexagonal architecture isolates the application core behind ports with external adapters.",
+      "detailedAnswer": "It protects business logic from databases and external systems.",
+      "example": "A legacy ATM protocol can be adapted to a payment port.",
+      "seniorPerspective": "Use ports where integration variability matters.",
+      "commonMistakes": "Adapters for trivial code.",
+      "followUps": [
+        "Ports versus adapters?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Core inside, adapters outside.",
+      "codeExample": "public interface PaymentPort{Task PayAsync(decimal amount);}"
+    },
+    {
+      "id": "exp-103",
+      "technology": "Architecture",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is an outbox pattern?",
+      "shortAnswer": "Outbox stores an event in the same transaction as the business change, then publishes it asynchronously.",
+      "detailedAnswer": "It avoids a gap between database commit and event publication.",
+      "example": "A completed transaction writes an outbox notification event.",
+      "seniorPerspective": "Consumers should still be idempotent.",
+      "commonMistakes": "Publishing after SaveChanges with no durable outbox.",
+      "followUps": [
+        "How are outbox records processed?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "Architecture",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "DB change + event in one transaction.",
+      "codeExample": "db.Outbox.Add(new OutboxMessage(id,payload));await db.SaveChangesAsync();"
+    },
+    {
+      "id": "exp-104",
+      "technology": "DevOps / Production",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is CI/CD?",
+      "shortAnswer": "CI validates changes continuously; CD automates delivery or deployment.",
+      "detailedAnswer": "It makes releases repeatable.",
+      "example": "A pull request runs tests and build before deployment.",
+      "seniorPerspective": "Include quality and security gates.",
+      "commonMistakes": "A green build is not proof of production safety.",
+      "followUps": [
+        "CI versus CD?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "CI validates; CD delivers.",
+      "codeExample": "- run: dotnet test"
+    },
+    {
+      "id": "exp-105",
+      "technology": "DevOps / Production",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is blue-green deployment?",
+      "shortAnswer": "Blue-green keeps two environments and shifts traffic to the validated version.",
+      "detailedAnswer": "It enables fast application rollback.",
+      "example": "Deploy API v2 beside v1, validate, then switch traffic.",
+      "seniorPerspective": "Database compatibility must be planned.",
+      "commonMistakes": "Ignoring schema compatibility.",
+      "followUps": [
+        "How is rollback done?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Two environments, switch traffic.",
+      "codeExample": "// Blue=current, Green=candidate"
+    },
+    {
+      "id": "exp-106",
+      "technology": "DevOps / Production",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is canary deployment?",
+      "shortAnswer": "Canary exposes a small percentage of traffic to a new version before wider rollout.",
+      "detailedAnswer": "It limits blast radius.",
+      "example": "Send 5% of API traffic to v2 and observe errors and latency.",
+      "seniorPerspective": "Define promotion and rollback metrics.",
+      "commonMistakes": "Calling a large rollout a canary.",
+      "followUps": [
+        "What metrics matter?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Canary = small exposure first.",
+      "codeExample": "// 5% -> observe -> 25% -> 100%"
+    },
+    {
+      "id": "exp-107",
+      "technology": "DevOps / Production",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What are feature flags?",
+      "shortAnswer": "Feature flags separate deployment from activation.",
+      "detailedAnswer": "They support controlled rollout and fast disabling.",
+      "example": "Deploy a new ATM flow disabled, then enable for selected terminals.",
+      "seniorPerspective": "Track ownership and remove stale flags.",
+      "commonMistakes": "Leaving flags forever.",
+      "followUps": [
+        "How do you test both states?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Deploy now, activate later.",
+      "codeExample": "if(flags.NewFlowEnabled)return NewFlow();"
+    },
+    {
+      "id": "exp-108",
+      "technology": "DevOps / Production",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is observability?",
+      "shortAnswer": "Observability combines logs, metrics and traces to understand system behavior.",
+      "detailedAnswer": "It helps connect symptoms to causes.",
+      "example": "Correlate API p99 with a database wait using a trace ID.",
+      "seniorPerspective": "Instrument useful signals without sensitive payloads.",
+      "commonMistakes": "Collecting huge logs without actionable metrics.",
+      "followUps": [
+        "Logs versus metrics versus traces?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Observe = logs + metrics + traces.",
+      "codeExample": "logger.LogInformation(\"Transaction {Id} completed\",id);"
+    },
+    {
+      "id": "exp-109",
+      "technology": "DevOps / Production",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is zero-downtime database migration?",
+      "shortAnswer": "Schema changes must allow old and new application versions to coexist during rollout.",
+      "detailedAnswer": "Expand-contract is a common strategy.",
+      "example": "Add a nullable column before code starts using it, then remove old fields later.",
+      "seniorPerspective": "Design migrations for compatibility and rollback.",
+      "commonMistakes": "Dropping a column in the same release that stops using it.",
+      "followUps": [
+        "What is expand-contract?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Schema compatible first, cleanup later.",
+      "codeExample": "ALTER TABLE Transactions ADD NewStatus nvarchar(30) NULL;"
+    },
+    {
+      "id": "exp-110",
+      "technology": "DevOps / Production",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you perform root-cause analysis?",
+      "shortAnswer": "Establish impact and timeline, collect evidence, identify contributing causes and create preventive actions.",
+      "detailedAnswer": "Separate immediate mitigation from permanent fixes.",
+      "example": "A timeout incident may involve a deployment, database plan and missing alert.",
+      "seniorPerspective": "Use evidence rather than blame.",
+      "commonMistakes": "Stopping at the first symptom.",
+      "followUps": [
+        "What makes an RCA useful?",
+        "What is a common production mistake here?",
+        "How would you test or validate this?"
+      ],
+      "tags": [
+        "DevOps / Production",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ],
+      "memoryCue": "Evidence -> causes -> prevention.",
+      "codeExample": "// Timeline -> evidence -> causes -> corrective actions"
     }
   ]
 }
