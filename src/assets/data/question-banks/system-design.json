@@ -1,0 +1,74 @@
+{
+  "title": "system-design",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": "System Design",
+      "level": "Simple",
+      "question": "What is horizontal scaling?",
+      "answer": "Add more instances rather than only increasing the size of one machine.",
+      "example": "Run multiple stateless API instances behind a load balancer.",
+      "followup": "Where should session state live?"
+    },
+    {
+      "area": "System Design",
+      "level": "Simple",
+      "question": "Why cache?",
+      "answer": "Caching reduces repeated expensive work and latency at the cost of freshness and invalidation complexity.",
+      "example": "Cache product metadata for 60 seconds.",
+      "followup": "What happens during a cache stampede?"
+    },
+    {
+      "area": "System Design",
+      "level": "Medium",
+      "question": "What is idempotency?",
+      "answer": "Repeating an operation with the same request identity should not cause unintended duplicate effects.",
+      "example": "A payment request carries an idempotency key stored with the result.",
+      "followup": "Where should the key be checked?"
+    },
+    {
+      "area": "System Design",
+      "level": "Medium",
+      "question": "When use a queue?",
+      "answer": "Queues decouple producers from consumers, absorb bursts and support asynchronous processing.",
+      "example": "An order API queues invoice generation instead of making the customer wait.",
+      "followup": "How do you handle duplicate messages?"
+    },
+    {
+      "area": "System Design",
+      "level": "Medium",
+      "question": "Consistency vs availability?",
+      "answer": "Systems choose consistency guarantees based on business requirements and failure behavior.",
+      "example": "Account balance updates need stronger correctness guarantees than analytics dashboards.",
+      "followup": "How would you document the consistency requirement?"
+    },
+    {
+      "area": "System Design",
+      "level": "Complex",
+      "question": "Design a URL shortener.",
+      "answer": "Use an API, unique key generation, durable mapping storage, cache hot mappings, redirects, rate limits and analytics asynchronously.",
+      "example": "POST creates a short id; GET resolves it from cache or storage and redirects.",
+      "followup": "How would you handle key collisions?"
+    },
+    {
+      "area": "System Design",
+      "level": "Complex",
+      "question": "Design a scalable notification service.",
+      "answer": "Persist intent, enqueue jobs, use workers and provider adapters, retry transient failures, dead-letter poison messages and make delivery idempotent.",
+      "example": "A notification id identifies the job across retries and provider attempts.",
+      "followup": "How do you handle a provider outage?"
+    },
+    {
+      "area": "System Design",
+      "level": "Complex",
+      "question": "Design a rate limiter.",
+      "answer": "Define identity and limits, choose a distributed algorithm such as token bucket, store counters atomically and return retry guidance.",
+      "example": "Redis can support atomic token/counter operations for multiple API instances.",
+      "followup": "How do clock skew and distributed consistency affect it?"
+    }
+  ]
+}
