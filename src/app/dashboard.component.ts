@@ -3,7 +3,7 @@ import {RouterLink} from '@angular/router';
 
 const TOPICS=[
 ['C# / .NET','csharp','Practical coding, async, concurrency, memory, LINQ and design decisions.'],
-['ASP.NET Core','.dotnet','Real API design, DI, middleware, security, data access and production problems.'],
+['ASP.NET Core','dotnet','Real API design, DI, middleware, security, data access and production problems.'],
 ['Angular','angular','Component design, RxJS, Signals, performance, forms and real application flows.'],
 ['JavaScript / TypeScript','javascript','Browser behavior, async code, closures, typing and practical debugging.'],
 ['SQL','sql','Query tuning, indexes, transactions, locking, deadlocks and data correctness.'],
