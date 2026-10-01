@@ -9,6 +9,7 @@ const TOPICS=[
 ['LINQ / C#','linq','LINQ operators, deferred execution, expression trees, projections and performance.'],
 ['Async / Threading','async-threading','async/await, Tasks, cancellation, concurrency, locks and thread safety.'],
 ['Angular','angular','Components, lifecycle, change detection, Signals, RxJS, forms, routing and HTTP.'],
+['AngularJS','angularjs','Scopes, digest cycle, directives, services, routing, $http, DI, performance and AngularJS-to-Angular migration'],
 ['JavaScript / TypeScript','javascript','Closures, prototypes, event loop, promises, modules, typing and browser behaviour.'],
 ['SQL','sql','Joins, indexes, execution plans, transactions, isolation, locking and query tuning.'],
 ['API Design','api-design','REST, HTTP semantics, versioning, pagination, idempotency, rate limiting and API contracts.'],
@@ -43,7 +44,7 @@ template:`
 </div>
 <div class="answer-framework">
 <h2>The answer pattern to practise</h2>
-<p><b>1. Explain the concept</b> → <b>2. Give a concrete example</b> → <b>3. Explain when you would use it</b> → <b>4. Compare alternatives</b> → <b>5. Discuss failure modes</b> → <b>6. Explain testing or production validation</b> → <b>7. Prepare for follow-ups</b></p>
+<p><b>1. Explain the concept</b> → <b>2. Give a concrete example</b> → <b>3. Explain when you would use it</b> → <b>4. Compare alternatives</b> → <b>5. Discuss failure modes</b> → <b>6. Explain testing or production validation</b></p>
 </div>
 <a routerLink="/cheat-sheet" class="cheat-link">
   <span class="cheat-badge">QUICK REVISION</span>
