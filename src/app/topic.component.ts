@@ -1,1 +1,105 @@
-import {Component,inject} from '@angular/core';import {ActivatedRoute,RouterLink} from '@angular/router';import {QuestionBankService,InterviewQuestion} from './core/question-bank.service';@Component({standalone:true,imports:[RouterLink],template:`<section class="page"><a routerLink="/" class="back">← Dashboard</a><div class="head"><div><p class="label">QUESTION BANK</p><h2>{{topic}}</h2><p class="desc">Answer in 30–60 seconds first, then reveal the example and senior follow-up.</p></div><div>{{index+1}} / {{filtered.length}}</div></div><div class="tools"><input [value]="search" (input)="search=$any($event.target).value;apply()" placeholder="Search questions..."><div class="filters"><button [class.on]="level==='All'" (click)="setLevel('All')">All</button>@for(l of levels;track l){<button [class.on]="level===l" (click)="setLevel(l)">{{l}}</button>}</div></div>@if(current();as q){<article class="card"><span class="pill">{{q.difficulty}}</span><h3>{{q.question}}</h3><button class="reveal" (click)="revealed=!revealed">{{revealed?'Hide answer':'Reveal answer'}}</button>@if(revealed){<h4>Answer</h4><p>{{q.shortAnswer}}</p><h4>Example</h4><p>{{q.example}}</p><h4>Senior perspective</h4><p>{{q.seniorPerspective}}</p><h4>Common mistake</h4><p>{{q.commonMistakes}}</p><h4>Follow-up</h4><p>{{q.followUps[0]}}</p>}</article>}<div class="actions"><button (click)="prev()">← Previous</button><button (click)="next()">Next question →</button></div></section>`,styles:[`.page{max-width:1000px;padding:30px 42px 70px}.back{color:#77869a;text-decoration:none;font-size:12px}.head{display:flex;justify-content:space-between;align-items:end;margin:32px 0 18px}.label{color:#7dd3fc;font-size:10px;letter-spacing:.18em}.head h2{font-size:40px;margin:5px 0}.desc{color:#7d8ba0;font-size:13px}.tools{display:flex;gap:10px;margin-bottom:14px}.tools input{flex:1;background:#0d141f;border:1px solid #263446;border-radius:8px;color:#dce6f2;padding:10px}.filters{display:flex;gap:6px}.filters button,.actions button,.reveal{border:1px solid #263446;background:#0d141f;color:#8c9aad;border-radius:7px;padding:8px 12px;font-size:11px}.filters .on,.actions button:last-child{background:#dff6ff;color:#09121a}.card{border:1px solid #223044;background:#0c131d;border-radius:14px;padding:28px}.pill{font-size:10px;color:#7dd3fc;border:1px solid #263b52;padding:5px 8px;border-radius:99px}.card h3{font-size:25px}.card h4{font-size:11px;letter-spacing:.12em;color:#7dd3fc;text-transform:uppercase;border-top:1px solid #1b2635;padding-top:16px}.card p{color:#b5c0cf;font-size:13px;line-height:1.7}.actions{display:flex;justify-content:space-between;margin-top:15px}` ]})export class TopicComponent{private s=inject(QuestionBankService);private r=inject(ActivatedRoute);topic='';questions:InterviewQuestion[]=[];filtered:InterviewQuestion[]=[];index=0;level='All';search='';revealed=false;levels=['Simple','Medium','Complex'];constructor(){this.r.paramMap.subscribe(p=>{const m:any={csharp:'C# / .NET',dotnet:'.NET',angular:'Angular',javascript:'JavaScript',sql:'SQL','system-design':'System Design',ai:'AI & Agentic AI',production:'Production Debugging',security:'Security',performance:'Performance',behavioral:'Behavioral'};this.topic=m[p.get('slug')||'csharp']||'C# / .NET';this.s.byTechnology(this.topic).subscribe(q=>{this.questions=q;this.apply()})})}apply(){const term=this.search.toLowerCase();this.filtered=this.questions.filter(q=>(this.level==='All'||q.difficulty===this.level)&&(!term||q.question.toLowerCase().includes(term)||q.example.toLowerCase().includes(term)));this.index=0;this.revealed=false}setLevel(x:string){this.level=x;this.apply()}current(){return this.filtered[this.index]}next(){if(this.filtered.length){this.index=(this.index+1)%this.filtered.length;this.revealed=false}}prev(){if(this.filtered.length){this.index=(this.index-1+this.filtered.length)%this.filtered.length;this.revealed=false}}}
+import {Component,inject} from '@angular/core';
+import {ActivatedRoute,RouterLink} from '@angular/router';
+import {QuestionBankService,InterviewQuestion} from './core/question-bank.service';
+
+@Component({
+  standalone:true,
+  imports:[RouterLink],
+  template:`
+    <section class="study-page">
+      <a routerLink="/" class="back">← Interview Prep</a>
+
+      <header class="topic-header">
+        <p class="label">INTERVIEW STUDY</p>
+        <h1>{{topic}}</h1>
+        <p>{{filtered.length}} questions. Read the question first, answer aloud, then compare with the notes below.</p>
+      </header>
+
+      @for(q of filtered; track q.id; let i = $index) {
+        <article class="question">
+          <div class="number">{{i + 1}}</div>
+          <div class="content">
+            <span class="difficulty">{{q.difficulty}}</span>
+            <h2>{{q.question}}</h2>
+
+            <section>
+              <h3>Answer</h3>
+              <p>{{q.shortAnswer}}</p>
+            </section>
+
+            <section>
+              <h3>Example</h3>
+              <p>{{q.example}}</p>
+            </section>
+
+            <section>
+              <h3>Senior-level thinking</h3>
+              <p>{{q.seniorPerspective}}</p>
+            </section>
+
+            <section>
+              <h3>Common mistake</h3>
+              <p>{{q.commonMistakes}}</p>
+            </section>
+
+            <section>
+              <h3>Follow-up questions</h3>
+              @for(f of q.followUps; track f) {
+                <p class="follow-up">→ {{f}}</p>
+              }
+            </section>
+          </div>
+        </article>
+      }
+    </section>
+  `,
+  styles:[`
+    :host{display:block}
+    .study-page{max-width:1000px;margin:0 auto;padding:28px 34px 90px}
+    .back{color:#7890a8;text-decoration:none;font-size:13px}
+    .topic-header{padding:55px 0 38px;border-bottom:1px solid #202b39}
+    .label{margin:0 0 10px;color:#7dd3fc;font-size:11px;letter-spacing:.18em}
+    h1{margin:0 0 12px;font-size:44px;letter-spacing:-.04em;color:#edf4fb}
+    .topic-header>p:last-child{max-width:720px;margin:0;color:#8b9aab;line-height:1.7;font-size:14px}
+    .question{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:38px 0;border-bottom:1px solid #1b2633}
+    .number{color:#52667c;font-size:13px;padding-top:6px}
+    .difficulty{display:inline-block;color:#7dd3fc;font-size:10px;text-transform:uppercase;letter-spacing:.13em}
+    h2{font-size:25px;line-height:1.35;margin:8px 0 28px;color:#f0f5fa}
+    section{margin:0 0 23px}
+    h3{margin:0 0 7px;color:#8aa0b6;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
+    section p{margin:0;color:#b7c3d0;font-size:14px;line-height:1.8;max-width:820px}
+    .follow-up{color:#91a5ba!important;margin-top:6px!important}
+    @media(max-width:700px){
+      .study-page{padding:22px 18px 70px}
+      .topic-header{padding:42px 0 30px}
+      h1{font-size:34px}
+      .question{grid-template-columns:30px 1fr;gap:10px;padding:30px 0}
+      h2{font-size:21px}
+    }
+  `]
+})
+export class TopicComponent{
+  private service=inject(QuestionBankService);
+  private route=inject(ActivatedRoute);
+  topic='';
+  filtered:InterviewQuestion[]=[];
+
+  constructor(){
+    this.route.paramMap.subscribe(params=>{
+      const map:any={
+        csharp:'C# / .NET',
+        angular:'Angular',
+        javascript:'JavaScript',
+        sql:'SQL',
+        'system-design':'System Design',
+        ai:'AI & Agentic AI',
+        production:'Production Debugging',
+        security:'Security',
+        performance:'Performance',
+        behavioral:'Behavioral'
+      };
+      this.topic=map[params.get('slug')||'csharp']||'C# / .NET';
+      this.service.byTechnology(this.topic).subscribe(q=>this.filtered=q);
+    });
+  }
+}
