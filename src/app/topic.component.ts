@@ -24,7 +24,7 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
           </select>
         </label>
       </header>
-      <div class="bank-note"><b>{{filtered.length}} questions</b><span>Clear answer + real-world example + deeper explanation + senior follow-ups.</span></div>
+      <div class="bank-note"><b>{{filtered.length}} questions</b><span>Clear answer + real-world example + code + deeper explanation + senior-level reasoning.</span></div>
 
       @for(q of filtered; track q.id; let i = $index) {
         <article class="question">
@@ -37,7 +37,6 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
             <section class="deep"><h3>Go deeper</h3><p>{{q.detailedAnswer}}</p></section>
             <section class="reasoning"><h3>What a 7-year developer should add</h3><p>{{q.seniorPerspective}}</p></section>
             <section class="mistakes"><h3>Common mistakes</h3><p>{{q.commonMistakes}}</p></section>
-            <section class="followups"><h3>Likely follow-ups</h3>@for(f of q.followUps; track f) { <p>→ {{f}}</p> }</section>
           </div>
         </article>
       }
@@ -50,7 +49,7 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
     .difficulty-select{min-width:190px}.difficulty-select span{display:block;margin-bottom:7px;color:#64748b;font-size:10px;font-weight:700;letter-spacing:.14em}select{width:100%;padding:11px 13px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;color:#1f2937;font-size:14px;outline:none}select:focus{border-color:#2563eb;box-shadow:0 0 0 3px #dbeafe}
     .bank-note{display:flex;gap:12px;align-items:center;padding:20px 0;border-bottom:1px solid #e2e6eb;color:#64748b;font-size:13px}.bank-note b{color:#1f2937}
     .question{display:grid;grid-template-columns:58px 1fr;gap:24px;padding:42px 0;border-bottom:1px solid #e2e6eb}.question-number{color:#94a3b8;font-size:13px;padding-top:7px;font-weight:600}.question-body{min-width:0}.meta{display:flex;gap:10px;margin-bottom:10px}.meta span{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#2563eb;background:#eff6ff;border:1px solid #dbeafe;border-radius:999px;padding:5px 9px}.question h2{font-size:27px;line-height:1.38;margin:0 0 27px;color:#111827;letter-spacing:-.02em}
-    section{margin:0 0 24px}h3{margin:0 0 8px;color:#475569;font-size:11px;letter-spacing:.12em;text-transform:uppercase}section p{margin:0;max-width:850px;color:#475569;font-size:15px;line-height:1.85}.answer{background:#fff;border:1px solid #dce4ed;border-left:4px solid #2563eb;border-radius:8px;padding:19px 21px}.answer h3{color:#1d4ed8}.example{background:#f1f5f9;border-radius:8px;padding:19px 21px}.code-example{background:#111827;border-radius:8px;padding:19px 21px}.code-example h3{color:#93c5fd}.code-example pre{margin:0;overflow:auto;color:#e5e7eb;font:13px/1.7 Consolas,Monaco,monospace;white-space:pre-wrap}.code-note{margin-top:12px!important;color:#94a3b8!important;font-size:12px!important}.memory{background:#eff6ff;border:1px solid #dbeafe;border-radius:8px;padding:18px 20px}.memory h3{color:#1d4ed8}.memory p{color:#1e40af}.deep{background:#fff;border:1px solid #e1e6ec;border-radius:8px;padding:19px 21px}.reasoning h3{color:#1d4ed8}.mistakes{background:#fafafa;border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px}.followups p{color:#64748b;margin-top:7px}.empty{padding:60px 0;color:#64748b}
+    section{margin:0 0 24px}h3{margin:0 0 8px;color:#475569;font-size:11px;letter-spacing:.12em;text-transform:uppercase}section p{margin:0;max-width:850px;color:#475569;font-size:15px;line-height:1.85}.answer{background:#fff;border:1px solid #dce4ed;border-left:4px solid #2563eb;border-radius:8px;padding:19px 21px}.answer h3{color:#1d4ed8}.example{background:#f1f5f9;border-radius:8px;padding:19px 21px}.code-example{background:#111827;border-radius:8px;padding:19px 21px}.code-example h3{color:#93c5fd}.code-example pre{margin:0;overflow:auto;color:#e5e7eb;font:13px/1.7 Consolas,Monaco,monospace;white-space:pre-wrap}.code-note{margin-top:12px!important;color:#94a3b8!important;font-size:12px!important}.memory{background:#eff6ff;border:1px solid #dbeafe;border-radius:8px;padding:18px 20px}.memory h3{color:#1d4ed8}.memory p{color:#1e40af}.deep{background:#fff;border:1px solid #e1e6ec;border-radius:8px;padding:19px 21px}.reasoning h3{color:#1d4ed8}.mistakes{background:#fafafa;border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px}.empty{padding:60px 0;color:#64748b}
     @media(max-width:700px){.study-page{padding:22px 18px 70px}.topic-header{display:block;padding:42px 0 28px}.topic-header h1{font-size:35px}.difficulty-select{margin-top:24px;max-width:none}.question{grid-template-columns:30px 1fr;gap:10px;padding:34px 0}.question h2{font-size:23px}section p{font-size:14px}}
   `]
 })
