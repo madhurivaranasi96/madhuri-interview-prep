@@ -1,5 +1,5 @@
 {
-  "version": 13,
+  "version": 14,
   "sourceNote": "Senior full-stack interview master bank for a 7-year developer. Main questions are conventional interview questions, grouped only into Simple, Medium and Complex. Every question has a clear interview answer, a concrete real-world engineering example, deeper reasoning, senior-level considerations, common mistakes and concept-specific follow-ups. Scenario-based questions remain separate.",
   "questions": [
     {
@@ -26,7 +26,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between a class and a struct in C#.",
-      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
+      "codeExample": "public class Account { public decimal Balance { get; set; } }\npublic readonly struct Money { public decimal Amount { get; } public Money(decimal amount) => Amount = amount; }"
     },
     {
       "id": "master-002",
@@ -52,7 +52,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between interface and abstract class in C#.",
-      "codeExample": "public interface IPaymentGateway\n{\n    Task<bool> PayAsync(decimal amount);\n}\n\npublic abstract class GatewayBase\n{\n    protected void Log(string message) => Console.WriteLine(message);\n}"
+      "codeExample": "public interface IPaymentGateway { Task<bool> PayAsync(decimal amount); }\npublic abstract class GatewayBase { protected void Log(string message) => Console.WriteLine(message); }"
     },
     {
       "id": "master-003",
@@ -78,7 +78,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between IEnumerable and IQueryable.",
-      "codeExample": "IEnumerable<Transaction> inMemory =\n    transactions.Where(t => t.Amount > 100);\n\nIQueryable<Transaction> database =\n    db.Transactions.Where(t => t.Amount > 100);"
+      "codeExample": "IEnumerable<int> data = numbers.Where(x => x > 10);\nIQueryable<int> query = db.Numbers.Where(x => x > 10);\n// IQueryable can translate the expression to SQL."
     },
     {
       "id": "master-004",
@@ -104,7 +104,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: async and await used for in C#.",
-      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n{\n    return await db.Transactions.FindAsync(id);\n}"
+      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n    => await db.Transactions.FindAsync(id);"
     },
     {
       "id": "master-005",
@@ -130,7 +130,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Transient, Scoped and Singleton lifetimes in ASP.NET Core dependency injection.",
-      "codeExample": "public class TransactionService(ILogger logger)\n{\n    public void Process() => logger.Log(\"Transaction processed\");\n}\n\nbuilder.Services.AddScoped<TransactionService>();"
+      "codeExample": "builder.Services.AddTransient<IValidator, Validator>();\nbuilder.Services.AddScoped<ITransactionService, TransactionService>();\nbuilder.Services.AddSingleton<IConfigCache, ConfigCache>();"
     },
     {
       "id": "master-006",
@@ -182,7 +182,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: dependency injection and why is it useful.",
-      "codeExample": "public class TransactionService(ILogger logger)\n{\n    public void Process() => logger.Log(\"Transaction processed\");\n}\n\nbuilder.Services.AddScoped<TransactionService>();"
+      "codeExample": "public class TransactionService(ILogger logger) {\n    public void Process() => logger.Log(\"Processed\");\n}\nbuilder.Services.AddScoped<TransactionService>();"
     },
     {
       "id": "master-008",
@@ -208,7 +208,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between a component and a service in Angular.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "@Component({ selector: 'app-transactions', templateUrl: './transactions.html' })\nexport class TransactionsComponent { }\n\n@Injectable({ providedIn: 'root' })\nexport class TransactionService {\n  getAll() { return this.http.get('/api/transactions'); }\n}"
     },
     {
       "id": "master-009",
@@ -234,7 +234,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between an Observable and a Promise.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "const result$ = this.http.get<Transaction[]>('/api/transactions');\nconst result = await fetch('/api/transactions');"
     },
     {
       "id": "master-010",
@@ -260,7 +260,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Angular change detection.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "@Component({\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: '{{transaction().amount}}'\n})\nexport class TransactionComponent {\n  transaction = signal({ amount: 100 });\n}"
     },
     {
       "id": "master-011",
@@ -286,7 +286,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: a closure in JavaScript.",
-      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
+      "codeExample": "function createCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst next = createCounter();\nnext(); // 1\nnext(); // 2"
     },
     {
       "id": "master-012",
@@ -312,7 +312,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between let, const and var.",
-      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
+      "codeExample": "var oldValue = 1;\nlet blockValue = 2;\nconst fixedValue = 3;\n// let/const are block scoped; const prevents reassignment."
     },
     {
       "id": "master-013",
@@ -338,7 +338,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between INNER JOIN and LEFT JOIN.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SELECT a.AccountId, t.Amount\nFROM Accounts a\nINNER JOIN Transactions t ON t.AccountId = a.AccountId;\n\nSELECT a.AccountId, t.Amount\nFROM Accounts a\nLEFT JOIN Transactions t ON t.AccountId = a.AccountId;"
     },
     {
       "id": "master-014",
@@ -364,7 +364,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: an index and why does it improve query performance.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "CREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);\n\nSELECT * FROM Transactions\nWHERE AccountId = @AccountId\nORDER BY TransactionDate DESC;"
     },
     {
       "id": "master-015",
@@ -390,7 +390,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: a transaction.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "BEGIN TRANSACTION;\nUPDATE Accounts SET Balance = Balance - @Amount WHERE Id = @From;\nUPDATE Accounts SET Balance = Balance + @Amount WHERE Id = @To;\nCOMMIT;"
     },
     {
       "id": "master-016",
@@ -416,7 +416,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the main components you consider when designing a backend service.",
-      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
+      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});"
     },
     {
       "id": "master-017",
@@ -442,7 +442,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between authentication and authorization.",
-      "codeExample": "builder.Services.AddAuthentication(\"Bearer\")\n    .AddJwtBearer();\n\nbuilder.Services.AddAuthorization(options =>\n    options.AddPolicy(\"CanApprove\", p => p.RequireRole(\"Approver\")));"
+      "codeExample": "[Authorize(Roles = \"Approver\")]\n[HttpPost(\"approve\")]\npublic IActionResult Approve(int id) => Ok();\n// Authentication identifies the caller; authorization checks permission."
     },
     {
       "id": "master-018",
@@ -468,7 +468,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: RAG and why is it useful.",
-      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
+      "codeExample": "var chunks = documentStore.Search(question);\nvar prompt = $\"Answer using these sources:\\n{string.Join(\"\\n\", chunks)}\";\nvar answer = await llm.GenerateAsync(prompt);"
     },
     {
       "id": "master-019",
@@ -494,7 +494,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between Task.WhenAll and awaiting tasks sequentially.",
-      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n{\n    return await db.Transactions.FindAsync(id);\n}"
+      "codeExample": "var a = service.GetAccountAsync(id);\nvar b = service.GetTransactionsAsync(id);\nawait Task.WhenAll(a, b);"
     },
     {
       "id": "master-020",
@@ -520,7 +520,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: deferred execution in LINQ and why can it surprise developers.",
-      "codeExample": "var successful = transactions\n    .Where(t => t.Status == TransactionStatus.Success)\n    .OrderByDescending(t => t.CreatedAt)\n    .Take(50)\n    .ToList();"
+      "codeExample": "var query = transactions.Where(t => t.Status == \"Success\");\n// Database/query work may not run until enumeration.\nvar result = query.ToList();"
     },
     {
       "id": "master-021",
@@ -546,7 +546,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: exception handling affect API design.",
-      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
+      "codeExample": "app.UseExceptionHandler(errorApp => errorApp.Run(async context =>\n{\n    context.Response.StatusCode = 500;\n    await context.Response.WriteAsJsonAsync(new { error = \"Unexpected error\" });\n}));"
     },
     {
       "id": "master-022",
@@ -572,7 +572,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: ASP.NET Core request cancellation work and why should services honor CancellationToken.",
-      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
+      "codeExample": "public async Task<Result> GetAsync(CancellationToken ct)\n    => await repository.GetAsync(ct);\n\n// Pass ct to database/HTTP calls so cancelled requests stop work."
     },
     {
       "id": "master-023",
@@ -598,7 +598,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between authentication and authorization middleware in ASP.NET Core.",
-      "codeExample": "app.UseExceptionHandler(\"/error\");\napp.UseAuthentication();\napp.UseAuthorization();\napp.MapControllers();"
+      "codeExample": "app.UseAuthentication(); // establishes HttpContext.User\napp.UseAuthorization();  // checks policies/roles\napp.MapControllers();"
     },
     {
       "id": "master-024",
@@ -624,7 +624,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you prevent an N+1 query problem in EF Core.",
-      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n{\n    return await db.Transactions\n        .AsNoTracking()\n        .SingleOrDefaultAsync(x => x.Id == id);\n}"
+      "codeExample": "var orders = await db.Orders\n    .Include(o => o.Items)\n    .Where(o => o.CustomerId == id)\n    .ToListAsync();"
     },
     {
       "id": "master-025",
@@ -650,7 +650,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: switchMap help with search or autocomplete.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "searchTerms.pipe(\n  debounceTime(300),\n  distinctUntilChanged(),\n  switchMap(term => api.search(term))\n).subscribe(results => this.results = results);"
     },
     {
       "id": "master-026",
@@ -676,7 +676,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between reactive forms and template-driven forms.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "form = new FormGroup({\n  accountId: new FormControl('', Validators.required),\n  amount: new FormControl(0, Validators.min(1))\n});"
     },
     {
       "id": "master-027",
@@ -702,7 +702,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Angular signals and when would you use them.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "count = signal(0);\ndouble = computed(() => this.count() * 2);\n\nincrement() { this.count.update(x => x + 1); }"
     },
     {
       "id": "master-028",
@@ -728,7 +728,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the JavaScript event loop work.",
-      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
+      "codeExample": "console.log('A');\nsetTimeout(() => console.log('B'), 0);\nPromise.resolve().then(() => console.log('C'));\nconsole.log('D');\n// A, D, C, B"
     },
     {
       "id": "master-029",
@@ -754,7 +754,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between interface and type in TypeScript.",
-      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
+      "codeExample": "interface Transaction { id: number; amount: number; }\ntype TransactionId = string | number;\nconst id: TransactionId = 10;"
     },
     {
       "id": "master-030",
@@ -780,7 +780,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between WHERE and HAVING.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SELECT AccountId, SUM(Amount) AS Total\nFROM Transactions\nWHERE Status = 'Success'\nGROUP BY AccountId\nHAVING SUM(Amount) > 10000;"
     },
     {
       "id": "master-031",
@@ -806,7 +806,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: a deadlock and how do you reduce deadlocks in SQL Server.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SET DEADLOCK_PRIORITY LOW;\nBEGIN TRAN;\n-- Keep transactions short and access tables in a consistent order.\nCOMMIT;"
     },
     {
       "id": "master-032",
@@ -832,7 +832,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: parameter sniffing in SQL Server.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SELECT * FROM Orders\nWHERE CustomerId = @CustomerId\nOPTION (RECOMPILE);\n-- Use deliberately after confirming parameter-sensitive plans are the issue."
     },
     {
       "id": "master-033",
@@ -858,7 +858,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you design a URL shortening service.",
-      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
+      "codeExample": "app.MapGet(\"/{code}\", async (string code, IUrlStore store) =>\n{\n    var url = await store.GetAsync(code);\n    return url is null ? Results.NotFound() : Results.Redirect(url);\n});"
     },
     {
       "id": "master-034",
@@ -884,7 +884,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: an IDOR vulnerability and how do you prevent it.",
-      "codeExample": "builder.Services.AddAuthentication(\"Bearer\")\n    .AddJwtBearer();\n\nbuilder.Services.AddAuthorization(options =>\n    options.AddPolicy(\"CanApprove\", p => p.RequireRole(\"Approver\")));"
+      "codeExample": "[HttpGet(\"accounts/{id}\")]\npublic async Task<IActionResult> Get(int id)\n{\n    if (!await authorization.CanAccessAccount(User, id)) return Forbid();\n    return Ok(await service.GetAsync(id));\n}"
     },
     {
       "id": "master-035",
@@ -910,7 +910,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: garbage collection work in .NET and how can a memory leak still occur.",
-      "codeExample": "int value = 10;\nobject boxed = value;     // boxing\nint copy = (int)boxed;    // unboxing\n\n// Prefer List<int> over ArrayList."
+      "codeExample": "var cache = new MemoryCache(...);\ncache.Set(\"key\", largeObject);\n// A leak-like problem can occur when long-lived roots retain objects indefinitely.\n// Use bounded caches and remove unused references."
     },
     {
       "id": "master-036",
@@ -936,7 +936,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you diagnose ThreadPool starvation in an ASP.NET Core application.",
-      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
+      "codeExample": "public async Task<IActionResult> Get(CancellationToken ct)\n{\n    var result = await service.GetAsync(ct); // non-blocking I/O\n    return Ok(result);\n}\n// Avoid .Result/.Wait() in request paths."
     },
     {
       "id": "master-037",
@@ -962,7 +962,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you design an idempotent API operation.",
-      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
+      "codeExample": "[HttpPost]\npublic async Task<IActionResult> Create(CreateRequest request, string idempotencyKey)\n{\n    var existing = await store.FindAsync(idempotencyKey);\n    if (existing != null) return Ok(existing);\n    var result = await service.CreateAsync(request);\n    await store.SaveAsync(idempotencyKey, result);\n    return Ok(result);\n}"
     },
     {
       "id": "master-038",
@@ -988,7 +988,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you design a high-throughput ASP.NET Core API.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "await using var tx = await db.Database.BeginTransactionAsync();\n// Keep synchronous work small; use async I/O and measure database latency.\nvar result = await service.ProcessAsync(request);\nawait tx.CommitAsync();"
     },
     {
       "id": "master-039",
@@ -1014,7 +1014,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between optimistic and pessimistic concurrency.",
-      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
+      "codeExample": "var row = await db.Accounts.SingleAsync(x => x.Id == id);\nrow.Version = request.Version;\n// UPDATE ... WHERE Id=@Id AND Version=@Version\n// If zero rows update, report a concurrency conflict."
     },
     {
       "id": "master-040",
@@ -1040,7 +1040,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you improve performance in a large Angular application.",
-      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
+      "codeExample": "trackById = (_: number, item: Transaction) => item.id;\n\n// Template:\n// @for (t of transactions; track trackById($index, t)) { ... }"
     },
     {
       "id": "master-041",
@@ -1066,7 +1066,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you prevent stale HTTP results and race conditions in an Angular application.",
-      "codeExample": "[HttpGet(\"{id:int}\")]\npublic async Task<ActionResult<TransactionDto>> Get(int id)\n{\n    var item = await service.GetAsync(id);\n    return item is null ? NotFound() : Ok(item);\n}"
+      "codeExample": "searchTerms.pipe(\n  debounceTime(300),\n  switchMap(term => this.api.search(term))\n).subscribe(results => this.results = results);"
     },
     {
       "id": "master-042",
@@ -1092,7 +1092,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you troubleshoot a query that suddenly became slow in production.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SELECT * FROM sys.dm_exec_query_stats;\n\n-- Then inspect the actual execution plan, waits, reads and recent data/index changes.\n-- Fix the measured bottleneck rather than guessing."
     },
     {
       "id": "master-043",
@@ -1118,7 +1118,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How do transaction isolation levels affect correctness and concurrency.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SET TRANSACTION ISOLATION LEVEL READ COMMITTED;\nBEGIN TRANSACTION;\nSELECT Balance FROM Accounts WHERE Id = @Id;\nCOMMIT;"
     },
     {
       "id": "master-044",
@@ -1144,7 +1144,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you paginate millions of rows efficiently.",
-      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
+      "codeExample": "SELECT TOP (@PageSize) Id, CreatedAt, Amount\nFROM Transactions\nWHERE Id > @LastSeenId\nORDER BY Id;"
     },
     {
       "id": "master-045",
@@ -1170,7 +1170,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you design a notification system that supports email, SMS and push.",
-      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
+      "codeExample": "public interface INotificationChannel\n{\n    Task SendAsync(Notification notification);\n}\n\nclass EmailChannel : INotificationChannel { /* ... */ }\nclass SmsChannel : INotificationChannel { /* ... */ }"
     },
     {
       "id": "master-046",
@@ -1196,7 +1196,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you design a distributed rate limiter.",
-      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
+      "codeExample": "var key = $\"rate:{clientId}\";\nvar count = await redis.IncrementAsync(key);\nawait redis.ExpireAsync(key, TimeSpan.FromMinutes(1));\nif (count > 100) return Results.StatusCode(429);"
     },
     {
       "id": "master-047",
@@ -1222,7 +1222,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you design a scalable order-processing system.",
-      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
+      "codeExample": "await queue.PublishAsync(new OrderCreated(order.Id));\n// Worker consumes the event and performs downstream work independently.\nawait orderRepository.SaveAsync(order);"
     },
     {
       "id": "master-048",
@@ -1248,7 +1248,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you secure a public REST API.",
-      "codeExample": "[HttpGet(\"{id:int}\")]\npublic async Task<ActionResult<TransactionDto>> Get(int id)\n{\n    var item = await service.GetAsync(id);\n    return item is null ? NotFound() : Ok(item);\n}"
+      "codeExample": "app.UseAuthentication();\napp.UseAuthorization();\nservices.AddRateLimiter(options => { /* policy */ });\n// Also validate input and use HTTPS everywhere."
     },
     {
       "id": "master-049",
@@ -1274,7 +1274,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you implement secure JWT refresh-token handling.",
-      "codeExample": "builder.Services.AddAuthentication(\"Bearer\")\n    .AddJwtBearer();\n\nbuilder.Services.AddAuthorization(options =>\n    options.AddPolicy(\"CanApprove\", p => p.RequireRole(\"Approver\")));"
+      "codeExample": "var refresh = RandomNumberGenerator.GetBytes(32);\nvar hash = SHA256.HashData(refresh);\nawait store.SaveHashAsync(hash, userId, expiry);\n// Store the hash, not the raw refresh token."
     },
     {
       "id": "master-050",
@@ -1300,7 +1300,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you investigate an intermittent production issue that cannot be reproduced locally.",
-      "codeExample": "try\n{\n    await transactionService.ProcessAsync(request);\n}\ncatch (Exception ex)\n{\n    logger.LogError(ex, \"Transaction failed: {Id}\", request.Id);\n    throw;\n}"
+      "codeExample": "logger.LogInformation(\"Request {Id} started\", requestId);\nusing var activity = Activity.Current;\nvar result = await service.ProcessAsync(request);\nlogger.LogInformation(\"Request {Id} completed\", requestId);"
     },
     {
       "id": "master-051",
@@ -1326,7 +1326,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you decide whether to rollback a production release.",
-      "codeExample": "try\n{\n    await transactionService.ProcessAsync(request);\n}\ncatch (Exception ex)\n{\n    logger.LogError(ex, \"Transaction failed: {Id}\", request.Id);\n    throw;\n}"
+      "codeExample": "if (errorRate > threshold && healthCheck.IsFailing)\n{\n    await deployment.RollbackAsync();\n}\n// Base the decision on impact, evidence and rollback safety."
     },
     {
       "id": "master-052",
@@ -1352,7 +1352,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you evaluate an enterprise RAG system.",
-      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
+      "codeExample": "var answer = await rag.AskAsync(question);\nvar citations = answer.Sources;\nvar score = evaluator.Grounding(answer, citations);\n// Evaluate retrieval, groundedness, relevance and latency."
     },
     {
       "id": "extra-001",
@@ -1378,7 +1378,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between latency, throughput and resource utilization.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.ProcessAsync();\nsw.Stop();\n// latency = time per request; throughput = requests/sec; utilization = resource use."
     },
     {
       "id": "extra-002",
@@ -1404,7 +1404,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: is measuring performance before optimization important.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "var before = await MeasureAsync(() => service.GetAsync());\n// Change one thing.\nvar after = await MeasureAsync(() => service.GetAsync());\nConsole.WriteLine($\"Before={before}ms After={after}ms\");"
     },
     {
       "id": "extra-003",
@@ -1430,7 +1430,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: caching improve performance and what problems can it introduce.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "if (cache.TryGet(key, out Config value)) return value;\nvar fresh = await repository.GetAsync(key);\ncache.Set(key, fresh, TimeSpan.FromMinutes(5));"
     },
     {
       "id": "extra-004",
@@ -1456,7 +1456,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: connection pooling and why does it matter for database performance.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "await using var connection = new SqlConnection(connectionString);\nawait connection.OpenAsync();\n// A pool reuses established connections instead of creating a new TCP connection each request."
     },
     {
       "id": "extra-005",
@@ -1482,7 +1482,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you investigate high API p99 latency when average latency looks normal.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "var timer = Stopwatch.StartNew();\nawait service.ProcessAsync();\nlogger.LogInformation(\"p99 investigation: {Elapsed}\", timer.ElapsedMilliseconds);\n// Break latency down by app, DB and external dependencies."
     },
     {
       "id": "extra-006",
@@ -1508,7 +1508,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: backpressure and why is it important in distributed systems.",
-      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
+      "codeExample": "await channel.WaitToWriteAsync(ct);\nawait channel.WriteAsync(message, ct);\n// The producer waits when consumers cannot keep up."
     },
     {
       "id": "extra-007",
@@ -1534,7 +1534,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you answer 'Tell me about yourself' for a 7-year software engineer interview.",
-      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
+      "codeExample": "public string Introduce() => \"I am a senior software engineer with 7+ years in C#/.NET, Angular and enterprise systems. I focus on development, debugging, production ownership and reliable delivery.\";"
     },
     {
       "id": "extra-008",
@@ -1560,7 +1560,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Tell me about a technical disagreement you had with a teammate. How did you handle it.",
-      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
+      "codeExample": "var decision = new TechnicalDecision\n{\n    Options = new[] { \"A\", \"B\" },\n    Evidence = \"Load test showed B reduced p95 latency\"\n};\n// Use evidence, discuss trade-offs and align on the decision."
     },
     {
       "id": "extra-009",
@@ -1586,7 +1586,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Tell me about a production failure you were responsible for. What did you learn.",
-      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
+      "codeExample": "try { await deployment.RunAsync(); }\ncatch (Exception ex)\n{\n    logger.LogError(ex, \"Release failure\");\n    await rollback.ExecuteAsync();\n}\n// Follow with a regression test and prevention action."
     },
     {
       "id": "extra-010",
@@ -1612,7 +1612,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Tell me about a time you influenced a technical decision without having authority..",
-      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
+      "codeExample": "var proposal = new Proposal(\"Use async I/O for DB calls\");\nproposal.Attach(\"benchmark-results.json\");\n// Influence with evidence, not authority."
     },
     {
       "id": "extra-011",
@@ -1638,7 +1638,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How do you handle ambiguous requirements as a senior developer.",
-      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
+      "codeExample": "var assumptions = requirements.FindMissingAssumptions();\nvar questions = assumptions.Select(a => \"What is the expected behavior for \" + a);\n// Clarify constraints before committing to architecture."
     },
     {
       "id": "extra-012",
@@ -1664,7 +1664,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: Tell me about a time you mentored or enabled another engineer..",
-      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
+      "codeExample": "public async Task ReviewAsync(PullRequest pr)\n{\n    await reviewer.ExplainAsync(pr);\n    await mentee.UpdateAsync(pr);\n}\n// Give context and feedback so the engineer can solve the next issue independently."
     },
     {
       "id": "extra-013",
@@ -1690,7 +1690,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: the difference between an AI agent and a normal LLM call.",
-      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
+      "codeExample": "var result = await llm.GenerateAsync(prompt);\nvar agentResult = await agent.RunAsync(new AgentRequest {\n    Goal = \"Investigate Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Git\" }\n});"
     },
     {
       "id": "extra-014",
@@ -1716,7 +1716,7 @@
         "Practical"
       ],
       "memoryCue": "Remember it as: How would you reduce hallucinations in an enterprise AI assistant.",
-      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
+      "codeExample": "var answer = await rag.AskAsync(question);\nif (!answer.HasCitations || answer.GroundingScore < 0.8)\n    return \"I don't have enough verified evidence to answer.\";\nreturn answer.Text;"
     }
   ]
 }
