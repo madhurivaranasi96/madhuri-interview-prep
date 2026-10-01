@@ -1,821 +1,2605 @@
 {
-  "version": 2,
+  "version": 3,
+  "sourceNote": "Themes synthesized from current senior-engineer interview material and official Microsoft, Angular and OWASP documentation. Answers are original study notes, not copied source text.",
   "questions": [
     {
-      "id": "q-1",
+      "id": "q-001",
       "technology": "C# / .NET",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "Value type vs reference type",
-      "shortAnswer": "Value types carry data directly; reference variables point to objects.",
-      "detailedAnswer": "Value types carry data directly; reference variables point to objects.",
-      "example": "Copying a struct copies its value; copying a class variable copies the reference.",
-      "seniorPerspective": "When would a struct be a good choice?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "Value types vs reference types",
+      "shortAnswer": "Value types contain their data directly; reference-type variables hold references to objects. The distinction affects copying, allocation, nullability and mutation semantics.",
+      "detailedAnswer": "Value types contain their data directly; reference-type variables hold references to objects. The distinction affects copying, allocation, nullability and mutation semantics.",
+      "example": "Copying an int copies the value; copying a class variable copies the reference to the same object.",
+      "seniorPerspective": "A senior answer also discusses boxing, stack/heap oversimplifications, mutability and API design.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "When would a struct be a good choice?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "C# / .NET",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-2",
+      "id": "q-002",
       "technology": "C# / .NET",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "String vs StringBuilder",
-      "shortAnswer": "String is immutable; StringBuilder is useful for repeated mutation.",
-      "detailedAnswer": "String is immutable; StringBuilder is useful for repeated mutation.",
-      "example": "Build a large text payload in a loop with StringBuilder.",
-      "seniorPerspective": "When is normal concatenation preferable?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "string vs StringBuilder",
+      "shortAnswer": "string is immutable, so repeated concatenation can create intermediate strings. StringBuilder is useful for repeated mutation of larger text.",
+      "detailedAnswer": "string is immutable, so repeated concatenation can create intermediate strings. StringBuilder is useful for repeated mutation of larger text.",
+      "example": "Build a large CSV payload inside a loop with StringBuilder.",
+      "seniorPerspective": "Choose based on measured workload; simple interpolation is usually clearer for small expressions.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "When is normal concatenation preferable?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "C# / .NET",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-3",
+      "id": "q-003",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "class vs struct",
+      "shortAnswer": "A class is a reference type; a struct is a value type intended for small value-like data. Structs are copied by value.",
+      "detailedAnswer": "A class is a reference type; a struct is a value type intended for small value-like data. Structs are copied by value.",
+      "example": "A Point-like value can be represented by a struct.",
+      "seniorPerspective": "Do not claim structs always live on the stack; storage depends on context.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-004",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "interface vs abstract class",
+      "shortAnswer": "An interface defines a contract; an abstract class can also share implementation and state.",
+      "detailedAnswer": "An interface defines a contract; an abstract class can also share implementation and state.",
+      "example": "Use an interface for a service contract and an abstract class only when shared behavior is genuinely part of the model.",
+      "seniorPerspective": "Prefer composition when inheritance would create unnecessary coupling.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-005",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "overloading vs overriding",
+      "shortAnswer": "Overloading changes a method signature; overriding replaces virtual behavior in a derived type.",
+      "detailedAnswer": "Overloading changes a method signature; overriding replaces virtual behavior in a derived type.",
+      "example": "Calculate(int) and Calculate(decimal) are overloads; a derived override is runtime polymorphism.",
+      "seniorPerspective": "Mention compile-time overload resolution versus runtime virtual dispatch.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-006",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "ref, out and in",
+      "shortAnswer": "ref passes an existing variable by reference, out requires assignment by the callee, and in passes a readonly reference.",
+      "detailedAnswer": "ref passes an existing variable by reference, out requires assignment by the callee, and in passes a readonly reference.",
+      "example": "TryParse commonly uses out.",
+      "seniorPerspective": "Use these when their semantics improve the API; return objects or tuples can be clearer.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-007",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "const vs readonly",
+      "shortAnswer": "const is a compile-time constant; readonly can be assigned during declaration or construction and is evaluated at runtime.",
+      "detailedAnswer": "const is a compile-time constant; readonly can be assigned during declaration or construction and is evaluated at runtime.",
+      "example": "A mathematical constant can be const; constructor-supplied state can be readonly.",
+      "seniorPerspective": "Public const values are embedded into consuming assemblies.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-008",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is boxing?",
+      "shortAnswer": "Boxing converts a value type to object or an implemented interface reference, creating an object representation.",
+      "detailedAnswer": "Boxing converts a value type to object or an implemented interface reference, creating an object representation.",
+      "example": "object value = 10 boxes the integer.",
+      "seniorPerspective": "Avoid accidental boxing in hot paths and prefer generic APIs.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-009",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Dictionary vs HashSet",
+      "shortAnswer": "Dictionary stores key/value pairs; HashSet stores unique values and is optimized for membership checks.",
+      "detailedAnswer": "Dictionary stores key/value pairs; HashSet stores unique values and is optimized for membership checks.",
+      "example": "Use Dictionary<int,User> for ID lookup and HashSet<int> for visited IDs.",
+      "seniorPerspective": "Correct equality and hashing are essential for custom key types.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-010",
+      "technology": "C# / .NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "IEnumerable vs IQueryable",
+      "shortAnswer": "IEnumerable represents iteration over objects; IQueryable can build an expression tree that a provider such as EF can translate.",
+      "detailedAnswer": "IEnumerable represents iteration over objects; IQueryable can build an expression tree that a provider such as EF can translate.",
+      "example": "Filter IQueryable before ToList so SQL can do the filtering.",
+      "seniorPerspective": "Watch deferred execution, provider translation and accidental materialization.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-011",
       "technology": "C# / .NET",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "IEnumerable vs IQueryable",
-      "shortAnswer": "IEnumerable operates over objects; IQueryable can translate expressions to a provider such as SQL.",
-      "detailedAnswer": "IEnumerable operates over objects; IQueryable can translate expressions to a provider such as SQL.",
-      "example": "Filter IQueryable before materializing it.",
-      "seniorPerspective": "What does premature ToList change?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "deferred execution in LINQ",
+      "shortAnswer": "Many LINQ operators execute only when enumerated; ToList, ToArray and similar operations materialize results.",
+      "detailedAnswer": "Many LINQ operators execute only when enumerated; ToList, ToArray and similar operations materialize results.",
+      "example": "A query may see changed source data if enumeration happens later.",
+      "seniorPerspective": "Senior answers discuss repeated enumeration, side effects and deliberate materialization.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What does premature ToList change?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "C# / .NET",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-4",
+      "id": "q-012",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "First vs Single",
+      "shortAnswer": "First returns the first match; Single requires exactly one match. The OrDefault variants return the default when no match exists.",
+      "detailedAnswer": "First returns the first match; Single requires exactly one match. The OrDefault variants return the default when no match exists.",
+      "example": "Use Single when duplicate data violates a business invariant.",
+      "seniorPerspective": "Do not use Single merely as a stricter First; it validates uniqueness.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-013",
       "technology": "C# / .NET",
       "difficulty": "Medium",
       "type": "Interview",
       "question": "async/await",
-      "shortAnswer": "It composes asynchronous work without blocking the caller while I/O is pending.",
-      "detailedAnswer": "It composes asynchronous work without blocking the caller while I/O is pending.",
+      "shortAnswer": "async/await composes asynchronous operations without blocking a thread while asynchronous I/O is pending.",
+      "detailedAnswer": "async/await composes asynchronous operations without blocking a thread while asynchronous I/O is pending.",
       "example": "await an HTTP call rather than blocking on Result.",
-      "seniorPerspective": "Why avoid async void?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "seniorPerspective": "Distinguish I/O-bound async from CPU-bound work and propagate cancellation.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why avoid async void?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "C# / .NET",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-5",
+      "id": "q-014",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Task vs Thread",
+      "shortAnswer": "Task represents asynchronous work and is normally scheduled by the runtime; Thread represents an actual OS execution thread.",
+      "detailedAnswer": "Task represents asynchronous work and is normally scheduled by the runtime; Thread represents an actual OS execution thread.",
+      "example": "Use Task for ordinary application async work rather than creating a thread per request.",
+      "seniorPerspective": "Discuss thread-pool starvation, blocking and long-running work.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-015",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Task.WhenAll",
+      "shortAnswer": "WhenAll allows independent asynchronous operations to run concurrently and waits for all of them.",
+      "detailedAnswer": "WhenAll allows independent asynchronous operations to run concurrently and waits for all of them.",
+      "example": "Fetch three independent services concurrently.",
+      "seniorPerspective": "Bound concurrency when fan-out could overwhelm dependencies.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-016",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "CancellationToken",
+      "shortAnswer": "CancellationToken enables cooperative cancellation; code must observe and propagate it.",
+      "detailedAnswer": "CancellationToken enables cooperative cancellation; code must observe and propagate it.",
+      "example": "Pass the request token into an HTTP or database call.",
+      "seniorPerspective": "Cancellation is part of API design, not merely a UI concern.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-017",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "IAsyncEnumerable",
+      "shortAnswer": "IAsyncEnumerable supports asynchronous streaming so consumers do not need the complete result set in memory.",
+      "detailedAnswer": "IAsyncEnumerable supports asynchronous streaming so consumers do not need the complete result set in memory.",
+      "example": "Use await foreach for a large remote result stream.",
+      "seniorPerspective": "Consider cancellation, resource lifetime and backpressure.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-018",
+      "technology": "C# / .NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "delegate vs event",
+      "shortAnswer": "A delegate is a callable reference; an event restricts outside code to subscribing and unsubscribing.",
+      "detailedAnswer": "A delegate is a callable reference; an event restricts outside code to subscribing and unsubscribing.",
+      "example": "A component can expose an event for state changes.",
+      "seniorPerspective": "Watch object lifetimes because long-lived publishers can retain subscribers.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-019",
       "technology": "C# / .NET",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Diagnose high CPU",
-      "shortAnswer": "Correlate CPU with endpoints and deployments, then profile hot paths and validate a measured fix.",
-      "detailedAnswer": "Correlate CPU with endpoints and deployments, then profile hot paths and validate a measured fix.",
-      "example": "Repeated large LINQ materialization can become a CPU hotspot.",
-      "seniorPerspective": "How do you distinguish CPU pressure from starvation?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "How would you design a thread-safe cache?",
+      "shortAnswer": "Define consistency, expiry, eviction and concurrency semantics first; then use concurrent structures and prevent duplicate expensive loads.",
+      "detailedAnswer": "Define consistency, expiry, eviction and concurrency semantics first; then use concurrent structures and prevent duplicate expensive loads.",
+      "example": "A local cache can use ConcurrentDictionary with expiry metadata.",
+      "seniorPerspective": "Discuss stampede prevention, memory bounds, invalidation and distributed caching.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you distinguish CPU pressure from starvation?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "C# / .NET",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-6",
+      "id": "q-020",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you diagnose a .NET memory leak?",
+      "shortAnswer": "Determine whether memory is actually leaking or simply retained, compare heap snapshots and identify unexpected object retention paths.",
+      "detailedAnswer": "Determine whether memory is actually leaking or simply retained, compare heap snapshots and identify unexpected object retention paths.",
+      "example": "An event subscription from a short-lived object to a singleton can keep the object alive.",
+      "seniorPerspective": "Separate managed retention, caches, large allocations and unmanaged resources.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-021",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you diagnose thread-pool starvation?",
+      "shortAnswer": "Look for blocked worker threads, synchronous waits, excessive queued work and rising latency with low useful CPU.",
+      "detailedAnswer": "Look for blocked worker threads, synchronous waits, excessive queued work and rising latency with low useful CPU.",
+      "example": "Calling Result on async I/O across many requests can block worker threads.",
+      "seniorPerspective": "Use metrics, traces and dumps; fix blocking and uncontrolled concurrency.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-022",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you implement retry correctly?",
+      "shortAnswer": "Retry only transient failures, cap attempts and delay, respect cancellation, and use exponential backoff with jitter when appropriate.",
+      "detailedAnswer": "Retry only transient failures, cap attempts and delay, respect cancellation, and use exponential backoff with jitter when appropriate.",
+      "example": "Retry a temporary network timeout but not a validation failure.",
+      "seniorPerspective": "Check idempotency before retrying writes and consider a circuit breaker.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-023",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "lock vs SemaphoreSlim",
+      "shortAnswer": "lock provides synchronous mutual exclusion; SemaphoreSlim can limit concurrency and supports asynchronous waiting.",
+      "detailedAnswer": "lock provides synchronous mutual exclusion; SemaphoreSlim can limit concurrency and supports asynchronous waiting.",
+      "example": "Use SemaphoreSlim(5) to allow five concurrent calls.",
+      "seniorPerspective": "Never hold a synchronous lock across await; choose primitives based on async semantics.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-024",
+      "technology": "C# / .NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you make code testable?",
+      "shortAnswer": "Use small responsibilities, explicit dependencies, deterministic behavior and clear boundaries.",
+      "detailedAnswer": "Use small responsibilities, explicit dependencies, deterministic behavior and clear boundaries.",
+      "example": "Inject an IClock instead of calling DateTime.Now throughout business logic.",
+      "seniorPerspective": "Do not introduce interfaces only for mocking; create useful seams.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "C# / .NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-025",
       "technology": ".NET",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "What is middleware",
-      "shortAnswer": "Middleware is a pipeline component that can inspect or modify requests and responses.",
-      "detailedAnswer": "Middleware is a pipeline component that can inspect or modify requests and responses.",
-      "example": "Correlation middleware adds a request ID before downstream processing.",
-      "seniorPerspective": "Why does ordering matter?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "What is dependency injection?",
+      "shortAnswer": "DI supplies dependencies from outside instead of constructing them inside the class, reducing coupling.",
+      "detailedAnswer": "DI supplies dependencies from outside instead of constructing them inside the class, reducing coupling.",
+      "example": "A controller receives a service through its constructor.",
+      "seniorPerspective": "DI is a composition mechanism, not a reason to abstract everything.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why does ordering matter?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         ".NET",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-7",
+      "id": "q-026",
+      "technology": ".NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Transient vs Scoped vs Singleton",
+      "shortAnswer": "Transient creates a new instance each time; Scoped creates one per request/scope; Singleton shares one instance for the application lifetime.",
+      "detailedAnswer": "Transient creates a new instance each time; Scoped creates one per request/scope; Singleton shares one instance for the application lifetime.",
+      "example": "DbContext is commonly scoped.",
+      "seniorPerspective": "Never capture scoped state in a singleton without an intentional scope strategy.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-027",
+      "technology": ".NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is middleware?",
+      "shortAnswer": "Middleware participates in the HTTP pipeline and can inspect, modify, short-circuit or delegate requests.",
+      "detailedAnswer": "Middleware participates in the HTTP pipeline and can inspect, modify, short-circuit or delegate requests.",
+      "example": "Exception handling and correlation IDs are common middleware concerns.",
+      "seniorPerspective": "Ordering matters because middleware wraps downstream execution.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-028",
+      "technology": ".NET",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is model binding?",
+      "shortAnswer": "Model binding maps route, query, form or body data into action parameters and models.",
+      "detailedAnswer": "Model binding maps route, query, form or body data into action parameters and models.",
+      "example": "A JSON body can bind to a DTO parameter.",
+      "seniorPerspective": "Validate input and avoid binding properties clients should not control.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-029",
       "technology": ".NET",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "Global exception handling",
-      "shortAnswer": "Handle errors at a boundary, map known failures, log context and avoid leaking internals.",
-      "detailedAnswer": "Handle errors at a boundary, map known failures, log context and avoid leaking internals.",
-      "example": "Map a domain conflict to 409 and unexpected failures to a safe 500.",
-      "seniorPerspective": "What should never be returned?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "Authentication vs authorization",
+      "shortAnswer": "Authentication establishes identity; authorization decides what that identity may access or perform.",
+      "detailedAnswer": "Authentication establishes identity; authorization decides what that identity may access or perform.",
+      "example": "JWT validation authenticates and a policy checks permissions.",
+      "seniorPerspective": "Authorization must be enforced server-side.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What should never be returned?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         ".NET",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-8",
+      "id": "q-030",
       "technology": ".NET",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "Secure a Web API",
-      "shortAnswer": "Use authentication, policy authorization, validation, TLS, safe secrets and secure logging.",
-      "detailedAnswer": "Use authentication, policy authorization, validation, TLS, safe secrets and secure logging.",
-      "example": "Validate JWT claims before policy checks.",
-      "seniorPerspective": "Where should authorization happen?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "PUT vs PATCH",
+      "shortAnswer": "PUT generally represents replacement and is intended to be idempotent; PATCH represents partial modification.",
+      "detailedAnswer": "PUT generally represents replacement and is intended to be idempotent; PATCH represents partial modification.",
+      "example": "PUT a complete profile versus PATCH one field.",
+      "seniorPerspective": "Define semantics clearly and validate partial updates.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Where should authorization happen?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         ".NET",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-9",
+      "id": "q-031",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "API idempotency",
+      "shortAnswer": "An operation is idempotent when repeating the same logical request has the same intended final effect.",
+      "detailedAnswer": "An operation is idempotent when repeating the same logical request has the same intended final effect.",
+      "example": "An idempotency key can make a retryable POST safe for a command.",
+      "seniorPerspective": "Design key scope, persistence, expiry and response replay together.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-032",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "global exception handling",
+      "shortAnswer": "Centralized handling maps known failures to safe responses, logs context and prevents internal details from leaking.",
+      "detailedAnswer": "Centralized handling maps known failures to safe responses, logs context and prevents internal details from leaking.",
+      "example": "Return a stable problem response for unexpected errors.",
+      "seniorPerspective": "Keep error contracts consistent and correlate them with telemetry.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-033",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "ProblemDetails",
+      "shortAnswer": "Problem Details is a standard shape for machine-readable HTTP errors, commonly containing status, title and detail.",
+      "detailedAnswer": "Problem Details is a standard shape for machine-readable HTTP errors, commonly containing status, title and detail.",
+      "example": "A validation failure can return a structured problem response.",
+      "seniorPerspective": "Do not expose stack traces or secrets in production responses.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-034",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "configuration and options",
+      "shortAnswer": "ASP.NET Core can combine configuration sources and bind related settings into typed options.",
+      "detailedAnswer": "ASP.NET Core can combine configuration sources and bind related settings into typed options.",
+      "example": "Environment variables can override deployment-specific JSON settings.",
+      "seniorPerspective": "Keep secrets outside source control and validate configuration at startup.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-035",
+      "technology": ".NET",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "health checks",
+      "shortAnswer": "Health checks expose signals about application readiness and liveness and can be used by monitoring or orchestration.",
+      "detailedAnswer": "Health checks expose signals about application readiness and liveness and can be used by monitoring or orchestration.",
+      "example": "Readiness can verify critical dependencies before traffic is accepted.",
+      "seniorPerspective": "Separate readiness from liveness to avoid unnecessary restarts.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-036",
       "technology": ".NET",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "High latency with low CPU",
-      "shortAnswer": "Inspect dependency latency, DB waits, connection pools and thread waits using traces.",
-      "detailedAnswer": "Inspect dependency latency, DB waits, connection pools and thread waits using traces.",
-      "example": "Tracing shows most time waiting on a downstream API.",
-      "seniorPerspective": "Which latency percentile matters?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "How would you secure a public Web API?",
+      "shortAnswer": "Use TLS, strong authentication, server-side authorization, validation, rate limiting, safe secrets, secure headers, auditing and dependency hardening.",
+      "detailedAnswer": "Use TLS, strong authentication, server-side authorization, validation, rate limiting, safe secrets, secure headers, auditing and dependency hardening.",
+      "example": "A policy can require a scope and resource ownership before an update.",
+      "seniorPerspective": "Security is layered; authentication alone is not authorization.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Which latency percentile matters?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         ".NET",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-10",
+      "id": "q-037",
+      "technology": ".NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How would you design a long-running operation?",
+      "shortAnswer": "Accept the request, persist job state, process asynchronously and expose status or completion notification instead of holding HTTP open.",
+      "detailedAnswer": "Accept the request, persist job state, process asynchronously and expose status or completion notification instead of holding HTTP open.",
+      "example": "POST /exports returns a job ID and a worker generates the export.",
+      "seniorPerspective": "Design retries, cancellation, deduplication, durable state and failure recovery.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-038",
+      "technology": ".NET",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you improve ASP.NET Core performance?",
+      "shortAnswer": "Measure first, then optimize database access, allocations, serialization, middleware, network calls and concurrency based on evidence.",
+      "detailedAnswer": "Measure first, then optimize database access, allocations, serialization, middleware, network calls and concurrency based on evidence.",
+      "example": "Profiling may show one repeated database query dominates latency.",
+      "seniorPerspective": "Use profiling and traces rather than guessing.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        ".NET",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-039",
       "technology": "Angular",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "What is a component",
-      "shortAnswer": "A component owns a focused view and its behavior.",
-      "detailedAnswer": "A component owns a focused view and its behavior.",
-      "example": "A user-list component renders data while a service handles HTTP.",
-      "seniorPerspective": "How do you prevent a huge component?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "What is an Angular component?",
+      "shortAnswer": "A component combines a template, state and behavior for a focused part of the UI.",
+      "detailedAnswer": "A component combines a template, state and behavior for a focused part of the UI.",
+      "example": "A product-list component renders products while a service handles data access.",
+      "seniorPerspective": "Keep components focused and move reusable business logic to services.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you prevent a huge component?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Angular",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-11",
+      "id": "q-040",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Reactive forms vs template-driven forms",
+      "shortAnswer": "Reactive forms model controls explicitly in TypeScript and suit complex forms; template-driven forms are simpler for small forms.",
+      "detailedAnswer": "Reactive forms model controls explicitly in TypeScript and suit complex forms; template-driven forms are simpler for small forms.",
+      "example": "A multi-step enterprise form is easier to manage with reactive forms.",
+      "seniorPerspective": "Choose based on complexity, validation and testability.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-041",
+      "technology": "Angular",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is routing?",
+      "shortAnswer": "Angular Router maps URLs to components and manages parameters, guards and lazy-loaded features.",
+      "detailedAnswer": "Angular Router maps URLs to components and manages parameters, guards and lazy-loaded features.",
+      "example": "/orders/42 can activate an order-detail route.",
+      "seniorPerspective": "Routes should reflect navigation and authorization boundaries.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-042",
       "technology": "Angular",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "OnPush",
-      "shortAnswer": "OnPush narrows change detection and works well with immutable/reactive state.",
-      "detailedAnswer": "OnPush narrows change detection and works well with immutable/reactive state.",
-      "example": "Replace an array reference after updates instead of mutating the same reference.",
-      "seniorPerspective": "What can still trigger checking?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "What are Signals?",
+      "shortAnswer": "Signals are reactive state primitives that track where values are read and notify dependent consumers when values change.",
+      "detailedAnswer": "Signals are reactive state primitives that track where values are read and notify dependent consumers when values change.",
+      "example": "signal(0) can feed a computed total and a template.",
+      "seniorPerspective": "Use signals for local/reactive state and observables when stream composition is the better fit.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What can still trigger checking?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Angular",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-12",
+      "id": "q-043",
       "technology": "Angular",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "switchMap vs mergeMap",
-      "shortAnswer": "switchMap keeps the newest inner stream; mergeMap allows concurrent inner streams.",
-      "detailedAnswer": "switchMap keeps the newest inner stream; mergeMap allows concurrent inner streams.",
-      "example": "Use switchMap for typeahead search.",
-      "seniorPerspective": "When is mergeMap better?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "computed vs effect",
+      "shortAnswer": "computed derives reactive state; effect performs a side effect when dependencies change.",
+      "detailedAnswer": "computed derives reactive state; effect performs a side effect when dependencies change.",
+      "example": "computed(() => price() * quantity()) is derived state.",
+      "seniorPerspective": "Prefer computed for derivation and reserve effects for external side effects.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "When is mergeMap better?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Angular",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-13",
+      "id": "q-044",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "OnPush change detection",
+      "shortAnswer": "OnPush lets Angular skip component subtrees when their relevant inputs and triggers have not changed.",
+      "detailedAnswer": "OnPush lets Angular skip component subtrees when their relevant inputs and triggers have not changed.",
+      "example": "Immutable input replacement makes changes explicit.",
+      "seniorPerspective": "Signals read in an OnPush template can also mark the component when they change.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-045",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Observable vs Promise",
+      "shortAnswer": "A Promise represents one eventual result; an Observable represents a stream and can be composed and cancelled.",
+      "detailedAnswer": "A Promise represents one eventual result; an Observable represents a stream and can be composed and cancelled.",
+      "example": "HTTP often emits one value; UI events emit repeatedly.",
+      "seniorPerspective": "Choose based on lifecycle, composition and cancellation needs.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-046",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "switchMap vs mergeMap vs concatMap",
+      "shortAnswer": "switchMap keeps the newest inner stream, mergeMap runs inner streams concurrently, and concatMap queues them.",
+      "detailedAnswer": "switchMap keeps the newest inner stream, mergeMap runs inner streams concurrently, and concatMap queues them.",
+      "example": "Use switchMap for typeahead and concatMap when order matters.",
+      "seniorPerspective": "The choice is about cancellation, concurrency and ordering.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-047",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Subject vs BehaviorSubject",
+      "shortAnswer": "Subject emits to current subscribers; BehaviorSubject stores a current value and emits it to new subscribers.",
+      "detailedAnswer": "Subject emits to current subscribers; BehaviorSubject stores a current value and emits it to new subscribers.",
+      "example": "Use BehaviorSubject when a current state value is meaningful.",
+      "seniorPerspective": "Do not introduce subjects when a simpler signal or observable is enough.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-048",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "How do you prevent subscription leaks?",
+      "shortAnswer": "Tie subscriptions to component or service lifetime and prefer async/template or framework-supported cleanup patterns.",
+      "detailedAnswer": "Tie subscriptions to component or service lifetime and prefer async/template or framework-supported cleanup patterns.",
+      "example": "A component subscription should stop when the component is destroyed.",
+      "seniorPerspective": "Leaks often come from ownership mistakes and long-lived event sources.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-049",
+      "technology": "Angular",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "lazy loading",
+      "shortAnswer": "Lazy loading defers feature code until it is needed, reducing initial bundle work.",
+      "detailedAnswer": "Lazy loading defers feature code until it is needed, reducing initial bundle work.",
+      "example": "Admin routes can load only when an admin navigates there.",
+      "seniorPerspective": "Measure navigation cost and avoid unnecessary fragmentation.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-050",
       "technology": "Angular",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Slow Angular page",
-      "shortAnswer": "Measure rendering, network, bundle and change-detection costs before optimizing.",
-      "detailedAnswer": "Measure rendering, network, bundle and change-detection costs before optimizing.",
-      "example": "Virtualize a huge table after profiling shows DOM work is dominant.",
-      "seniorPerspective": "How do you prevent regression?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "How do you debug a slow Angular page?",
+      "shortAnswer": "Measure network, bundle parsing, rendering, change detection and expensive computations separately.",
+      "detailedAnswer": "Measure network, bundle parsing, rendering, change detection and expensive computations separately.",
+      "example": "Angular and browser DevTools can reveal long tasks and repeated rendering.",
+      "seniorPerspective": "Fix the dominant measured bottleneck and verify before/after metrics.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you prevent regression?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Angular",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-14",
-      "technology": "JavaScript",
-      "difficulty": "Simple",
-      "type": "Interview",
-      "question": "var let const",
-      "shortAnswer": "var is function-scoped; let and const are block-scoped; const prevents rebinding.",
-      "detailedAnswer": "var is function-scoped; let and const are block-scoped; const prevents rebinding.",
-      "example": "A const object can mutate internally but cannot be reassigned.",
-      "seniorPerspective": "Why prefer block scope?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "Why prefer block scope?"
-      ],
-      "tags": [
-        "JavaScript",
-        "simple"
-      ]
-    },
-    {
-      "id": "q-15",
-      "technology": "JavaScript",
-      "difficulty": "Simple",
-      "type": "Interview",
-      "question": "Closure",
-      "shortAnswer": "A function retains access to lexical variables after its outer function returns.",
-      "detailedAnswer": "A function retains access to lexical variables after its outer function returns.",
-      "example": "A counter function keeps its private count.",
-      "seniorPerspective": "How can closures retain memory?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "How can closures retain memory?"
-      ],
-      "tags": [
-        "JavaScript",
-        "simple"
-      ]
-    },
-    {
-      "id": "q-16",
-      "technology": "JavaScript",
-      "difficulty": "Medium",
-      "type": "Interview",
-      "question": "Event loop",
-      "shortAnswer": "Synchronous work runs first; microtasks such as Promise continuations run before later tasks.",
-      "detailedAnswer": "Synchronous work runs first; microtasks such as Promise continuations run before later tasks.",
-      "example": "Promise callbacks commonly run before a timer callback.",
-      "seniorPerspective": "How can microtasks hurt responsiveness?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "How can microtasks hurt responsiveness?"
-      ],
-      "tags": [
-        "JavaScript",
-        "medium"
-      ]
-    },
-    {
-      "id": "q-17",
-      "technology": "JavaScript",
+      "id": "q-051",
+      "technology": "Angular",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Browser memory leak",
-      "shortAnswer": "Compare heap snapshots and retained objects, inspect listeners/timers and verify stabilization.",
-      "detailedAnswer": "Compare heap snapshots and retained objects, inspect listeners/timers and verify stabilization.",
-      "example": "A component adds window listeners without cleanup.",
-      "seniorPerspective": "What retaining path would you inspect?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "How do you design Angular state management?",
+      "shortAnswer": "Start with local state and introduce shared services/signals or a state library only when ownership and cross-feature coordination require it.",
+      "detailedAnswer": "Start with local state and introduce shared services/signals or a state library only when ownership and cross-feature coordination require it.",
+      "example": "A wizard can keep local state while authenticated user state is shared.",
+      "seniorPerspective": "Define source of truth, update ownership and persistence needs first.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What retaining path would you inspect?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
-        "JavaScript",
-        "complex"
+        "Angular",
+        "Complex"
       ]
     },
     {
-      "id": "q-18",
+      "id": "q-052",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you prevent search race conditions?",
+      "shortAnswer": "Debounce input, cancel stale requests or ignore stale responses, and ensure only the latest query can update the UI.",
+      "detailedAnswer": "Debounce input, cancel stale requests or ignore stale responses, and ensure only the latest query can update the UI.",
+      "example": "switchMap can cancel the previous HTTP observable when a new term arrives.",
+      "seniorPerspective": "Also model loading, error and empty states.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-053",
+      "technology": "Angular",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you optimize a large table?",
+      "shortAnswer": "Reduce DOM work with pagination or virtualization, efficient tracking, minimal template computation and server-side data loading.",
+      "detailedAnswer": "Reduce DOM work with pagination or virtualization, efficient tracking, minimal template computation and server-side data loading.",
+      "example": "Virtual scrolling renders only visible rows.",
+      "seniorPerspective": "Measure rendering and data costs before choosing a technique.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Angular",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-054",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "var vs let vs const",
+      "shortAnswer": "let and const are block-scoped; var is function-scoped. const prevents reassignment of the binding, not object mutation.",
+      "detailedAnswer": "let and const are block-scoped; var is function-scoped. const prevents reassignment of the binding, not object mutation.",
+      "example": "const user = {}; user.name = 'A' is valid.",
+      "seniorPerspective": "Prefer const by default and let when reassignment is required.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-055",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "== vs ===",
+      "shortAnswer": "== performs coercion; === compares without implicit type coercion.",
+      "detailedAnswer": "== performs coercion; === compares without implicit type coercion.",
+      "example": "'1' == 1 is true while '1' === 1 is false.",
+      "seniorPerspective": "Prefer strict equality unless coercion is deliberate.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-056",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "closure",
+      "shortAnswer": "A closure is a function together with access to variables from its lexical environment after the outer function returns.",
+      "detailedAnswer": "A closure is a function together with access to variables from its lexical environment after the outer function returns.",
+      "example": "A factory can return a function that retains a private counter.",
+      "seniorPerspective": "Closures can accidentally retain large objects or stale state.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-057",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "event loop",
+      "shortAnswer": "JavaScript coordinates synchronous execution with queued asynchronous work; microtasks such as Promise continuations run before the next task in typical browser scheduling.",
+      "detailedAnswer": "JavaScript coordinates synchronous execution with queued asynchronous work; microtasks such as Promise continuations run before the next task in typical browser scheduling.",
+      "example": "A resolved Promise callback runs before a later timer callback.",
+      "seniorPerspective": "Understanding queue ordering helps explain UI responsiveness.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-058",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "Promise.all",
+      "shortAnswer": "Promise.all resolves when all inputs resolve and rejects when any input rejects.",
+      "detailedAnswer": "Promise.all resolves when all inputs resolve and rejects when any input rejects.",
+      "example": "Fetch three independent resources concurrently with Promise.all.",
+      "seniorPerspective": "It does not automatically cancel already-started operations after rejection.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-059",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "debounce vs throttle",
+      "shortAnswer": "Debounce waits for activity to stop; throttle limits execution frequency.",
+      "detailedAnswer": "Debounce waits for activity to stop; throttle limits execution frequency.",
+      "example": "Debounce search input; throttle scroll work.",
+      "seniorPerspective": "Choose based on whether the final event or bounded frequency matters.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-060",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "map/filter/reduce",
+      "shortAnswer": "map transforms, filter selects, and reduce combines items into an accumulated result.",
+      "detailedAnswer": "map transforms, filter selects, and reduce combines items into an accumulated result.",
+      "example": "prices.map(x => x * 1.1) transforms every price.",
+      "seniorPerspective": "Prefer readability over dense functional chains.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-061",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "interface vs type in TypeScript",
+      "shortAnswer": "Both describe shapes; interfaces are extendable declarations while type aliases also express unions and intersections.",
+      "detailedAnswer": "Both describe shapes; interfaces are extendable declarations while type aliases also express unions and intersections.",
+      "example": "type Status = 'New' | 'Closed' is naturally a type alias.",
+      "seniorPerspective": "Choose the construct that communicates the model clearly.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-062",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you prevent frontend race conditions?",
+      "shortAnswer": "Model asynchronous ownership explicitly, cancel or ignore stale work and make state transitions deterministic.",
+      "detailedAnswer": "Model asynchronous ownership explicitly, cancel or ignore stale work and make state transitions deterministic.",
+      "example": "A stale search response must not overwrite a newer result.",
+      "seniorPerspective": "Use cancellation, sequence IDs or reactive stream operators as appropriate.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-063",
+      "technology": "JavaScript / TypeScript",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "How do you diagnose a browser memory leak?",
+      "shortAnswer": "Compare heap snapshots, inspect retained objects, event listeners and timers, and identify unexpected reachability.",
+      "detailedAnswer": "Compare heap snapshots, inspect retained objects, event listeners and timers, and identify unexpected reachability.",
+      "example": "A global listener can retain a destroyed component.",
+      "seniorPerspective": "Fix ownership and cleanup rather than forcing garbage collection.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "JavaScript / TypeScript",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-064",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "INNER JOIN vs LEFT JOIN",
+      "shortAnswer": "INNER JOIN returns matches from both sides; LEFT JOIN preserves every left row and uses null for missing right rows.",
+      "detailedAnswer": "INNER JOIN returns matches from both sides; LEFT JOIN preserves every left row and uses null for missing right rows.",
+      "example": "List all customers including those with no orders using LEFT JOIN.",
+      "seniorPerspective": "Conditions in WHERE can accidentally turn a LEFT JOIN into an inner-like result.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-065",
       "technology": "SQL",
       "difficulty": "Simple",
       "type": "Interview",
       "question": "WHERE vs HAVING",
       "shortAnswer": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
       "detailedAnswer": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
-      "example": "Filter 2026 orders with WHERE, then customers over a SUM threshold with HAVING.",
-      "seniorPerspective": "Can HAVING work without GROUP BY?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "example": "WHERE filters orders by date; HAVING filters customers with more than five orders.",
+      "seniorPerspective": "Use WHERE when the condition does not depend on aggregation.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Can HAVING work without GROUP BY?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "SQL",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-19",
+      "id": "q-066",
       "technology": "SQL",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "INNER vs LEFT JOIN",
-      "shortAnswer": "INNER keeps matches; LEFT keeps all left rows and nulls unmatched right values.",
-      "detailedAnswer": "INNER keeps matches; LEFT keeps all left rows and nulls unmatched right values.",
-      "example": "List customers with or without orders using LEFT JOIN.",
-      "seniorPerspective": "How can WHERE undo a LEFT JOIN?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "GROUP BY",
+      "shortAnswer": "GROUP BY forms groups so aggregates such as COUNT and SUM can operate per group.",
+      "detailedAnswer": "GROUP BY forms groups so aggregates such as COUNT and SUM can operate per group.",
+      "example": "Count orders per customer.",
+      "seniorPerspective": "Every selected expression must be grouped or aggregated according to SQL rules.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How can WHERE undo a LEFT JOIN?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "SQL",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-20",
+      "id": "q-067",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "primary key vs unique constraint",
+      "shortAnswer": "A primary key identifies the entity row; a unique constraint enforces uniqueness for another candidate attribute.",
+      "detailedAnswer": "A primary key identifies the entity row; a unique constraint enforces uniqueness for another candidate attribute.",
+      "example": "CustomerId can be primary while Email is unique.",
+      "seniorPerspective": "Account for nullable behavior and business rules.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-068",
+      "technology": "SQL",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "clustered vs nonclustered index",
+      "shortAnswer": "A clustered index defines the table's row storage order in SQL Server; a nonclustered index is a separate access structure.",
+      "detailedAnswer": "A clustered index defines the table's row storage order in SQL Server; a nonclustered index is a separate access structure.",
+      "example": "Use nonclustered indexes for important selective access patterns.",
+      "seniorPerspective": "Indexes trade storage and write cost for read performance.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-069",
       "technology": "SQL",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "What is an index",
-      "shortAnswer": "An index can reduce row lookup work for selected access patterns but adds write/storage cost.",
-      "detailedAnswer": "An index can reduce row lookup work for selected access patterns but adds write/storage cost.",
-      "example": "Index CustomerId and CreatedAt for customer history queries.",
-      "seniorPerspective": "Why can too many indexes hurt?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "What makes an index useful?",
+      "shortAnswer": "An index helps when its keys support filtering, joining or ordering with useful selectivity and acceptable maintenance cost.",
+      "detailedAnswer": "An index helps when its keys support filtering, joining or ordering with useful selectivity and acceptable maintenance cost.",
+      "example": "An index on OrderDate can support date-range queries.",
+      "seniorPerspective": "Do not index every column; use workload and execution plans.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why can too many indexes hurt?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "SQL",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-21",
+      "id": "q-070",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "covering index",
+      "shortAnswer": "A covering index contains all columns needed by a query so extra lookups may be avoided.",
+      "detailedAnswer": "A covering index contains all columns needed by a query so extra lookups may be avoided.",
+      "example": "An index on CustomerId including Status can satisfy a narrow query.",
+      "seniorPerspective": "Covering indexes improve reads but increase storage and write cost.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-071",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "transactions and ACID",
+      "shortAnswer": "Transactions group changes atomically and aim to provide atomicity, consistency, isolation and durability.",
+      "detailedAnswer": "Transactions group changes atomically and aim to provide atomicity, consistency, isolation and durability.",
+      "example": "Debit and credit operations belong in one transaction.",
+      "seniorPerspective": "Isolation and transaction scope strongly affect concurrency.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-072",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "isolation levels",
+      "shortAnswer": "Isolation levels define visibility between concurrent transactions and trade consistency guarantees against concurrency.",
+      "detailedAnswer": "Isolation levels define visibility between concurrent transactions and trade consistency guarantees against concurrency.",
+      "example": "READ COMMITTED and snapshot-based approaches have different blocking behavior.",
+      "seniorPerspective": "Choose the weakest isolation that still meets correctness.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-073",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "deadlocks",
+      "shortAnswer": "A deadlock occurs when transactions wait on resources held by each other and the database aborts one victim.",
+      "detailedAnswer": "A deadlock occurs when transactions wait on resources held by each other and the database aborts one victim.",
+      "example": "Two transactions update the same tables in opposite order.",
+      "seniorPerspective": "Consistent access order, short transactions and good indexing reduce risk.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-074",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "CTE vs temp table",
+      "shortAnswer": "A CTE is a statement-scoped query expression; a temp table materializes intermediate data and can be indexed and reused.",
+      "detailedAnswer": "A CTE is a statement-scoped query expression; a temp table materializes intermediate data and can be indexed and reused.",
+      "example": "Use a temp table when a large intermediate result is reused several times.",
+      "seniorPerspective": "Neither is inherently faster; inspect the plan and workload.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-075",
+      "technology": "SQL",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "EXISTS vs IN",
+      "shortAnswer": "Both can express membership; EXISTS is often natural for correlated existence checks.",
+      "detailedAnswer": "Both can express membership; EXISTS is often natural for correlated existence checks.",
+      "example": "Find customers for whom at least one order exists using EXISTS.",
+      "seniorPerspective": "Optimizer behavior depends on query shape and indexes.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-076",
       "technology": "SQL",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Slow query investigation",
-      "shortAnswer": "Capture exact SQL and parameters, inspect plans, estimates, indexes, blocking and statistics.",
-      "detailedAnswer": "Capture exact SQL and parameters, inspect plans, estimates, indexes, blocking and statistics.",
-      "example": "A non-sargable predicate can force a scan.",
-      "seniorPerspective": "Why might an index not help?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "How do you tune a slow SQL query?",
+      "shortAnswer": "Reproduce with realistic data, inspect the execution plan, identify scans/lookups/sorts/joins, validate indexes and statistics, then measure again.",
+      "detailedAnswer": "Reproduce with realistic data, inspect the execution plan, identify scans/lookups/sorts/joins, validate indexes and statistics, then measure again.",
+      "example": "A missing selective index may change a scan into a seek.",
+      "seniorPerspective": "Tune from evidence: plan, runtime waits, cardinality and workload.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why might an index not help?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "SQL",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-22",
+      "id": "q-077",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "parameter sniffing",
+      "shortAnswer": "A compiled plan can be influenced by initial parameter values; skewed data can make that plan poor for later values.",
+      "detailedAnswer": "A compiled plan can be influenced by initial parameter values; skewed data can make that plan poor for later values.",
+      "example": "A highly skewed customer filter may have different optimal plans.",
+      "seniorPerspective": "Diagnose with actual plans and runtime behavior before choosing mitigations.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-078",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "connection pool exhaustion",
+      "shortAnswer": "Find why connections remain busy: slow queries, long transactions, leaked contexts or excessive concurrency.",
+      "detailedAnswer": "Find why connections remain busy: slow queries, long transactions, leaked contexts or excessive concurrency.",
+      "example": "A downstream outage can make requests hold DB connections while waiting.",
+      "seniorPerspective": "Increasing the pool alone can move the bottleneck to the database.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-079",
+      "technology": "SQL",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "pagination for large tables",
+      "shortAnswer": "Offset pagination is simple but high offsets can be expensive; keyset pagination uses a stable ordered key to fetch the next page efficiently.",
+      "detailedAnswer": "Offset pagination is simple but high offsets can be expensive; keyset pagination uses a stable ordered key to fetch the next page efficiently.",
+      "example": "WHERE Id > @lastId ORDER BY Id implements keyset paging.",
+      "seniorPerspective": "Define stable ordering and duplicate handling.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "SQL",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-080",
       "technology": "System Design",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "Horizontal scaling",
-      "shortAnswer": "Add more service instances instead of only making one machine larger.",
-      "detailedAnswer": "Add more service instances instead of only making one machine larger.",
-      "example": "Run several stateless API instances behind a load balancer.",
-      "seniorPerspective": "Where should shared state live?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "latency vs throughput",
+      "shortAnswer": "Latency is time per operation; throughput is completed work per unit time.",
+      "detailedAnswer": "Latency is time per operation; throughput is completed work per unit time.",
+      "example": "An API can have high throughput but poor tail latency.",
+      "seniorPerspective": "Define target percentiles and throughput units.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Where should shared state live?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "System Design",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-23",
+      "id": "q-081",
+      "technology": "System Design",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "horizontal vs vertical scaling",
+      "shortAnswer": "Vertical scaling adds resources to a machine; horizontal scaling adds instances.",
+      "detailedAnswer": "Vertical scaling adds resources to a machine; horizontal scaling adds instances.",
+      "example": "Multiple API instances behind a load balancer are horizontal scaling.",
+      "seniorPerspective": "Horizontal scaling requires handling shared state and data bottlenecks.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-082",
+      "technology": "System Design",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "load balancer",
+      "shortAnswer": "A load balancer distributes traffic across healthy instances and can perform health checks and routing.",
+      "detailedAnswer": "A load balancer distributes traffic across healthy instances and can perform health checks and routing.",
+      "example": "Requests are distributed across three stateless APIs.",
+      "seniorPerspective": "Session affinity can simplify some designs but reduces flexibility.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-083",
+      "technology": "System Design",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "cache",
+      "shortAnswer": "A cache stores frequently accessed data closer to consumers to reduce latency and backend load.",
+      "detailedAnswer": "A cache stores frequently accessed data closer to consumers to reduce latency and backend load.",
+      "example": "Cache product metadata with a short TTL.",
+      "seniorPerspective": "Discuss invalidation, staleness, eviction and stampede protection.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-084",
       "technology": "System Design",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "Idempotency",
-      "shortAnswer": "Repeating an operation should have the same intended effect as doing it once.",
-      "detailedAnswer": "Repeating an operation should have the same intended effect as doing it once.",
-      "example": "A payment request uses a unique idempotency key.",
-      "seniorPerspective": "Where should the key be stored?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "SQL vs NoSQL",
+      "shortAnswer": "SQL fits relational consistency, transactions and rich queries; NoSQL may fit flexible models or particular scale/access patterns.",
+      "detailedAnswer": "SQL fits relational consistency, transactions and rich queries; NoSQL may fit flexible models or particular scale/access patterns.",
+      "example": "A transactional order model often benefits from relational semantics.",
+      "seniorPerspective": "Choose from access patterns and correctness requirements.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Where should the key be stored?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "System Design",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-24",
+      "id": "q-085",
       "technology": "System Design",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "Why use a queue",
-      "shortAnswer": "Queues decouple producers and consumers, absorb bursts and enable asynchronous work.",
-      "detailedAnswer": "Queues decouple producers and consumers, absorb bursts and enable asynchronous work.",
-      "example": "An API queues email work instead of waiting for the provider.",
-      "seniorPerspective": "How do you handle duplicate delivery?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "queue vs synchronous API",
+      "shortAnswer": "A queue decouples producers and consumers and absorbs bursts; synchronous APIs provide immediate request-response behavior.",
+      "detailedAnswer": "A queue decouples producers and consumers and absorbs bursts; synchronous APIs provide immediate request-response behavior.",
+      "example": "Queue image processing rather than holding an HTTP request open.",
+      "seniorPerspective": "Queues introduce retries, duplicates and eventual consistency.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you handle duplicate delivery?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "System Design",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-25",
+      "id": "q-086",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "idempotency",
+      "shortAnswer": "Idempotency makes retries safe by preventing duplicate logical effects.",
+      "detailedAnswer": "Idempotency makes retries safe by preventing duplicate logical effects.",
+      "example": "Store an idempotency key and original result for a command.",
+      "seniorPerspective": "Define key scope, atomicity, expiry and replay behavior.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-087",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "CAP theorem",
+      "shortAnswer": "During a network partition, a distributed system cannot simultaneously guarantee both strong consistency and availability in the simplified CAP model.",
+      "detailedAnswer": "During a network partition, a distributed system cannot simultaneously guarantee both strong consistency and availability in the simplified CAP model.",
+      "example": "A system may reject writes during partition rather than serve conflicting data.",
+      "seniorPerspective": "CAP is specifically about partition scenarios, not a permanent choose-two rule.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-088",
+      "technology": "System Design",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "event-driven architecture",
+      "shortAnswer": "Services communicate through events representing facts, reducing temporal coupling but increasing eventual consistency and operational complexity.",
+      "detailedAnswer": "Services communicate through events representing facts, reducing temporal coupling but increasing eventual consistency and operational complexity.",
+      "example": "OrderCreated can trigger fulfillment and notifications.",
+      "seniorPerspective": "Discuss delivery guarantees, ordering, replay, schema evolution and idempotency.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-089",
       "technology": "System Design",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Notification service",
-      "shortAnswer": "Persist intent, queue work, scale workers, add retries, idempotency, dead letters and observability.",
-      "detailedAnswer": "Persist intent, queue work, scale workers, add retries, idempotency, dead letters and observability.",
-      "example": "POST stores notification ID and queues delivery.",
-      "seniorPerspective": "What if the provider is down?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "design a URL shortener",
+      "shortAnswer": "Generate unique short IDs, persist mappings, serve redirects efficiently and cache hot keys.",
+      "detailedAnswer": "Generate unique short IDs, persist mappings, serve redirects efficiently and cache hot keys.",
+      "example": "A write creates a short-to-long mapping and reads resolve it.",
+      "seniorPerspective": "Discuss collisions, hot keys, abuse, analytics, storage and availability.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What if the provider is down?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "System Design",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-26",
-      "technology": "AI & Agentic AI",
-      "difficulty": "Simple",
-      "type": "Interview",
-      "question": "What is an LLM",
-      "shortAnswer": "A model predicts tokens from context learned during training and can generate useful but unsupported text.",
-      "detailedAnswer": "A model predicts tokens from context learned during training and can generate useful but unsupported text.",
-      "example": "Summarize a supplied document.",
-      "seniorPerspective": "Why does context quality matter?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "Why does context quality matter?"
-      ],
-      "tags": [
-        "AI & Agentic AI",
-        "simple"
-      ]
-    },
-    {
-      "id": "q-27",
-      "technology": "AI & Agentic AI",
-      "difficulty": "Simple",
-      "type": "Interview",
-      "question": "Embeddings",
-      "shortAnswer": "Embeddings map content to vectors so semantic similarity can be measured.",
-      "detailedAnswer": "Embeddings map content to vectors so semantic similarity can be measured.",
-      "example": "Retrieve document chunks close to a question vector.",
-      "seniorPerspective": "How do chunk size and overlap matter?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "How do chunk size and overlap matter?"
-      ],
-      "tags": [
-        "AI & Agentic AI",
-        "simple"
-      ]
-    },
-    {
-      "id": "q-28",
-      "technology": "AI & Agentic AI",
-      "difficulty": "Medium",
-      "type": "Interview",
-      "question": "RAG",
-      "shortAnswer": "Retrieval-Augmented Generation retrieves external context before generation.",
-      "detailedAnswer": "Retrieval-Augmented Generation retrieves external context before generation.",
-      "example": "Retrieve policy chunks and require answers to use them.",
-      "seniorPerspective": "How do you evaluate retrieval separately?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "How do you evaluate retrieval separately?"
-      ],
-      "tags": [
-        "AI & Agentic AI",
-        "medium"
-      ]
-    },
-    {
-      "id": "q-29",
-      "technology": "AI & Agentic AI",
+      "id": "q-090",
+      "technology": "System Design",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Secure AI agent",
-      "shortAnswer": "Treat model output as untrusted input and enforce least privilege, validation and audit controls.",
-      "detailedAnswer": "Treat model output as untrusted input and enforce least privilege, validation and audit controls.",
-      "example": "A delete request must pass policy checks before execution.",
-      "seniorPerspective": "How do you prevent prompt injection?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "design a notification system",
+      "shortAnswer": "Persist requests, queue delivery work, process by channel, track attempts and handle provider failures.",
+      "detailedAnswer": "Persist requests, queue delivery work, process by channel, track attempts and handle provider failures.",
+      "example": "Email, SMS and push can use separate workers.",
+      "seniorPerspective": "Discuss rate limits, deduplication, preferences, retries and observability.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you prevent prompt injection?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
-        "AI & Agentic AI",
-        "complex"
+        "System Design",
+        "Complex"
       ]
     },
     {
-      "id": "q-30",
-      "technology": "Production Debugging",
-      "difficulty": "Simple",
-      "type": "Interview",
-      "question": "RCA",
-      "shortAnswer": "Root cause analysis identifies the underlying cause rather than only the symptom.",
-      "detailedAnswer": "Root cause analysis identifies the underlying cause rather than only the symptom.",
-      "example": "A timeout may be caused by exhausted DB connections.",
-      "seniorPerspective": "What prevention follows?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "What prevention follows?"
-      ],
-      "tags": [
-        "Production Debugging",
-        "simple"
-      ]
-    },
-    {
-      "id": "q-31",
-      "technology": "Production Debugging",
-      "difficulty": "Simple",
-      "type": "Interview",
-      "question": "Correlation ID",
-      "shortAnswer": "A correlation ID connects logs and traces across service boundaries.",
-      "detailedAnswer": "A correlation ID connects logs and traces across service boundaries.",
-      "example": "The gateway ID appears in downstream logs.",
-      "seniorPerspective": "Should clients choose IDs freely?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "Should clients choose IDs freely?"
-      ],
-      "tags": [
-        "Production Debugging",
-        "simple"
-      ]
-    },
-    {
-      "id": "q-32",
-      "technology": "Production Debugging",
-      "difficulty": "Medium",
-      "type": "Interview",
-      "question": "Slow API investigation",
-      "shortAnswer": "Check percentiles, traffic, CPU, thread pool, DB, dependencies, pools and traces.",
-      "detailedAnswer": "Check percentiles, traffic, CPU, thread pool, DB, dependencies, pools and traces.",
-      "example": "Tracing shows most time in a database query.",
-      "seniorPerspective": "What distinguishes tail latency?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "What distinguishes tail latency?"
-      ],
-      "tags": [
-        "Production Debugging",
-        "medium"
-      ]
-    },
-    {
-      "id": "q-33",
-      "technology": "Production Debugging",
+      "id": "q-091",
+      "technology": "System Design",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Production deadlock",
-      "shortAnswer": "Capture deadlock evidence, inspect resource order and transaction scope, then fix conflicting access patterns.",
-      "detailedAnswer": "Capture deadlock evidence, inspect resource order and transaction scope, then fix conflicting access patterns.",
-      "example": "Two transactions update tables in opposite order.",
-      "seniorPerspective": "Why is retry not the full fix?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "design a rate limiter",
+      "shortAnswer": "Choose token bucket, leaky bucket or sliding-window semantics and enforce a key such as user or API key.",
+      "detailedAnswer": "Choose token bucket, leaky bucket or sliding-window semantics and enforce a key such as user or API key.",
+      "example": "Return 429 when the limit is exceeded.",
+      "seniorPerspective": "For multiple instances, coordinate state through a shared store or gateway and design failure behavior.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why is retry not the full fix?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
-        "Production Debugging",
-        "complex"
+        "System Design",
+        "Complex"
       ]
     },
     {
-      "id": "q-34",
+      "id": "q-092",
+      "technology": "System Design",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "design for high availability",
+      "shortAnswer": "Remove single points of failure, distribute across failure domains, add health-based routing and define graceful degradation.",
+      "detailedAnswer": "Remove single points of failure, distribute across failure domains, add health-based routing and define graceful degradation.",
+      "example": "Run multiple API instances and redundant dependency paths.",
+      "seniorPerspective": "Availability is end-to-end; dependencies and operations also matter.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "System Design",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-093",
       "technology": "Security",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "Authentication vs authorization",
-      "shortAnswer": "Authentication establishes identity; authorization decides permissions.",
-      "detailedAnswer": "Authentication establishes identity; authorization decides permissions.",
-      "example": "A valid token authenticates while a policy decides whether approval is allowed.",
-      "seniorPerspective": "Why is UI-only authorization insufficient?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "authentication vs authorization",
+      "shortAnswer": "Authentication verifies identity; authorization determines allowed actions or resources.",
+      "detailedAnswer": "Authentication verifies identity; authorization determines allowed actions or resources.",
+      "example": "A valid token authenticates while a policy checks permission.",
+      "seniorPerspective": "Never use UI visibility as the security boundary.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why is UI-only authorization insufficient?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Security",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-35",
+      "id": "q-094",
       "technology": "Security",
-      "difficulty": "Medium",
-      "type": "Interview",
-      "question": "Protect secrets",
-      "shortAnswer": "Keep secrets out of source control and client bundles; use managed runtime secret storage and rotation.",
-      "detailedAnswer": "Keep secrets out of source control and client bundles; use managed runtime secret storage and rotation.",
-      "example": "Load an API key server-side from a secret provider.",
-      "seniorPerspective": "What if a secret is committed?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
-      "followUps": [
-        "What if a secret is committed?"
-      ],
-      "tags": [
-        "Security",
-        "medium"
-      ]
-    },
-    {
-      "id": "q-36",
-      "technology": "Security",
-      "difficulty": "Medium",
+      "difficulty": "Simple",
       "type": "Interview",
       "question": "SQL injection",
-      "shortAnswer": "Untrusted input changes SQL structure when concatenated into queries.",
-      "detailedAnswer": "Untrusted input changes SQL structure when concatenated into queries.",
-      "example": "Parameterized queries treat input as data.",
-      "seniorPerspective": "Why is escaping fragile?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "shortAnswer": "Injection occurs when untrusted input changes SQL structure. Parameterized queries keep data separate from SQL syntax.",
+      "detailedAnswer": "Injection occurs when untrusted input changes SQL structure. Parameterized queries keep data separate from SQL syntax.",
+      "example": "Pass a search term as a parameter instead of concatenating SQL.",
+      "seniorPerspective": "Validation helps but is not a substitute for parameterization.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why is escaping fragile?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Security",
-        "medium"
+        "Simple"
       ]
     },
     {
-      "id": "q-37",
+      "id": "q-095",
+      "technology": "Security",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "XSS",
+      "shortAnswer": "Cross-site scripting occurs when attacker-controlled content is interpreted as executable browser content.",
+      "detailedAnswer": "Cross-site scripting occurs when attacker-controlled content is interpreted as executable browser content.",
+      "example": "Rendering untrusted HTML without safe handling can execute attacker code.",
+      "seniorPerspective": "Use contextual output encoding and carefully controlled sanitization.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Security",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-096",
+      "technology": "Security",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "CSRF",
+      "shortAnswer": "CSRF tricks a browser into sending an authenticated request to a site; defenses include SameSite cookies and anti-forgery tokens for cookie-based flows.",
+      "detailedAnswer": "CSRF tricks a browser into sending an authenticated request to a site; defenses include SameSite cookies and anti-forgery tokens for cookie-based flows.",
+      "example": "A state-changing form uses an anti-forgery mechanism.",
+      "seniorPerspective": "Understand how the browser sends credentials before choosing defenses.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Security",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-097",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "JWT risks",
+      "shortAnswer": "JWTs are signed tokens, not encrypted by default. Risks include weak validation, long lifetimes and trusting claims without authorization.",
+      "detailedAnswer": "JWTs are signed tokens, not encrypted by default. Risks include weak validation, long lifetimes and trusting claims without authorization.",
+      "example": "Validate issuer, audience, signature and expiration as required.",
+      "seniorPerspective": "A valid token does not automatically authorize every resource.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Security",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-098",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "least privilege",
+      "shortAnswer": "Grant only the permissions required for a task and duration.",
+      "detailedAnswer": "Grant only the permissions required for a task and duration.",
+      "example": "A reporting service gets read-only access to required data.",
+      "seniorPerspective": "Apply least privilege to users, services, agents and infrastructure.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Security",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-099",
+      "technology": "Security",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "secrets management",
+      "shortAnswer": "Keep secrets out of source control, client bundles and logs; use protected runtime secret storage and rotation.",
+      "detailedAnswer": "Keep secrets out of source control, client bundles and logs; use protected runtime secret storage and rotation.",
+      "example": "Load a server API credential from a managed secret store.",
+      "seniorPerspective": "If leaked, revoke and rotate it and investigate the exposure.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Security",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-100",
       "technology": "Security",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Secure file upload",
-      "shortAnswer": "Validate type/size, randomize names, isolate storage, authorize access and scan when appropriate.",
-      "detailedAnswer": "Validate type/size, randomize names, isolate storage, authorize access and scan when appropriate.",
-      "example": "Store uploaded files under generated IDs outside executable paths.",
-      "seniorPerspective": "What is path traversal?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "secure file upload",
+      "shortAnswer": "Validate authorization, size and content, generate server-side names, isolate storage and prevent executable handling.",
+      "detailedAnswer": "Validate authorization, size and content, generate server-side names, isolate storage and prevent executable handling.",
+      "example": "Store uploads using generated IDs outside executable paths.",
+      "seniorPerspective": "Protect against path traversal and do not trust filenames or MIME types.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What is path traversal?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Security",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-38",
+      "id": "q-101",
       "technology": "Performance",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "Latency vs throughput",
-      "shortAnswer": "Latency is time per operation; throughput is work completed per unit time.",
-      "detailedAnswer": "Latency is time per operation; throughput is work completed per unit time.",
-      "example": "An API can have high throughput while tail latency is poor.",
-      "seniorPerspective": "Why use percentiles?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "latency vs throughput vs scalability",
+      "shortAnswer": "Latency measures response time, throughput measures work per time, and scalability describes how capacity changes with load/resources.",
+      "detailedAnswer": "Latency measures response time, throughput measures work per time, and scalability describes how capacity changes with load/resources.",
+      "example": "Adding instances can increase throughput while a database limits latency.",
+      "seniorPerspective": "Choose the metric that matches the user-facing goal.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "Why use percentiles?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Performance",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-39",
+      "id": "q-102",
+      "technology": "Performance",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "what is caching good for?",
+      "shortAnswer": "Caching helps when data is expensive to fetch or compute and can tolerate a defined freshness model.",
+      "detailedAnswer": "Caching helps when data is expensive to fetch or compute and can tolerate a defined freshness model.",
+      "example": "Cache reference data for a short TTL.",
+      "seniorPerspective": "Caching introduces staleness, memory pressure and stampede risks.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Performance",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-103",
       "technology": "Performance",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "N+1 query",
-      "shortAnswer": "One parent query followed by one query per parent creates excessive round trips.",
-      "detailedAnswer": "One parent query followed by one query per parent creates excessive round trips.",
-      "example": "Load required related data with a suitable join/projection.",
-      "seniorPerspective": "How do you prove N+1?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "N+1 queries",
+      "shortAnswer": "N+1 occurs when one parent query causes one extra query per parent, creating excessive round trips.",
+      "detailedAnswer": "N+1 occurs when one parent query causes one extra query per parent, creating excessive round trips.",
+      "example": "Load 100 orders then make 100 customer queries.",
+      "seniorPerspective": "Use joins, projections or batching and verify with SQL traces.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you prove N+1?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Performance",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-40",
+      "id": "q-104",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "p95 vs average",
+      "shortAnswer": "Average can hide outliers; p95 is the latency at which 95% of observations are at or below that value.",
+      "detailedAnswer": "Average can hide outliers; p95 is the latency at which 95% of observations are at or below that value.",
+      "example": "100ms average with 2s p95 indicates tail latency trouble.",
+      "seniorPerspective": "Track percentiles and correlate them with dependencies and traffic.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-105",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "why pagination helps",
+      "shortAnswer": "Pagination bounds data transferred, processed and rendered per request.",
+      "detailedAnswer": "Pagination bounds data transferred, processed and rendered per request.",
+      "example": "Return 50 records rather than 100,000.",
+      "seniorPerspective": "Large datasets also require suitable indexes and possibly keyset pagination.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-106",
       "technology": "Performance",
       "difficulty": "Complex",
       "type": "Interview",
-      "question": "Slow endpoint",
-      "shortAnswer": "Break latency into application, DB, network and downstream spans and optimize the dominant measured component.",
-      "detailedAnswer": "Break latency into application, DB, network and downstream spans and optimize the dominant measured component.",
-      "example": "Tracing shows most time in a dependency.",
-      "seniorPerspective": "How do you prevent regressions?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "how do you optimize an API?",
+      "shortAnswer": "Measure first, isolate the dominant component, optimize the database/network/application path and verify with load tests and telemetry.",
+      "detailedAnswer": "Measure first, isolate the dominant component, optimize the database/network/application path and verify with load tests and telemetry.",
+      "example": "Tracing may show most latency is a downstream call.",
+      "seniorPerspective": "Set performance budgets and regression checks.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "How do you prevent regressions?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Performance",
-        "complex"
+        "Complex"
       ]
     },
     {
-      "id": "q-41",
+      "id": "q-107",
+      "technology": "Performance",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "how do you optimize Angular?",
+      "shortAnswer": "Reduce initial bundle work, unnecessary rendering, expensive template computation, DOM size and duplicate requests.",
+      "detailedAnswer": "Reduce initial bundle work, unnecessary rendering, expensive template computation, DOM size and duplicate requests.",
+      "example": "Lazy-load features and avoid expensive repeated template calculations.",
+      "seniorPerspective": "Use browser and Angular profiling and compare real metrics.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Performance",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-108",
+      "technology": "Production Debugging",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "what is RCA?",
+      "shortAnswer": "Root cause analysis identifies the underlying mechanism that allowed an incident to occur, not only the symptom.",
+      "detailedAnswer": "Root cause analysis identifies the underlying mechanism that allowed an incident to occur, not only the symptom.",
+      "example": "A timeout may be caused by connection-pool saturation.",
+      "seniorPerspective": "Include contributing factors and prevention actions.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-109",
+      "technology": "Production Debugging",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "correlation ID",
+      "shortAnswer": "A correlation ID links logs and traces for one logical request across service boundaries.",
+      "detailedAnswer": "A correlation ID links logs and traces for one logical request across service boundaries.",
+      "example": "The gateway request ID appears in downstream logs.",
+      "seniorPerspective": "Use structured logs and propagate identifiers consistently.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-110",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "API suddenly becomes slow",
+      "shortAnswer": "Compare latency percentiles, traffic, CPU, memory, thread pool, database waits, downstream dependencies and recent changes.",
+      "detailedAnswer": "Compare latency percentiles, traffic, CPU, memory, thread pool, database waits, downstream dependencies and recent changes.",
+      "example": "Tracing can show whether time is spent in SQL or a remote service.",
+      "seniorPerspective": "Mitigate customer impact first, then diagnose permanently.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-111",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "local works but production fails",
+      "shortAnswer": "Compare configuration, versions, data shape, network policies, scale, flags and dependency behavior.",
+      "detailedAnswer": "Compare configuration, versions, data shape, network policies, scale, flags and dependency behavior.",
+      "example": "Production may have different timeout settings or data cardinality.",
+      "seniorPerspective": "Reproducible deployments and environment parity reduce this problem.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-112",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "database CPU spikes",
+      "shortAnswer": "Identify top queries and plans, correlate with traffic/deployments, and inspect indexing, cardinality and concurrency.",
+      "detailedAnswer": "Identify top queries and plans, correlate with traffic/deployments, and inspect indexing, cardinality and concurrency.",
+      "example": "A plan regression after data growth can cause a scan.",
+      "seniorPerspective": "Do not add indexes blindly; measure read and write effects.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-113",
+      "technology": "Production Debugging",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "memory grows continuously",
+      "shortAnswer": "Determine whether growth follows traffic, retained objects, cache size, large allocations or unmanaged resources; compare snapshots.",
+      "detailedAnswer": "Determine whether growth follows traffic, retained objects, cache size, large allocations or unmanaged resources; compare snapshots.",
+      "example": "An unbounded dictionary can mimic a memory leak.",
+      "seniorPerspective": "Set cache limits and reproduce under representative load.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-114",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "high CPU after release",
+      "shortAnswer": "Compare CPU by endpoint/version, profile hot paths and inspect algorithmic changes, serialization and data processing.",
+      "detailedAnswer": "Compare CPU by endpoint/version, profile hot paths and inspect algorithmic changes, serialization and data processing.",
+      "example": "A new O(n²) operation may appear only at production data sizes.",
+      "seniorPerspective": "Rollback or disable the feature if necessary, then validate the fix.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-115",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "queue backlog grows",
+      "shortAnswer": "Measure arrival rate, processing rate, concurrency, failures and retries. If arrivals exceed sustainable processing, backlog grows.",
+      "detailedAnswer": "Measure arrival rate, processing rate, concurrency, failures and retries. If arrivals exceed sustainable processing, backlog grows.",
+      "example": "Adding consumers helps only if downstream dependencies can handle the extra load.",
+      "seniorPerspective": "Use backpressure, bounded retries and dead-letter handling.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-116",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "duplicate background jobs",
+      "shortAnswer": "Assume retries or at-least-once delivery can happen and make job handling idempotent using durable operation keys/state.",
+      "detailedAnswer": "Assume retries or at-least-once delivery can happen and make job handling idempotent using durable operation keys/state.",
+      "example": "Record completion for a business operation so a retry does not repeat the effect.",
+      "seniorPerspective": "Define correctness semantics; distributed locks alone are not always enough.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-117",
+      "technology": "Production Debugging",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "incident response order",
+      "shortAnswer": "Stabilize and protect users first, gather evidence, identify the likely failure domain, communicate status and apply a safe mitigation.",
+      "detailedAnswer": "Stabilize and protect users first, gather evidence, identify the likely failure domain, communicate status and apply a safe mitigation.",
+      "example": "Roll back a bad release or disable a failing feature when appropriate.",
+      "seniorPerspective": "After recovery, perform RCA and track preventive actions.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Production Debugging",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-118",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "What is RAG?",
+      "shortAnswer": "Retrieval-Augmented Generation retrieves external context and supplies it to a model before generation.",
+      "detailedAnswer": "Retrieval-Augmented Generation retrieves external context and supplies it to a model before generation.",
+      "example": "Retrieve relevant documentation passages before answering a policy question.",
+      "seniorPerspective": "Evaluate retrieval quality separately from generation quality.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-119",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "embeddings",
+      "shortAnswer": "Embeddings represent content as vectors so semantically similar items can be retrieved by vector similarity.",
+      "detailedAnswer": "Embeddings represent content as vectors so semantically similar items can be retrieved by vector similarity.",
+      "example": "A query can retrieve documentation with different wording but similar meaning.",
+      "seniorPerspective": "Chunking, metadata, model choice and distance metric affect results.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-120",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "what is an AI agent?",
+      "shortAnswer": "An agent is a model-driven workflow that can choose tools, observe results and continue toward a goal.",
+      "detailedAnswer": "An agent is a model-driven workflow that can choose tools, observe results and continue toward a goal.",
+      "example": "An agent can inspect a ticket, retrieve documents and analyze logs.",
+      "seniorPerspective": "Use deterministic workflows where possible because autonomy adds failure modes.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-121",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "how do you reduce hallucinations?",
+      "shortAnswer": "Ground responses in trusted context, constrain tools, validate structured outputs and measure factual accuracy.",
+      "detailedAnswer": "Ground responses in trusted context, constrain tools, validate structured outputs and measure factual accuracy.",
+      "example": "Require evidence from retrieved documents and allow an insufficient-evidence result.",
+      "seniorPerspective": "Prompting alone is not a reliability guarantee.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-122",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "how do you secure an AI agent?",
+      "shortAnswer": "Treat model output and retrieved content as untrusted, enforce least privilege on tools, validate actions and audit decisions.",
+      "detailedAnswer": "Treat model output and retrieved content as untrusted, enforce least privilege on tools, validate actions and audit decisions.",
+      "example": "A model-suggested database change still needs server-side authorization.",
+      "seniorPerspective": "Prompt injection cannot be solved solely by adding instructions.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-123",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "evaluate a RAG system",
+      "shortAnswer": "Measure retrieval quality, answer correctness, groundedness, latency, cost and no-answer behavior with a representative evaluation set.",
+      "detailedAnswer": "Measure retrieval quality, answer correctness, groundedness, latency, cost and no-answer behavior with a representative evaluation set.",
+      "example": "Use labeled questions with expected evidence and evaluate retrieval separately from generation.",
+      "seniorPerspective": "Include adversarial, ambiguous and no-answer cases.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-124",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "single agent vs multi-agent",
+      "shortAnswer": "Multiple agents can separate specialized responsibilities but add coordination, latency, cost and failure modes.",
+      "detailedAnswer": "Multiple agents can separate specialized responsibilities but add coordination, latency, cost and failure modes.",
+      "example": "A planner plus specialist workers may help when responsibilities are genuinely distinct.",
+      "seniorPerspective": "Start with the simplest architecture that meets reliability needs.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-125",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Complex",
+      "type": "Interview",
+      "question": "make an AI workflow reliable",
+      "shortAnswer": "Combine deterministic validation, constrained tools, bounded retries, checkpoints, idempotency, human approval for risky actions and observability.",
+      "detailedAnswer": "Combine deterministic validation, constrained tools, bounded retries, checkpoints, idempotency, human approval for risky actions and observability.",
+      "example": "An agent drafts a change but policy gates and tests decide whether it can be applied.",
+      "seniorPerspective": "Treat the model as a probabilistic component inside a deterministic safety envelope.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Complex"
+      ]
+    },
+    {
+      "id": "q-126",
       "technology": "Behavioral",
       "difficulty": "Simple",
       "type": "Interview",
-      "question": "Difficult technical problem",
-      "shortAnswer": "Use a concise situation, responsibility, actions, reasoning and result.",
-      "detailedAnswer": "Use a concise situation, responsibility, actions, reasoning and result.",
-      "example": "Explain one technical decision you personally made.",
-      "seniorPerspective": "What would you do differently now?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "Tell me about yourself for a senior role",
+      "shortAnswer": "Give a concise present-past-future story: current engineering scope, strongest skills and the problems you want to solve next.",
+      "detailedAnswer": "Give a concise present-past-future story: current engineering scope, strongest skills and the problems you want to solve next.",
+      "example": "Keep it around one to two minutes and connect experience to the role.",
+      "seniorPerspective": "Do not recite the resume line by line; emphasize ownership and impact.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What would you do differently now?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Behavioral",
-        "simple"
+        "Simple"
       ]
     },
     {
-      "id": "q-42",
+      "id": "q-127",
+      "technology": "Behavioral",
+      "difficulty": "Simple",
+      "type": "Interview",
+      "question": "Tell me about a difficult technical problem",
+      "shortAnswer": "Use Situation, Task, Action and Result, focusing on your reasoning and measurable outcome.",
+      "detailedAnswer": "Use Situation, Task, Action and Result, focusing on your reasoning and measurable outcome.",
+      "example": "Explain the signal, investigation, decision, implementation and result.",
+      "seniorPerspective": "Be specific about your contribution rather than only saying 'we fixed it'.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Simple"
+      ]
+    },
+    {
+      "id": "q-128",
       "technology": "Behavioral",
       "difficulty": "Medium",
       "type": "Interview",
-      "question": "Code review disagreement",
-      "shortAnswer": "Focus on requirements, evidence and maintainability rather than ownership.",
-      "detailedAnswer": "Focus on requirements, evidence and maintainability rather than ownership.",
-      "example": "Use tests or measurements to resolve ambiguous trade-offs.",
-      "seniorPerspective": "What if the reviewer still disagrees?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "Tell me about a production incident",
+      "shortAnswer": "Explain impact, mitigation, communication, root cause and prevention.",
+      "detailedAnswer": "Explain impact, mitigation, communication, root cause and prevention.",
+      "example": "Describe evidence used to narrow the failure domain.",
+      "seniorPerspective": "Show ownership and learning without blaming individuals.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What if the reviewer still disagrees?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Behavioral",
-        "medium"
+        "Medium"
       ]
     },
     {
-      "id": "q-43",
+      "id": "q-129",
       "technology": "Behavioral",
-      "difficulty": "Complex",
+      "difficulty": "Medium",
       "type": "Interview",
-      "question": "Lead without authority",
-      "shortAnswer": "Build alignment with evidence, a small proposal and measurable outcomes.",
-      "detailedAnswer": "Build alignment with evidence, a small proposal and measurable outcomes.",
-      "example": "Prototype a change and document migration steps.",
-      "seniorPerspective": "What if the team rejects it?",
-      "commonMistakes": "Answer directly first, then give an example and a trade-off.",
+      "question": "technical disagreement",
+      "shortAnswer": "Describe the disagreement objectively, evidence considered, alignment process and outcome.",
+      "detailedAnswer": "Describe the disagreement objectively, evidence considered, alignment process and outcome.",
+      "example": "Use requirements, measurements or maintainability evidence rather than authority.",
+      "seniorPerspective": "Show that you can change your position when evidence changes.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
       "followUps": [
-        "What if the team rejects it?"
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
       ],
       "tags": [
         "Behavioral",
-        "complex"
+        "Medium"
+      ]
+    },
+    {
+      "id": "q-130",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Interview",
+      "question": "What would you do differently?",
+      "shortAnswer": "Choose a genuine improvement and explain what you learned and what changed in your approach.",
+      "detailedAnswer": "Choose a genuine improvement and explain what you learned and what changed in your approach.",
+      "example": "A missed scalability assumption can lead to earlier load testing.",
+      "seniorPerspective": "Focus on learning and changed behavior rather than self-criticism.",
+      "commonMistakes": "Answer directly, explain why it matters, give one concrete example, then mention a trade-off or failure mode.",
+      "followUps": [
+        "What trade-off would you consider?",
+        "How would you test or diagnose this in production?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Medium"
       ]
     }
   ]
