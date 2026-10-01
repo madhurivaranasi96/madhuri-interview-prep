@@ -1,4 +1,5 @@
 name: Deploy Angular app to GitHub Pages
+# GitHub Pages deployment verified after enabling Pages in repository settings.
 on:
   push:
     branches: [main]
