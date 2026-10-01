@@ -88,6 +88,7 @@ export class TopicComponent{
     this.route.paramMap.subscribe(params=>{
       const map:any={
         csharp:'C# / .NET',
+        dotnet:'.NET',
         angular:'Angular',
         javascript:'JavaScript',
         sql:'SQL',
