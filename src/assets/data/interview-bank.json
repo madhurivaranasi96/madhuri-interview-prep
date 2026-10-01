@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "sourceNote": "Senior full-stack interview master bank for a 7-year developer. Main questions are conventional interview questions, grouped only into Simple, Medium and Complex. Every question has a clear interview answer, a concrete real-world engineering example, deeper reasoning, senior-level considerations, common mistakes and concept-specific follow-ups. Scenario-based questions remain separate.",
   "questions": [
     {
@@ -1245,6 +1245,342 @@
       "tags": [
         "AI & Agentic AI",
         "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-001",
+      "technology": "Performance",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "What is the difference between latency, throughput and resource utilization?",
+      "shortAnswer": "Latency is the time for one operation, throughput is how much work the system completes per unit time, and utilization describes how heavily resources such as CPU, memory or database connections are used.",
+      "detailedAnswer": "These metrics describe different failure modes. A system can be low-latency at low traffic and collapse under load because utilization approaches a saturation point.",
+      "example": "An API can have good average latency but poor throughput if every request consumes too much CPU. A reporting job may have high throughput while deliberately using more CPU during an off-peak window.",
+      "seniorPerspective": "I always name the metric before proposing an optimization.",
+      "commonMistakes": "Optimizing average latency while p95 is poor; confusing throughput with latency; ignoring saturation.",
+      "followUps": [
+        "Why is p95 useful?",
+        "What happens near resource saturation?",
+        "Which metric would you monitor for an API?"
+      ],
+      "tags": [
+        "Performance",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-002",
+      "technology": "Performance",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "Why is measuring performance before optimization important?",
+      "shortAnswer": "Without a baseline, it is difficult to know whether a change helped, hurt another metric or simply moved the bottleneck.",
+      "detailedAnswer": "A good baseline includes representative traffic, p95 or p99 latency, error rate and resource usage. The same workload should be used after the change.",
+      "example": "If an API takes 900 ms, profiling may show 700 ms is SQL time. Rewriting a C# loop that costs 5 ms is unlikely to produce a meaningful improvement.",
+      "seniorPerspective": "Senior optimization is evidence-driven rather than based on code that merely looks slow.",
+      "commonMistakes": "Optimizing the most visible code instead of the dominant cost; using only local benchmarks; ignoring tail latency.",
+      "followUps": [
+        "How do you choose a representative workload?",
+        "Which percentile would you track?",
+        "How do you validate a performance fix?"
+      ],
+      "tags": [
+        "Performance",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-003",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "How does caching improve performance and what problems can it introduce?",
+      "shortAnswer": "Caching avoids repeated expensive work by reusing data, but it introduces freshness, invalidation, memory and consistency concerns.",
+      "detailedAnswer": "I define what can be stale, how long it can be stale, how invalidation happens and what occurs when the cache is unavailable.",
+      "example": "A product catalog that changes every few minutes can be cached for a short TTL. A customer's current account balance should not be served from a stale cache without a business rule allowing that behavior.",
+      "seniorPerspective": "The senior decision is whether the consistency trade-off is acceptable for the business operation.",
+      "commonMistakes": "Caching highly dynamic data; no eviction policy; cache stampede; treating cache as the source of truth.",
+      "followUps": [
+        "What is cache-aside?",
+        "How do you prevent stampedes?",
+        "What happens when the cache is unavailable?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-004",
+      "technology": "Performance",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is connection pooling and why does it matter for database performance?",
+      "shortAnswer": "Connection pooling reuses database connections instead of establishing a new physical connection for every operation. It reduces connection setup overhead but the pool is still a finite resource.",
+      "detailedAnswer": "A pool that is exhausted can cause requests to wait. Long-running queries and leaked connections can therefore look like application latency problems.",
+      "example": "If an API opens a new database connection for every request and traffic spikes, connection creation and database authentication can become expensive. Pooling reuses connections while limiting concurrency.",
+      "seniorPerspective": "I monitor pool waits together with SQL duration and request latency.",
+      "commonMistakes": "Opening connections and never disposing them; increasing pool size without checking database capacity; confusing pooled connections with unlimited connections.",
+      "followUps": [
+        "What causes pool exhaustion?",
+        "How does async disposal help?",
+        "Should pool size always be increased?"
+      ],
+      "tags": [
+        "Performance",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-005",
+      "technology": "Performance",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How would you investigate high API p99 latency when average latency looks normal?",
+      "shortAnswer": "I would segment requests by endpoint, dependency, instance, region and request characteristics and inspect traces and percentile distributions rather than relying on the average.",
+      "detailedAnswer": "Tail latency often comes from contention, retries, queueing or outliers. The fix should target the source of the long tail rather than making the average path faster.",
+      "example": "If average latency is 150 ms but p99 is 5 seconds, a small fraction of requests may be hitting a slow SQL plan, lock wait or downstream timeout. Distributed tracing can show where those tail requests spend time.",
+      "seniorPerspective": "I would compare p50, p95 and p99 before and after the change and verify error rates did not increase.",
+      "commonMistakes": "Optimizing only the median; increasing timeouts to hide slow dependencies; ignoring retry amplification.",
+      "followUps": [
+        "How do retries affect p99?",
+        "How would you identify the slow dependency?",
+        "When should a timeout be reduced?"
+      ],
+      "tags": [
+        "Performance",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-006",
+      "technology": "Performance",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "What is backpressure and why is it important in distributed systems?",
+      "shortAnswer": "Backpressure prevents producers from overwhelming consumers by bounding queues, concurrency or ingestion rates.",
+      "detailedAnswer": "Backpressure protects system stability. The product decision is whether to queue, throttle, reject or degrade when demand exceeds sustainable capacity.",
+      "example": "If an API accepts files faster than a worker can process them, an unbounded queue grows until memory or storage is exhausted. A bounded queue can slow or reject producers when capacity is reached.",
+      "seniorPerspective": "I define capacity limits and observable overload behavior rather than allowing queues to grow without bounds.",
+      "commonMistakes": "Unbounded queues; unlimited worker concurrency; retry storms during overload; no user-visible overload policy.",
+      "followUps": [
+        "How do you implement bounded concurrency?",
+        "What metrics show overload?",
+        "When should an API return 429?"
+      ],
+      "tags": [
+        "Performance",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-007",
+      "technology": "Behavioral",
+      "difficulty": "Simple",
+      "type": "Interview Question",
+      "question": "How would you answer 'Tell me about yourself' for a 7-year software engineer interview?",
+      "shortAnswer": "I would give a concise career summary, current technical strengths, the kinds of systems I have worked on, and what I am looking for next. I would keep it relevant to the role rather than narrating every job.",
+      "detailedAnswer": "The senior signal is progression: increasing scope, judgment, ownership and impact. The answer should create clear threads for the interviewer to explore.",
+      "example": "A strong two-minute answer can cover progression from implementation to owning features, debugging production issues, making design decisions and collaborating across teams, followed by the technologies most relevant to the job.",
+      "seniorPerspective": "I prepare a flexible version that can be tailored to backend, full-stack or platform roles without memorizing a script.",
+      "commonMistakes": "Listing every technology; reading the resume aloud; giving personal history unrelated to the role; making unsupported claims.",
+      "followUps": [
+        "How has your role changed over seven years?",
+        "What are your strongest technical areas?",
+        "What kind of role are you targeting?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Simple",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-008",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "Tell me about a technical disagreement you had with a teammate. How did you handle it?",
+      "shortAnswer": "I would explain the decision, the evidence behind my position, the other person's concern, how we tested or compared the options, and the final outcome. I would avoid framing the story as proving someone wrong.",
+      "detailedAnswer": "Senior behavior is evidence-based influence: understand the other constraint, make the disagreement concrete, and keep the relationship separate from the technical decision.",
+      "example": "For a debate about caching versus fixing a slow query, I could profile the endpoint, show that an index removed most of the latency, agree to revisit caching after measuring production behavior, and document the decision.",
+      "seniorPerspective": "I focus on what I personally did and what I learned, not on blaming the other engineer.",
+      "commonMistakes": "Saying the other person was wrong; giving no action of your own; ending with 'we agreed' without explaining why.",
+      "followUps": [
+        "What would you do if they still disagreed?",
+        "Did you change your mind?",
+        "What did you learn?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-009",
+      "technology": "Behavioral",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "Tell me about a production failure you were responsible for. What did you learn?",
+      "shortAnswer": "I would own the part I controlled, explain how I mitigated the impact, identify the root cause, and describe the process or technical change that prevents recurrence.",
+      "detailedAnswer": "A senior answer demonstrates accountability without pretending one person caused every system failure. The learning should change future engineering behavior.",
+      "example": "If a release caused an unexpected error spike, I would explain the rollback or mitigation, the evidence that identified the change, the missing test or guardrail, and the follow-up monitoring or deployment improvement.",
+      "seniorPerspective": "I would quantify impact where possible and be ready for detailed follow-up about what I would do differently.",
+      "commonMistakes": "Blaming another team; presenting a failure with no personal contribution; claiming 'we added tests' without explaining what test or why it closes the gap.",
+      "followUps": [
+        "What was the root cause?",
+        "What would you do differently?",
+        "How did you verify the fix?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-010",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "Tell me about a time you influenced a technical decision without having authority.",
+      "shortAnswer": "I would describe the decision, stakeholders, constraints, evidence I gathered, how I communicated it and the outcome. Influence should come from clarity and trust rather than title.",
+      "detailedAnswer": "At seven years, the interviewer is often looking for influence across boundaries: making decisions clearer for others and accepting the team's final decision once the evidence is considered.",
+      "example": "For a proposed architecture change, I could compare operational cost, migration risk and delivery time, run a small proof of concept, and use the evidence in a design review so the team could choose an incremental approach.",
+      "seniorPerspective": "I would distinguish influencing a decision from forcing my preferred solution.",
+      "commonMistakes": "Claiming the team followed because of seniority; focusing on meetings rather than decisions; ignoring legitimate opposing constraints.",
+      "followUps": [
+        "What if your recommendation was rejected?",
+        "How did you build alignment?",
+        "What did you learn from the final decision?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-011",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "How do you handle ambiguous requirements as a senior developer?",
+      "shortAnswer": "I turn ambiguity into explicit assumptions, identify the highest-risk unknowns, confirm the business outcome, and propose a small implementation that can validate the direction before large investment.",
+      "detailedAnswer": "Senior engineers reduce ambiguity for the team. The goal is not to wait for a perfect specification but to make uncertainty visible and manageable.",
+      "example": "If a product request says 'make the dashboard faster,' I would clarify the user journey and target metric, measure current latency, identify the bottleneck and agree on a measurable acceptance criterion before redesigning the system.",
+      "seniorPerspective": "I document decisions and assumptions so later changes can be made intentionally rather than rediscovering why the design exists.",
+      "commonMistakes": "Starting implementation with hidden assumptions; asking endless clarification questions; solving the wrong problem efficiently.",
+      "followUps": [
+        "How do you proceed if the stakeholder is unavailable?",
+        "What assumptions would you document?",
+        "When would you stop and escalate?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-012",
+      "technology": "Behavioral",
+      "difficulty": "Complex",
+      "type": "Interview Question",
+      "question": "Tell me about a time you mentored or enabled another engineer.",
+      "shortAnswer": "I would focus on how I helped the person become more independent, not just on the task I completed for them.",
+      "detailedAnswer": "Senior impact includes multiplying team capability. The strongest example shows a repeatable practice such as design reviews, debugging walkthroughs or documentation.",
+      "example": "For a developer struggling with a production issue, I could guide them through log correlation, hypothesis formation and validation, then let them implement the fix while I reviewed the approach. A useful outcome is that they handled a similar issue independently later.",
+      "seniorPerspective": "I explain the coaching choice and the measurable or observable improvement in the person's independence.",
+      "commonMistakes": "Taking over the task; teaching only through theory; presenting another engineer's success as my own.",
+      "followUps": [
+        "How did you adapt your mentoring style?",
+        "What did the engineer do independently later?",
+        "What would you improve about your approach?"
+      ],
+      "tags": [
+        "Behavioral",
+        "Complex",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-013",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "What is the difference between an AI agent and a normal LLM call?",
+      "shortAnswer": "A normal LLM call produces an answer from a prompt. An agentic workflow can plan or select actions, call tools, inspect results and continue toward a goal under defined constraints.",
+      "detailedAnswer": "Agentic behavior increases capability and risk. Reliability comes from deterministic tool boundaries, authorization, timeouts, budgets and auditability around the model.",
+      "example": "A support assistant can retrieve an issue, search approved documentation, analyze logs and draft a proposed fix. Each tool call should have explicit permissions and structured inputs rather than giving the model unrestricted system access.",
+      "seniorPerspective": "I separate probabilistic reasoning from deterministic business controls.",
+      "commonMistakes": "Giving an agent unrestricted tools; no timeout or cost budget; trusting model-generated parameters without validation.",
+      "followUps": [
+        "How do you secure tools?",
+        "How do you stop infinite loops?",
+        "When is a simple LLM call better?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Medium",
+        "Interview Question",
+        "7+ Years",
+        "Practical"
+      ]
+    },
+    {
+      "id": "extra-014",
+      "technology": "AI & Agentic AI",
+      "difficulty": "Medium",
+      "type": "Interview Question",
+      "question": "How would you reduce hallucinations in an enterprise AI assistant?",
+      "shortAnswer": "I would improve retrieval quality, constrain the answer to approved context, require citations where appropriate, allow explicit 'I don't know' behavior and evaluate against representative questions.",
+      "detailedAnswer": "Hallucination reduction is a system problem, not just a prompt problem. Retrieval, authorization, model choice, output validation and evaluation all contribute.",
+      "example": "For an internal support assistant, retrieve only documents the user can access, include source metadata, instruct the model to answer only from supplied evidence, and return no-answer when retrieval confidence is insufficient.",
+      "seniorPerspective": "I would measure unsupported-answer rate and retrieval misses separately.",
+      "commonMistakes": "Adding a stronger prompt without measuring retrieval; exposing private documents; forcing an answer when evidence is missing.",
+      "followUps": [
+        "How do you detect unsupported claims?",
+        "What if two sources conflict?",
+        "How do you evaluate a no-answer policy?"
+      ],
+      "tags": [
+        "AI & Agentic AI",
+        "Medium",
         "Interview Question",
         "7+ Years",
         "Practical"
