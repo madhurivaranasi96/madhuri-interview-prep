@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "sourceNote": "Senior full-stack interview master bank for a 7-year developer. Main questions are conventional interview questions, grouped only into Simple, Medium and Complex. Every question has a clear interview answer, a concrete real-world engineering example, deeper reasoning, senior-level considerations, common mistakes and concept-specific follow-ups. Scenario-based questions remain separate.",
   "questions": [
     {
@@ -25,7 +25,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between a class and a struct in C#."
+      "memoryCue": "Remember it as: the difference between a class and a struct in C#.",
+      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
     },
     {
       "id": "master-002",
@@ -50,7 +51,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between interface and abstract class in C#."
+      "memoryCue": "Remember it as: the difference between interface and abstract class in C#.",
+      "codeExample": "public interface IPaymentGateway\n{\n    Task<bool> PayAsync(decimal amount);\n}\n\npublic abstract class GatewayBase\n{\n    protected void Log(string message) => Console.WriteLine(message);\n}"
     },
     {
       "id": "master-003",
@@ -75,7 +77,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between IEnumerable and IQueryable."
+      "memoryCue": "Remember it as: the difference between IEnumerable and IQueryable.",
+      "codeExample": "IEnumerable<Transaction> inMemory =\n    transactions.Where(t => t.Amount > 100);\n\nIQueryable<Transaction> database =\n    db.Transactions.Where(t => t.Amount > 100);"
     },
     {
       "id": "master-004",
@@ -100,7 +103,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: async and await used for in C#."
+      "memoryCue": "Remember it as: async and await used for in C#.",
+      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n{\n    return await db.Transactions.FindAsync(id);\n}"
     },
     {
       "id": "master-005",
@@ -125,7 +129,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Transient, Scoped and Singleton lifetimes in ASP.NET Core dependency injection."
+      "memoryCue": "Remember it as: Transient, Scoped and Singleton lifetimes in ASP.NET Core dependency injection.",
+      "codeExample": "public class TransactionService(ILogger logger)\n{\n    public void Process() => logger.Log(\"Transaction processed\");\n}\n\nbuilder.Services.AddScoped<TransactionService>();"
     },
     {
       "id": "master-006",
@@ -150,7 +155,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: middleware in ASP.NET Core."
+      "memoryCue": "Remember it as: middleware in ASP.NET Core.",
+      "codeExample": "app.UseExceptionHandler(\"/error\");\napp.UseAuthentication();\napp.UseAuthorization();\napp.MapControllers();"
     },
     {
       "id": "master-007",
@@ -175,7 +181,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: dependency injection and why is it useful."
+      "memoryCue": "Remember it as: dependency injection and why is it useful.",
+      "codeExample": "public class TransactionService(ILogger logger)\n{\n    public void Process() => logger.Log(\"Transaction processed\");\n}\n\nbuilder.Services.AddScoped<TransactionService>();"
     },
     {
       "id": "master-008",
@@ -200,7 +207,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between a component and a service in Angular."
+      "memoryCue": "Remember it as: the difference between a component and a service in Angular.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-009",
@@ -225,7 +233,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between an Observable and a Promise."
+      "memoryCue": "Remember it as: the difference between an Observable and a Promise.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-010",
@@ -250,7 +259,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Angular change detection."
+      "memoryCue": "Remember it as: Angular change detection.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-011",
@@ -275,7 +285,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: a closure in JavaScript."
+      "memoryCue": "Remember it as: a closure in JavaScript.",
+      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
     },
     {
       "id": "master-012",
@@ -300,7 +311,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between let, const and var."
+      "memoryCue": "Remember it as: the difference between let, const and var.",
+      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
     },
     {
       "id": "master-013",
@@ -325,7 +337,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between INNER JOIN and LEFT JOIN."
+      "memoryCue": "Remember it as: the difference between INNER JOIN and LEFT JOIN.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-014",
@@ -350,7 +363,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: an index and why does it improve query performance."
+      "memoryCue": "Remember it as: an index and why does it improve query performance.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-015",
@@ -375,7 +389,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: a transaction."
+      "memoryCue": "Remember it as: a transaction.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-016",
@@ -400,7 +415,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the main components you consider when designing a backend service."
+      "memoryCue": "Remember it as: the main components you consider when designing a backend service.",
+      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
     },
     {
       "id": "master-017",
@@ -425,7 +441,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between authentication and authorization."
+      "memoryCue": "Remember it as: the difference between authentication and authorization.",
+      "codeExample": "builder.Services.AddAuthentication(\"Bearer\")\n    .AddJwtBearer();\n\nbuilder.Services.AddAuthorization(options =>\n    options.AddPolicy(\"CanApprove\", p => p.RequireRole(\"Approver\")));"
     },
     {
       "id": "master-018",
@@ -450,7 +467,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: RAG and why is it useful."
+      "memoryCue": "Remember it as: RAG and why is it useful.",
+      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
     },
     {
       "id": "master-019",
@@ -475,7 +493,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between Task.WhenAll and awaiting tasks sequentially."
+      "memoryCue": "Remember it as: the difference between Task.WhenAll and awaiting tasks sequentially.",
+      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n{\n    return await db.Transactions.FindAsync(id);\n}"
     },
     {
       "id": "master-020",
@@ -500,7 +519,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: deferred execution in LINQ and why can it surprise developers."
+      "memoryCue": "Remember it as: deferred execution in LINQ and why can it surprise developers.",
+      "codeExample": "var successful = transactions\n    .Where(t => t.Status == TransactionStatus.Success)\n    .OrderByDescending(t => t.CreatedAt)\n    .Take(50)\n    .ToList();"
     },
     {
       "id": "master-021",
@@ -525,7 +545,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: exception handling affect API design."
+      "memoryCue": "Remember it as: exception handling affect API design.",
+      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
     },
     {
       "id": "master-022",
@@ -550,7 +571,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: ASP.NET Core request cancellation work and why should services honor CancellationToken."
+      "memoryCue": "Remember it as: ASP.NET Core request cancellation work and why should services honor CancellationToken.",
+      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
     },
     {
       "id": "master-023",
@@ -575,7 +597,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between authentication and authorization middleware in ASP.NET Core."
+      "memoryCue": "Remember it as: the difference between authentication and authorization middleware in ASP.NET Core.",
+      "codeExample": "app.UseExceptionHandler(\"/error\");\napp.UseAuthentication();\napp.UseAuthorization();\napp.MapControllers();"
     },
     {
       "id": "master-024",
@@ -600,7 +623,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you prevent an N+1 query problem in EF Core."
+      "memoryCue": "Remember it as: How would you prevent an N+1 query problem in EF Core.",
+      "codeExample": "public async Task<Transaction?> GetAsync(int id)\n{\n    return await db.Transactions\n        .AsNoTracking()\n        .SingleOrDefaultAsync(x => x.Id == id);\n}"
     },
     {
       "id": "master-025",
@@ -625,7 +649,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: switchMap help with search or autocomplete."
+      "memoryCue": "Remember it as: switchMap help with search or autocomplete.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-026",
@@ -650,7 +675,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between reactive forms and template-driven forms."
+      "memoryCue": "Remember it as: the difference between reactive forms and template-driven forms.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-027",
@@ -675,7 +701,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Angular signals and when would you use them."
+      "memoryCue": "Remember it as: Angular signals and when would you use them.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-028",
@@ -700,7 +727,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the JavaScript event loop work."
+      "memoryCue": "Remember it as: the JavaScript event loop work.",
+      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
     },
     {
       "id": "master-029",
@@ -725,7 +753,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between interface and type in TypeScript."
+      "memoryCue": "Remember it as: the difference between interface and type in TypeScript.",
+      "codeExample": "async function loadTransaction(id: number): Promise<Transaction> {\n  const response = await fetch('/api/transactions/' + id);\n  if (!response.ok) throw new Error('Request failed');\n  return response.json();\n}"
     },
     {
       "id": "master-030",
@@ -750,7 +779,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between WHERE and HAVING."
+      "memoryCue": "Remember it as: the difference between WHERE and HAVING.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-031",
@@ -775,7 +805,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: a deadlock and how do you reduce deadlocks in SQL Server."
+      "memoryCue": "Remember it as: a deadlock and how do you reduce deadlocks in SQL Server.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-032",
@@ -800,7 +831,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: parameter sniffing in SQL Server."
+      "memoryCue": "Remember it as: parameter sniffing in SQL Server.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-033",
@@ -825,7 +857,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you design a URL shortening service."
+      "memoryCue": "Remember it as: How would you design a URL shortening service.",
+      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
     },
     {
       "id": "master-034",
@@ -850,7 +883,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: an IDOR vulnerability and how do you prevent it."
+      "memoryCue": "Remember it as: an IDOR vulnerability and how do you prevent it.",
+      "codeExample": "builder.Services.AddAuthentication(\"Bearer\")\n    .AddJwtBearer();\n\nbuilder.Services.AddAuthorization(options =>\n    options.AddPolicy(\"CanApprove\", p => p.RequireRole(\"Approver\")));"
     },
     {
       "id": "master-035",
@@ -875,7 +909,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: garbage collection work in .NET and how can a memory leak still occur."
+      "memoryCue": "Remember it as: garbage collection work in .NET and how can a memory leak still occur.",
+      "codeExample": "int value = 10;\nobject boxed = value;     // boxing\nint copy = (int)boxed;    // unboxing\n\n// Prefer List<int> over ArrayList."
     },
     {
       "id": "master-036",
@@ -900,7 +935,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you diagnose ThreadPool starvation in an ASP.NET Core application."
+      "memoryCue": "Remember it as: How would you diagnose ThreadPool starvation in an ASP.NET Core application.",
+      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
     },
     {
       "id": "master-037",
@@ -925,7 +961,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you design an idempotent API operation."
+      "memoryCue": "Remember it as: How would you design an idempotent API operation.",
+      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
     },
     {
       "id": "master-038",
@@ -950,7 +987,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you design a high-throughput ASP.NET Core API."
+      "memoryCue": "Remember it as: How would you design a high-throughput ASP.NET Core API.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "master-039",
@@ -975,7 +1013,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between optimistic and pessimistic concurrency."
+      "memoryCue": "Remember it as: the difference between optimistic and pessimistic concurrency.",
+      "codeExample": "public async Task<Result> ExecuteAsync(Request request)\n{\n    Validate(request);\n    var result = await dependency.ExecuteAsync(request);\n    return Map(result);\n}"
     },
     {
       "id": "master-040",
@@ -1000,7 +1039,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you improve performance in a large Angular application."
+      "memoryCue": "Remember it as: How would you improve performance in a large Angular application.",
+      "codeExample": "transactions$ = this.http.get<Transaction[]>('/api/transactions');\n\n// Template:\n// @for (t of transactions$ | async; track t.id) {\n//   {{ t.amount }}\n// }"
     },
     {
       "id": "master-041",
@@ -1025,7 +1065,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you prevent stale HTTP results and race conditions in an Angular application."
+      "memoryCue": "Remember it as: How would you prevent stale HTTP results and race conditions in an Angular application.",
+      "codeExample": "[HttpGet(\"{id:int}\")]\npublic async Task<ActionResult<TransactionDto>> Get(int id)\n{\n    var item = await service.GetAsync(id);\n    return item is null ? NotFound() : Ok(item);\n}"
     },
     {
       "id": "master-042",
@@ -1050,7 +1091,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you troubleshoot a query that suddenly became slow in production."
+      "memoryCue": "Remember it as: How would you troubleshoot a query that suddenly became slow in production.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-043",
@@ -1075,7 +1117,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How do transaction isolation levels affect correctness and concurrency."
+      "memoryCue": "Remember it as: How do transaction isolation levels affect correctness and concurrency.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-044",
@@ -1100,7 +1143,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you paginate millions of rows efficiently."
+      "memoryCue": "Remember it as: How would you paginate millions of rows efficiently.",
+      "codeExample": "SELECT AccountId, TransactionDate, Amount\nFROM Transactions\nWHERE AccountId = @AccountId\n  AND TransactionDate >= @FromDate\nORDER BY TransactionDate DESC;\n\nCREATE INDEX IX_Transactions_Account_Date\nON Transactions(AccountId, TransactionDate);"
     },
     {
       "id": "master-045",
@@ -1125,7 +1169,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you design a notification system that supports email, SMS and push."
+      "memoryCue": "Remember it as: How would you design a notification system that supports email, SMS and push.",
+      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
     },
     {
       "id": "master-046",
@@ -1150,7 +1195,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you design a distributed rate limiter."
+      "memoryCue": "Remember it as: How would you design a distributed rate limiter.",
+      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
     },
     {
       "id": "master-047",
@@ -1175,7 +1221,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you design a scalable order-processing system."
+      "memoryCue": "Remember it as: How would you design a scalable order-processing system.",
+      "codeExample": "app.MapPost(\"/transactions\", async (CreateTransaction cmd, IService service) =>\n{\n    var id = await service.CreateAsync(cmd);\n    return Results.Accepted(\"/transactions/\" + id);\n});\n\n// Non-critical work can be published to a queue."
     },
     {
       "id": "master-048",
@@ -1200,7 +1247,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you secure a public REST API."
+      "memoryCue": "Remember it as: How would you secure a public REST API.",
+      "codeExample": "[HttpGet(\"{id:int}\")]\npublic async Task<ActionResult<TransactionDto>> Get(int id)\n{\n    var item = await service.GetAsync(id);\n    return item is null ? NotFound() : Ok(item);\n}"
     },
     {
       "id": "master-049",
@@ -1225,7 +1273,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you implement secure JWT refresh-token handling."
+      "memoryCue": "Remember it as: How would you implement secure JWT refresh-token handling.",
+      "codeExample": "builder.Services.AddAuthentication(\"Bearer\")\n    .AddJwtBearer();\n\nbuilder.Services.AddAuthorization(options =>\n    options.AddPolicy(\"CanApprove\", p => p.RequireRole(\"Approver\")));"
     },
     {
       "id": "master-050",
@@ -1250,7 +1299,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you investigate an intermittent production issue that cannot be reproduced locally."
+      "memoryCue": "Remember it as: How would you investigate an intermittent production issue that cannot be reproduced locally.",
+      "codeExample": "try\n{\n    await transactionService.ProcessAsync(request);\n}\ncatch (Exception ex)\n{\n    logger.LogError(ex, \"Transaction failed: {Id}\", request.Id);\n    throw;\n}"
     },
     {
       "id": "master-051",
@@ -1275,7 +1325,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you decide whether to rollback a production release."
+      "memoryCue": "Remember it as: How would you decide whether to rollback a production release.",
+      "codeExample": "try\n{\n    await transactionService.ProcessAsync(request);\n}\ncatch (Exception ex)\n{\n    logger.LogError(ex, \"Transaction failed: {Id}\", request.Id);\n    throw;\n}"
     },
     {
       "id": "master-052",
@@ -1300,7 +1351,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you evaluate an enterprise RAG system."
+      "memoryCue": "Remember it as: How would you evaluate an enterprise RAG system.",
+      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
     },
     {
       "id": "extra-001",
@@ -1325,7 +1377,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between latency, throughput and resource utilization."
+      "memoryCue": "Remember it as: the difference between latency, throughput and resource utilization.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "extra-002",
@@ -1350,7 +1403,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: is measuring performance before optimization important."
+      "memoryCue": "Remember it as: is measuring performance before optimization important.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "extra-003",
@@ -1375,7 +1429,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: caching improve performance and what problems can it introduce."
+      "memoryCue": "Remember it as: caching improve performance and what problems can it introduce.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "extra-004",
@@ -1400,7 +1455,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: connection pooling and why does it matter for database performance."
+      "memoryCue": "Remember it as: connection pooling and why does it matter for database performance.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "extra-005",
@@ -1425,7 +1481,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you investigate high API p99 latency when average latency looks normal."
+      "memoryCue": "Remember it as: How would you investigate high API p99 latency when average latency looks normal.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "extra-006",
@@ -1450,7 +1507,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: backpressure and why is it important in distributed systems."
+      "memoryCue": "Remember it as: backpressure and why is it important in distributed systems.",
+      "codeExample": "var sw = Stopwatch.StartNew();\nvar result = await service.GetTransactionsAsync();\nsw.Stop();\n\nlogger.LogInformation(\"Latency: {Ms} ms\", sw.ElapsedMilliseconds);"
     },
     {
       "id": "extra-007",
@@ -1475,7 +1533,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you answer 'Tell me about yourself' for a 7-year software engineer interview."
+      "memoryCue": "Remember it as: How would you answer 'Tell me about yourself' for a 7-year software engineer interview.",
+      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
     },
     {
       "id": "extra-008",
@@ -1500,7 +1559,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Tell me about a technical disagreement you had with a teammate. How did you handle it."
+      "memoryCue": "Remember it as: Tell me about a technical disagreement you had with a teammate. How did you handle it.",
+      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
     },
     {
       "id": "extra-009",
@@ -1525,7 +1585,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Tell me about a production failure you were responsible for. What did you learn."
+      "memoryCue": "Remember it as: Tell me about a production failure you were responsible for. What did you learn.",
+      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
     },
     {
       "id": "extra-010",
@@ -1550,7 +1611,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Tell me about a time you influenced a technical decision without having authority.."
+      "memoryCue": "Remember it as: Tell me about a time you influenced a technical decision without having authority..",
+      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
     },
     {
       "id": "extra-011",
@@ -1575,7 +1637,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How do you handle ambiguous requirements as a senior developer."
+      "memoryCue": "Remember it as: How do you handle ambiguous requirements as a senior developer.",
+      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
     },
     {
       "id": "extra-012",
@@ -1600,7 +1663,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: Tell me about a time you mentored or enabled another engineer.."
+      "memoryCue": "Remember it as: Tell me about a time you mentored or enabled another engineer..",
+      "codeExample": "// Use your real project example:\nvar answer = new\n{\n    Situation = \"Production issue affected transaction flow\",\n    Action = \"I isolated the failing dependency and coordinated the fix\",\n    Result = \"Service recovered and a regression test was added\"\n};"
     },
     {
       "id": "extra-013",
@@ -1625,7 +1689,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: the difference between an AI agent and a normal LLM call."
+      "memoryCue": "Remember it as: the difference between an AI agent and a normal LLM call.",
+      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
     },
     {
       "id": "extra-014",
@@ -1650,7 +1715,8 @@
         "7+ Years",
         "Practical"
       ],
-      "memoryCue": "Remember it as: How would you reduce hallucinations in an enterprise AI assistant."
+      "memoryCue": "Remember it as: How would you reduce hallucinations in an enterprise AI assistant.",
+      "codeExample": "var result = await agent.RunAsync(new AgentRequest\n{\n    Goal = \"Analyze Jira issue\",\n    Tools = new[] { \"Jira\", \"Logs\", \"Repository\" }\n});\n\nawait approvalService.RequestHumanApprovalAsync(result);"
     }
   ]
 }
