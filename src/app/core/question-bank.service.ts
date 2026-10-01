@@ -5,7 +5,7 @@ import {shareReplay,map,Observable} from 'rxjs';
 export interface InterviewQuestion{
   id:string; technology:string; difficulty:string; type:string; question:string;
   shortAnswer:string; detailedAnswer:string; example:string; seniorPerspective:string;
-  commonMistakes:string; followUps:string[]; tags:string[];
+  commonMistakes:string; followUps:string[]; tags:string[]; memoryCue:string; codeExample:string;
 }
 
 @Injectable({providedIn:'root'})
