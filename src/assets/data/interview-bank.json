@@ -1,6 +1,6 @@
 {
-  "version": 17,
-  "sourceNote": "Expanded to 300 categorized original interview questions. Themes synthesized from multiple current public interview-prep sources covering .NET/C#, ASP.NET Core, EF Core, Angular/RxJS, SQL Server, system design, security, performance, testing, architecture, DevOps, messaging and AI. Questions are paraphrased original study material; main questions use only Simple, Medium and Complex difficulty. Scenario-based interviews remain separate.",
+  "version": 18,
+  "sourceNote": "Expanded to 336 categorized original interview questions across the full stack: C#/.NET, ASP.NET Core, EF Core, LINQ, async/threading, Angular, JavaScript/TypeScript, SQL, API design, architecture, design patterns, microservices, messaging, system design, networking, cloud/distributed systems, security, performance, testing, DevOps/production, production debugging, AI/agentic AI and behavioral interviews. Themes are synthesized from multiple current public interview-prep sources; questions are paraphrased original study material. Main questions use only Simple, Medium and Complex difficulty. Scenario-based interviews remain separate.",
   "questions": [
     {
       "id": "master-001",
