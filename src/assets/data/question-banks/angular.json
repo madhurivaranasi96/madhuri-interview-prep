@@ -1,0 +1,82 @@
+{
+  "title": "angular",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": "Angular",
+      "level": "Simple",
+      "question": "What is a service?",
+      "answer": "A service encapsulates reusable logic or state and can be injected where needed.",
+      "example": "UserService owns API access instead of putting HTTP calls in every component.",
+      "followup": "When should state stay inside a component?"
+    },
+    {
+      "area": "Angular",
+      "level": "Simple",
+      "question": "Reactive forms vs template-driven forms?",
+      "answer": "Reactive forms define form state and validation in TypeScript; template-driven forms rely more on template directives.",
+      "example": "Complex dynamic validation is usually easier to model with reactive forms.",
+      "followup": "What is the benefit for testing?"
+    },
+    {
+      "area": "Angular",
+      "level": "Simple",
+      "question": "setValue vs patchValue?",
+      "answer": "setValue expects the complete form structure; patchValue updates only supplied controls.",
+      "example": "Patch a single profile field without supplying every form control.",
+      "followup": "When would setValue be useful as a safety check?"
+    },
+    {
+      "area": "Angular",
+      "level": "Medium",
+      "question": "Explain OnPush. ",
+      "answer": "OnPush allows Angular to skip a component subtree until relevant notifications occur, such as input reference changes, events, reactive updates or explicit marking.",
+      "example": "Replacing items with a new array works; mutating the same array reference can produce stale UI.",
+      "followup": "How would you diagnose a stale OnPush view?"
+    },
+    {
+      "area": "Angular",
+      "level": "Medium",
+      "question": "switchMap vs mergeMap?",
+      "answer": "switchMap cancels the previous inner subscription when new input arrives; mergeMap allows concurrent inner work.",
+      "example": "Use switchMap for typeahead search; use mergeMap when independent requests may run concurrently.",
+      "followup": "When would concatMap be safer?"
+    },
+    {
+      "area": "Angular",
+      "level": "Medium",
+      "question": "How do you prevent RxJS memory leaks?",
+      "answer": "Prefer async pipe or lifecycle-aware cleanup, and ensure long-lived subscriptions have an explicit owner.",
+      "example": "A component can use takeUntilDestroyed for a subscription tied to its lifetime.",
+      "followup": "What happens to a stream that never completes?"
+    },
+    {
+      "area": "Angular",
+      "level": "Complex",
+      "question": "A list of 10,000 rows is slow. What do you do?",
+      "answer": "Measure rendering and data costs, use stable tracking, virtual scrolling where appropriate, pagination, lazy data and efficient change detection.",
+      "example": "Use @for with a stable item id and virtualize a truly large viewport.",
+      "followup": "How do you prove the bottleneck is rendering?"
+    },
+    {
+      "area": "Angular",
+      "level": "Complex",
+      "question": "How would you structure a large Angular application?",
+      "answer": "Separate feature boundaries, shared UI primitives, core infrastructure and state ownership; keep components focused and APIs typed.",
+      "example": "A feature owns its routes and services while shared contains reusable presentational components.",
+      "followup": "When is a global store unnecessary?"
+    },
+    {
+      "area": "Angular",
+      "level": "Complex",
+      "question": "How would you migrate AngularJS to Angular?",
+      "answer": "Establish tests and boundaries, migrate feature-by-feature, isolate legacy APIs and progressively remove framework coupling.",
+      "example": "Move one workflow from controller/$scope to a standalone Angular feature while retaining a stable backend contract.",
+      "followup": "How do you reduce migration risk?"
+    }
+  ]
+}
