@@ -1,0 +1,90 @@
+{
+  "title": "csharp",
+  "levels": [
+    "Simple",
+    "Medium",
+    "Complex"
+  ],
+  "questions": [
+    {
+      "area": "C#",
+      "level": "Simple",
+      "question": "Value type vs reference type?",
+      "answer": "Value types contain their value directly; reference types hold a reference to an object. The distinction affects copying, allocation and nullability.",
+      "example": "Copying an int copies its value; assigning two variables that reference the same object lets both observe mutations.",
+      "followup": "What changes when a value type is boxed?"
+    },
+    {
+      "area": "C#",
+      "level": "Simple",
+      "question": "String vs StringBuilder?",
+      "answer": "String is immutable, so repeated concatenation can create many objects. StringBuilder is useful for many incremental changes.",
+      "example": "Build a large CSV line in a loop with StringBuilder rather than repeated +=.",
+      "followup": "When can ordinary string interpolation still be preferable?"
+    },
+    {
+      "area": "C#",
+      "level": "Simple",
+      "question": "ref vs out?",
+      "answer": "Both pass variables by reference. ref requires the caller to initialize the variable; out requires the callee to assign it.",
+      "example": "int.TryParse uses an out parameter to return a parsed value.",
+      "followup": "Why might a tuple or result object be clearer than out parameters?"
+    },
+    {
+      "area": "C#",
+      "level": "Medium",
+      "question": "IEnumerable vs IQueryable?",
+      "answer": "IEnumerable represents iteration over in-memory objects; IQueryable builds an expression tree that a provider can translate, commonly to SQL.",
+      "example": "Apply Where before ToList when querying EF Core so filtering can happen in the database.",
+      "followup": "What happens when you call AsEnumerable too early?"
+    },
+    {
+      "area": "C#",
+      "level": "Medium",
+      "question": "Why use async/await?",
+      "answer": "It lets code compose asynchronous I/O without blocking the calling thread while the operation is pending.",
+      "example": "await an HTTP call rather than blocking with .Result.",
+      "followup": "Why can .Result or .Wait create deadlocks or thread-pool starvation?"
+    },
+    {
+      "area": "C#",
+      "level": "Medium",
+      "question": "Task vs Thread?",
+      "answer": "Task represents asynchronous work and is normally scheduled by the runtime; Thread is an OS execution thread and is more expensive and explicit.",
+      "example": "Use Task-based APIs for I/O and normal parallel work rather than creating raw threads for each request.",
+      "followup": "When would a dedicated thread be justified?"
+    },
+    {
+      "area": "C#",
+      "level": "Medium",
+      "question": "What causes a deadlock?",
+      "answer": "Two or more operations wait indefinitely for resources held by each other.",
+      "example": "Transaction A locks row 1 then row 2 while transaction B locks row 2 then row 1.",
+      "followup": "How do you reduce deadlock probability?"
+    },
+    {
+      "area": "C#",
+      "level": "Complex",
+      "question": "How would you build a thread-safe cache?",
+      "answer": "Use safe concurrent access, explicit expiration, bounded memory and protection against duplicate expensive initialization.",
+      "example": "ConcurrentDictionary plus Lazy<T> can ensure one initialization path per key.",
+      "followup": "How would you handle eviction and a failed factory?"
+    },
+    {
+      "area": "C#",
+      "level": "Complex",
+      "question": "How do you investigate memory growth?",
+      "answer": "Measure first, capture managed heap information, inspect retained objects and allocation paths, identify long-lived references, fix ownership and verify after a sustained run.",
+      "example": "An event subscription from a singleton to short-lived objects can keep those objects alive.",
+      "followup": "How do you distinguish a leak from normal GC behavior?"
+    },
+    {
+      "area": "C#",
+      "level": "Complex",
+      "question": "How would you improve a slow LINQ query?",
+      "answer": "Inspect allocations, enumeration count, generated SQL where relevant, materialization points and algorithmic complexity before changing code.",
+      "example": "Move a repeated FirstOrDefault over a list into a dictionary lookup when the access pattern is key-based.",
+      "followup": "How do you prove the optimization helped?"
+    }
+  ]
+}
