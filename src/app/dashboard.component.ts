@@ -2,19 +2,32 @@ import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
 const TOPICS=[
-['C# / .NET','csharp','Practical coding, async, concurrency, memory, LINQ and design decisions.'],
-['ASP.NET Core','dotnet','Real API design, DI, middleware, security, data access and production problems.'],
-['Angular','angular','Component design, RxJS, Signals, performance, forms and real application flows.'],
-['JavaScript / TypeScript','javascript','Browser behavior, async code, closures, typing and practical debugging.'],
-['SQL','sql','Query tuning, indexes, transactions, locking, deadlocks and data correctness.'],
-['System Design','system-design','Design real systems, choose components, scale them and handle failures.'],
-['Security','security','Apply security concepts to APIs, browsers, databases and AI systems.'],
-['Performance','performance','Find bottlenecks using evidence and improve latency, throughput and resource usage.'],
-['Production Debugging','production','Walk through incidents from symptom to evidence, mitigation, root cause and prevention.'],
-['AI & Agentic AI','ai','Build reliable AI workflows, RAG systems, tools, evaluation and guardrails.'],
-['Behavioral','behavioral','Explain ownership, difficult decisions, incidents, conflict and technical leadership.'],
-['Scenario-Based Interviews','scenarios','A separate bank for production incidents, debugging, performance failures and architecture situations.']
-];
+['C# / .NET','csharp','Core C#, types, OOP, collections, exceptions, memory and modern language features.'],
+['.NET Runtime','dotnet-runtime','CLR, GC, JIT, dependency injection, configuration, hosting and runtime behaviour.'],
+['ASP.NET Core','aspnet-core','Middleware, DI, Web API, filters, validation, authentication and production APIs.'],
+['EF Core','ef-core','DbContext, tracking, relationships, migrations, transactions and query performance.'],
+['LINQ / C#','linq','LINQ operators, deferred execution, expression trees, projections and performance.'],
+['Async / Threading','async-threading','async/await, Tasks, cancellation, concurrency, locks and thread safety.'],
+['Angular','angular','Components, lifecycle, change detection, Signals, RxJS, forms, routing and HTTP.'],
+['JavaScript / TypeScript','javascript','Closures, prototypes, event loop, promises, modules, typing and browser behaviour.'],
+['SQL','sql','Joins, indexes, execution plans, transactions, isolation, locking and query tuning.'],
+['API Design','api-design','REST, HTTP semantics, versioning, pagination, idempotency, rate limiting and API contracts.'],
+['Architecture','architecture','SOLID, Clean Architecture, DDD, CQRS, modular design and architectural trade-offs.'],
+['Design Patterns','design-patterns','Factory, Strategy, Decorator, Adapter, Repository and practical pattern selection.'],
+['Microservices','microservices','Service boundaries, communication, resilience, consistency and distributed transactions.'],
+['Data / Messaging','data-messaging','Queues, pub/sub, Kafka/RabbitMQ concepts, delivery guarantees and event-driven design.'],
+['System Design','system-design','Scalability, caching, databases, consistency, availability and failure handling.'],
+['Networking / Web','networking-web','HTTP, DNS, TLS, TCP, proxies, browser networking and web request lifecycles.'],
+['Cloud / Distributed Systems','cloud-distributed','Cloud architecture, distributed coordination, resilience, scaling and service selection.'],
+['Security','security','Authentication, authorization, OWASP, secure APIs, secrets, encryption and threat modelling.'],
+['Performance','performance','Profiling, latency, throughput, memory, caching, database and API optimization.'],
+['Testing','testing','Unit, integration, API, test doubles, async testing, reliability and test strategy.'],
+['DevOps / Production','devops-production','CI/CD, Docker, deployment, observability, health checks, rollback and release safety.'],
+['Production Debugging','production','Logs, metrics, traces, RCA, incident response and production troubleshooting.'],
+['AI & Agentic AI','ai','LLM integration, RAG, tool calling, agents, evaluation, safety and production AI.'],
+['Behavioral','behavioral','Ownership, leadership, conflict, failures, mentoring, stakeholder communication and decisions.'],
+['Scenario-Based Interviews','scenarios','A separate bank where the question itself is a production or engineering situation.']
+]
 
 @Component({
 standalone:true,imports:[RouterLink],
