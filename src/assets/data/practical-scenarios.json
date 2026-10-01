@@ -1,0 +1,89 @@
+{
+  "title": "Practical & Scenario Interview Bank",
+  "questions": [
+    {
+      "type": "Practical",
+      "question": "Build a global exception handler",
+      "answer": "Create consistent error responses without leaking stack traces.",
+      "example": "Middleware catches unhandled exceptions, logs a correlation id and maps known domain exceptions to safe status codes.",
+      "followup": "Follow-up: how do you test it?"
+    },
+    {
+      "type": "Practical",
+      "question": "Build a JWT-secured API",
+      "answer": "Protect endpoints and enforce role/policy authorization.",
+      "example": "Authenticate token signature/claims, then authorize by policy rather than trusting a client-supplied role.",
+      "followup": "Follow-up: where do you store secrets?"
+    },
+    {
+      "type": "Practical",
+      "question": "Build an Angular search page",
+      "answer": "Search as the user types without request storms.",
+      "example": "Reactive form valueChanges → debounceTime → distinctUntilChanged → switchMap → error handling and lifecycle cleanup.",
+      "followup": "Follow-up: what if the previous request returns late?"
+    },
+    {
+      "type": "Practical",
+      "question": "Build pagination",
+      "answer": "Support page, size, total count and stable ordering.",
+      "example": "Validate page size, use deterministic ORDER BY and server-side pagination for large datasets.",
+      "followup": "Follow-up: offset vs cursor pagination?"
+    },
+    {
+      "type": "Practical",
+      "question": "Build a retry component",
+      "answer": "Retry transient operations safely.",
+      "example": "Classify errors, use bounded exponential backoff with jitter and cancellation; never blindly retry every failure.",
+      "followup": "Follow-up: how do you avoid retry storms?"
+    },
+    {
+      "type": "Practical",
+      "question": "Design an audit logger",
+      "answer": "Record security/business events without exposing secrets.",
+      "example": "Use structured events with actor, action, resource, timestamp and correlation id; redact sensitive fields.",
+      "followup": "Follow-up: how do you prevent log tampering?"
+    },
+    {
+      "type": "Scenario",
+      "question": "A customer reports one screen is blank",
+      "answer": "Investigate without guessing.",
+      "example": "Reproduce with the same route/data, inspect browser console/network, compare API response, check feature flags and recent deployment, then isolate the failing boundary.",
+      "followup": "Follow-up: how do you communicate status to the customer?"
+    },
+    {
+      "type": "Scenario",
+      "question": "API works locally but fails in production",
+      "answer": "Compare environment contracts rather than changing code randomly.",
+      "example": "Inspect configuration, identity, network policy, certificates, dependency versions and data differences.",
+      "followup": "Follow-up: what telemetry should exist before the incident?"
+    },
+    {
+      "type": "Scenario",
+      "question": "Database CPU suddenly spikes",
+      "answer": "Correlate timing with queries and workload.",
+      "example": "Inspect top queries, execution plans, blocking, statistics, data growth and recent releases.",
+      "followup": "Follow-up: when is adding an index the wrong fix?"
+    },
+    {
+      "type": "Scenario",
+      "question": "A background job processes duplicates",
+      "answer": "Assume delivery can repeat and design for idempotency.",
+      "example": "Persist a stable job/event id and make state transitions conditional/atomic.",
+      "followup": "Follow-up: exactly-once vs effectively-once?"
+    },
+    {
+      "type": "Scenario",
+      "question": "Angular page becomes slow after adding a feature",
+      "answer": "Measure before optimizing.",
+      "example": "Profile rendering, network waterfall, bundle size, change detection and subscription behavior; fix the measured bottleneck.",
+      "followup": "Follow-up: how would you prevent regression?"
+    },
+    {
+      "type": "Scenario",
+      "question": "External payment provider is intermittently failing",
+      "answer": "Protect the system while preserving correctness.",
+      "example": "Use timeouts, classified retries, circuit breaking, idempotency and reconciliation rather than duplicate charges.",
+      "followup": "Follow-up: what must happen when provider outcome is unknown?"
+    }
+  ]
+}
