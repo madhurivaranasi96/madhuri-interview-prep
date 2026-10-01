@@ -1,0 +1,192 @@
+{
+  "title": "Coding Interview Bank",
+  "note": "Problems are practice material; exact questions vary by employer.",
+  "levels": [
+    "Easy",
+    "Medium",
+    "Hard",
+    "Senior"
+  ],
+  "questions": [
+    {
+      "difficulty": "Easy",
+      "problem": "Two Sum",
+      "prompt": "Given an array and target, return indices of two values that sum to target.",
+      "approach": "Use a Dictionary<int,int> while scanning once.",
+      "complexity": "O(n) time, O(n) space",
+      "followup": "Follow-up: what if input is sorted?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Easy",
+      "problem": "Valid Parentheses",
+      "prompt": "Determine whether brackets are correctly nested.",
+      "approach": "Use a Stack<char> and match each closing bracket to the latest opener.",
+      "complexity": "O(n) time, O(n) space",
+      "followup": "Follow-up: how would you handle other bracket types?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Easy",
+      "problem": "Reverse a Linked List",
+      "prompt": "Reverse a singly linked list.",
+      "approach": "Maintain previous, current and next pointers and reverse links iteratively.",
+      "complexity": "O(n) time, O(1) space",
+      "followup": "Follow-up: recursive version?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Easy",
+      "problem": "First Non-Repeating Character",
+      "prompt": "Return the first character that occurs once.",
+      "approach": "Count characters, then scan the string again.",
+      "complexity": "O(n) time, O(k) space",
+      "followup": "Follow-up: case sensitivity?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Longest Substring Without Repeating Characters",
+      "prompt": "Find the longest substring with unique characters.",
+      "approach": "Use a sliding window and a map of last seen positions.",
+      "complexity": "O(n) time, O(k) space",
+      "followup": "Follow-up: explain why the left boundary never moves backward.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Maximum Subarray",
+      "prompt": "Find the contiguous subarray with maximum sum.",
+      "approach": "Kadane's algorithm tracks the best subarray ending at the current position.",
+      "complexity": "O(n) time, O(1) space",
+      "followup": "Follow-up: return the actual range too.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Merge Intervals",
+      "prompt": "Merge overlapping intervals.",
+      "approach": "Sort by start, then extend the last output interval when overlap exists.",
+      "complexity": "O(n log n) time, O(n) space",
+      "followup": "Follow-up: can you process already sorted input in O(n)?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Binary Search First Occurrence",
+      "prompt": "Find the first position of a target in sorted data.",
+      "approach": "Binary search while continuing left after a match.",
+      "complexity": "O(log n) time, O(1) space",
+      "followup": "Follow-up: find the last occurrence.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Top K Frequent Elements",
+      "prompt": "Return the k most frequent values.",
+      "approach": "Count frequencies, then use a heap or bucket strategy.",
+      "complexity": "O(n log k) with a heap",
+      "followup": "Follow-up: when is bucket sort better?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "LRU Cache",
+      "prompt": "Implement get and put with O(1) average operations.",
+      "approach": "Combine Dictionary<TKey,Node> with a doubly linked list for recency order.",
+      "complexity": "O(1) average time",
+      "followup": "Follow-up: make it thread-safe.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Producer Consumer",
+      "prompt": "Implement a bounded producer-consumer queue.",
+      "approach": "Use a concurrent queue plus synchronization/semaphores or a channel abstraction.",
+      "complexity": "O(1) amortized enqueue/dequeue",
+      "followup": "Follow-up: graceful shutdown?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Retry Policy",
+      "prompt": "Implement retry with exponential backoff.",
+      "approach": "Retry only classified transient failures, cap attempts and delay, and honor cancellation.",
+      "complexity": "Bounded attempts; delay grows exponentially",
+      "followup": "Follow-up: why add jitter?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Number of Islands",
+      "prompt": "Count connected land components in a grid.",
+      "approach": "DFS/BFS each unvisited land cell and mark the component.",
+      "complexity": "O(rows*cols) time",
+      "followup": "Follow-up: iterative BFS to avoid recursion depth.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Course Schedule",
+      "prompt": "Determine whether prerequisites contain a cycle.",
+      "approach": "Model a directed graph and use Kahn's algorithm or DFS cycle detection.",
+      "complexity": "O(V+E) time",
+      "followup": "Follow-up: return a valid ordering.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Word Break",
+      "prompt": "Determine whether a string can be segmented using dictionary words.",
+      "approach": "Use dynamic programming where dp[i] indicates whether prefix i is constructible.",
+      "complexity": "O(n^2) baseline",
+      "followup": "Follow-up: how would a trie change it?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Meeting Rooms II",
+      "prompt": "Find minimum rooms required for overlapping meetings.",
+      "approach": "Sort starts and ends or use a min-heap of end times.",
+      "complexity": "O(n log n) time",
+      "followup": "Follow-up: return which room each meeting uses.",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Senior",
+      "problem": "Thread-Safe Cache",
+      "prompt": "Build an expiring cache safe for concurrent readers/writers.",
+      "approach": "Define key/value/expiry semantics, use concurrent structures and avoid duplicate expensive factories.",
+      "complexity": "Correctness and bounded memory matter more than raw speed.",
+      "followup": "Follow-up: cache stampede and eviction strategy?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Senior",
+      "problem": "Rate Limiter",
+      "prompt": "Implement a per-client rate limiter.",
+      "approach": "Use token bucket or sliding window semantics with atomic state and expiration.",
+      "complexity": "Discuss distributed deployment separately.",
+      "followup": "Follow-up: how would multiple API instances share limits?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Senior",
+      "problem": "Bounded Background Worker",
+      "prompt": "Build a worker that accepts jobs, limits concurrency and shuts down gracefully.",
+      "approach": "Use a bounded queue, cancellation token, worker loop and completion signaling.",
+      "complexity": "Backpressure prevents unbounded memory.",
+      "followup": "Follow-up: what happens to jobs during shutdown?",
+      "language": "C#"
+    },
+    {
+      "difficulty": "Senior",
+      "problem": "File Processing Pipeline",
+      "prompt": "Process many files concurrently without exhausting memory.",
+      "approach": "Stream files, bound concurrency, use cancellation, collect failures and make processing idempotent.",
+      "complexity": "Complexity depends on total bytes; memory remains bounded.",
+      "followup": "Follow-up: resume after process failure.",
+      "language": "C#"
+    }
+  ]
+}
