@@ -37,6 +37,11 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
               <p>{{q.example}}</p>
             </section>
 
+            <section class="deep">
+              <h3>If the interviewer pushes deeper</h3>
+              <p>{{q.detailedAnswer}}</p>
+            </section>
+
             <section>
               <h3>Senior-level reasoning</h3>
               <p>{{q.seniorPerspective}}</p>
@@ -79,6 +84,8 @@ import {QuestionBankService,InterviewQuestion} from './core/question-bank.servic
     .explain{background:#fff;border:1px solid #e1e6ec;border-left:4px solid #2563eb;border-radius:8px;padding:20px 22px;box-shadow:0 2px 8px rgba(15,23,42,.03)}
     .explain h3{color:#1d4ed8}
     .practical{background:#f1f5f9;border-radius:8px;padding:20px 22px}
+    .deep{background:#fff;border:1px solid #e1e6ec;border-radius:8px;padding:20px 22px}
+    .deep h3{color:#334155}
     .followups{padding-top:5px}
     .followups p{color:#64748b;margin-top:7px}
     @media(max-width:700px){
