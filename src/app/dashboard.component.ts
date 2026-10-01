@@ -27,7 +27,11 @@ template:`
 <div><b>Apply</b><span>Connect it to a realistic engineering situation.</span></div>
 <div><b>Reason</b><span>Discuss trade-offs, failure modes and decisions.</span></div>
 </div>
-<h2>Choose a topic</h2>
+<div class="answer-framework">
+<h2>The answer pattern to practise</h2>
+<p><b>1. Clarify the problem</b> → <b>2. State your approach</b> → <b>3. Explain the implementation</b> → <b>4. Give a realistic example</b> → <b>5. Discuss failure modes and trade-offs</b> → <b>6. Explain how you would measure and prevent recurrence</b></p>
+</div>
+<h2>Choose an area</h2>
 <div class="topics">
 @for(t of topics;track t[1]){
 <a [routerLink]="['/topic',t[1]]">
@@ -48,6 +52,9 @@ h1{margin:0;max-width:800px;font-size:50px;line-height:1.08;letter-spacing:-.045
 .principles div{background:#fff;border:1px solid #e1e6ec;border-radius:9px;padding:19px 20px}
 .principles b{display:block;color:#111827;font-size:15px;margin-bottom:6px}
 .principles span{display:block;color:#64748b;font-size:12px;line-height:1.6}
+.answer-framework{background:#fff;border:1px solid #dbe3ec;border-radius:10px;padding:20px 22px;margin:0 0 58px}
+.answer-framework h2{margin:0 0 9px}
+.answer-framework p{margin:0;color:#64748b;font-size:14px;line-height:1.8}
 h2{font-size:23px;color:#111827;margin:0 0 18px}
 .topics{border-top:1px solid #dfe4ea}
 .topics a{display:grid;grid-template-columns:42px 1fr 30px;gap:15px;align-items:center;padding:22px 0;border-bottom:1px solid #e2e6eb;text-decoration:none;color:inherit}
