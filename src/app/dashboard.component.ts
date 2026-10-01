@@ -12,7 +12,8 @@ const TOPICS=[
 ['Performance','performance','Find bottlenecks using evidence and improve latency, throughput and resource usage.'],
 ['Production Debugging','production','Walk through incidents from symptom to evidence, mitigation, root cause and prevention.'],
 ['AI & Agentic AI','ai','Build reliable AI workflows, RAG systems, tools, evaluation and guardrails.'],
-['Behavioral','behavioral','Explain ownership, difficult decisions, incidents, conflict and technical leadership.']
+['Behavioral','behavioral','Explain ownership, difficult decisions, incidents, conflict and technical leadership.'],
+['Scenario-Based Interviews','scenarios','A separate bank for production incidents, debugging, performance failures and architecture situations.']
 ];
 
 @Component({
