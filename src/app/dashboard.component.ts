@@ -20,18 +20,18 @@ standalone:true,imports:[RouterLink],
 template:`
 <section class="home">
 <p class="label">SENIOR SOFTWARE ENGINEER · 7+ YEARS</p>
-<h1>Prepare by thinking like an engineer.</h1>
-<p class="intro">This is not a theory question bank. Each topic is meant to help you explain how you would use a concept, implement it, debug it, make trade-offs and handle the problem when it reaches production.</p>
+<h1>Prepare the way a senior engineer answers.</h1>
+<p class="intro">The main bank uses conventional interview questions. The answer then turns the concept into practical engineering thinking: a concrete example, implementation choices, trade-offs, failure modes and how you would validate the decision.</p>
 <div class="principles">
-<div><b>Explain</b><span>Say the concept clearly in your own words.</span></div>
-<div><b>Apply</b><span>Connect it to a realistic engineering situation.</span></div>
-<div><b>Reason</b><span>Discuss trade-offs, failure modes and decisions.</span></div>
+<div><b>Understand</b><span>Explain the concept clearly without memorising a textbook paragraph.</span></div>
+<div><b>Apply</b><span>Use a concrete engineering example to show how the concept behaves in practice.</span></div>
+<div><b>Defend</b><span>Explain alternatives, trade-offs, failure modes and evidence.</span></div>
 </div>
 <div class="answer-framework">
 <h2>The answer pattern to practise</h2>
-<p><b>1. Clarify the problem</b> → <b>2. State your approach</b> → <b>3. Explain the implementation</b> → <b>4. Give a realistic example</b> → <b>5. Discuss failure modes and trade-offs</b> → <b>6. Explain how you would measure and prevent recurrence</b></p>
+<p><b>1. Explain the concept</b> → <b>2. Give a concrete example</b> → <b>3. Explain when you would use it</b> → <b>4. Compare alternatives</b> → <b>5. Discuss failure modes</b> → <b>6. Explain testing or production validation</b> → <b>7. Prepare for follow-ups</b></p>
 </div>
-<h2>Choose an area</h2>
+<div class="section-intro"><p class="section-label">MAIN TECHNICAL INTERVIEW BANK</p><h2>Conventional questions, practical answers.</h2><p>Simple, Medium, Complex and Senior / Advanced. Scenario wording is intentionally kept out of this bank.</p></div>
 <div class="topics">
 @for(t of topics;track t[1]){
 <a [routerLink]="['/topic',t[1]]">
