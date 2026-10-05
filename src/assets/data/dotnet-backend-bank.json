@@ -1,7 +1,7 @@
 {
   "title": ".NET Backend Interview Track",
   "description": "24-topic senior .NET backend interview preparation with answers, practical examples and working C# examples.",
-  "version": 1,
+  "version": 2,
   "questions": [
     {
       "id": "dotnet-backend-1",
@@ -1010,6 +1010,510 @@
       ],
       "memoryCue": "Scale out statelessly; protect bottlenecks.",
       "codeExample": "builder.Services.AddRateLimiter(options =>\n{\n    options.AddFixedWindowLimiter(\"api\", o =>\n    {\n        o.PermitLimit = 100;\n        o.Window = TimeSpan.FromSeconds(1);\n    });\n});"
+    },
+    {
+      "id": "dotnet-backend-49",
+      "category": "1. C# Fundamentals",
+      "slug": "csharp-fundamentals",
+      "technology": "1. C# Fundamentals",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is boxing and unboxing in C#?",
+      "shortAnswer": "Boxing converts a value type to object or an implemented interface, allocating an object; unboxing extracts the value type back. Repeated boxing can create unnecessary allocations.",
+      "detailedAnswer": "Boxing converts a value type to object or an implemented interface, allocating an object; unboxing extracts the value type back. Repeated boxing can create unnecessary allocations.",
+      "example": "A generic collection avoids boxing that older non-generic collections could cause when storing transaction counters.",
+      "seniorPerspective": "Avoid boxing in hot paths; generics usually provide better type safety and allocation behaviour.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "1. C# Fundamentals"
+      ],
+      "memoryCue": "Boxing = value becomes object; unboxing = object becomes value.",
+      "codeExample": "int count=10;\nobject boxed=count;\nint value=(int)boxed;"
+    },
+    {
+      "id": "dotnet-backend-50",
+      "category": "2. OOP & SOLID",
+      "slug": "oop-solid",
+      "technology": "2. OOP & SOLID",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between abstraction and encapsulation?",
+      "shortAnswer": "Abstraction exposes what a component does while hiding unnecessary implementation detail; encapsulation controls access to state and behaviour inside a type.",
+      "detailedAnswer": "Abstraction exposes what a component does while hiding unnecessary implementation detail; encapsulation controls access to state and behaviour inside a type.",
+      "example": "A withdrawal service exposes WithdrawAsync while keeping validation and state-transition details internal.",
+      "seniorPerspective": "Good design uses both: a stable abstraction at the boundary and encapsulated invariants inside the implementation.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "2. OOP & SOLID"
+      ],
+      "memoryCue": "Abstraction = what; encapsulation = protect how/state.",
+      "codeExample": "public class Withdrawal\n{\n    private decimal balance;\n    public bool CanWithdraw(decimal amount) => amount <= balance;\n}"
+    },
+    {
+      "id": "dotnet-backend-51",
+      "category": "3. Collections & Generics",
+      "slug": "collections-generics",
+      "technology": "3. Collections & Generics",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between IEnumerable, ICollection and IList?",
+      "shortAnswer": "IEnumerable provides enumeration, ICollection adds collection operations such as Count and mutation, while IList adds indexed access and insertion/removal by index.",
+      "detailedAnswer": "IEnumerable provides enumeration, ICollection adds collection operations such as Count and mutation, while IList adds indexed access and insertion/removal by index.",
+      "example": "A read-only service contract may expose IEnumerable<Transaction>; code needing indexed operations may use IList.",
+      "seniorPerspective": "Expose the least powerful abstraction the consumer needs.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "3. Collections & Generics"
+      ],
+      "memoryCue": "IEnumerable = enumerate; ICollection = collection operations; IList = indexed list.",
+      "codeExample": "IEnumerable<Transaction> transactions = GetTransactions();\nforeach(var t in transactions) Console.WriteLine(t.Id);"
+    },
+    {
+      "id": "dotnet-backend-52",
+      "category": "4. Delegates, Events & Lambda",
+      "slug": "delegates-events",
+      "technology": "4. Delegates, Events & Lambda",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between Action, Func and Predicate?",
+      "shortAnswer": "Action represents a method returning void, Func represents a method returning a value, and Predicate is a delegate returning bool for a condition.",
+      "detailedAnswer": "Action represents a method returning void, Func represents a method returning a value, and Predicate is a delegate returning bool for a condition.",
+      "example": "Validation rules commonly fit Predicate or Func<bool>-style delegates.",
+      "seniorPerspective": "Know the generic parameter ordering and use named delegates when the business meaning deserves a domain-specific type.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "4. Delegates, Events & Lambda"
+      ],
+      "memoryCue": "Action = void; Func = value; Predicate = bool condition.",
+      "codeExample": "Action log = () => Console.WriteLine(\"Done\");\nFunc<decimal,decimal> fee = x => x*.01m;\nPredicate<decimal> valid = x => x > 0;"
+    },
+    {
+      "id": "dotnet-backend-53",
+      "category": "5. Exception Handling",
+      "slug": "exceptions",
+      "technology": "5. Exception Handling",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between throwing exceptions and returning error results?",
+      "shortAnswer": "Exceptions are appropriate for exceptional failures and cross-layer propagation; expected business outcomes can often be represented explicitly as a result type.",
+      "detailedAnswer": "Exceptions are appropriate for exceptional failures and cross-layer propagation; expected business outcomes can often be represented explicitly as a result type.",
+      "example": "Insufficient funds is a predictable business outcome, while a database connection failure is an exceptional infrastructure failure.",
+      "seniorPerspective": "Avoid both extremes: do not throw for every validation failure, and do not hide infrastructure failures in arbitrary result strings.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "5. Exception Handling"
+      ],
+      "memoryCue": "Expected outcome = result; exceptional failure = exception.",
+      "codeExample": "public record Result(bool Success,string? Error);\n\nResult Withdraw(decimal amount)\n    => amount <= 0 ? new(false,\"Invalid amount\") : new(true,null);"
+    },
+    {
+      "id": "dotnet-backend-54",
+      "category": "6. LINQ",
+      "slug": "linq",
+      "technology": "6. LINQ",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between Select and SelectMany?",
+      "shortAnswer": "Select transforms each source element into one result, while SelectMany transforms each element into a sequence and flattens the nested sequences.",
+      "detailedAnswer": "Select transforms each source element into one result, while SelectMany transforms each element into a sequence and flattens the nested sequences.",
+      "example": "An account has many transactions; SelectMany can produce one flat sequence of transactions across accounts.",
+      "seniorPerspective": "Use SelectMany carefully with large datasets and ensure EF Core can translate the resulting query.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "6. LINQ"
+      ],
+      "memoryCue": "Select = map; SelectMany = map + flatten.",
+      "codeExample": "var allTransactions = accounts.SelectMany(a => a.Transactions);"
+    },
+    {
+      "id": "dotnet-backend-55",
+      "category": "7. Async/Await & Multithreading",
+      "slug": "async-threading",
+      "technology": "7. Async/Await & Multithreading",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "When should you use Task.WhenAll?",
+      "shortAnswer": "Use Task.WhenAll when independent asynchronous operations can safely run concurrently and you want to await their combined completion.",
+      "detailedAnswer": "Use Task.WhenAll when independent asynchronous operations can safely run concurrently and you want to await their combined completion.",
+      "example": "Loading terminal configuration and feature flags independently can be concurrent if neither operation depends on the other.",
+      "seniorPerspective": "Do not use uncontrolled concurrency against a database or downstream service; bound concurrency when load is large.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "7. Async/Await & Multithreading"
+      ],
+      "memoryCue": "Independent I/O → WhenAll.",
+      "codeExample": "var configTask = LoadConfigAsync();\nvar flagsTask = LoadFlagsAsync();\nawait Task.WhenAll(configTask, flagsTask);"
+    },
+    {
+      "id": "dotnet-backend-56",
+      "category": "8. Memory Management & GC",
+      "slug": "memory-gc",
+      "technology": "8. Memory Management & GC",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What causes unnecessary allocations in a .NET API?",
+      "shortAnswer": "Creating excessive temporary objects, strings, arrays, closures or boxed values can increase allocation rate and GC pressure.",
+      "detailedAnswer": "Creating excessive temporary objects, strings, arrays, closures or boxed values can increase allocation rate and GC pressure.",
+      "example": "Building many intermediate strings for every transaction response can create avoidable allocations.",
+      "seniorPerspective": "Measure allocations with profiling before optimizing; readability usually matters more until a real hotspot is proven.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "8. Memory Management & GC"
+      ],
+      "memoryCue": "Allocation rate matters under load.",
+      "codeExample": "var message = $\"Transaction {id} completed\";"
+    },
+    {
+      "id": "dotnet-backend-57",
+      "category": "9. .NET Runtime",
+      "slug": "runtime",
+      "technology": "9. .NET Runtime",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is an assembly in .NET?",
+      "shortAnswer": "An assembly is a compiled deployment/versioning unit containing IL, metadata and related resources, typically represented by a DLL or executable.",
+      "detailedAnswer": "An assembly is a compiled deployment/versioning unit containing IL, metadata and related resources, typically represented by a DLL or executable.",
+      "example": "A backend service references application and library assemblies when it starts.",
+      "seniorPerspective": "Know the difference between source project, assembly, namespace and type; they are not interchangeable concepts.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "9. .NET Runtime"
+      ],
+      "memoryCue": "Assembly = compiled unit + metadata.",
+      "codeExample": "// MyService.dll is an assembly containing compiled types and metadata."
+    },
+    {
+      "id": "dotnet-backend-58",
+      "category": "10. Dependency Injection",
+      "slug": "di",
+      "technology": "10. Dependency Injection",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "Why is constructor injection preferred in .NET?",
+      "shortAnswer": "Constructor injection makes required dependencies explicit, ensures the object cannot normally exist without them and improves testability.",
+      "detailedAnswer": "Constructor injection makes required dependencies explicit, ensures the object cannot normally exist without them and improves testability.",
+      "example": "A transaction service can declare its repository and audit writer in its constructor instead of resolving them from a service locator.",
+      "seniorPerspective": "Avoid injecting IServiceProvider everywhere; it hides dependencies and often becomes a service-locator anti-pattern.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "10. Dependency Injection"
+      ],
+      "memoryCue": "Required dependencies belong in the constructor.",
+      "codeExample": "public TransactionService(IRepository repo, IAuditWriter audit)\n{\n    this.repo=repo; this.audit=audit;\n}"
+    },
+    {
+      "id": "dotnet-backend-59",
+      "category": "11. Configuration",
+      "slug": "configuration",
+      "technology": "11. Configuration",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How should configuration differ between development and production?",
+      "shortAnswer": "Keep safe defaults in source-controlled configuration and supply environment-specific values through deployment configuration or secret providers. Never depend on developer-machine settings in production.",
+      "detailedAnswer": "Keep safe defaults in source-controlled configuration and supply environment-specific values through deployment configuration or secret providers. Never depend on developer-machine settings in production.",
+      "example": "A local SQL connection string can be in development settings, while production receives its value from a secure deployment mechanism.",
+      "seniorPerspective": "Configuration should be validated at startup when invalid settings would make the service unusable.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "11. Configuration"
+      ],
+      "memoryCue": "Code stays the same; environment supplies values.",
+      "codeExample": "var connection = builder.Configuration.GetConnectionString(\"Default\");"
+    },
+    {
+      "id": "dotnet-backend-60",
+      "category": "12. Logging",
+      "slug": "logging",
+      "technology": "12. Logging",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the purpose of log levels such as Information, Warning and Error?",
+      "shortAnswer": "Log levels communicate severity and operational importance. Information describes normal significant operations, Warning indicates something unexpected but handled, and Error indicates a failed operation.",
+      "detailedAnswer": "Log levels communicate severity and operational importance. Information describes normal significant operations, Warning indicates something unexpected but handled, and Error indicates a failed operation.",
+      "example": "A retryable downstream timeout may be Warning if handled; a failed transaction may be Error.",
+      "seniorPerspective": "Choose levels so production teams can filter noise without losing evidence.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "12. Logging"
+      ],
+      "memoryCue": "Level = operational severity.",
+      "codeExample": "logger.LogInformation(\"Transaction {Id} started\", id);\nlogger.LogWarning(\"Retrying host call\");\nlogger.LogError(ex,\"Transaction failed\");"
+    },
+    {
+      "id": "dotnet-backend-61",
+      "category": "13. ASP.NET Core",
+      "slug": "aspnet-core",
+      "technology": "13. ASP.NET Core",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is dependency injection in ASP.NET Core?",
+      "shortAnswer": "ASP.NET Core has a built-in DI container where services are registered and resolved, usually through constructor injection.",
+      "detailedAnswer": "ASP.NET Core has a built-in DI container where services are registered and resolved, usually through constructor injection.",
+      "example": "A controller receives ITransactionService without constructing the concrete implementation itself.",
+      "seniorPerspective": "DI is primarily about dependency management and composition; it is not automatically a design architecture.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "13. ASP.NET Core"
+      ],
+      "memoryCue": "Register abstraction → inject abstraction.",
+      "codeExample": "builder.Services.AddScoped<ITransactionService, TransactionService>();"
+    },
+    {
+      "id": "dotnet-backend-62",
+      "category": "14. Web API",
+      "slug": "web-api",
+      "technology": "14. Web API",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "Which HTTP status codes should a backend developer know well?",
+      "shortAnswer": "Common codes include 200 for success, 201 for creation, 204 for successful no-content operations, 400 for invalid requests, 401 for unauthenticated access, 403 for forbidden access, 404 for missing resources and 500/503 for server/dependency failures.",
+      "detailedAnswer": "Common codes include 200 for success, 201 for creation, 204 for successful no-content operations, 400 for invalid requests, 401 for unauthenticated access, 403 for forbidden access, 404 for missing resources and 500/503 for server/dependency failures.",
+      "example": "A valid POST creating a transaction can return 201; an unauthenticated request should normally return 401.",
+      "seniorPerspective": "Be consistent across the API and do not return 200 for every error.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "14. Web API"
+      ],
+      "memoryCue": "Status code communicates outcome semantics.",
+      "codeExample": "return CreatedAtAction(nameof(Get), new { id }, result);\n// 404 when resource does not exist"
+    },
+    {
+      "id": "dotnet-backend-63",
+      "category": "15. Middleware",
+      "slug": "middleware",
+      "technology": "15. Middleware",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "How do you write custom middleware?",
+      "shortAnswer": "A middleware receives HttpContext and a RequestDelegate, performs logic before and/or after calling the next delegate, and can short-circuit when needed.",
+      "detailedAnswer": "A middleware receives HttpContext and a RequestDelegate, performs logic before and/or after calling the next delegate, and can short-circuit when needed.",
+      "example": "Correlation IDs and request timing are common cross-cutting middleware concerns.",
+      "seniorPerspective": "Keep middleware focused; avoid putting business rules into the HTTP pipeline.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "15. Middleware"
+      ],
+      "memoryCue": "Middleware wraps next().",
+      "codeExample": "public async Task InvokeAsync(HttpContext context, RequestDelegate next)\n{\n    var start=Stopwatch.GetTimestamp();\n    await next(context);\n}"
+    },
+    {
+      "id": "dotnet-backend-64",
+      "category": "16. Filters",
+      "slug": "filters",
+      "technology": "16. Filters",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is an authorization filter versus an action filter?",
+      "shortAnswer": "Authorization filters run early to determine access, while action filters wrap controller action execution and are useful for action-specific cross-cutting behaviour.",
+      "detailedAnswer": "Authorization filters run early to determine access, while action filters wrap controller action execution and are useful for action-specific cross-cutting behaviour.",
+      "example": "A timing filter can measure controller execution; authorization policies determine whether the caller may execute the endpoint.",
+      "seniorPerspective": "Prefer ASP.NET Core authorization policies for authorization rather than building custom access checks into arbitrary action filters.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "16. Filters"
+      ],
+      "memoryCue": "Authorization decides access; action filter wraps action execution.",
+      "codeExample": "public void OnActionExecuting(ActionExecutingContext context)\n{\n    // action-specific concern\n}"
+    },
+    {
+      "id": "dotnet-backend-65",
+      "category": "17. REST",
+      "slug": "rest",
+      "technology": "17. REST",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between PUT and PATCH?",
+      "shortAnswer": "PUT generally replaces the resource representation and is intended to be idempotent; PATCH applies a partial modification and its semantics depend on the patch format.",
+      "detailedAnswer": "PUT generally replaces the resource representation and is intended to be idempotent; PATCH applies a partial modification and its semantics depend on the patch format.",
+      "example": "Updating an entire terminal configuration can use PUT; changing only one setting can use PATCH.",
+      "seniorPerspective": "Design APIs around resource semantics and document validation and idempotency behaviour.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "17. REST"
+      ],
+      "memoryCue": "PUT = replace; PATCH = partial change.",
+      "codeExample": "[HttpPut(\"{id}\")]\npublic IActionResult Replace(int id, Config model) => NoContent();\n\n[HttpPatch(\"{id}\")]\npublic IActionResult Patch(int id, JsonPatchDocument patch) => NoContent();"
+    },
+    {
+      "id": "dotnet-backend-66",
+      "category": "18. Authentication & Authorization",
+      "slug": "auth",
+      "technology": "18. Authentication & Authorization",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What are claims and policies in ASP.NET Core?",
+      "shortAnswer": "Claims are pieces of information about an authenticated principal; policies combine requirements that determine whether a request is authorized.",
+      "detailedAnswer": "Claims are pieces of information about an authenticated principal; policies combine requirements that determine whether a request is authorized.",
+      "example": "A claim can identify a user's role or permission, while a policy can require the CanApprove permission.",
+      "seniorPerspective": "Policies are more flexible than scattering role checks through controllers.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "18. Authentication & Authorization"
+      ],
+      "memoryCue": "Claims describe identity; policies enforce access rules.",
+      "codeExample": "builder.Services.AddAuthorization(o =>\n    o.AddPolicy(\"CanApprove\", p => p.RequireClaim(\"permission\",\"approve\")));"
+    },
+    {
+      "id": "dotnet-backend-67",
+      "category": "19. Security",
+      "slug": "security",
+      "technology": "19. Security",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between hashing and encryption?",
+      "shortAnswer": "Hashing is designed as a one-way transformation, while encryption is reversible with a key. Passwords should use dedicated password hashing; sensitive data requiring recovery uses encryption.",
+      "detailedAnswer": "Hashing is designed as a one-way transformation, while encryption is reversible with a key. Passwords should use dedicated password hashing; sensitive data requiring recovery uses encryption.",
+      "example": "User passwords are verified using password hashes; a secret that must later be recovered may require encryption.",
+      "seniorPerspective": "Do not invent cryptography; use well-established framework/library primitives and key management.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "19. Security"
+      ],
+      "memoryCue": "Hash = one-way verification; encryption = reversible protection.",
+      "codeExample": "var hash = passwordHasher.HashPassword(user, password);\nvar result = passwordHasher.VerifyHashedPassword(user, hash, password);"
+    },
+    {
+      "id": "dotnet-backend-68",
+      "category": "20. Entity Framework Core",
+      "slug": "ef-core",
+      "technology": "20. Entity Framework Core",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is AsNoTracking and when should you use it?",
+      "shortAnswer": "AsNoTracking disables change tracking for a query, which is often appropriate for read-only results and can reduce tracking overhead.",
+      "detailedAnswer": "AsNoTracking disables change tracking for a query, which is often appropriate for read-only results and can reduce tracking overhead.",
+      "example": "A dashboard endpoint returning transaction summaries does not need EF to track every entity.",
+      "seniorPerspective": "Do not use it blindly when you need to modify tracked entities later.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "20. Entity Framework Core"
+      ],
+      "memoryCue": "Read-only query → consider no tracking.",
+      "codeExample": "var rows = await db.Transactions\n    .AsNoTracking()\n    .Select(x => new { x.Id, x.Amount })\n    .ToListAsync();"
+    },
+    {
+      "id": "dotnet-backend-69",
+      "category": "21. SQL & Database",
+      "slug": "sql-db",
+      "technology": "21. SQL & Database",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is a deadlock in a database?",
+      "shortAnswer": "A deadlock occurs when transactions wait on resources held by each other, so neither can proceed. The database detects it and normally aborts one transaction.",
+      "detailedAnswer": "A deadlock occurs when transactions wait on resources held by each other, so neither can proceed. The database detects it and normally aborts one transaction.",
+      "example": "Two transaction paths updating Account then Transaction in opposite orders can deadlock.",
+      "seniorPerspective": "Consistent lock ordering, short transactions and retry strategies can reduce impact; inspect deadlock graphs when diagnosing.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "21. SQL & Database"
+      ],
+      "memoryCue": "Deadlock = circular waiting.",
+      "codeExample": "// Keep resource access order consistent:\n// 1. Account\n// 2. Transaction\n// in every transaction path."
+    },
+    {
+      "id": "dotnet-backend-70",
+      "category": "22. Architecture & Design Patterns",
+      "slug": "architecture-patterns",
+      "technology": "22. Architecture & Design Patterns",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is Clean Architecture trying to achieve?",
+      "shortAnswer": "It keeps business rules independent of infrastructure and delivery mechanisms, with dependencies pointing toward stable inner layers.",
+      "detailedAnswer": "It keeps business rules independent of infrastructure and delivery mechanisms, with dependencies pointing toward stable inner layers.",
+      "example": "The ATM transaction rules should not depend directly on SQL Server or ASP.NET controllers.",
+      "seniorPerspective": "The goal is dependency direction and change isolation, not creating four projects for every small application.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "22. Architecture & Design Patterns"
+      ],
+      "memoryCue": "Business rules inside; infrastructure outside.",
+      "codeExample": "public interface ITransactionRepository\n{\n    Task SaveAsync(Transaction tx);\n}\n// Domain/application depends on the abstraction."
+    },
+    {
+      "id": "dotnet-backend-71",
+      "category": "23. Caching",
+      "slug": "caching",
+      "technology": "23. Caching",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is cache-aside caching?",
+      "shortAnswer": "The application first checks the cache; on a miss it loads from the source, stores the result with an expiry and returns it.",
+      "detailedAnswer": "The application first checks the cache; on a miss it loads from the source, stores the result with an expiry and returns it.",
+      "example": "Terminal configuration is read from Redis first and from SQL when absent.",
+      "seniorPerspective": "Define TTL and invalidation rules; stale data is a design decision, not an accident.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "23. Caching"
+      ],
+      "memoryCue": "Read cache → miss → source → populate.",
+      "codeExample": "var cached = await cache.GetStringAsync(key);\nif (cached is null)\n{\n    cached = await LoadFromDbAsync();\n    await cache.SetStringAsync(key,cached);\n}"
+    },
+    {
+      "id": "dotnet-backend-72",
+      "category": "24. Performance & Scalability",
+      "slug": "performance",
+      "technology": "24. Performance & Scalability",
+      "difficulty": "Medium",
+      "type": "Technical",
+      "question": "What is the difference between latency and throughput?",
+      "shortAnswer": "Latency is the time taken by an individual operation; throughput is how much work the system completes per unit time.",
+      "detailedAnswer": "Latency is the time taken by an individual operation; throughput is how much work the system completes per unit time.",
+      "example": "An API may have 100 ms average latency while processing thousands of requests per second if it scales horizontally.",
+      "seniorPerspective": "Use percentiles such as p95/p99 for latency and inspect capacity bottlenecks when throughput increases.",
+      "commonMistakes": "",
+      "followUps": [],
+      "tags": [
+        ".NET Backend",
+        "24. Performance & Scalability"
+      ],
+      "memoryCue": "Latency = time per request; throughput = work per time.",
+      "codeExample": "// Measure both request duration and request rate.\nmetrics.Record(\"request_duration_ms\", elapsedMs);\nmetrics.Record(\"requests_per_second\", rate);"
     }
   ]
 }
