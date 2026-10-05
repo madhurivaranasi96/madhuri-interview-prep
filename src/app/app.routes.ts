@@ -3,6 +3,7 @@ import {DashboardComponent} from './dashboard.component';
 import {TopicComponent} from './topic.component';
 import {PracticeComponent} from './practice.component';
 import {CheatSheetComponent} from './cheat-sheet.component';
+import {DotnetBackendComponent} from './dotnet-backend.component';
 
 export const routes:Routes=[
  {path:'',component:DashboardComponent},
@@ -11,5 +12,6 @@ export const routes:Routes=[
  {path:'scenarios',component:PracticeComponent},
  {path:'practice/:mode',component:PracticeComponent},
  {path:'cheat-sheet',component:CheatSheetComponent},
+ {path:'dotnet-backend',component:DotnetBackendComponent},
  {path:'**',redirectTo:''}
 ];
