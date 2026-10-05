@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
 const TOPICS=[
+['.NET Backend — 24 Topics','dotnet-backend','Focused senior backend track: C#, OOP, SOLID, LINQ, async, runtime, ASP.NET Core, APIs, security, EF Core, SQL, architecture, caching and performance.'],
 ['C# / .NET','csharp','Core C#, types, OOP, collections, exceptions, memory and modern language features.'],
 ['.NET Runtime','dotnet-runtime','CLR, GC, JIT, dependency injection, configuration, hosting and runtime behaviour.'],
 ['ASP.NET Core','aspnet-core','Middleware, DI, Web API, filters, validation, authentication and production APIs.'],
@@ -54,7 +55,13 @@ template:`
 <div class="section-intro"><p class="section-label">MAIN TECHNICAL INTERVIEW BANK</p><h2>Conventional questions, practical answers.</h2><p>Filter each topic by <b>Simple</b>, <b>Medium</b> or <b>Complex</b> using the dropdown. Scenario wording is kept in a separate bank.</p></div>
 <div class="topics">
 @for(t of topics;track t[1]){
-@if(t[1]==='scenarios'){
+@if(t[1]==='dotnet-backend'){
+<a routerLink="/dotnet-backend">
+<span class="topic-number">{{($index+1).toString().padStart(2,'0')}}</span>
+<span><b>{{t[0]}}</b><small>{{t[2]}}</small></span>
+<span class="arrow">→</span>
+</a>
+} @else if(t[1]==='scenarios'){
 <a routerLink="/scenarios">
 <span class="topic-number">{{($index+1).toString().padStart(2,'0')}}</span>
 <span><b>{{t[0]}}</b><small>{{t[2]}}</small></span>
